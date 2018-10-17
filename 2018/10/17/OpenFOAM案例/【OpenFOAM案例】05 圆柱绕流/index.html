@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。 1 目标 本案例的主要目的为讲解瞬态流动问题仿真 案例考虑雷诺数为100的圆柱绕流问题，采用层流求解 案例计算完毕后可以观察到涡脱落现象  2 计算模型计算模型尺寸如图所示。 尺寸如表所示。    Name Location Dimension     Cylinder D1 1m   inlet length D2 1">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【OpenFOAM案例】05 圆柱绕流">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。 1 目标 本案例的主要目的为讲解瞬态流动问题仿真 案例考虑雷诺数为100的圆柱绕流问题，采用层流求解 案例计算完毕后可以观察到涡脱落现象  2 计算模型计算模型尺寸如图所示。 尺寸如表所示。    Name Location Dimension     Cylinder D1 1m   inlet length D2 1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-24/34186161.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-24/77484340.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-25/99413606.jpg">
+<meta property="og:updated_time" content="2018-10-16T16:20:37.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【OpenFOAM案例】05 圆柱绕流">
+<meta name="twitter:description" content="圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。 1 目标 本案例的主要目的为讲解瞬态流动问题仿真 案例考虑雷诺数为100的圆柱绕流问题，采用层流求解 案例计算完毕后可以观察到涡脱落现象  2 计算模型计算模型尺寸如图所示。 尺寸如表所示。    Name Location Dimension     Cylinder D1 1m   inlet length D2 1">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-24/34186161.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【OpenFOAM案例】05 圆柱绕流 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【OpenFOAM案例】05 圆柱绕流
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。</p>
+<h1 id="1-目标"><a href="#1-目标" class="headerlink" title="1 目标"></a>1 目标</h1><ul>
+<li>本案例的主要目的为讲解瞬态流动问题仿真</li>
+<li>案例考虑雷诺数为100的圆柱绕流问题，采用层流求解</li>
+<li>案例计算完毕后可以观察到涡脱落现象</li>
+</ul>
+<h1 id="2-计算模型"><a href="#2-计算模型" class="headerlink" title="2 计算模型"></a>2 计算模型</h1><p>计算模型尺寸如图所示。</p>
+<p>尺寸如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Location</th>
+<th>Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cylinder</td>
+<td>D1</td>
+<td>1m</td>
+</tr>
+<tr>
+<td>inlet length</td>
+<td>D2</td>
+<td>10m = 10D</td>
+</tr>
+<tr>
+<td>outlet length</td>
+<td>D3</td>
+<td>15m = 15D</td>
+</tr>
+<tr>
+<td>width</td>
+<td>D4</td>
+<td>20m = 20D</td>
+</tr>
+</tbody>
+</table>
+<p>计算域中流体密度 1kg/m3，动力粘度为0.01 Pa.s，入口速度1 m/s。则雷诺数：<br>$$<br>Re = \frac{\rho u D}{\mu}  = \frac{1\times 1 \times 1}{0.01} = 100<br>$$</p>
+<h1 id="3-几何模型及网格"><a href="#3-几何模型及网格" class="headerlink" title="3 几何模型及网格"></a>3 几何模型及网格</h1><p>按前述的几何参数建立几何模型。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-6-24/34186161.jpg" alt=""></p>
+<p>边界分别为inlet、outlet、top、bottom、cylinder。</p>
+<h1 id="4-转换网格"><a href="#4-转换网格" class="headerlink" title="4 转换网格"></a>4 转换网格</h1><p>本案例依然<strong>使用icoFoam求解器。</strong>因此先从tutorial中拷贝一个icoFoam模板。我们这里用cavity当模板。</p>
+<p>打开终端，输入命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp -r $FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity $FOAM_RUN</span><br><span class="line">cd $FOAM_RUN</span><br><span class="line">mv cavity cylinder</span><br></pre></td></tr></table></figure>
+<p>mv命令是给文件夹改名，我们这里将文件重命名为cylinder。</p>
+<p>将前面生成的网格拷贝到$FOAM_RUN路径下，并将网格名称修改为cylinder.msh。</p>
+<blockquote>
+<p>blueCFD下此路径为：D:\blueCFD-Core-2016\ofuser-of4\run\cylinder，我这里是将blueCFD安装在D盘根目录下了，如果是装在其他位置的话，需要做相应修改。</p>
+</blockquote>
+<p>利用命令转换网格：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $FOAM_RUN/cylinder</span><br><span class="line">fluentMeshToFoam cylinder</span><br></pre></td></tr></table></figure>
+<p>转换成功出现如下图所示提示：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-6-24/77484340.jpg" alt=""></p>
+<p>利用<strong>Tree</strong>命令查看此时cylinder文件夹下的组织形式为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">├── 0</span><br><span class="line">│   ├── p</span><br><span class="line">│   └── U</span><br><span class="line">├── constant</span><br><span class="line">│   ├── polyMesh</span><br><span class="line">│   │   ├── boundary</span><br><span class="line">│   │   ├── cellZones</span><br><span class="line">│   │   ├── faces</span><br><span class="line">│   │   ├── faceZones</span><br><span class="line">│   │   ├── neighbour</span><br><span class="line">│   │   ├── owner</span><br><span class="line">│   │   ├── points</span><br><span class="line">│   │   └── pointZones</span><br><span class="line">│   └── transportProperties</span><br><span class="line">├── cylinder.msh</span><br><span class="line">└── system</span><br><span class="line">    ├── blockMeshDict</span><br><span class="line">    ├── controlDict</span><br><span class="line">    ├── fvSchemes</span><br><span class="line">    └── fvSolution</span><br><span class="line"> </span><br><span class="line">4 directories, 16 files</span><br></pre></td></tr></table></figure>
+<p>利用命令查看boundary文件内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano constant/polyMesh/boundary</span><br></pre></td></tr></table></figure>
+<p>文件内容为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">FoamFile</span><br><span class="line">&#123;</span><br><span class="line">    version     <span class="number">2.0</span>;</span><br><span class="line">    format      ascii;</span><br><span class="line">    <span class="class"><span class="keyword">class</span>       <span class="title">polyBoundaryMesh</span>;</span></span><br><span class="line">    location    <span class="string">"constant/polyMesh"</span>;</span><br><span class="line">    object      boundary;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">6</span></span><br><span class="line">(</span><br><span class="line">    INLET</span><br><span class="line">    &#123;</span><br><span class="line">        type            patch;</span><br><span class="line">        nFaces          <span class="number">79</span>;</span><br><span class="line">        startFace       <span class="number">22248</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    OUTLET</span><br><span class="line">    &#123;</span><br><span class="line">        type            patch;</span><br><span class="line">        nFaces          <span class="number">79</span>;</span><br><span class="line">        startFace       <span class="number">22327</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    TOP</span><br><span class="line">    &#123;</span><br><span class="line">        type            wall;</span><br><span class="line">        inGroups        <span class="number">1</span>(wall);</span><br><span class="line">        nFaces          <span class="number">139</span>;</span><br><span class="line">        startFace       <span class="number">22406</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    BOTTOM</span><br><span class="line">    &#123;</span><br><span class="line">        type            wall;</span><br><span class="line">        inGroups        <span class="number">1</span>(wall);</span><br><span class="line">        nFaces          <span class="number">139</span>;</span><br><span class="line">        startFace       <span class="number">22545</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    CYLINDER</span><br><span class="line">    &#123;</span><br><span class="line">        type            wall;</span><br><span class="line">        inGroups        <span class="number">1</span>(wall);</span><br><span class="line">        nFaces          <span class="number">28</span>;</span><br><span class="line">        startFace       <span class="number">22684</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    frontAndBackPlanes</span><br><span class="line">    &#123;</span><br><span class="line">        type            empty;</span><br><span class="line">        inGroups        <span class="number">1</span>(empty);</span><br><span class="line">        nFaces          <span class="number">22480</span>;</span><br><span class="line">        startFace       <span class="number">22712</span>;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>看到文件中除了我们自己命名的INLET、OUTLET、TOP、BOTTOM、CYLINDER外，还多出了一个frontAndBackPlanes，我们的网格是2D模型，而OF只能计算3D模型，因此自动给网格拉伸了一层厚度，多了个边界。后面要处理这个边界。</p>
+</blockquote>
+<h1 id="5-修改p文件和U文件"><a href="#5-修改p文件和U文件" class="headerlink" title="5 修改p文件和U文件"></a>5 修改p文件和U文件</h1><p>修改p文件为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">FoamFile</span><br><span class="line">&#123;</span><br><span class="line">    version     <span class="number">2.0</span>;</span><br><span class="line">    format      ascii;</span><br><span class="line">    <span class="class"><span class="keyword">class</span>       <span class="title">volScalarField</span>;</span></span><br><span class="line">    object      p;</span><br><span class="line">&#125;</span><br><span class="line">dimensions      [<span class="number">0</span> <span class="number">2</span> <span class="number">-2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>];</span><br><span class="line">internalField   uniform <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line">boundaryField</span><br><span class="line">&#123;</span><br><span class="line">    INLET</span><br><span class="line">    &#123;</span><br><span class="line">        type            zeroGradient;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//出口压力为0//</span></span><br><span class="line">    OUTLET</span><br><span class="line">    &#123;</span><br><span class="line">        type            fixedValue;</span><br><span class="line">        value           uniform <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    TOP</span><br><span class="line">    &#123;</span><br><span class="line">        type            zeroGradient;</span><br><span class="line">    &#125;</span><br><span class="line">    BOTTOM</span><br><span class="line">    &#123;</span><br><span class="line">        type            zeroGradient;</span><br><span class="line">    &#125;</span><br><span class="line">      CYLINDER</span><br><span class="line">    &#123;</span><br><span class="line">          type            zeroGradient;</span><br><span class="line">    &#125;</span><br><span class="line">    frontAndBack</span><br><span class="line">    &#123;</span><br><span class="line">        type            empty;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>出口边界静压为0</p>
+</blockquote>
+<p>修改U文件为以下内容。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">FoamFile</span><br><span class="line">&#123;</span><br><span class="line">    version     <span class="number">2.0</span>;</span><br><span class="line">    format      ascii;</span><br><span class="line">    <span class="class"><span class="keyword">class</span>       <span class="title">volVectorField</span>;</span></span><br><span class="line">    object      U;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// * * * * * * * * * * * * //</span></span><br><span class="line"> </span><br><span class="line">dimensions      [<span class="number">0</span> <span class="number">1</span> <span class="number">-1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>];</span><br><span class="line"><span class="function">internalField   <span class="title">uniform</span> <span class="params">(<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">boundaryField</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//入口速度为1m/s//</span></span><br><span class="line">    INLET</span><br><span class="line">    &#123;</span><br><span class="line">        type            fixedValue;</span><br><span class="line">        <span class="function">value           <span class="title">uniform</span> <span class="params">(<span class="number">1</span> <span class="number">0</span> <span class="number">0</span>)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    OUTLET</span><br><span class="line">    &#123;</span><br><span class="line">        type            zeroGradient;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//顶部和底部均为无滑移壁面//</span></span><br><span class="line">    TOP</span><br><span class="line">    &#123;</span><br><span class="line">        type            noSlip;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    BOTTOM</span><br><span class="line">    &#123;</span><br><span class="line">        type            noSlip;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    CYLINDER</span><br><span class="line">    &#123;</span><br><span class="line">        type            fixedValue;</span><br><span class="line">        <span class="function">value           <span class="title">uniform</span> <span class="params">(<span class="number">0</span> <span class="number">0</span> <span class="number">0</span>)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//侧面一定要设置为empty//</span></span><br><span class="line">    frontAndBack</span><br><span class="line">    &#123;</span><br><span class="line">        type            empty;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>入口速度为1m/s。</p>
+</blockquote>
+<h1 id="6-修改transportProperties文件"><a href="#6-修改transportProperties文件" class="headerlink" title="6 修改transportProperties文件"></a>6 修改transportProperties文件</h1><p>设置运动粘度0.01m2/s。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FoamFile</span><br><span class="line">&#123;</span><br><span class="line">    version     <span class="number">2.0</span>;</span><br><span class="line">    format      ascii;</span><br><span class="line">    <span class="class"><span class="keyword">class</span>       <span class="title">dictionary</span>;</span></span><br><span class="line">    location    <span class="string">"constant"</span>;</span><br><span class="line">    object      transportProperties;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * //</span></span><br><span class="line"> </span><br><span class="line">nu              [<span class="number">0</span> <span class="number">2</span> <span class="number">-1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>] <span class="number">0.01</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意这里设置的是运动粘度，看量纲。</p>
+</blockquote>
+<h1 id="7-设置controlDict文件"><a href="#7-设置controlDict文件" class="headerlink" title="7 设置controlDict文件"></a>7 设置controlDict文件</h1><p>修改controlDict文件为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">FoamFile</span><br><span class="line">&#123;</span><br><span class="line">    version     <span class="number">2.0</span>;</span><br><span class="line">    format      ascii;</span><br><span class="line">    <span class="class"><span class="keyword">class</span>       <span class="title">dictionary</span>;</span></span><br><span class="line">    location    <span class="string">"system"</span>;</span><br><span class="line">    object      controlDict;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// * * * * * *  * * * * * * //</span></span><br><span class="line">application     icoFoam;</span><br><span class="line">startFrom       startTime;</span><br><span class="line">startTime       <span class="number">0</span>;</span><br><span class="line">stopAt          endTime;</span><br><span class="line"><span class="comment">//设置计算100s</span></span><br><span class="line">endTime         <span class="number">100</span>;</span><br><span class="line">deltaT          <span class="number">0.005</span>;</span><br><span class="line">writeControl    timeStep;</span><br><span class="line">writeInterval   <span class="number">20</span>;</span><br><span class="line">purgeWrite      <span class="number">0</span>;</span><br><span class="line">writeFormat     ascii;</span><br><span class="line">writePrecision  <span class="number">6</span>;</span><br><span class="line">writeCompression off;</span><br><span class="line">timeFormat      general;</span><br><span class="line">timePrecision   <span class="number">6</span>;</span><br><span class="line">runTimeModifiable <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="8-开始计算"><a href="#8-开始计算" class="headerlink" title="8 开始计算"></a>8 开始计算</h1><p>利用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $FOAM_RUN/cylinder</span><br><span class="line">icoFoam</span><br></pre></td></tr></table></figure>
+<h1 id="9-后处理"><a href="#9-后处理" class="headerlink" title="9 后处理"></a>9 后处理</h1><p>利用命令启动paraview进行后处理。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paraFoam</span><br></pre></td></tr></table></figure>
+<p>速度分布如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-6-25/99413606.jpg" alt=""></p>
+<blockquote>
+<p>腾讯传视频太慢了，这里就懒得传了。案例文件及动画链接：链接：<a href="http://pan.baidu.com/s/1nuS1uIX" target="_blank" rel="noopener">http://pan.baidu.com/s/1nuS1uIX</a> 密码：a2qp</p>
+</blockquote>
+<hr>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/" rel="next" title="【一起学OpenFOAM】01 OpenFoam的优势">
+                <i class="fa fa-chevron-left"></i> 【一起学OpenFOAM】01 OpenFoam的优势
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/" rel="prev" title="【OpenFOAM案例】04 编译安装OpenFOAM">
+                【OpenFOAM案例】04 编译安装OpenFOAM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-目标"><span class="nav-text">1 目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-计算模型"><span class="nav-text">2 计算模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-几何模型及网格"><span class="nav-text">3 几何模型及网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-转换网格"><span class="nav-text">4 转换网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-修改p文件和U文件"><span class="nav-text">5 修改p文件和U文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-修改transportProperties文件"><span class="nav-text">6 修改transportProperties文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-设置controlDict文件"><span class="nav-text">7 设置controlDict文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-开始计算"><span class="nav-text">8 开始计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-后处理"><span class="nav-text">9 后处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

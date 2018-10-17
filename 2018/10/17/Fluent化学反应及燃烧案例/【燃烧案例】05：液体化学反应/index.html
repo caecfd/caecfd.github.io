@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例利用ANSYS Fluent中提供的瞬态层流火焰模型模拟液体化学反应。 液体化学反应通常表现为慢速化学反应及低组分扩散。慢速化学反应意味着ANSYS Fluent中提供的快速化学反应模型（如非预混平衡模型、稳态层流小火焰模型及涡耗散模型等）均无法提供准确的结果。 本案例演示以下内容：  建立受限撞击流反应器中的液体化学反应计算模型 设置非稳态层流小火焰模型 导入CHEMKIN反应机理 计算稳">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【燃烧案例】05：液体化学反应">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="本案例利用ANSYS Fluent中提供的瞬态层流火焰模型模拟液体化学反应。 液体化学反应通常表现为慢速化学反应及低组分扩散。慢速化学反应意味着ANSYS Fluent中提供的快速化学反应模型（如非预混平衡模型、稳态层流小火焰模型及涡耗散模型等）均无法提供准确的结果。 本案例演示以下内容：  建立受限撞击流反应器中的液体化学反应计算模型 设置非稳态层流小火焰模型 导入CHEMKIN反应机理 计算稳">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/ba348449-1b49-44d8-9591-755e77cdc483.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/dee7b82d-2e3f-46a7-9876-67a4e3145aef.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/02afb277-8607-42d3-8a2a-598e2a703f83.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/544d7067-6678-45bc-9152-361c6eecf4b3.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/72f05da7-5f54-49fd-ad67-f33d7a8ffeb5.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/cf8d7219-9bf9-4f41-8cfb-08e6670ba4bd.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/80e35da4-d74c-4d27-b9bb-1b2dd09a9fd4.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/19a00901-33d0-4f6f-b0cd-a906e1f16ab9.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/a2d6b7cb-7a7d-4048-82eb-3cb748d5ecc6.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/2cc7858b-420a-462c-a6a6-c1771da00061.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/b82d1619-f3be-4db7-9cba-4c10e40fbaca.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/d4270272-dd90-41f1-843c-cc49aa7934bb.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/7476a3c0-41e8-4786-83b3-0fee5a8a2159.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/42965dbe-5281-46eb-8847-febcdee51985.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/cf83bc20-a4f3-4d81-8972-c926681a6248.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/a354eabe-941b-479c-8ad1-795f47d70998.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/5f98626e-71e6-44c9-9f6f-78c3b660d781.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/b33eb97b-5caa-4ae4-bedf-1a09f381d24a.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/06af22c9-421e-4607-954c-93d86027fd24.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/6aa51ef8-40fb-4ac0-8c1a-bb9a32a8321c.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/f32e0ccc-3049-46ed-895e-cc2f15628080.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/0393172e-55c8-4add-bf7f-ada35bb12dbb.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/7f14401b-3c1a-475d-9c9a-a973f33c9489.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/239ef4fd-19ab-4308-ad89-63cbcca1a918.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/10cad894-5cc2-4967-be7d-2e984283f16c.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/7d000477-ce3b-480c-ad5b-11ba92ae00ab.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/aa1e7063-81db-4246-9964-e3d553633cbf.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/a27baa4c-7e83-405f-8cda-8d52f59d23c7.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/c637d65d-2916-491c-9a75-2f3603916fe9.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/c6bcb218-364c-43f4-a480-c5a1039a445c.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/ca5ca6c7-ef8b-453b-8cc6-0b6df16b6013.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/30a25385-1526-4d35-b7c1-16d6124ea489.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/94503b52-19fa-4ca3-b14a-833897a92fb5.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/f749139b-260f-4519-8b53-4063fb0be678.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/4b52319d-c134-4398-b08d-69d3308234c6.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/eba37624-bd12-45b8-bcd0-4ec744a26a8b.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/63702d40-9802-4776-832d-bc491d1eae45.png">
+<meta property="og:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/1970c157-55f6-4859-9545-3e2090930d9d.png">
+<meta property="og:updated_time" content="2018-10-17T04:58:27.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【燃烧案例】05：液体化学反应">
+<meta name="twitter:description" content="本案例利用ANSYS Fluent中提供的瞬态层流火焰模型模拟液体化学反应。 液体化学反应通常表现为慢速化学反应及低组分扩散。慢速化学反应意味着ANSYS Fluent中提供的快速化学反应模型（如非预混平衡模型、稳态层流小火焰模型及涡耗散模型等）均无法提供准确的结果。 本案例演示以下内容：  建立受限撞击流反应器中的液体化学反应计算模型 设置非稳态层流小火焰模型 导入CHEMKIN反应机理 计算稳">
+<meta name="twitter:image" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/index_files/ba348449-1b49-44d8-9591-755e77cdc483.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【燃烧案例】05：液体化学反应 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【燃烧案例】05：液体化学反应
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 11:51:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T11:51:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent化学反应及燃烧案例/" itemprop="url" rel="index"><span itemprop="name">Fluent化学反应及燃烧案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例利用ANSYS Fluent中提供的<strong>瞬态层流火焰模型</strong>模拟液体化学反应。</p>
+<p>液体化学反应通常表现为慢速化学反应及低组分扩散。慢速化学反应意味着ANSYS Fluent中提供的快速化学反应模型（如非预混平衡模型、稳态层流小火焰模型及涡耗散模型等）均无法提供准确的结果。</p>
+<p>本案例演示以下内容：</p>
+<ul>
+<li>建立受限撞击流反应器中的液体化学反应计算模型</li>
+<li>设置非稳态层流小火焰模型</li>
+<li>导入CHEMKIN反应机理</li>
+<li>计算稳态及瞬态小火焰模型</li>
+</ul>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>瞬态层流小火焰模型（Unsteady laminar flamelet model）能够同时考虑慢速化学反应以及由于低扩散率所导致的低混合。该模型通过将刚性化学动力学计算简化为一维问题而能够显著的减少计算时间。本案例求解计算撞击流反应器中的化学反应：<br>$$<br>A+B \rightarrow P_1 \<br>A+D \rightarrow P_2<br>$$<br>第一个反应非常快，而第二个反应则非常慢。当激活liquid micro-mixing model时，ANSYS Fluent假设反应活化能非常小，因此反应在组分混合后能够瞬间完成。案例示意图如下图所示。</p>
+<p><img src="index_files/ba348449-1b49-44d8-9591-755e77cdc483.png" alt=""></p>
+<h1 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2 准备工作"></a>2 准备工作</h1><ul>
+<li>准备文件包括<strong>CIJR.msh.gz</strong></li>
+<li>启动Fluent，选择<strong>3D</strong>及<strong>Double Precision</strong></li>
+</ul>
+<h2 id="2-1-导入Mesh"><a href="#2-1-导入Mesh" class="headerlink" title="2.1 导入Mesh"></a>2.1 导入Mesh</h2><ul>
+<li>选择菜单<strong>File → Read → Mesh…</strong>，导入网格文件<strong>CIJR.msh.gz</strong></li>
+</ul>
+<p><img src="index_files/dee7b82d-2e3f-46a7-9876-67a4e3145aef.png" alt=""></p>
+<ul>
+<li>点击<strong>Display</strong>按钮显示计算模型，如下图所示</li>
+</ul>
+<p><img src="index_files/02afb277-8607-42d3-8a2a-598e2a703f83.png" alt=""><br>本次计算利用模型对称性，采用二分之一模型进行计算。</p>
+<h2 id="2-2-General设置"><a href="#2-2-General设置" class="headerlink" title="2.2 General设置"></a>2.2 General设置</h2><ul>
+<li>鼠标双击模型树节点<strong>General</strong>按钮</li>
+<li>右侧面板保持默认参数</li>
+</ul>
+<p><img src="index_files/544d7067-6678-45bc-9152-361c6eecf4b3.png" alt=""></p>
+<ul>
+<li>点击右侧面板<strong>Scale…</strong>，弹出模型缩放对话框，设置<strong>Mesh Was Create In</strong>为<strong>mm</strong>，点击按钮<strong>Scale</strong>缩放网格</li>
+<li>点击按钮<strong>Close</strong>关闭对话框<br><img src="index_files/72f05da7-5f54-49fd-ad67-f33d7a8ffeb5.png" alt=""></li>
+</ul>
+<h2 id="2-3-湍流模型设置"><a href="#2-3-湍流模型设置" class="headerlink" title="2.3 湍流模型设置"></a>2.3 湍流模型设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Viscous</strong>，选择弹出菜单项<strong>Model → Realizable k-epsilon</strong>，激活Realizable k-e湍流模型<br><img src="index_files/cf8d7219-9bf9-4f41-8cfb-08e6670ba4bd.png" alt=""></li>
+</ul>
+<blockquote>
+<p>CIJR中的慢速化学反应只能使用以下模型之一进行模拟：laminar finite-rate model, EDC model， transported PDF model或unsteady laminar flamelet model。前两种模型不能精确捕捉液体化学反应的微观混合，Transport PDF模型计算量非常大。本案例中利用unsteady laminar flamelet model配合liquid micro-mixing extension，此模型需要以steady laminar flametlet model计算结果作为初始值。</p>
+</blockquote>
+<h2 id="2-4-Species模型设置"><a href="#2-4-Species模型设置" class="headerlink" title="2.4 Species模型设置"></a>2.4 Species模型设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Models &gt; Species</strong>弹出组分模型设置对话框</li>
+<li>选择<strong>Non-Premixed Combustion</strong></li>
+<li>激活选项<strong>Inlet Diffusion</strong>及<strong>Liquid Micro-Mixing</strong></li>
+<li>选择选项<strong>Steady Diffusion Flamelet</strong></li>
+</ul>
+<p><img src="index_files/80e35da4-d74c-4d27-b9bb-1b2dd09a9fd4.png" alt=""></p>
+<ul>
+<li>点击按钮<strong>Import CHEMKIN Mecanism…</strong>弹出机理导入对话框</li>
+<li>导入机理文件<strong>CIJR.che</strong>及热力学文件<strong>CIJR-therm.dat</strong></li>
+<li>点击<strong>Apply</strong>按钮确认导入，点击<strong>Close</strong>按钮关闭对话框<br><img src="index_files/19a00901-33d0-4f6f-b0cd-a906e1f16ab9.png" alt=""></li>
+<li><p>Species Model对话框中，切换标签页为<strong>Boundary</strong>，按下图所示进行设置<br><img src="index_files/a2d6b7cb-7a7d-4048-82eb-3cb748d5ecc6.png" alt=""></p>
+</li>
+<li><p>切换中<strong>Flamelet</strong>标签页，按下图所示进行设置，点击按钮<strong>Calculate Flameles</strong>生成火焰，保存火焰文件为<strong>CIJR.fla.gz</strong><br><img src="index_files/2cc7858b-420a-462c-a6a6-c1771da00061.png" alt=""></p>
+</li>
+<li>切换到<strong>Tables</strong>标签页，参数保持默认设置，点击按钮<strong>Calculate PDF Table</strong>生成PDF表<br><img src="index_files/b82d1619-f3be-4db7-9cba-4c10e40fbaca.png" alt=""></li>
+<li>选择菜单<strong>File → Write → PDF…</strong>,将PDF数据保存到文件CIJR.pdf.gz中</li>
+<li>点击<strong>Close</strong>按钮关闭Species Model对话框</li>
+</ul>
+<h2 id="2-5-Materials设置"><a href="#2-5-Materials设置" class="headerlink" title="2.5 Materials设置"></a>2.5 Materials设置</h2><ul>
+<li>双击模型树节点<strong>Materials &gt; Mixture &gt; flamelet-mixture &gt; a（l）</strong>，弹出材料定义对话框，设置器<strong>Desity</strong>为<strong>1000</strong>，如下图所示，点击按钮<strong>Change/Create</strong>及<strong>Close</strong>关闭对话框<br><img src="index_files/d4270272-dd90-41f1-843c-cc49aa7934bb.png" alt=""></li>
+<li><p>相同方式设置其他材料<strong>b(l), bulk(l), d(l), p1(l)及p2(l)</strong>的密度均为<strong>1000</strong></p>
+</li>
+<li><p>鼠标双击模型树节点<strong>Meterials &gt; pdf-mixture</strong>，弹出材料定义对话框，按下图所示设置<strong>Viscosity</strong>及<strong>Mass Diffusivity</strong>参数值<br><img src="index_files/7476a3c0-41e8-4786-83b3-0fee5a8a2159.png" alt=""></p>
+<blockquote>
+<p>注意： 设置粘度与质量扩散参数，是为了满足Schmidt数为1000。</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="index_files/42965dbe-5281-46eb-8847-febcdee51985.png" alt=""></p>
+<h2 id="2-6-Boundary-Condtions设置"><a href="#2-6-Boundary-Condtions设置" class="headerlink" title="2.6 Boundary Condtions设置"></a>2.6 Boundary Condtions设置</h2><p><strong>1、vel-inlet-left边界设置</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; vel-inlet-left</strong>弹出边界参数设置对话框</li>
+<li><strong>Momentun</strong>标签页中设置<strong>Velocity Magnitude</strong>为<strong>2 m/s</strong></li>
+<li>设置<strong>Specification Method</strong>为<strong>Intensity and Hydraulic Diameter</strong>，设置<strong>Turbulent Intensity</strong>为<strong>5 %</strong>，设置<strong>Hydraulic Diameter</strong>为<strong>0.001 m</strong></li>
+</ul>
+<p><img src="index_files/cf83bc20-a4f3-4d81-8972-c926681a6248.png" alt=""></p>
+<ul>
+<li><strong>Species</strong>标签页中设置<strong>Mean Mixture Fraction</strong>为<strong>1</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="index_files/a354eabe-941b-479c-8ad1-795f47d70998.png" alt=""></p>
+<blockquote>
+<p>设置Mean Mixture Fraction为1，Mixture Fraction Variance为0，表示该入口为‘fuel’反应物入口</p>
+</blockquote>
+<p><strong>2、vel-inlet-right</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; vel-inlet-right</strong>，弹出参数设置对话框</li>
+<li>Momentum标签页下参数按下图所示参数设置<br><img src="index_files/5f98626e-71e6-44c9-9f6f-78c3b660d781.png" alt=""></li>
+<li>Species标签页下参数按下图所示设置<br><img src="index_files/b33eb97b-5caa-4ae4-bedf-1a09f381d24a.png" alt=""></li>
+</ul>
+<p><strong>3、pressure-outlet</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Condtions &gt; pressure-outlet</strong>，弹出设置对话框中采用默认设置</li>
+</ul>
+<h2 id="2-7-Initialization"><a href="#2-7-Initialization" class="headerlink" title="2.7 Initialization"></a>2.7 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Solution &gt; Initialization</strong>，选择弹出菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="index_files/06af22c9-421e-4607-954c-93d86027fd24.png" alt=""></p>
+<h2 id="2-8-Run-Calculation"><a href="#2-8-Run-Calculation" class="headerlink" title="2.8 Run Calculation"></a>2.8 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>250</strong>，点击按钮<strong>Calculate</strong>进行计算<br><img src="index_files/6aa51ef8-40fb-4ac0-8c1a-bb9a32a8321c.png" alt=""><br>计算230步达到收敛，如下图所示。<br><img src="index_files/f32e0ccc-3049-46ed-895e-cc2f15628080.png" alt=""></li>
+<li>鼠标双击模型树节点<strong>Solution &gt; Method</strong>，右侧面板设置<strong>Pressure</strong>选项为<strong>PRESTO!</strong>，设置其他所有项为<strong>Second Order Upwind</strong><br><img src="index_files/0393172e-55c8-4add-bf7f-ada35bb12dbb.png" alt=""></li>
+<li><p>鼠标双击模型树节点<strong>Solution &gt; Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>250</strong>，点击按钮<strong>Calculate</strong>进行计算<br>大约计算100步后计算收敛。<br><img src="index_files/7f14401b-3c1a-475d-9c9a-a973f33c9489.png" alt=""></p>
+</li>
+<li><p>利用菜单<strong>File → Write → case &amp; data…</strong>保存文件</p>
+</li>
+</ul>
+<h2 id="2-9-查看结果文件"><a href="#2-9-查看结果文件" class="headerlink" title="2.9 查看结果文件"></a>2.9 查看结果文件</h2><p><strong>1、查看对称面上速度</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Results &gt; Contours</strong>，弹出对话框中按下图所示设置<br><img src="index_files/239ef4fd-19ab-4308-ad89-63cbcca1a918.png" alt=""><br>速度分布如下图所示。<br><img src="index_files/10cad894-5cc2-4967-be7d-2e984283f16c.png" alt=""><br><strong>2、查看湍流粘度</strong><br><img src="index_files/7d000477-ce3b-480c-ad5b-11ba92ae00ab.png" alt=""><br><img src="index_files/aa1e7063-81db-4246-9964-e3d553633cbf.png" alt=""><br><strong>3、查看scalar dissipation</strong><br><img src="index_files/a27baa4c-7e83-405f-8cda-8d52f59d23c7.png" alt=""><br><img src="index_files/c637d65d-2916-491c-9a75-2f3603916fe9.png" alt=""></li>
+</ul>
+<h2 id="2-10-Unsteady-Flamelet"><a href="#2-10-Unsteady-Flamelet" class="headerlink" title="2.10 Unsteady Flamelet"></a>2.10 Unsteady Flamelet</h2><ul>
+<li>鼠标双击模型树节点<strong>Models &gt; Species</strong>，弹出对话框中激活选项<strong>Unsteady Diffusion Flamelet</strong><br><img src="index_files/c6bcb218-364c-43f4-a480-c5a1039a445c.png" alt=""></li>
+<li>切换至<strong>Flamelet</strong>标签页，按下图所示参数进行设置，点击按钮<strong>Initialize Unsteady Flamelet Probability</strong>构建燃烧概率初始化<br><img src="index_files/ca5ca6c7-ef8b-453b-8cc6-0b6df16b6013.png" alt=""></li>
+<li>鼠标双击模型树节点<strong>Results &gt; Contours</strong>，弹出对话框中按下图所示设置<br><img src="index_files/30a25385-1526-4d35-b7c1-16d6124ea489.png" alt=""><br>查看得到Probability of Flamelet-1如下图所示<br><img src="index_files/94503b52-19fa-4ca3-b14a-833897a92fb5.png" alt=""></li>
+</ul>
+<h2 id="2-11-Run-Calculation"><a href="#2-11-Run-Calculation" class="headerlink" title="2.11 Run Calculation"></a>2.11 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Run Calculation</strong>，右侧面板中设置<strong>Number of Time Steps</strong>为<strong>100</strong>，其他参数保持默认设置，点击按钮<strong>Calculate</strong>进行计算<br><img src="index_files/f749139b-260f-4519-8b53-4063fb0be678.png" alt=""><br>计算残差如图所示。<br><img src="index_files/4b52319d-c134-4398-b08d-69d3308234c6.png" alt=""></li>
+</ul>
+<h2 id="2-12-计算结果查看"><a href="#2-12-计算结果查看" class="headerlink" title="2.12 计算结果查看"></a>2.12 计算结果查看</h2><ul>
+<li><p>鼠标双击模型树节点<strong>Results &gt; Contours</strong>，弹出对话框中按下图所示设置<br><img src="index_files/eba37624-bd12-45b8-bcd0-4ec744a26a8b.png" alt=""><br><img src="index_files/63702d40-9802-4776-832d-bc491d1eae45.png" alt=""></p>
+</li>
+<li><p>保存case与data文件</p>
+</li>
+<li><p>继续计算200个时间步长</p>
+</li>
+<li>查看Probability of Flamelet-1，如下图所示，可看到最大值约为0.02，可认为计算达到收敛，此时可以进行后处理<br><img src="index_files/1970c157-55f6-4859-9545-3e2090930d9d.png" alt=""></li>
+</ul>
+<ul>
+<li>查看各组分质量分数，如图所示。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】01：BERL燃烧器/" rel="next" title="【燃烧案例】01：BERL燃烧器">
+                <i class="fa fa-chevron-left"></i> 【燃烧案例】01：BERL燃烧器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】06：预混燃烧/" rel="prev" title="【燃烧案例】06：预混燃烧">
+                【燃烧案例】06：预混燃烧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-准备工作"><span class="nav-text">2 准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-导入Mesh"><span class="nav-text">2.1 导入Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-General设置"><span class="nav-text">2.2 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-湍流模型设置"><span class="nav-text">2.3 湍流模型设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Species模型设置"><span class="nav-text">2.4 Species模型设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Materials设置"><span class="nav-text">2.5 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Boundary-Condtions设置"><span class="nav-text">2.6 Boundary Condtions设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Initialization"><span class="nav-text">2.7 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Run-Calculation"><span class="nav-text">2.8 Run Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-查看结果文件"><span class="nav-text">2.9 查看结果文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-Unsteady-Flamelet"><span class="nav-text">2.10 Unsteady Flamelet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-11-Run-Calculation"><span class="nav-text">2.11 Run Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-12-计算结果查看"><span class="nav-text">2.12 计算结果查看</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

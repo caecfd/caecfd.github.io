@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1 介绍在汽轮机的分析和设计中，湿蒸汽的建模是非常重要的。湿蒸汽是指在蒸汽迅速凝结的过程中饱和蒸汽和液滴形成的两相混合物。本教程演示利用FLUENT的湿蒸汽模型模拟仿真非平衡蒸汽冷凝问题。本教程演示以下操作：  利用湿蒸汽模型建立非平衡蒸汽冷凝问题 指定湿蒸汽建模参数 求解及后处理湿蒸气问题 建模并求解非冷凝问题 比较湿法和干法(非冷凝)的计算结果  2 问题描述本案例考虑拉瓦尔扩散-收敛喷嘴中的">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="1 介绍在汽轮机的分析和设计中，湿蒸汽的建模是非常重要的。湿蒸汽是指在蒸汽迅速凝结的过程中饱和蒸汽和液滴形成的两相混合物。本教程演示利用FLUENT的湿蒸汽模型模拟仿真非平衡蒸汽冷凝问题。本教程演示以下操作：  利用湿蒸汽模型建立非平衡蒸汽冷凝问题 指定湿蒸汽建模参数 求解及后处理湿蒸气问题 建模并求解非冷凝问题 比较湿法和干法(非冷凝)的计算结果  2 问题描述本案例考虑拉瓦尔扩散-收敛喷嘴中的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-12/81289289.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/36086509.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/58090821.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/22630111.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/34086943.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/97364596.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/29071152.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/51745041.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/89547039.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/69192514.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/79778396.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/49059654.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/14271770.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/74888769.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/25407566.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/32109558.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/34664865.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/88715997.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/67243279.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/86466214.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/75986093.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/33888665.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/75245954.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/8627317.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/55855870.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/55414831.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/74532329.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/20675569.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/56921405.jpg">
+<meta property="og:updated_time" content="2018-10-17T04:58:27.102Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结">
+<meta name="twitter:description" content="1 介绍在汽轮机的分析和设计中，湿蒸汽的建模是非常重要的。湿蒸汽是指在蒸汽迅速凝结的过程中饱和蒸汽和液滴形成的两相混合物。本教程演示利用FLUENT的湿蒸汽模型模拟仿真非平衡蒸汽冷凝问题。本教程演示以下操作：  利用湿蒸汽模型建立非平衡蒸汽冷凝问题 指定湿蒸汽建模参数 求解及后处理湿蒸气问题 建模并求解非冷凝问题 比较湿法和干法(非冷凝)的计算结果  2 问题描述本案例考虑拉瓦尔扩散-收敛喷嘴中的">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-12/81289289.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 12:05:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:05:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h1><p>在汽轮机的分析和设计中，湿蒸汽的建模是非常重要的。湿蒸汽是指在蒸汽迅速凝结的过程中饱和蒸汽和液滴形成的两相混合物。<br>本教程演示利用FLUENT的湿蒸汽模型模拟仿真非平衡蒸汽冷凝问题。<br>本教程演示以下操作：</p>
+<ul>
+<li>利用湿蒸汽模型建立非平衡蒸汽冷凝问题</li>
+<li>指定湿蒸汽建模参数</li>
+<li>求解及后处理湿蒸气问题</li>
+<li>建模并求解非冷凝问题</li>
+<li>比较湿法和干法(非冷凝)的计算结果</li>
+</ul>
+<h1 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2 问题描述"></a>2 问题描述</h1><p>本案例考虑拉瓦尔扩散-收敛喷嘴中的湿蒸气冷凝问题。采用二维模型进行计算，如下图所示。喷嘴喉部高度1 cm，考虑到喷嘴几何的对称性，计算采用轴对称几何。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-12/81289289.jpg" alt=""></p>
+<p>进入喷嘴的流体是干蒸汽。当气流加速并清除喉部区域时，会发生快速冷凝。蒸汽先冷却，然后成核，形成蒸汽(气相)和细水珠(液相)的两相混合物。湿蒸汽模型将解决凝聚相质量分数守恒和单位体积液滴数密度守恒的输运方程。对于非冷凝的情况，这些方程是不能解决的。</p>
+<h1 id="3-Fluent设置"><a href="#3-Fluent设置" class="headerlink" title="3 Fluent设置"></a>3 Fluent设置</h1><h2 id="3-1-启动Fluent"><a href="#3-1-启动Fluent" class="headerlink" title="3.1 启动Fluent"></a>3.1 启动Fluent</h2><ul>
+<li>以<strong>2D</strong>、<strong>Double Precision</strong>方式启动Fluent</li>
+<li>利用菜单<strong>File → Read → Mesh…</strong>打开网格文件<strong>2dlaval.msh</strong></li>
+</ul>
+<p>计算网格如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/36086509.jpg" alt=""></p>
+<h2 id="3-2-General设置"><a href="#3-2-General设置" class="headerlink" title="3.2 General设置"></a>3.2 General设置</h2><ul>
+<li>双击模型树节点<strong>General</strong>，右侧面板选择选项<strong>Density-Based</strong></li>
+</ul>
+<blockquote>
+<p>注：湿蒸气模型只能工作在密度基求解器下。</p>
+</blockquote>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/58090821.jpg" alt=""></p>
+<ul>
+<li>点击按钮<strong>Units…</strong>打开单位设置对话框，修改<strong>Pressure</strong>单位<strong>torr</strong>，点击<strong>Close</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/22630111.jpg" alt=""></p>
+<blockquote>
+<p>注：这里修改单位仅仅只是为了后面设置参数方便，并不会对计算结果产生任何影响。</p>
+</blockquote>
+<h2 id="3-3-激活湿蒸气模型"><a href="#3-3-激活湿蒸气模型" class="headerlink" title="3.3 激活湿蒸气模型"></a>3.3 激活湿蒸气模型</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Multiphase</strong>，选择弹出菜单<strong>Wetsteam</strong>激活湿蒸气模型</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/34086943.jpg" alt=""></p>
+<h2 id="3-4-采用无粘模型"><a href="#3-4-采用无粘模型" class="headerlink" title="3.4 采用无粘模型"></a>3.4 采用无粘模型</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Viscous</strong>，弹出菜单项中选择<strong>Model → Inviscid</strong>激活无粘模型</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/97364596.jpg" alt=""></p>
+<h2 id="3-5-设置操作条件"><a href="#3-5-设置操作条件" class="headerlink" title="3.5 设置操作条件"></a>3.5 设置操作条件</h2><ul>
+<li>双击模型树节点<strong>Cell Zone Conditions</strong></li>
+<li>右侧面板中点击按钮<strong>Operating Conditions…</strong>打开操作条件设置对话框</li>
+<li>设置<strong>Operating Pressure</strong>为<strong>0</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/29071152.jpg" alt=""></p>
+<h2 id="3-6-Boundary-Conditions设置"><a href="#3-6-Boundary-Conditions设置" class="headerlink" title="3.6 Boundary Conditions设置"></a>3.6 Boundary Conditions设置</h2><p><strong>1、设置pressure_inlet.3</strong></p>
+<ul>
+<li>双击模型树节点<strong>Boundary Conditions &gt; pressure_inlet.3</strong>，进入边界设置对话框</li>
+<li>设置<strong>Gauge Total Pressure</strong>为<strong>530.5 torr</strong>，设置<strong>Supersonic/Initial Gauge Pressure</strong>为<strong>530.5 torr</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/51745041.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Total Temperature</strong>为<strong>377 k</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/89547039.jpg" alt=""></p>
+<ul>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><strong>2、设置pressure_outlet.4</strong></p>
+<ul>
+<li>双击模型树节点<strong>Boundary Conditions &gt; pressure_outlet.4</strong>，进入边界设置对话框</li>
+<li>设置<strong>Gauge Pressure</strong>为<strong>37.50319 torr</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/69192514.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Backflow Total Temperature</strong>为<strong>377 k</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/79778396.jpg" alt=""></p>
+<ul>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<h2 id="3-7-Initialziation设置"><a href="#3-7-Initialziation设置" class="headerlink" title="3.7 Initialziation设置"></a>3.7 Initialziation设置</h2><ul>
+<li>双击模型树节点<strong>Initialization</strong></li>
+<li>右侧面板选择<strong>Standard Initialization</strong>，设置<strong>Gauge Pressure</strong>为<strong>530.5 torr</strong>，设置<strong>X Velocity</strong>为<strong>53 m/s</strong>，设置<strong>Temperature</strong>为<strong>377 K</strong></li>
+<li>点击按钮<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/49059654.jpg" alt=""></p>
+<h2 id="3-8-Run-Calculation"><a href="#3-8-Run-Calculation" class="headerlink" title="3.8 Run Calculation"></a>3.8 Run Calculation</h2><ul>
+<li>双击模型树节点<strong>Run Calculation</strong></li>
+<li>右侧面板设置<strong>Number of Iterations</strong>为<strong>1000</strong></li>
+<li>点击<strong>Calculate</strong>按钮开始计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/14271770.jpg" alt=""></p>
+<p>大约850步迭代后收敛至0.001。</p>
+<h1 id="4-冷凝计算结果"><a href="#4-冷凝计算结果" class="headerlink" title="4 冷凝计算结果"></a>4 冷凝计算结果</h1><h2 id="4-1-各种云图分布"><a href="#4-1-各种云图分布" class="headerlink" title="4.1 各种云图分布"></a>4.1 各种云图分布</h2><p><strong>1、Static pressure</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/74888769.jpg" alt=""></p>
+<p><strong>2、温度分布</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/25407566.jpg" alt=""></p>
+<p><strong>3、Mach数分布</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/32109558.jpg" alt=""></p>
+<p>液相质量分数分布如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/34664865.jpg" alt=""></p>
+<p><strong>4、liquid mass fraction</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/88715997.jpg" alt=""></p>
+<p><strong>5、Log 10 (Droplets Nucleation Rate) </strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/67243279.jpg" alt=""></p>
+<p><strong>6、Droplet Average Radius</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/86466214.jpg" alt=""></p>
+<h2 id="4-2-定义变量"><a href="#4-2-定义变量" class="headerlink" title="4.2 定义变量"></a>4.2 定义变量</h2><ul>
+<li>右键选择模型树节点<strong>Custom Field Functions</strong>，点击弹出菜单项<strong>New…</strong>弹出设置对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/75986093.jpg" alt=""></p>
+<ul>
+<li>定义变量<strong>p-ratio2</strong>为<strong>p/70727.32</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/33888665.jpg" alt=""></p>
+<blockquote>
+<p>注意：这里定义一个无量纲压力用于和实验结果进行比较。530.5 torr = 70727.32 Pa</p>
+</blockquote>
+<h2 id="4-3-XY-Plot"><a href="#4-3-XY-Plot" class="headerlink" title="4.3 XY Plot"></a>4.3 XY Plot</h2><ul>
+<li>右键选择模型树节点<strong>XY Plot</strong>，选择弹出节点<strong>New…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/75245954.jpg" alt=""></p>
+<ul>
+<li>如下图所示设置，加载实验数据文件Exp-410 DATA P/Po，并设置显示形式</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/8627317.jpg" alt=""></p>
+<ul>
+<li>压力分布曲线如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/55855870.jpg" alt=""></p>
+<p>计算结果与实验测试结果比较接近。</p>
+<p>保存数据文件为moses-stein-ppo.xy。</p>
+<h1 id="5-无冷凝计算"><a href="#5-无冷凝计算" class="headerlink" title="5 无冷凝计算"></a>5 无冷凝计算</h1><h2 id="5-1-计算设置"><a href="#5-1-计算设置" class="headerlink" title="5.1 计算设置"></a>5.1 计算设置</h2><ul>
+<li>双击模型树节点<strong>Solution &gt; Controls</strong>，点击右侧面板按钮<strong>Equations…</strong>，弹出的对话框中取消选择<strong>Wet Steam</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/55414831.jpg" alt=""></p>
+<ul>
+<li>双击模型树节点<strong>Initialization</strong>，右侧面板中点击按钮<strong>Initialize</strong>进行初始化</li>
+<li>双击模型树节点<strong>Run Calculation</strong>，右侧面板设置<strong>Number of Iteration</strong>为<strong>800</strong>，点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p>迭代660步，计算收敛至0.001。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/74532329.jpg" alt=""></p>
+<h2 id="5-2-计算结果"><a href="#5-2-计算结果" class="headerlink" title="5.2 计算结果"></a>5.2 计算结果</h2><p><strong>1、马赫数分布</strong></p>
+<p>马赫数分布如下图所示。速度要比考虑冷凝时大一些。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/20675569.jpg" alt=""></p>
+<p><strong>2、压力比较</strong></p>
+<p>比较两种条件下（考虑冷凝与不考虑冷凝）中心线上压力分布，如下图所示。</p>
+<p>采用湿蒸气模型考虑冷凝条件下压力存在突变。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/56921405.jpg" alt=""></p>
+<h1 id="6-总结"><a href="#6-总结" class="headerlink" title="6 总结"></a>6 总结</h1><p>ANSYS Fluent采用欧拉-欧拉方法对湿蒸汽流动进行模拟。采用可压缩的Navier-Stokes方程模拟混合物流动，额外再求解两个输运方程：液相质量分数(β)及单位体积液滴数量(η)。相变模型基于经典非等温成核理论，在均匀非平衡冷凝过程中形成液滴。</p>
+<p>wet-steam模型在使用过程中存在诸多限制，包括：</p>
+<ul>
+<li>该模型仅能用于密度基求解器</li>
+<li>进出口边界只能使用pressure inlet、mass flow inlet及pressure outlet</li>
+<li>当激活wet-steam模型后，Create/Edit Materials对话框无法使用，因为流体混合属性由内置的蒸汽属性函数或用户定义的湿蒸汽属性函数决定的。因此，如果需要设置和调整属性，那么在激活湿蒸汽模型之前，必须在Create/Edit Materials对话框中进行。</li>
+</ul>
+<p>关于湿蒸气模型的使用详情，可参阅Fluent随机文档（User Guide的24.6及Theory Guide的17.6），本文仅为一个简单的引入案例。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】02：旋涂工艺/" rel="next" title="【多相流计算】02：旋涂工艺">
+                <i class="fa fa-chevron-left"></i> 【多相流计算】02：旋涂工艺
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】03：圆形坯料连续铸造/" rel="prev" title="【多相流计算】03：圆形坯料连续铸造">
+                【多相流计算】03：圆形坯料连续铸造 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-介绍"><span class="nav-text">1 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-问题描述"><span class="nav-text">2 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Fluent设置"><span class="nav-text">3 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-启动Fluent"><span class="nav-text">3.1 启动Fluent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-General设置"><span class="nav-text">3.2 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-激活湿蒸气模型"><span class="nav-text">3.3 激活湿蒸气模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-采用无粘模型"><span class="nav-text">3.4 采用无粘模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-设置操作条件"><span class="nav-text">3.5 设置操作条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-Boundary-Conditions设置"><span class="nav-text">3.6 Boundary Conditions设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-Initialziation设置"><span class="nav-text">3.7 Initialziation设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-Run-Calculation"><span class="nav-text">3.8 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-冷凝计算结果"><span class="nav-text">4 冷凝计算结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-各种云图分布"><span class="nav-text">4.1 各种云图分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-定义变量"><span class="nav-text">4.2 定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-XY-Plot"><span class="nav-text">4.3 XY Plot</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-无冷凝计算"><span class="nav-text">5 无冷凝计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-计算设置"><span class="nav-text">5.1 计算设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-计算结果"><span class="nav-text">5.2 计算结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-总结"><span class="nav-text">6 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本教程利用Fluent中的finite-rate/eddy-dissipation模型模拟煤燃烧或煤气化过程中的多焦反应。本教程的目的是提供指南和建议的设置和解决多焦反应煤燃烧或气化利用有限速率/涡耗散模型。本教程演示如何做以下：  使用离散相模型的建立和求解多焦煤的燃烧反应。 激活和燃烧过程中发生的反应，建立有限速率/涡耗散模型。 使用合适的求解器设置。 包括辐射模型，研究反应温度的影响  1">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【燃烧案例】08：煤燃烧">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】08：煤燃烧/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="本教程利用Fluent中的finite-rate/eddy-dissipation模型模拟煤燃烧或煤气化过程中的多焦反应。本教程的目的是提供指南和建议的设置和解决多焦反应煤燃烧或气化利用有限速率/涡耗散模型。本教程演示如何做以下：  使用离散相模型的建立和求解多焦煤的燃烧反应。 激活和燃烧过程中发生的反应，建立有限速率/涡耗散模型。 使用合适的求解器设置。 包括辐射模型，研究反应温度的影响  1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/AgkKfJiId1.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/8A9mDmAmkk.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/74KBE5cef5.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/Cd8e2mB2mI.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/3bKI1610i0.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/fm30aaGBfh.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/bF3LH5Im5l.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/a6D37Hh3DH.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/bhdBlBFDbh.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/l7kFjEK8fI.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/25G37jilD9.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/E4GflGc1bc.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/fHKEEjml0m.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/5ilDA1B7Kj.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/kjLa1dACiA.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/d8Kk13g1ib.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/C8LjedbfdC.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/HE9FGIH8KH.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/mJhfjhdgH1.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/FlLkffD9C3.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/7KiDdB6F2m.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/bJLc5Gcibe.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/D8iKdegFKA.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/b05leL2h7C.png?imageslim">
+<meta property="og:updated_time" content="2018-10-17T04:58:27.075Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【燃烧案例】08：煤燃烧">
+<meta name="twitter:description" content="本教程利用Fluent中的finite-rate/eddy-dissipation模型模拟煤燃烧或煤气化过程中的多焦反应。本教程的目的是提供指南和建议的设置和解决多焦反应煤燃烧或气化利用有限速率/涡耗散模型。本教程演示如何做以下：  使用离散相模型的建立和求解多焦煤的燃烧反应。 激活和燃烧过程中发生的反应，建立有限速率/涡耗散模型。 使用合适的求解器设置。 包括辐射模型，研究反应温度的影响  1">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180420/AgkKfJiId1.png?imageslim">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】08：煤燃烧/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【燃烧案例】08：煤燃烧 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】08：煤燃烧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【燃烧案例】08：煤燃烧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 11:52:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T11:52:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent化学反应及燃烧案例/" itemprop="url" rel="index"><span itemprop="name">Fluent化学反应及燃烧案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】08：煤燃烧/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】08：煤燃烧/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本教程利用Fluent中的<strong>finite-rate/eddy-dissipation</strong>模型模拟煤燃烧或煤气化过程中的多焦反应。<br>本教程的目的是提供指南和建议的设置和解决多焦反应煤燃烧或气化利用有限速率/涡耗散模型。<br>本教程演示如何做以下：</p>
+<ul>
+<li>使用离散相模型的建立和求解多焦煤的燃烧反应。</li>
+<li>激活和燃烧过程中发生的反应，建立有限速率/涡耗散模型。</li>
+<li>使用合适的求解器设置。</li>
+<li>包括辐射模型，研究反应温度的影响</li>
+</ul>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>本案例考虑的煤燃烧系统为一个简单的10m x 1m的二维模型，如图所示。考虑模型对称性，计算过程中仅计算半模型。</p>
+<p>2D模型的入口被分割成两部分，接近中心的入口跨度0.125m，介质以50m/s速度流入计算域。另一个入口区域跨度0.375m，介质以15m/s速度进入燃烧器。两个入口中国空气温度均为1500K。煤颗粒从高速气流的中心进入燃烧炉，其质量流量为0.1 kg/s（炉膛总流量为0.2 kg/s），炉膛壁面具有恒定温度1200K。根据入口尺寸和平均入口速度计算雷诺数大约是100000。因此流动为湍流。<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/AgkKfJiId1.png?imageslim" alt="mark"></p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><ul>
+<li>准备网格文件<strong>mchar.msh.gz</strong></li>
+<li>以<strong>2D、double precision</strong>启动Fluent</li>
+</ul>
+<h2 id="2-1-读取网格"><a href="#2-1-读取网格" class="headerlink" title="2.1 读取网格"></a>2.1 读取网格</h2><ul>
+<li><strong>File → Read → Mesh…</strong>读入网格<h2 id="2-2-General设置"><a href="#2-2-General设置" class="headerlink" title="2.2 General设置"></a>2.2 General设置</h2>保持默认设置。<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/8A9mDmAmkk.png?imageslim" alt="mark"><h2 id="2-3-Models设置"><a href="#2-3-Models设置" class="headerlink" title="2.3 Models设置"></a>2.3 Models设置</h2></li>
+</ul>
+<p>激活<strong>Energy</strong>模型及<strong>Realizable k-epsilon</strong>湍流模型。</p>
+<h2 id="2-4-Species模型设置"><a href="#2-4-Species模型设置" class="headerlink" title="2.4 Species模型设置"></a>2.4 Species模型设置</h2><ul>
+<li>选择模型<strong>Species Transport</strong></li>
+<li>激活反应<strong>Volumetirc</strong>及<strong>Particle Surface</strong></li>
+<li>选择Mixture Materials为<strong>coal-mv-volatiles-air</strong></li>
+<li>选择<strong>Finite-Rate/Eddy-Dissipation</strong><br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/74KBE5cef5.png?imageslim" alt="mark"></li>
+</ul>
+<h2 id="2-5-Materials设置"><a href="#2-5-Materials设置" class="headerlink" title="2.5 Materials设置"></a>2.5 Materials设置</h2><ul>
+<li>从材料数据库中添加材料<strong>carbon-monoxide (co)</strong>、<strong>carbon-solid(c(s))</strong> 及 <strong>hydrogen(h2)</strong><br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/Cd8e2mB2mI.png?imageslim" alt="mark"></li>
+</ul>
+<blockquote>
+<p>Fluent中有两种solid材料：一种用于壁面热传导及仅用于求解能量方程的固体；另一种为fluid-solid，如本案例中的固体材料，该材料以颗粒形式存在。</p>
+</blockquote>
+<ul>
+<li>确保材料co2, co,c(s), h2, n2, o2, 及 h2o 的Cp为<strong>piecewise-polynomial</strong>，保持默认值</li>
+<li>设置<strong>coal mv volatiles</strong>的Cp为常数</li>
+<li><p>修改<strong>coal-mv-volatiles-air</strong>的<strong>mixture Species</strong>，如图所示，添加h2及co，确保n2位于列表末尾<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/3bKI1610i0.png?imageslim" alt="mark"></p>
+</li>
+<li><p>修改<strong>coal-mv-volatiles-air</strong>的<strong>Reaction</strong>，本案例涉及到6个化学反应<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/fm30aaGBfh.png?imageslim" alt="mark"><br>按下图所示参数定义这6个反应。<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/bF3LH5Im5l.png?imageslim" alt="mark"><br>定义完毕后如图所示。<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/a6D37Hh3DH.png?imageslim" alt="mark"></p>
+</li>
+<li><p>修改修改<strong>coal-mv-volatiles-air</strong>的<strong>Mechanism</strong><br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/bhdBlBFDbh.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h2 id="2-6-Discrete-Phase模型设置"><a href="#2-6-Discrete-Phase模型设置" class="headerlink" title="2.6 Discrete Phase模型设置"></a>2.6 Discrete Phase模型设置</h2><p>利用DPM模型喷射煤粉颗粒。</p>
+<ul>
+<li><p>启动DPM模型，如下图所示<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/l7kFjEK8fI.png?imageslim" alt="mark"></p>
+</li>
+<li><p>创建<strong>Injections…</strong><br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/25G37jilD9.png?imageslim" alt="mark"><br>其他参数如下图所示。<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/E4GflGc1bc.png?imageslim" alt="mark"></p>
+</li>
+<li><p>设置<strong>Turbulent Dispersion</strong>标签页<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/fHKEEjml0m.png?imageslim" alt="mark"></p>
+</li>
+<li><p>修改颗粒材料coal-mv的物性参数<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/5ilDA1B7Kj.png?imageslim" alt="mark"><br>其他参数如图所示。<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/kjLa1dACiA.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<h2 id="2-7-Boundary-Conditions设置"><a href="#2-7-Boundary-Conditions设置" class="headerlink" title="2.7 Boundary Conditions设置"></a>2.7 Boundary Conditions设置</h2><p><strong>1、velocity-inlet-2边界设置</strong><br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/d8Kk13g1ib.png?imageslim" alt="mark"><br><strong>2、velocity-inlet-8参数设置</strong><br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/C8LjedbfdC.png?imageslim" alt="mark"><br><strong>3、wall-7边界设置</strong></p>
+<ul>
+<li>设置壁面温度为<strong>1200 K</strong></li>
+</ul>
+<p><strong>4、pressure-outlet-6参数设置</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/HE9FGIH8KH.png?imageslim" alt="mark"></p>
+<h2 id="2-8-初始化并计算"><a href="#2-8-初始化并计算" class="headerlink" title="2.8 初始化并计算"></a>2.8 初始化并计算</h2><ul>
+<li>利用velocity-inlet-2进行初始化<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/mJhfjhdgH1.png?imageslim" alt="mark"></li>
+<li>设置计算<strong>500</strong>步开始计算<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/FlLkffD9C3.png?imageslim" alt="mark"></li>
+<li>保存case及data文件</li>
+</ul>
+<h1 id="3-计算后处理"><a href="#3-计算后处理" class="headerlink" title="3 计算后处理"></a>3 计算后处理</h1><ul>
+<li>查看温度<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/7KiDdB6F2m.png?imageslim" alt="mark"></li>
+<li>h2o组分分布<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/bJLc5Gcibe.png?imageslim" alt="mark"></li>
+<li>dpm信息查看<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/D8iKdegFKA.png?imageslim" alt="mark"></li>
+</ul>
+<h1 id="4-激活辐射计算"><a href="#4-激活辐射计算" class="headerlink" title="4 激活辐射计算"></a>4 激活辐射计算</h1><ul>
+<li>开启<strong>P1</strong>辐射模型</li>
+<li>设置<strong>coal-mv-volatiles-air</strong>材料的<strong>Absorption Coefficient</strong>的参数为<strong>wsggm-domain-based</strong></li>
+<li>计算100步<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180420/b05leL2h7C.png?imageslim" alt="mark"></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】06：预混燃烧/" rel="next" title="【燃烧案例】06：预混燃烧">
+                <i class="fa fa-chevron-left"></i> 【燃烧案例】06：预混燃烧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】07：导流射流燃烧/" rel="prev" title="【燃烧案例】07：导流射流燃烧">
+                【燃烧案例】07：导流射流燃烧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-读取网格"><span class="nav-text">2.1 读取网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-General设置"><span class="nav-text">2.2 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Models设置"><span class="nav-text">2.3 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Species模型设置"><span class="nav-text">2.4 Species模型设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Materials设置"><span class="nav-text">2.5 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Discrete-Phase模型设置"><span class="nav-text">2.6 Discrete Phase模型设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Boundary-Conditions设置"><span class="nav-text">2.7 Boundary Conditions设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-初始化并计算"><span class="nav-text">2.8 初始化并计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-计算后处理"><span class="nav-text">3 计算后处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-激活辐射计算"><span class="nav-text">4 激活辐射计算</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

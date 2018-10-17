@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例利用Fluent中的 Finite-Rate Eddy-Dissipation 模型模拟三维BERL燃烧器内部燃烧流场。 1 问题描述如图所示的燃烧器。  其中空气入口采用UDF进行指定，燃料入口采用流量入口，其质量流量为0.0002623542 kg/s，出口为压力出口，其出口静压为大气压。 燃烧模拟采用Finite-Rate Eddy-Dissipation模型，该模型为常用的慢化学反应">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【燃烧案例】01：BERL燃烧器">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】01：BERL燃烧器/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="本案例利用Fluent中的 Finite-Rate Eddy-Dissipation 模型模拟三维BERL燃烧器内部燃烧流场。 1 问题描述如图所示的燃烧器。  其中空气入口采用UDF进行指定，燃料入口采用流量入口，其质量流量为0.0002623542 kg/s，出口为压力出口，其出口静压为大气压。 燃烧模拟采用Finite-Rate Eddy-Dissipation模型，该模型为常用的慢化学反应">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/53736915.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180406/97lLiI78Jc.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180406/lbf5jFJEba.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180406/EbBCdaK61L.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/92473123.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/76397961.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/62154997.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/11298785.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/46632651.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/74314947.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/13393717.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/32826742.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/26951978.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/2054909.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/3534282.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/26975423.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/79887176.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/24887540.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/39954245.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/58495277.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/17574602.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/15534092.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/68189811.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/26043557.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/32661991.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/17355505.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/43936604.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/94533354.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/26804071.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/87735407.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/77625683.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/15358815.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/43119951.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/81129390.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/62657791.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/28296684.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/84793985.jpg">
+<meta property="og:updated_time" content="2018-10-17T04:58:27.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【燃烧案例】01：BERL燃烧器">
+<meta name="twitter:description" content="本案例利用Fluent中的 Finite-Rate Eddy-Dissipation 模型模拟三维BERL燃烧器内部燃烧流场。 1 问题描述如图所示的燃烧器。  其中空气入口采用UDF进行指定，燃料入口采用流量入口，其质量流量为0.0002623542 kg/s，出口为压力出口，其出口静压为大气压。 燃烧模拟采用Finite-Rate Eddy-Dissipation模型，该模型为常用的慢化学反应">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-4-6/53736915.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】01：BERL燃烧器/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【燃烧案例】01：BERL燃烧器 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】01：BERL燃烧器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【燃烧案例】01：BERL燃烧器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 11:50:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T11:50:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent化学反应及燃烧案例/" itemprop="url" rel="index"><span itemprop="name">Fluent化学反应及燃烧案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】01：BERL燃烧器/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】01：BERL燃烧器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例利用Fluent中的<strong> Finite-Rate Eddy-Dissipation</strong> 模型模拟三维BERL燃烧器内部燃烧流场。</p>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>如图所示的燃烧器。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/53736915.jpg" alt=""></p>
+<p>其中空气入口采用UDF进行指定，燃料入口采用流量入口，其质量流量为0.0002623542 kg/s，出口为压力出口，其出口静压为大气压。</p>
+<p>燃烧模拟采用Finite-Rate Eddy-Dissipation模型，该模型为常用的慢化学反应模型。</p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><h2 id="2-1-启动Fluent"><a href="#2-1-启动Fluent" class="headerlink" title="2.1 启动Fluent"></a>2.1 启动Fluent</h2><ul>
+<li>以<strong>3D</strong>模式启动Fluent，选中<strong>Double Precision</strong>采用双精度计算</li>
+<li>利用菜单<strong>File→ Read→ Mesh…</strong>读取网格文件<strong>berl_ed_15_degree.msh</strong></li>
+</ul>
+<h2 id="2-2-General设置"><a href="#2-2-General设置" class="headerlink" title="2.2 General设置"></a>2.2 General设置</h2><ul>
+<li>双击模型树节点<strong>Genearl</strong>，右侧面板中点击按钮<strong>Scale…</strong>弹出网格缩放对话框</li>
+<li>选择<strong>Mesh Was Created In</strong>选项为<strong>mm</strong>，点击<strong>Scale</strong>按钮缩放网格</li>
+<li>点击<strong>Close</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180406/97lLiI78Jc.png?imageslim" alt="mark"></p>
+<ul>
+<li>General面板保持默认设置，如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180406/lbf5jFJEba.png?imageslim" alt=""></p>
+<h2 id="2-3-Models设置"><a href="#2-3-Models设置" class="headerlink" title="2.3 Models设置"></a>2.3 Models设置</h2><p>激活能量方程、Realizable k-epsilon湍流模型、P1辐射模型。</p>
+<ul>
+<li>右键选择模型树节点<strong>Models &gt; Energy</strong>，点击弹出菜单项<strong>On</strong>激活能量方程</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180406/EbBCdaK61L.png?imageslim" alt="mark"></p>
+<ul>
+<li>右键选择模型树节点<strong>Models &gt; Viscous</strong>，选择弹出菜单<strong>Models → Realizable k-epsilon</strong>激活湍流模型</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/92473123.jpg" alt=""></p>
+<ul>
+<li><p>双击模型树节点<strong>Models &gt; Radiation</strong>弹出辐射设置对话框</p>
+<ul>
+<li>Theta Divisions=4</li>
+<li>Phi Divisions=4</li>
+<li>Theta Pixels=3</li>
+<li>Phi Pixels=3</li>
+<li>Energy iterations per radiation iterations =1</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/76397961.jpg" alt=""></p>
+</li>
+<li><p>点击<strong>OK</strong>按钮关闭对话框</p>
+</li>
+</ul>
+<h2 id="2-4-Species-Models设置"><a href="#2-4-Species-Models设置" class="headerlink" title="2.4 Species Models设置"></a>2.4 Species Models设置</h2><ul>
+<li>双击模型树节点<strong>Models  → Species</strong>弹出组分输运模型设置对话框</li>
+<li>选择模型<strong>Species Transport</strong></li>
+<li>激活选项<strong>Volumetric</strong>激活体积反应</li>
+<li>选择湍流化学反应作用模型为<strong>Finite-Rate/Eddy-Dissipation</strong></li>
+<li>取消选项<strong>Diffusion Energy Source</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/62154997.jpg" alt=""></p>
+<h2 id="2-5-Materials设置"><a href="#2-5-Materials设置" class="headerlink" title="2.5 Materials设置"></a>2.5 Materials设置</h2><p><strong>1、添加材料</strong></p>
+<ul>
+<li>双击模型树节点<strong>Materials &gt; fluid &gt; air</strong>，在弹出的材料编辑对话框中点击按钮<strong>Fluent Database…</strong>打开材料数据库对话框</li>
+<li>材料数据库对话框中设置<strong>Material Type</strong>为<strong>fluid</strong>，并选择材料<strong>methane </strong>及<strong>carbon-dioxide</strong>，点击<strong>Copy</strong>按钮添加材料</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/11298785.jpg" alt=""></p>
+<ul>
+<li>修改材料<strong>Methane</strong>名称为<strong>fuel</strong>，去除Chemical Formula中的内容，点击按钮<strong>Change/Create</strong>修改材料</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/46632651.jpg" alt=""></p>
+<p><strong>2、修改混合物</strong>参数</p>
+<ul>
+<li>鼠标双击模型树节点<strong>Materials &gt; Mixture &gt; mixture-template</strong>弹出Create/Edit Materials对话框</li>
+<li>点击对话框中<strong>Mixture Species</strong>右侧的<strong>Edit…</strong>按钮，弹出属性边界对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/74314947.jpg" alt=""></p>
+<ul>
+<li>如下图所示设置组分，确保氮气（n2）位于列表的最下方，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/13393717.jpg" alt=""></p>
+<ul>
+<li>点击Create/Edit Materials对话框中<strong>Reaction</strong>右侧的<strong>Edit…</strong>按钮，弹出化学反应定义对话框，按下图所示参数定义化学反应</li>
+</ul>
+<p>$$<br>CH_4 +2O_2 \rightarrow CO_2 + 2H_2 O<br>$$</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/32826742.jpg" alt=""></p>
+<ul>
+<li>点击<strong>OK</strong>按钮关闭对话框，返回至Create/Edit Materials对话框</li>
+<li>设置<strong>Thermal conductivity to</strong>选项为<strong>polynomial</strong>，弹出Polynomial Profile对话框</li>
+<li>设置<strong>Coefficients</strong>为<strong>2</strong>，并设置系数为<strong>-0.0076736及5.8837e-5</strong>，如下图所示，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/26951978.jpg" alt=""></p>
+<ul>
+<li>同理设置<strong>Viscosity</strong>为<strong>polynomial</strong>，并设置系数为<strong>-7.6181e-6及3.2623e-8</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+<li>设置<strong>Absorption Coefficient</strong>为<strong>wsggm-domain-based</strong></li>
+<li><strong>Scattering Coefficient</strong>为<strong>1e-9</strong>，其他参数保持默认设置</li>
+<li>点击按钮<strong>Change/Create</strong>修改材料参数，点击<strong>Close</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/2054909.jpg" alt=""></p>
+<h2 id="2-6-解释UDF"><a href="#2-6-解释UDF" class="headerlink" title="2.6 解释UDF"></a>2.6 解释UDF</h2><p>本案例利用UDF指定入口速度及壁面边界温度。所采用的UDF可以利用解释方式加载运行。</p>
+<ul>
+<li>右键选择模型树节点<strong>Parameters &amp; Customization &gt; User Defined Functions</strong>，点击弹出菜单项<strong>Interpreted…</strong>打开UDF解释对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/3534282.jpg" alt=""></p>
+<ul>
+<li>点击<strong>Browse…</strong>按钮加载UDF文件<strong>berl-profiles.c</strong>，点击按钮<strong>Interpret</strong>解释UDF源文件</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/26975423.jpg" alt=""></p>
+<h2 id="2-7-Boundary-Conditions"><a href="#2-7-Boundary-Conditions" class="headerlink" title="2.7 Boundary Conditions"></a>2.7 Boundary Conditions</h2><p><strong>1、inlet-air边界设置</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inlet-air</strong>，弹出边界设置对话框</li>
+<li>Momentum标签页下进行如下图所示设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/79887176.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Temperature</strong>为<strong>312 K</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/24887540.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Species</strong>标签页，设置<strong>o2</strong>为<strong>0.2315</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/39954245.jpg" alt=""></p>
+<p><strong>2、inlet-fuel</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inlet-fuel</strong>，弹出边界设置对话框</li>
+<li>进入<strong>Momentum</strong>标签页，设置<strong>Mass Flow Specification Method</strong>为<strong>0.0002623542 kg/s</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/58495277.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Temperature</strong>为<strong>308 K</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/17574602.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Species</strong>标签页，设置<strong>fuel</strong>为<strong>0.97</strong>，<strong>co2</strong>为<strong>0.008</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/15534092.jpg" alt=""></p>
+<p><strong>3、outlet</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt;outlet</strong>，弹出边界设置对话框</li>
+<li><strong>Momentum</strong>标签页设置如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/68189811.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Backflow Total Temperature</strong>为<strong>1300 k</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/26043557.jpg" alt=""></p>
+<p><strong>4、其他壁面边界</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; wall-1</strong>，弹出边界设置对话框</li>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Thermal Condtions</strong>为<strong>Temperature</strong></li>
+<li>设置<strong>Temperature</strong>为<strong>312 K</strong></li>
+<li>设置<strong>Internal Emissivity</strong>为<strong>0.6</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/32661991.jpg" alt=""></p>
+<p>与此设置相同，其他壁面边界条件如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>边界</th>
+<th>温度</th>
+<th>Internal Emissivity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wall-2</td>
+<td>1173</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>wall-3</td>
+<td>1173</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>wall-4</td>
+<td>1273</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>wall-5</td>
+<td>1100</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>wall-6</td>
+<td>wall-temp</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>wall-7</td>
+<td>1305</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>wall-8</td>
+<td>1370</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-8-Mesh-Interface"><a href="#2-8-Mesh-Interface" class="headerlink" title="2.8 Mesh Interface"></a>2.8 Mesh Interface</h2><ul>
+<li>鼠标双击模型树节点<strong>Mesh Interface</strong>，弹出设置对话框</li>
+<li>点击按钮<strong>Manual Create…</strong>打开手动创建对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/17355505.jpg" alt=""></p>
+<ul>
+<li>如下图所示创建interface，注意激活选项<strong>Periodic Boundary Condition</strong>，并设置<strong>Type</strong>为<strong>Rotational</strong>，选中选项<strong>Auto Compute Offset</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/43936604.jpg" alt=""></p>
+<h2 id="2-9-Methods设置"><a href="#2-9-Methods设置" class="headerlink" title="2.9 Methods设置"></a>2.9 Methods设置</h2><ul>
+<li>双击模型树节点<strong>Solution &gt; Methods</strong>，如下图所示设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/94533354.jpg" alt=""></p>
+<h2 id="2-10-Controls设置"><a href="#2-10-Controls设置" class="headerlink" title="2.10 Controls设置"></a>2.10 Controls设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Controls</strong>，右侧面板中设置<strong>Flow Courant Number</strong>为<strong>50</strong></li>
+<li>设置<strong>Density</strong>为<strong>0.25</strong>，其他参数保持默认设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/26804071.jpg" alt=""></p>
+<ul>
+<li>点击按钮<strong>Equations…</strong>，弹出对话框中取消选择<strong>Discrete Ordinates</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/87735407.jpg" alt=""></p>
+<blockquote>
+<p>注意：</p>
+<p>这里先取消计算辐射，是处于计算收敛性上的考虑。其实也可以不取消。</p>
+</blockquote>
+<h2 id="2-11-Initialization"><a href="#2-11-Initialization" class="headerlink" title="2.11 Initialization"></a>2.11 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Solution &gt; Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/77625683.jpg" alt=""></p>
+<h2 id="2-13-Run-Calculation"><a href="#2-13-Run-Calculation" class="headerlink" title="2.13 Run Calculation"></a>2.13 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>1000</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/15358815.jpg" alt=""></p>
+<h2 id="2-14-激活辐射模型重新计算"><a href="#2-14-激活辐射模型重新计算" class="headerlink" title="2.14 激活辐射模型重新计算"></a>2.14 激活辐射模型重新计算</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Controls</strong>，右侧面板中点击按钮<strong>Equations…</strong>弹出设置对话框</li>
+<li>选中所有列表项，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/43119951.jpg" alt=""></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>2000</strong>，点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/81129390.jpg" alt=""></p>
+<blockquote>
+<p>注意：加入辐射模型后计算量非常大，2000步计算在12核工作站上可能要耗费几个小时的时间。</p>
+</blockquote>
+<h1 id="3-后处理"><a href="#3-后处理" class="headerlink" title="3 后处理"></a>3 后处理</h1><p>计算完毕后可以查看周期面上温度、组分等物理量分布。</p>
+<ul>
+<li>温度分布</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/62657791.jpg" alt=""></p>
+<ul>
+<li>速度分布</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/28296684.jpg" alt=""></p>
+<ul>
+<li>CO2组分分布</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-4-6/84793985.jpg" alt=""></p>
+<p>由于后处理与常规后处理方式并无不同，这里不再赘述。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】03：锥形燃烧器内预混燃烧/" rel="next" title="【燃烧案例】03：锥形燃烧器内预混燃烧">
+                <i class="fa fa-chevron-left"></i> 【燃烧案例】03：锥形燃烧器内预混燃烧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent化学反应及燃烧案例/【燃烧案例】05：液体化学反应/" rel="prev" title="【燃烧案例】05：液体化学反应">
+                【燃烧案例】05：液体化学反应 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-启动Fluent"><span class="nav-text">2.1 启动Fluent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-General设置"><span class="nav-text">2.2 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Models设置"><span class="nav-text">2.3 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Species-Models设置"><span class="nav-text">2.4 Species Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Materials设置"><span class="nav-text">2.5 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-解释UDF"><span class="nav-text">2.6 解释UDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Boundary-Conditions"><span class="nav-text">2.7 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Mesh-Interface"><span class="nav-text">2.8 Mesh Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-Methods设置"><span class="nav-text">2.9 Methods设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-Controls设置"><span class="nav-text">2.10 Controls设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-11-Initialization"><span class="nav-text">2.11 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-13-Run-Calculation"><span class="nav-text">2.13 Run Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-14-激活辐射模型重新计算"><span class="nav-text">2.14 激活辐射模型重新计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-后处理"><span class="nav-text">3 后处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

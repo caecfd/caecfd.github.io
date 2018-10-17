@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1 引子本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。本案例主要展示以下内容：  使用冲蚀模型分析3D弯头中的冲蚀现象 使用离散相模型 使用合适的求解参数求解案例 计算后处理  2 问题描述本案例的几何模型如下图所示。该模型由两个90°弯头及连接管道构成，介质水从inlet口进入，从outlet口流出。   水流入速度10m/s">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【多相流计算】09：DPM冲蚀计算">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="1 引子本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。本案例主要展示以下内容：  使用冲蚀模型分析3D弯头中的冲蚀现象 使用离散相模型 使用合适的求解参数求解案例 计算后处理  2 问题描述本案例的几何模型如下图所示。该模型由两个90°弯头及连接管道构成，介质水从inlet口进入，从outlet口流出。   水流入速度10m/s">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/22867867.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/88560630.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/19605498.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/56399834.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/96059737.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/58074916.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/39377412.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/67940837.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/2841872.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/60519070.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/6201763.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/54229931.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/35335688.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/58258397.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/11666328.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/6616603.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/9573195.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/10340348.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/6047949.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/58774513.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/29451465.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/81640519.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/67916953.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/63805279.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/40507891.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/50463073.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/19552593.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/70510007.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/85132132.jpg">
+<meta property="og:updated_time" content="2018-10-17T06:06:25.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【多相流计算】09：DPM冲蚀计算">
+<meta name="twitter:description" content="1 引子本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。本案例主要展示以下内容：  使用冲蚀模型分析3D弯头中的冲蚀现象 使用离散相模型 使用合适的求解参数求解案例 计算后处理  2 问题描述本案例的几何模型如下图所示。该模型由两个90°弯头及连接管道构成，介质水从inlet口进入，从outlet口流出。   水流入速度10m/s">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-25/22867867.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【多相流计算】09：DPM冲蚀计算 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【多相流计算】09：DPM冲蚀计算
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：14:06:25" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-引子"><a href="#1-引子" class="headerlink" title="1 引子"></a>1 引子</h1><p>本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。<br>本案例主要展示以下内容：</p>
+<ul>
+<li>使用冲蚀模型分析3D弯头中的冲蚀现象</li>
+<li>使用离散相模型</li>
+<li>使用合适的求解参数求解案例</li>
+<li>计算后处理</li>
+</ul>
+<h1 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2 问题描述"></a>2 问题描述</h1><p>本案例的几何模型如下图所示。该模型由两个90°弯头及连接管道构成，介质水从inlet口进入，从outlet口流出。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/22867867.jpg" alt=""></p>
+<ul>
+<li>水流入速度10m/s，出口假设为outflow边界，在求解过程中考虑湍流、等温及稳态条件。</li>
+<li>密度1500kg/m3的颗粒从入口以初速度10m/s进入管道，颗粒直径为200微米，质量流量1kg/s</li>
+<li>颗粒在壁面上的法向及切向反弹系数定义为颗粒冲击角的多项式函数。在建立冲蚀模型时，冲击角函数被用于定义管道壁面的塑性冲蚀（不同的冲击角造成的管道壁面的损伤不同）</li>
+<li>本例中，颗粒的粒径函数定义为常数$1.8\times10^{-9}$，速度指数定义为常数2.6，这些参数来自于公开的文献。</li>
+</ul>
+<h1 id="3-模型准备"><a href="#3-模型准备" class="headerlink" title="3   模型准备"></a>3   模型准备</h1><p>本案例采用已有的网格模型。</p>
+<ul>
+<li>以<strong>3D</strong>、<strong>Double Precision</strong>模式启动FLUENT。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/88560630.jpg" alt=""></p>
+<h1 id="4-网格检查"><a href="#4-网格检查" class="headerlink" title="4 网格检查"></a>4 网格检查</h1><ul>
+<li>利用菜单<strong>File → Read → Mesh…</strong>读入网格文件<strong>3d-elbow.msh</strong></li>
+<li>双击模型树节点General，右侧面板中点击<strong>Scale</strong>检查网格尺度，确保其与实际尺寸保持一致</li>
+<li>点击<strong>Check</strong>按钮检查网格及网格质量</li>
+<li>点击<strong>Display…</strong>按钮显示计算网格，如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/19605498.jpg" alt=""></p>
+<h1 id="5模型设置"><a href="#5模型设置" class="headerlink" title="5模型设置"></a>5模型设置</h1><ul>
+<li>右键选择模型树节点<strong>Models</strong>，点击弹出菜单项<strong>Viscous → Realizable k-epsilon</strong>添加Realizable k-epsilon湍流模型</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/56399834.jpg" alt=""></p>
+<ul>
+<li>双击模型树节点<strong>Models &gt; Discrete Phase(Off)</strong>，弹出如下图所示对话框。</li>
+<li>设置激活<strong>Interaction with Continuous Phase</strong></li>
+<li>设置<strong>Number of Continuous Phase Interactions per DPM Iteration</strong>为<strong>5</strong></li>
+<li>设置<strong>Max. Number of Steps</strong>参数值为<strong>10000</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/96059737.jpg" alt=""></p>
+<ul>
+<li>进入<strong>Physical Models</strong>标签页，选择激活<strong>Erosion/Accretion</strong>选项，如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/58074916.jpg" alt=""></p>
+<h1 id="6-材料设置"><a href="#6-材料设置" class="headerlink" title="6 材料设置"></a>6 材料设置</h1><ul>
+<li>从材料数据库中添加液态水<strong>water-liquid(h2o\<l>)</l></strong></li>
+</ul>
+<h1 id="7-设定注入器"><a href="#7-设定注入器" class="headerlink" title="7 设定注入器"></a>7 设定注入器</h1><ul>
+<li>双击模型树节点<strong>Models &gt; Discrete Phase &gt; Injections</strong>打开注入器定义对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/39377412.jpg" alt=""></p>
+<ul>
+<li>点击对话框上按钮<strong>Create</strong>创建注入器，弹出创建对话框，如下图所示</li>
+<li>在<strong>Point Properties</strong>标签页下<ul>
+<li>设置<strong>Injection Type</strong>为<strong>Surface</strong></li>
+<li>设置<strong>Release From Surface</strong>为<strong>inlet</strong></li>
+<li>设置<strong>z-velocity</strong>为<strong>10</strong></li>
+<li>设置<strong>Diameter</strong>为<strong>0.0002</strong></li>
+<li>设置<strong>Total Flow Rate</strong>为<strong>1</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/67940837.jpg" alt=""></p>
+<ul>
+<li>进入<strong>Turbulent Dispersion</strong>标签页下，激活<strong>Discrete Random Walk Model</strong>，设置<strong>Number of Tries</strong>参数为<strong>10</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/2841872.jpg" alt=""></p>
+<h1 id="8-修改材料"><a href="#8-修改材料" class="headerlink" title="8 修改材料"></a>8 修改材料</h1><ul>
+<li>双击模型树节点<strong>Materials &gt; Inert Particle &gt; anthracite</strong>弹出材料属性设置对话框</li>
+<li>修改<strong>Name</strong>为<strong>sand</strong>，密度修改为<strong>1500 kg/m3</strong></li>
+<li>点击<strong>Change/Create</strong>按钮确认更改</li>
+<li>点击<strong>Close</strong>按钮关闭对话框。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/60519070.jpg" alt=""></p>
+<h1 id="9-Cell-zone-Conditions设置"><a href="#9-Cell-zone-Conditions设置" class="headerlink" title="9 Cell zone Conditions设置"></a>9 Cell zone Conditions设置</h1><ul>
+<li>双击模型树节点<strong>Cell Zone Conditions &gt; fluid</strong>，弹出计算域设置对话框</li>
+<li>设置参数<strong>Material Name</strong>为<strong>water-liquid</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/6201763.jpg" alt=""></p>
+<h1 id="10-边界条件设置"><a href="#10-边界条件设置" class="headerlink" title="10 边界条件设置"></a>10 边界条件设置</h1><p>边界条件中需要设置进出口及壁面边界条件。</p>
+<h2 id="10-1-inlet入口设置"><a href="#10-1-inlet入口设置" class="headerlink" title="10.1 inlet入口设置"></a>10.1 inlet入口设置</h2><ul>
+<li>双击模型树节点<strong>Boundary Conditions &gt; inlet</strong>，弹出入口设置对话框</li>
+<li>设置<strong>Velocity Magnitude</strong>为<strong>10 m/s</strong></li>
+<li>设置<strong>Specification Method</strong>为<strong>Intensity and Hydraulic Diameter</strong></li>
+<li>设置<strong>Turbulent Intensity</strong>为<strong>5%</strong></li>
+<li>设置<strong>Hydraulic Diameter</strong>为<strong>0.05 m</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/54229931.jpg" alt=""></p>
+<h2 id="10-2-出口设置"><a href="#10-2-出口设置" class="headerlink" title="10.2 出口设置"></a>10.2 出口设置</h2><ul>
+<li>设置出口边界outlet的边界类型为outflow。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/35335688.jpg" alt=""></p>
+<blockquote>
+<p>本案例采用17.0以后版本演示，改变边界类型的方式与早期版本有些许不同，这里使用右键点击边界，选择Type，然后更改类型</p>
+</blockquote>
+<h2 id="10-3-壁面边界设置"><a href="#10-3-壁面边界设置" class="headerlink" title="10.3 壁面边界设置"></a>10.3 壁面边界设置</h2><p>本例的壁面边界wall中主要需要设置DPM标签页下的内容。</p>
+<ul>
+<li>双击模型树节点<strong>Boudnary &gt; wall</strong>弹出壁面边界设置对话框</li>
+<li>切换至<strong>DPM</strong>标签页</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/58258397.jpg" alt=""></p>
+<p>需要设置的内容：</p>
+<ul>
+<li><p><strong>Normal</strong>：法向反弹系数<br>本案例定义法向反弹系数为：</p>
+<p>$$\varepsilon_N=0.993-0.0307\alpha+4.75\times10^{-4}\alpha^2-2.61\times10^{-6}\alpha^3$$</p>
+<p>点击Normal后方的Edit…按钮，定义方式如下图所示：</p>
+</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/11666328.jpg" alt=""></p>
+<ul>
+<li><p><strong>Tangent</strong>：切向反弹系数<br>本案例定义切向反弹系数为：</p>
+<p>$$\varepsilon_T=0.998-0.029\alpha+6.43\times10^{-4}\alpha^2-3.56\times10^{-6}\alpha^3$$</p>
+</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/6616603.jpg" alt=""></p>
+<ul>
+<li>激活选项<strong>General Model</strong>，点击后方<strong>Edit…</strong>按钮弹出通用冲蚀模型参数定义对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/9573195.jpg" alt=""></p>
+<p>采用下图所示方式进行定义：</p>
+<ul>
+<li><strong>Impact Angle Function</strong>：冲击角函数。 冲击角函数采用分段线性方式进行定义，数据如表所示。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Point</th>
+<th style="text-align:left">Angle</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">0.8</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:left">30</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:left">45</td>
+<td style="text-align:left">0.5</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:left">90</td>
+<td style="text-align:left">0.4</td>
+</tr>
+</tbody>
+</table>
+<p>采用下图方式进行定义：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/10340348.jpg" alt=""></p>
+<ul>
+<li><strong>Diameter Function</strong>：粒径函数，本案例取1.8e-9</li>
+<li><strong>Velocity Exponent Function</strong>：速度指数函数，本案例取2.6，如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/6047949.jpg" alt=""></p>
+<h1 id="11-初始化及计算"><a href="#11-初始化及计算" class="headerlink" title="11 初始化及计算"></a>11 初始化及计算</h1><ul>
+<li>鼠标右键选择模型树节点<strong>Initialization </strong>点击菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/58774513.jpg" alt=""></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>1000</strong></li>
+<li>点击按钮<strong>Calculate</strong>开始计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/29451465.jpg" alt=""></p>
+<h1 id="12-查看粒子追踪"><a href="#12-查看粒子追踪" class="headerlink" title="12 查看粒子追踪"></a>12 查看粒子追踪</h1><p><strong>1、查看颗粒轨迹</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Results &gt; Particle Tracks</strong></li>
+<li>设置<strong>Color by</strong>为<strong>Particle Velocity Magnitude</strong>，设置<strong>Track Style</strong>为<strong>coarse-cylinder</strong></li>
+<li>选择<strong>Release from Injections</strong>为<strong>injection-0</strong></li>
+<li>点击按钮<strong>Save/Display</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/81640519.jpg" alt=""></p>
+<ul>
+<li>右键选择模型树节点<strong>Scene</strong>，点击弹出菜单项<strong>New…</strong>新建sence</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/67916953.jpg" alt=""></p>
+<ul>
+<li>弹出对话框中选择按钮<strong>New Object &gt; Mesh…</strong>，弹出设置对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/63805279.jpg" alt=""></p>
+<ul>
+<li>按下图所示设置对话框，注意取消选项<strong>Edge</strong>，点击按钮<strong>Save/Display</strong>及<strong>Close</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/40507891.jpg" alt=""></p>
+<ul>
+<li>回到Scene设置对话框，激活选项<strong>particle-tracks-1</strong>及<strong>Mesh-1</strong></li>
+<li>拖动滑块设置<strong>mesh-1</strong>的透明度为<strong>70</strong></li>
+<li>点击按钮<strong>Save &amp; Display</strong>显示颗粒轨迹</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/50463073.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/19552593.jpg" alt=""></p>
+<p><strong>2、查看壁面冲蚀率</strong></p>
+<ul>
+<li>双击模型树节点<strong>Results &gt; Graphics &gt; Contours</strong>，弹出云图设置对话框</li>
+<li>激活选项<strong>Filled</strong></li>
+<li>选择选项<strong>Contours of</strong>分别为<strong>Discrete Phase Variables…</strong>及<strong>DPM Erosion Rate(Generic)</strong></li>
+<li>选择<strong>Surface</strong>为<strong>wall</strong></li>
+<li>点击按钮<strong>Save/Display</strong>显示充实率云图</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/70510007.jpg" alt=""></p>
+<p>冲蚀率云图分布如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-25/85132132.jpg" alt=""></p>
+<blockquote>
+<p>若要在其他后处理软件中观察冲蚀情况，则需要通过菜单<strong>File &gt; Export &gt; Particle History Data…</strong>输出颗粒数据。</p>
+</blockquote>
+<p>本案例采用的是通用冲蚀模型，此模型是Fluent中传统的冲蚀模型。在最近几个版本的Fluent中添加了新的冲蚀模型，如Finnie、McLaury及Oka模型，有兴趣的话可以尝试一下。</p>
+<p>Fluent计算的只是颗粒轨迹及颗粒状态，至于壁面的冲蚀情况是通过冲蚀模型来得到的，这是一个经验模型，在实际工程应用中需要格外注意。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" rel="next" title="【多相流计算】06：晃荡的油箱">
+                <i class="fa fa-chevron-left"></i> 【多相流计算】06：晃荡的油箱
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-引子"><span class="nav-text">1 引子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-问题描述"><span class="nav-text">2 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-模型准备"><span class="nav-text">3   模型准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-网格检查"><span class="nav-text">4 网格检查</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5模型设置"><span class="nav-text">5模型设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-材料设置"><span class="nav-text">6 材料设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-设定注入器"><span class="nav-text">7 设定注入器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-修改材料"><span class="nav-text">8 修改材料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-Cell-zone-Conditions设置"><span class="nav-text">9 Cell zone Conditions设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-边界条件设置"><span class="nav-text">10 边界条件设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-inlet入口设置"><span class="nav-text">10.1 inlet入口设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-出口设置"><span class="nav-text">10.2 出口设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-壁面边界设置"><span class="nav-text">10.3 壁面边界设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-初始化及计算"><span class="nav-text">11 初始化及计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-查看粒子追踪"><span class="nav-text">12 查看粒子追踪</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

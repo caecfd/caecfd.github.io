@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="OpenFOAM中提供了众多的标准求解器。有了这些标准求解器，即使你对程序设计一无所知，你也可以将OpenFOAM当做是一款CFD软件。实际上OpenFOAM的功能不只是求解器流体流动问题。 OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每一个目录下均包含众多的求解器。了解这些求解器各自的用途，是用好这些求解器的基本前提。   以下内容来自于OpenFOAM Use">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【一起学OpenFOAM】06 标准求解器">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="OpenFOAM中提供了众多的标准求解器。有了这些标准求解器，即使你对程序设计一无所知，你也可以将OpenFOAM当做是一款CFD软件。实际上OpenFOAM的功能不只是求解器流体流动问题。 OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每一个目录下均包含众多的求解器。了解这些求解器各自的用途，是用好这些求解器的基本前提。   以下内容来自于OpenFOAM Use">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-24/59345956.jpg">
+<meta property="og:updated_time" content="2018-10-16T16:20:37.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【一起学OpenFOAM】06 标准求解器">
+<meta name="twitter:description" content="OpenFOAM中提供了众多的标准求解器。有了这些标准求解器，即使你对程序设计一无所知，你也可以将OpenFOAM当做是一款CFD软件。实际上OpenFOAM的功能不只是求解器流体流动问题。 OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每一个目录下均包含众多的求解器。了解这些求解器各自的用途，是用好这些求解器的基本前提。   以下内容来自于OpenFOAM Use">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-24/59345956.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【一起学OpenFOAM】06 标准求解器 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【一起学OpenFOAM】06 标准求解器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OpenFOAM中提供了众多的标准求解器。有了这些标准求解器，即使你对程序设计一无所知，你也可以将OpenFOAM当做是一款CFD软件。实际上OpenFOAM的功能不只是求解器流体流动问题。</p>
+<p>OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每一个目录下均包含众多的求解器。了解这些求解器各自的用途，是用好这些求解器的基本前提。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-6-24/59345956.jpg" alt=""></p>
+<blockquote>
+<p>以下内容来自于OpenFOAM User Guide</p>
+</blockquote>
+<h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><p>包括三个求解器：</p>
+<ul>
+<li><strong>laplacianFoam</strong>：求解器简单的拉普拉斯方程。如固体中的热传导方程。</li>
+<li><strong>potentialFoam</strong>：势流求解器。求解速度势。</li>
+<li><strong>scalarTransportFoam</strong>：求解稳态或瞬态的标量传输方程</li>
+</ul>
+<h1 id="Incompressible（不可压缩流动）"><a href="#Incompressible（不可压缩流动）" class="headerlink" title="Incompressible（不可压缩流动）"></a>Incompressible（不可压缩流动）</h1><ul>
+<li><strong>adjointShapeOptimizationFoam</strong>：不可压缩非牛顿流体湍流流动稳态求解器，此求解器包括根据压力损失进行管道形状优化功能。</li>
+<li><strong>boundaryFoam</strong>：不可压缩稳态一维湍流求解器。常用于为入口边界生产边界层条件</li>
+<li><strong>icoFoam</strong>：牛顿流体不可压缩瞬态层流求解器</li>
+<li><strong>nonNewtonianIcoFoam</strong>：非牛顿流体不可压缩瞬态层流求解器</li>
+<li><strong>pimpleFoam</strong>：采用PIMPLE算法的大时间步不可压缩湍流瞬态求解器</li>
+<li><strong>pimpleDyMFoam</strong>：用于运动网格的牛顿流体不可压缩湍流瞬态求解器</li>
+<li><strong>pisoFoam</strong>：使用PISO算法的不可压缩湍流瞬态求解器</li>
+<li><strong>shallowWaterFoam</strong>：瞬态无粘有旋浅水方程瞬态求解器</li>
+<li><strong>simpleFoam</strong>：使用SIMPLE算法的不可压缩湍流稳态求解器</li>
+<li><strong>porousSimpleFoam</strong>：支持MRF的多孔介质不可压缩湍流稳态求解器</li>
+<li><strong>SRFSimpleFoam</strong>：单参考系中非牛顿流体不可压缩湍流稳态求解器</li>
+</ul>
+<h1 id="Compressible（可压缩流动）"><a href="#Compressible（可压缩流动）" class="headerlink" title="Compressible（可压缩流动）"></a>Compressible（可压缩流动）</h1><ul>
+<li><strong>rhoCentralFoam</strong>：基于Kurganov&amp;Tadmor中心迎风格式的密度计可压缩湍流求解器</li>
+<li><strong>rhoCentralDyMFoam</strong>：支持动网格的基于Kurganov&amp;Tadmor中心迎风格式的密度计可压缩湍流求解器</li>
+<li><strong>rhoPimpleFoam</strong>：基于PIMPLE算法的可压缩湍流瞬态求解器，常用于HVAC领域</li>
+<li><strong>rhoPimpleDyMFoam</strong>：与rhoPimpleFoam相同，不过附加了动网格求解</li>
+<li><strong>rhoPorousSimpleFoam</strong>：附加有多孔介质模型的可压缩湍流稳态求解器</li>
+<li><strong>sonicFoam</strong>：瞬态可压缩气体湍流求解器，用于跨音速和超音速</li>
+<li><strong>sonicDyMFoam</strong>：与sonicFoam相同，可以使用动网格</li>
+<li><strong>sonicLiquidFoam</strong>：可压缩跨音速/超音速层流瞬态求解器</li>
+</ul>
+<h1 id="Multiphase（多相流）"><a href="#Multiphase（多相流）" class="headerlink" title="Multiphase（多相流）"></a>Multiphase（多相流）</h1><ul>
+<li><strong>cavitatingFoam</strong>：基于均相平衡模型瞬态空化求解器。</li>
+<li><strong>cavitatingDyMFoam</strong>：与cavitatingFoam相同，支持动网格及自适应网格</li>
+<li><strong>compressibleInterFoam</strong>：基于VOF模型的可压缩、非等温、不可溶两相界面捕捉求解器</li>
+<li><strong>compressibleInterDyMFoam</strong>：与compressibleInterFoam功能相同，支持动网格与自适应网格</li>
+<li><strong>compressibleMultiphaseInterPhase</strong>：基于VOF模型的支持n相不可压、非等温、不可溶流体界面捕捉求解器</li>
+<li><strong>driftFluxFoam</strong>：基于mixture模型，考虑相间滑移的两相不可压缩求解器</li>
+<li><strong>interFoam</strong>：基于VOF模型的两相不可压缩、等温、不可溶流体界面捕捉求解器</li>
+<li><strong>interDyMFoam</strong>：与interFoam功能相同，支持动网格及自适应网格</li>
+<li><strong>interMixingFoam</strong>：三相不可压缩，其中两相互溶，使用VOF模型捕捉相间界面</li>
+<li><strong>interPhaseChangeFoam</strong>：基于VOF模型的不可压、等温、不可溶、存在相变的两相界面捕捉求解器</li>
+<li><strong>interPhaseChangeDyMFoam</strong>：与interPhaseChangeFoam功能相同，支持动网格及自适应网格</li>
+<li><strong>multiphaseEulerFoam</strong>：包含传热的多相可压缩求解器，基于双流体模型</li>
+<li><strong>multiphaseInterFoam</strong>：考虑表面张力及接触角效应的多相不可压界面捕捉求解器</li>
+<li><strong>multiphaseInterDyMFoam</strong>：与multiphaseInterFoam功能相同，支持动网格及自适应网格</li>
+<li><strong>potentialFreeSurfaceFoam</strong>：包含波高的不可压缩NS方程求解器，可用于模拟单相自由表面的波高</li>
+<li><strong>potentialFreeSurfaceDyMFoam</strong>：与potentialFreeSurfaceFoam功能相同，支持动网格及自适应网格</li>
+<li><strong>reactingMultiphaseEulerFoam</strong>：用于具有共同压力的任何数量的可压缩流体相的系统，但是另外具有分离的性质。 相模型的类型在运行时选择，并且可以有选择地表示多个组分反应。</li>
+<li><strong>reactingTwoPhaseEulerFoam</strong>：用于具有共同压力的2相可压缩流体系统，但是另外具有分离的性质。 相模型的类型在运行时选择，并且可以有选择地表示多个物种和同相反应。</li>
+<li><strong>twoLiquidMixingFoam</strong>：不可压缩可溶两相混合求解器</li>
+<li><strong>twoPhaseEulerFoam</strong>：两相可压缩系统，其中一相为分散相。典型应用为包含传热模型的流体中的气泡。</li>
+</ul>
+<h1 id="直接数值模拟"><a href="#直接数值模拟" class="headerlink" title="直接数值模拟"></a>直接数值模拟</h1><ul>
+<li><strong>dnsFoam</strong>：计算域为立方体的各向同性湍流直接模拟求解器</li>
+</ul>
+<h1 id="Combustion（燃烧）"><a href="#Combustion（燃烧）" class="headerlink" title="Combustion（燃烧）"></a>Combustion（燃烧）</h1><ul>
+<li><strong>chemFoam</strong>：单网格化学反应求解器。主要用于与其他化学反应求解器作对比。</li>
+<li><strong>coldEngineFoam</strong>：内燃机内冷态流动求解器</li>
+<li><strong>engineFoam</strong>：内燃机求解器</li>
+<li><strong>fireFoam</strong>：瞬态火灾及湍流扩散火焰求解器</li>
+<li><strong>PDRFoam</strong>：附带湍流的可压预混/部分预混燃烧求解器</li>
+<li><strong>reactingFoam</strong>：附带化学反应的燃烧求解器</li>
+<li><strong>rhoReactingBuoyantFoam</strong>：利用密度基、热力学模型及浮力强化模型的燃烧求解器，包含化学反应</li>
+<li><strong>rhoReactingFoam</strong>：密度基、热力学模型及化学反应的燃烧求解器</li>
+<li><strong>XiFoam</strong>：包含湍流模型的可压缩预混/部分预混燃烧求解器</li>
+</ul>
+<h1 id="Heat-Transfer（传热）"><a href="#Heat-Transfer（传热）" class="headerlink" title="Heat Transfer（传热）"></a>Heat Transfer（传热）</h1><ul>
+<li><p><strong>buoyantBoussinesqPimpleFoam</strong>：包含湍流的瞬态不可压浮力驱动求解器</p>
+</li>
+<li><p><strong>buoyantBoussinesqSimpleFoam</strong>：包含湍流的稳态不可压浮力驱动求解器</p>
+</li>
+<li><p><strong>buoyantPimpleFoam</strong>：包含湍流的瞬态可压缩浮力驱动求解器（用于暖通和传热）</p>
+</li>
+<li><p><strong>buoyantSimpleFoam</strong>：包含湍流的稳态可压缩浮力驱动求解器</p>
+</li>
+</ul>
+<ul>
+<li><strong>chtMultiRegionFoam</strong>：固体热传导与流体传热耦合求解，包含浮力、湍流以及热传导瞬态求解器</li>
+<li><strong>chtMultiRegionSimpleFoam</strong>：固体热传导与流体传热耦合求解，包含浮力、湍流以及热传导稳态求解器</li>
+<li><strong>thermoFoam</strong>：在固定流程中的能量传输及热力学求解器</li>
+</ul>
+<h1 id="Particle-tracking（粒子跟踪）"><a href="#Particle-tracking（粒子跟踪）" class="headerlink" title="Particle-tracking（粒子跟踪）"></a>Particle-tracking（粒子跟踪）</h1><ul>
+<li><strong>coalChemistryFoam</strong>：包含煤粉及石灰岩颗粒能量源及燃烧的可压缩、湍流瞬态求解器</li>
+<li><strong>DPMFoam</strong>：考虑颗粒体积分数对连续相作用的单颗粒团耦合输运瞬态求解器</li>
+<li><strong>MPPICFoam</strong>：基于MPPIC方法描述颗粒间的碰撞，不真实求解颗粒与颗粒的相互作用</li>
+<li><strong>icoUncoupledKinematicParcelFoam</strong>：单颗粒团被动输运瞬态求解器</li>
+<li><strong>icoUncoupledKinematicParcelFoam</strong>：支持动网格及自适应网格的icoUncoupledKinematicParcelFoam</li>
+<li><strong>reactingParcelFilmFoam</strong>：包含化学反应、多项颗粒以及壁膜模型的可压缩湍流求解器</li>
+<li><strong>reactingParcelFoam</strong>：包含化学反应、多相颗粒以及可选的源/约束的可压缩湍流瞬态求解器</li>
+<li><strong>simpleReactingParcelFoam</strong>：包含化学反应、多相颗粒以及可选的源及约束的可压缩湍流稳态求解器</li>
+<li><strong>sprayFoam</strong>：喷雾颗粒可压缩湍流瞬态求解器</li>
+<li><strong>sprayDyMFoam</strong>：支持动网格和自适应网格的喷雾颗粒可压缩湍流瞬态求解器</li>
+<li><strong>sprayEngineFoam</strong>：引擎喷雾颗粒可压缩湍流瞬态求解器</li>
+<li><strong>uncoupledKinematicParcelFoam </strong>：颗粒团单相耦合瞬态求解器</li>
+</ul>
+<h1 id="Electromagnetics（电磁场）"><a href="#Electromagnetics（电磁场）" class="headerlink" title="Electromagnetics（电磁场）"></a>Electromagnetics（电磁场）</h1><ul>
+<li><strong>electrostaticFoam</strong>：静电场求解器</li>
+<li><strong>magneticFoam</strong>：永磁场求解器</li>
+<li><strong>mhdFoam</strong>：不可压缩层流磁流体求解器</li>
+</ul>
+<h1 id="Stress-analysis-of-solid（固体应力）"><a href="#Stress-analysis-of-solid（固体应力）" class="headerlink" title="Stress analysis of solid（固体应力）"></a>Stress analysis of solid（固体应力）</h1><ul>
+<li><strong>solidDisplacementFoam</strong>：线弹性小应变的有限体积瞬态分离式求解器，可选温度扩散和热应力</li>
+<li><strong>solidEquilibriumDisplacementFoam</strong>：线弹性小应变的有限体积稳态分离式求解器，可选温度扩散和热应力</li>
+</ul>
+<h1 id="Finance（金融）"><a href="#Finance（金融）" class="headerlink" title="Finance（金融）"></a>Finance（金融）</h1><ul>
+<li><strong>financialFoam</strong>：期权定价Black0Scholes方程求解器</li>
+</ul>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>以上是OpenFOAM中的标准求解器，用户可以开发自己的求解器。</p>
+<p>若是开发OpenFOAM通用界面，一个比较重要的工作是制作筛选器，根据不同的流动场景选择最合适的求解器。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/" rel="next" title="【OpenFOAM案例】07 pitzDaily">
+                <i class="fa fa-chevron-left"></i> 【OpenFOAM案例】07 pitzDaily
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】05 OpenFOAM的学习资源/" rel="prev" title="【一起学OpenFOAM】05 OpenFOAM的学习资源">
+                【一起学OpenFOAM】05 OpenFOAM的学习资源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Incompressible（不可压缩流动）"><span class="nav-text">Incompressible（不可压缩流动）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Compressible（可压缩流动）"><span class="nav-text">Compressible（可压缩流动）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiphase（多相流）"><span class="nav-text">Multiphase（多相流）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直接数值模拟"><span class="nav-text">直接数值模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Combustion（燃烧）"><span class="nav-text">Combustion（燃烧）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Heat-Transfer（传热）"><span class="nav-text">Heat Transfer（传热）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Particle-tracking（粒子跟踪）"><span class="nav-text">Particle-tracking（粒子跟踪）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Electromagnetics（电磁场）"><span class="nav-text">Electromagnetics（电磁场）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stress-analysis-of-solid（固体应力）"><span class="nav-text">Stress analysis of solid（固体应力）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Finance（金融）"><span class="nav-text">Finance（金融）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例演示利用ANSYS Fluent中的大涡模拟与噪声模型计算绕经2D圆柱体的湍流流场以及由流场引起的气动噪声。 本教程主要演示以下操作：  二维大涡模拟计算设置 气动声学计算设置 为声学计算保存声源数据 计算声压信号 声学结果后处理  1 问题描述本案例考虑的问题如下图所示。2D矩形计算域中包含一个直径1.9cm的圆柱体，上游来流速度为69.2 m/s，流场雷诺数为90000。圆柱上游长度为5">
+<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【声学案例】02：FWH方法">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/气动声学/【声学案例】02：FWH方法/index.html">
+<meta property="og:site_name" content="CFD视点">
+<meta property="og:description" content="本案例演示利用ANSYS Fluent中的大涡模拟与噪声模型计算绕经2D圆柱体的湍流流场以及由流场引起的气动噪声。 本教程主要演示以下操作：  二维大涡模拟计算设置 气动声学计算设置 为声学计算保存声源数据 计算声压信号 声学结果后处理  1 问题描述本案例考虑的问题如下图所示。2D矩形计算域中包含一个直径1.9cm的圆柱体，上游来流速度为69.2 m/s，流场雷诺数为90000。圆柱上游长度为5">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/36659032.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/60187752.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/47452017.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/59655852.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/75009212.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/74983080.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/22676709.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/67928228.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/9030892.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/28275326.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/67827375.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/BBAfmfAH76.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/35006621.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/7991269.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/79500132.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/88931152.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/40040277.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/HIGgd6hGll.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/42153965.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/74711709.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/J4Fia2k6KG.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/F18K2BB3F9.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180318/JAChIGFE3i.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180318/71HAAGjdBI.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/LEaAG9fE0E.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/HIGgd6hGll.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/3kD9FbdI53.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/mi3Liaa1a1.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/JLhkljED90.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/KLLg0c5DC0.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/I1dI7ba918.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/8Cifi7KAa0.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/KiclLl6kFI.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/dagKC7d7KE.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/7059Ad28jm.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/7fh570GmC7.png?imageslim">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180319/9Ah8mKkFij.png?imageslim">
+<meta property="og:updated_time" content="2018-10-17T04:58:27.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【声学案例】02：FWH方法">
+<meta name="twitter:description" content="本案例演示利用ANSYS Fluent中的大涡模拟与噪声模型计算绕经2D圆柱体的湍流流场以及由流场引起的气动噪声。 本教程主要演示以下操作：  二维大涡模拟计算设置 气动声学计算设置 为声学计算保存声源数据 计算声压信号 声学结果后处理  1 问题描述本案例考虑的问题如下图所示。2D矩形计算域中包含一个直径1.9cm的圆柱体，上游来流速度为69.2 m/s，流场雷诺数为90000。圆柱上游长度为5">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-3-18/36659032.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/气动声学/【声学案例】02：FWH方法/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【声学案例】02：FWH方法 | CFD视点</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFD视点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/气动声学/【声学案例】02：FWH方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFD视点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【声学案例】02：FWH方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 11:38:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T11:38:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/气动声学/" itemprop="url" rel="index"><span itemprop="name">气动声学</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/气动声学/【声学案例】02：FWH方法/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/气动声学/【声学案例】02：FWH方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例演示利用ANSYS Fluent中的大涡模拟与噪声模型计算绕经2D圆柱体的湍流流场以及由流场引起的气动噪声。</p>
+<p>本教程主要演示以下操作：</p>
+<ul>
+<li>二维大涡模拟计算设置</li>
+<li>气动声学计算设置</li>
+<li>为声学计算保存声源数据</li>
+<li>计算声压信号</li>
+<li>声学结果后处理</li>
+</ul>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>本案例考虑的问题如下图所示。2D矩形计算域中包含一个直径1.9cm的圆柱体，上游来流速度为69.2 m/s，流场雷诺数为90000。圆柱上游长度为5D，下游长度为20D。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/36659032.jpg" alt=""></p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><h2 id="2-1-启动Fluent"><a href="#2-1-启动Fluent" class="headerlink" title="2.1 启动Fluent"></a>2.1 启动Fluent</h2><ul>
+<li>以<strong>2D</strong>、<strong>Double Precision</strong>形式启动Fluent</li>
+</ul>
+<h2 id="2-1-网格准备"><a href="#2-1-网格准备" class="headerlink" title="2.1 网格准备"></a>2.1 网格准备</h2><p>本案例网格采用外部导入形式加载。</p>
+<ul>
+<li>选择菜单<strong>File →  Read → Mesh…</strong>读取网格文件<strong>cylinder2d.msh.gz</strong></li>
+<li>双击模型树节点<strong>General</strong>，右侧面板点击按钮<strong>Check</strong>确保计算网格完整</li>
+<li>点击<strong>Display</strong>按钮查看网格，如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/60187752.jpg" alt=""></p>
+<blockquote>
+<p>大涡模拟常采用四边形网格（六面体网格），因为其产生的数值扩散要更小。同时划分的网格应足够小，以能够捕捉到相关的湍流长度尺度，同时使得数值误差小于亚格子尺度湍流粘度。出于计算时间上的考虑，本案例的网格较为粗糙，在实际计算过程中，圆柱壁面附近的网格应该划分得更加细密。</p>
+</blockquote>
+<h2 id="2-2-General设置"><a href="#2-2-General设置" class="headerlink" title="2.2 General设置"></a>2.2 General设置</h2><ul>
+<li>双击模型树节点<strong>General</strong></li>
+<li>选择选项<strong>Transient</strong>启动瞬态计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/47452017.jpg" alt=""></p>
+<h2 id="2-3-Models设置"><a href="#2-3-Models设置" class="headerlink" title="2.3 Models设置"></a>2.3 Models设置</h2><p>默认情况下2D几何模型是无法激活大涡模拟的，此时需要通过TUI命令将其激活。此命令为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(rpsetvar 'les-2d? #t)</span><br></pre></td></tr></table></figure>
+<p>如下图所示，即可激活2D几何下的LES模型。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/59655852.jpg" alt=""></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Models &gt; Viscous</strong>弹出湍流模型选择对话框，如下图所示，选择<strong>Large Eddy Simulation</strong>，子模型选择<strong>Smagorinsky-Lilly</strong>，模型参数保持默认，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/75009212.jpg" alt=""></p>
+<blockquote>
+<p>对于声学模拟，一般情况下建议使用LES模型</p>
+</blockquote>
+<h2 id="2-4-Boundary-Conditions"><a href="#2-4-Boundary-Conditions" class="headerlink" title="2.4 Boundary Conditions"></a>2.4 Boundary Conditions</h2><p><strong>1、inlet边界设置</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inlet</strong>弹出边界设置对话框</li>
+<li>设置<strong>Velocity Magnitude</strong>为<strong>69.2 m/s</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/74983080.jpg" alt=""></p>
+<p><strong>2、outlet设置</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inlet</strong>弹出边界设置对话框</li>
+<li>保持默认参数设置，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/22676709.jpg" alt=""></p>
+<h2 id="2-5-Methods设置"><a href="#2-5-Methods设置" class="headerlink" title="2.5 Methods设置"></a>2.5 Methods设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Methods</strong></li>
+<li>右侧面板中激活选项<strong>Non-Iterative Time Advancement</strong></li>
+<li>设置<strong>Pressure-Velocity Coupling Scheme</strong>为<strong>Fractional Step</strong></li>
+<li>设置<strong>Transient Formulation</strong>为<strong>Second Order Implicit</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/67928228.jpg" alt=""></p>
+<h2 id="2-6-Controls设置"><a href="#2-6-Controls设置" class="headerlink" title="2.6 Controls设置"></a>2.6 Controls设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Controls</strong></li>
+<li>右侧面板设置<strong>Pressure</strong>为<strong>0.7</strong></li>
+<li>其他参数保持默认设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/9030892.jpg" alt=""></p>
+<h2 id="2-7-Initialization"><a href="#2-7-Initialization" class="headerlink" title="2.7 Initialization"></a>2.7 Initialization</h2><ul>
+<li>鼠标双击模型树节点<strong>Initialization</strong></li>
+<li>右侧面板激活选项<strong>Standard Initialization</strong></li>
+<li>选择<strong>Compute from</strong>为<strong>inlet</strong></li>
+<li>点击按钮<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/28275326.jpg" alt=""></p>
+<h2 id="2-8-Monitors"><a href="#2-8-Monitors" class="headerlink" title="2.8 Monitors"></a>2.8 Monitors</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Monitors &gt; Residual</strong>弹出残差监测对话框</li>
+<li>设置<strong>Iterations to Plot</strong>为<strong>20</strong></li>
+<li>设置<strong>Iterations to Store</strong>为<strong>10000</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/67827375.jpg" alt=""></p>
+<h2 id="2-9-Run-Calculation"><a href="#2-9-Run-Calculation" class="headerlink" title="2.9 Run Calculation"></a>2.9 Run Calculation</h2><ul>
+<li>双击模型树节点<strong>Run Calculation</strong></li>
+<li>右侧面板设置<strong>Time Step Size</strong>为<strong>5e-6 s</strong>，设置<strong>Number of Time Steps</strong>为<strong>20</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/BBAfmfAH76.png?imageslim" alt=""></p>
+<blockquote>
+<p>大涡模拟中所需的时间步长取决于所要求解的流体涡的最小时间尺度，通常需要使当地CFL数接近于1。然而在开始计算之前，通常难易获取到合适的时间步长。因此在开始计算之后，往往还需要对时间步长进行调整。对于给定的时间步长Δt，声学分析最高频率为f=1/(2Δt)。在本案例中，最大频率为100 kHz，由此可得时间步长约为5e-6s。</p>
+</blockquote>
+<h2 id="2-10-设置圆柱体升阻力监测"><a href="#2-10-设置圆柱体升阻力监测" class="headerlink" title="2.10 设置圆柱体升阻力监测"></a>2.10 设置圆柱体升阻力监测</h2><p><strong>1、阻力监测</strong></p>
+<ul>
+<li>鼠标右键选择模型树节点<strong>Report </strong>，点击弹出菜单项<strong>New → Force Report → Drag…</strong>弹出阻力设置对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/35006621.jpg" alt=""></p>
+<ul>
+<li>按下图所示设置阻力监测参数，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/7991269.jpg" alt=""></p>
+<p><strong>2、升力监测</strong></p>
+<ul>
+<li>鼠标右键选择模型树节点<strong>Report </strong>，点击弹出菜单项<strong>New → Force Report → Drag…</strong>弹出阻力设置对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/79500132.jpg" alt=""></p>
+<ul>
+<li>按下图所示参数进行升力系数设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/88931152.jpg" alt=""></p>
+<h2 id="2-11-Reference-Value设置"><a href="#2-11-Reference-Value设置" class="headerlink" title="2.11 Reference Value设置"></a>2.11 Reference Value设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Reference Values</strong>，右侧面板中选择<strong>Compute from</strong>下拉项为<strong>inlet</strong></li>
+<li>确认列表中参数值与下图所示参数保持一致</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/40040277.jpg" alt=""></p>
+<h2 id="2-22-Run-Calculation"><a href="#2-22-Run-Calculation" class="headerlink" title="2.22 Run Calculation"></a>2.22 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong></li>
+<li>右侧面板中设置<strong>Time Step Size</strong>为<strong>5e-6 s</strong>，设置<strong>Number of Time Steps</strong>为<strong>4000</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/HIGgd6hGll.png?imageslim" alt=""></p>
+<h1 id="3-流场后处理"><a href="#3-流场后处理" class="headerlink" title="3 流场后处理"></a>3 流场后处理</h1><h2 id="3-1-查看升阻力监测曲线"><a href="#3-1-查看升阻力监测曲线" class="headerlink" title="3.1 查看升阻力监测曲线"></a>3.1 查看升阻力监测曲线</h2><p>计算结束后可查看监测得到的升阻力系数随时间分布，如下图所示。从图中看出曲线呈周期分布。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/42153965.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-3-18/74711709.jpg" alt=""></p>
+<h2 id="3-2-CFL查看"><a href="#3-2-CFL查看" class="headerlink" title="3.2 CFL查看"></a>3.2 CFL查看</h2><p>利用直方图查看wall_cylinder边界上的CFL分布，确保其CFL值在1附近。</p>
+<ul>
+<li>鼠标双击模型树节点<strong>Results ＞ Plots &gt; Histogram</strong>弹出直方图绘制对话框</li>
+<li>如图所示，设置<strong>Histogram of</strong>为<strong>Velocity…</strong>及<strong>Cell Convective Courant Number</strong></li>
+<li>设置<strong>Divisions</strong>为<strong>100</strong></li>
+<li>选择<strong>Zones</strong>为<strong>wall_cylinder</strong></li>
+<li>点击<strong>Plot</strong>按钮绘制图形</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/J4Fia2k6KG.png?imageslim" alt=""></p>
+<p>得到的CFL数分布直方图如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/F18K2BB3F9.png?imageslim" alt=""></p>
+<p>从图可以看出，圆柱体周围CFL数最大值约为6，大部分分布在1周围，符合预期要求。</p>
+<h1 id="4-气动声学计算"><a href="#4-气动声学计算" class="headerlink" title="4 气动声学计算"></a>4 气动声学计算</h1><h2 id="4-1-设置声学模型"><a href="#4-1-设置声学模型" class="headerlink" title="4.1 设置声学模型"></a>4.1 设置声学模型</h2><ul>
+<li>鼠标双击模型树节点<strong>Models &gt; Acoustics</strong>弹出声学模型设置对话框</li>
+<li>选择Model为<strong>Ffowcs-Williams &amp; Hawkings</strong></li>
+<li>选中选项<strong>Export Acoustic Source Data in ASD Format</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180318/JAChIGFE3i.png?imageslim" alt="mark"></p>
+<ul>
+<li>点击按钮<strong>Define Sources…</strong>弹出声源定义对话框</li>
+<li>选择<strong>Source Zones</strong>为<strong>wall_cylinder</strong></li>
+<li>设置<strong>Source Data Root File Name</strong>为<strong>cylinder2d</strong>，设置<strong>Write Frequency</strong>为<strong>2</strong>，设置<strong>Number of Time Steps per File</strong>为<strong>200</strong></li>
+<li>点击<strong>Apply</strong>及<strong>Close</strong>按钮关闭Acoustic Sources对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180318/71HAAGjdBI.png?imageslim" alt="mark"></p>
+<ul>
+<li>点击<strong>OK</strong>按钮关闭<strong>Acoustics Mode</strong>对话框</li>
+</ul>
+<h2 id="4-2-Controls"><a href="#4-2-Controls" class="headerlink" title="4.2 Controls"></a>4.2 Controls</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Controls</strong>，右侧面板中设置<strong>Pressure</strong>为<strong>1</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/LEaAG9fE0E.png?imageslim" alt="mark"></p>
+<h2 id="4-3-Run-Calculation"><a href="#4-3-Run-Calculation" class="headerlink" title="4.3 Run Calculation"></a>4.3 Run Calculation</h2><p>继续计算4000步。</p>
+<ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong></li>
+<li>右侧面板中设置<strong>Time Step Size</strong>为<strong>5e-6 s</strong>，设置<strong>Number of Time Steps</strong>为<strong>4000</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/HIGgd6hGll.png?imageslim" alt=""></p>
+<h2 id="4-4-设置声学模型常数"><a href="#4-4-设置声学模型常数" class="headerlink" title="4.4 设置声学模型常数"></a>4.4 设置声学模型常数</h2><ul>
+<li>双击模型树节点<strong>Models &gt; Acoustics</strong>弹出声学模型设置对话框</li>
+<li>选择激活<strong>Ffowcs-Williams &amp; Hawkings</strong>模型</li>
+<li>修改<strong>SourceCorrelation Length</strong>为<strong>0.095 m</strong></li>
+<li>其他参数如图嗾使保持默认，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/3kD9FbdI53.png?imageslim" alt="mark"></p>
+<blockquote>
+<p>注意：当在2D模型中进行声学计算模拟时，参数Source Correlation Length非常重要。Fluent会假设声源与所指定的关联长度完全相关。它在计算域内部构建一个深度等于指定关联长度的源体积，而且忽略外部源。在实际的2D模型声学计算中，用户必须估计该参数值，而且获得的声压级与该参树相关。这会导致采用2D模型计算获取绝对声压级非常困难，因此，进行2D气动声学计算主要用于定性研究观察趋势，在三维计算时不需要输入该参数值。</p>
+</blockquote>
+<h2 id="4-5-设置声学信号"><a href="#4-5-设置声学信号" class="headerlink" title="4.5 设置声学信号"></a>4.5 设置声学信号</h2><ul>
+<li>双击模型树节点<strong>Run Calculation</strong>，右侧面板中点击按钮<strong>Acoustic Signals…</strong>弹出Acoustic Signals设置对话框</li>
+<li>点击对话框中按钮<strong>Receivers…</strong>弹出Acoustic Receivers对话框，按下图所示进行设置</li>
+<li>点击<strong>OK</strong>按钮关闭Acoustic Receivers对话框回到Acoustic Signals对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/mi3Liaa1a1.png?imageslim" alt="mark"></p>
+<ul>
+<li>在Acoustic Signals对话框中，按下图所示进行设置，点击<strong>Compute/Write</strong>按钮计算并写出数据</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/JLhkljED90.png?imageslim" alt="mark"></p>
+<h1 id="5-声场后处理"><a href="#5-声场后处理" class="headerlink" title="5 声场后处理"></a>5 声场后处理</h1><h2 id="5-1-声压曲线"><a href="#5-1-声压曲线" class="headerlink" title="5.1 声压曲线"></a>5.1 声压曲线</h2><ul>
+<li>双击模型树节点<strong>Results &gt; Plots &gt; File</strong>弹出文件数据绘制对话框</li>
+<li>如下图所示加载数据receiver-1.ard及receiver-2.ard，设置曲线及轴参数</li>
+<li>点击<strong>Plot</strong>按钮显示声压随时间变化曲线</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/KLLg0c5DC0.png?imageslim" alt="mark"></p>
+<p>声压曲线如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/I1dI7ba918.png?imageslim" alt="mark"></p>
+<blockquote>
+<p>注意到两个接收器存在大约5e-3s的时间延迟，这是因为receiver-2与声源的距离要比receiver-1更远。而且从图中看出，receiver-2的压力要比receiver-1小。</p>
+</blockquote>
+<h2 id="5-2-FFT转换"><a href="#5-2-FFT转换" class="headerlink" title="5.2 FFT转换"></a>5.2 FFT转换</h2><ul>
+<li>双击模型树节点<strong>Results &gt; Plot &gt; FFT</strong>打开傅里叶转换设置面板</li>
+<li>如下图所示，选选项<strong>Acoustics Analysis</strong>及<strong>Process Receiver</strong></li>
+<li>设置<strong>Y Axis Function</strong>为<strong>Sound Pressure Level(dB）</strong>，并选择<strong>Receiver-1</strong></li>
+<li>点击<strong>Axies…</strong>按钮打开轴参数设置对话框，确保X轴参数范围为<strong>Auto Range</strong>，点击<strong>Apply</strong>及<strong>Close</strong>确认修改轴参数</li>
+<li>点击按钮<strong>Plot FFT</strong>显示经过傅里叶变换后的声压级频域曲线</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/8Cifi7KAa0.png?imageslim" alt="mark"></p>
+<p>声压级分布如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/KiclLl6kFI.png?imageslim" alt="mark"></p>
+<p>此图很乱，可以缩小X轴显示范围更清晰的进行数据展示。</p>
+<ul>
+<li>点击<strong>Axies…</strong>按钮打开轴参数设置对话框，如下图所示，取消<strong>Auto Range</strong>选项设置，设置最小最大值分别为<strong>0~5000</strong></li>
+<li>点击<strong>Apply及Close</strong>按钮确认参数设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/dagKC7d7KE.png?imageslim" alt="mark"></p>
+<p>此时显示的声压级曲线如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/7059Ad28jm.png?imageslim" alt="mark"></p>
+<ul>
+<li>可修改x轴变量为<strong>Strouhal Number</strong>，显示的声压级曲线如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/7fh570GmC7.png?imageslim" alt="mark"></p>
+<ul>
+<li>显示功率谱密度随Strouhal Number变化曲线，如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180319/9Ah8mKkFij.png?imageslim" alt="mark"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/气动声学/【声学案例】03：宽带噪声/" rel="prev" title="【声学案例】03：宽带噪声">
+                【声学案例】03：宽带噪声 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙" />
+            
+              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-启动Fluent"><span class="nav-text">2.1 启动Fluent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-网格准备"><span class="nav-text">2.1 网格准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-General设置"><span class="nav-text">2.2 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Models设置"><span class="nav-text">2.3 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Boundary-Conditions"><span class="nav-text">2.4 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Methods设置"><span class="nav-text">2.5 Methods设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Controls设置"><span class="nav-text">2.6 Controls设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Initialization"><span class="nav-text">2.7 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Monitors"><span class="nav-text">2.8 Monitors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-Run-Calculation"><span class="nav-text">2.9 Run Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-设置圆柱体升阻力监测"><span class="nav-text">2.10 设置圆柱体升阻力监测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-11-Reference-Value设置"><span class="nav-text">2.11 Reference Value设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-22-Run-Calculation"><span class="nav-text">2.22 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-流场后处理"><span class="nav-text">3 流场后处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-查看升阻力监测曲线"><span class="nav-text">3.1 查看升阻力监测曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-CFL查看"><span class="nav-text">3.2 CFL查看</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-气动声学计算"><span class="nav-text">4 气动声学计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-设置声学模型"><span class="nav-text">4.1 设置声学模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Controls"><span class="nav-text">4.2 Controls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Run-Calculation"><span class="nav-text">4.3 Run Calculation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-设置声学模型常数"><span class="nav-text">4.4 设置声学模型常数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-设置声学信号"><span class="nav-text">4.5 设置声学信号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-声场后处理"><span class="nav-text">5 声场后处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-声压曲线"><span class="nav-text">5.1 声压曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-FFT转换"><span class="nav-text">5.2 FFT转换</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
