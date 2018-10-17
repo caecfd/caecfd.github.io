@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Fluent UDF利用的是C语言，本文简单介绍在UDF中经常会用到的C语言常识。本文部分内容来自UDF手册。 1 C语言中的注释C语言中的注释利用/*及*/来实现。例如:1/*这是一个注释*/ 注释也可以跨行实现，如:12/*这是一个跨行注释*/ 注意:在编写UDF的过程中，不能把DEFINE宏(如DEFINE_PROFILE)放置在注释中，否则会引起编译错误 2 基本数据类型Fluent UD">
+<meta name="keywords" content="Fluent UDF介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent UDF【4】：C语言基础">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="Fluent UDF利用的是C语言，本文简单介绍在UDF中经常会用到的C语言常识。本文部分内容来自UDF手册。 1 C语言中的注释C语言中的注释利用/*及*/来实现。例如:1/*这是一个注释*/ 注释也可以跨行实现，如:12/*这是一个跨行注释*/ 注意:在编写UDF的过程中，不能把DEFINE宏(如DEFINE_PROFILE)放置在注释中，否则会引起编译错误 2 基本数据类型Fluent UD">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3577886-d669d698a12ddeea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-17T17:14:19.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent UDF【4】：C语言基础">
+<meta name="twitter:description" content="Fluent UDF利用的是C语言，本文简单介绍在UDF中经常会用到的C语言常识。本文部分内容来自UDF手册。 1 C语言中的注释C语言中的注释利用/*及*/来实现。例如:1/*这是一个注释*/ 注释也可以跨行实现，如:12/*这是一个跨行注释*/ 注意:在编写UDF的过程中，不能把DEFINE宏(如DEFINE_PROFILE)放置在注释中，否则会引起编译错误 2 基本数据类型Fluent UD">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3577886-d669d698a12ddeea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent UDF【4】：C语言基础 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于Me</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent UDF【4】：C语言基础
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:19" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Fluent UDF利用的是C语言，本文简单介绍在UDF中经常会用到的C语言常识。<br>本文部分内容来自UDF手册。</p>
+<h1 id="1-C语言中的注释"><a href="#1-C语言中的注释" class="headerlink" title="1 C语言中的注释"></a>1 C语言中的注释</h1><p>C语言中的注释利用<code>/*及*/</code>来实现。例如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*这是一个注释*/</span></span><br></pre></td></tr></table></figure></p>
+<p>注释也可以跨行实现，如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*这是一个</span></span><br><span class="line"><span class="comment">跨行注释*/</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意:在编写UDF的过程中，不能把DEFINE宏(如DEFINE_PROFILE)放置在注释中，否则会引起编译错误</strong></p>
+<h1 id="2-基本数据类型"><a href="#2-基本数据类型" class="headerlink" title="2 基本数据类型"></a>2 基本数据类型</h1><p>Fluent UDF解释器支持的标准C数据类型包括:</p>
+<ul>
+<li><code>int</code>。整形，存储形如1,2,3之类的整数。</li>
+<li><code>long</code>。长整形。存储数据与int类似，但范围更广。</li>
+<li><code>float</code>。浮点型。存储小数，如1.234等</li>
+<li><code>double</code>。双精度浮点型。与float类似。</li>
+<li><code>char</code>。字符型，如’a’,’b’,’c’等。<br>Fluent UDF中还有<code>real</code>型，其实这是Fluent自定义的数据类型，在双精度求解器中，real类型与double类型相同，而在单精度求解器中，real类型等同于float类型。UDF自动进行转换，因此在需要浮点数时，可以全部采用real类型。</li>
+</ul>
+<h1 id="3-常数"><a href="#3-常数" class="headerlink" title="3 常数"></a>3 常数</h1><p>在C语言中可以利用#define来定义常数。需要注意的是，定义为常数类型后，该变量的值不能改变。如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WALL_ID 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> YMIN 0.0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> YMAX 0.4</span></span><br></pre></td></tr></table></figure></p>
+<p>这样定义完毕后，WALL_ID的值不能再发生改变，因此如下的语句会引发编译错误:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WALL_ID = WALL_ID +<span class="number">1</span> ;</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-变量"><a href="#4-变量" class="headerlink" title="4 变量"></a>4 变量</h1><p>变量用于存储数据。所有变量都包含类型、名称以及值，有时候还包含存储标记（如静态变量和外部变量）。C语言中所有的变量在使用之前都必须声明，这样C编译器才会知道该如何为此变量分配内存。</p>
+<h2 id="4-1-全局变量和局部变量"><a href="#4-1-全局变量和局部变量" class="headerlink" title="4.1 全局变量和局部变量"></a>4.1 全局变量和局部变量</h2><p>C语言中的全局变量定义在函数的外部，该变量可以被源文件中所有的函数引用。全局变量如果未被声明为静态变量的话，还可以被外部函数引用。如下例中的全局变量声明：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">real volume; <span class="comment">/*此处定义的是全局变量*/</span></span><br><span class="line">DEFINE_ADJUST(vol,domain)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*此处可以访问变量volume*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>局部变量一般定义在函数体内，其只在函数体内起作用，在函数体外无法被访问到。如下程序中的局部变量定义。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DEFINE_PROPERTY(cell_viscosity, cell, thread)</span><br><span class="line">&#123;</span><br><span class="line">    real mu_lam;      <span class="comment">/*局部变量 */</span></span><br><span class="line">    real temp = C_T(cell, thread);  <span class="comment">/* 局部变量 */</span></span><br><span class="line">    <span class="keyword">if</span> (temp &gt; <span class="number">288.</span>)</span><br><span class="line">      mu_lam = <span class="number">5.5e-3</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; <span class="number">286.</span>)</span><br><span class="line">      mu_lam = <span class="number">143.2135</span> - <span class="number">0.49725</span> * temp;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      mu_lam = <span class="number">1.</span>;</span><br><span class="line">    <span class="keyword">return</span> mu_lam;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-2-外部变量"><a href="#4-2-外部变量" class="headerlink" title="4.2 外部变量"></a>4.2 外部变量</h2><p>当在某个源文件中定义了一个未加static的全局变量后，若想在另一个源文件中调用此变量，此时可以使用外部变量声明来实现。采用如下声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> real volume;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：extern声明只能用于编译型UDF中。</strong><br>以下是一个利用extern的案例。<br>假设在源文件file1.c中定义了全局变量：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">real volume;</span><br><span class="line">DEFINE_ADJUST(compute_volume, domain)</span><br><span class="line">&#123;</span><br><span class="line">    volume = ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若其他的的源文件想要利用此全局变量volume， 此时可以创建头文件，并将变量volume声明为extern变量，如创建头文件extfile.h，写入内容：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> real volume;</span><br></pre></td></tr></table></figure></p>
+<p>之后就可以在其他的源文件中使用此变量volume了，如在源文件file2.c中：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"extfile.h"</span></span></span><br><span class="line">DEFINE_SOURCE(heat_source,c,t,ds,eqn)</span><br><span class="line">&#123;</span><br><span class="line">     real total_source = ...;</span><br><span class="line">     real source;</span><br><span class="line">     source = total_source/volume;</span><br><span class="line">     <span class="keyword">return</span> source;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>温馨提示：外部变量使用起来很麻烦也很容易出错，如果对其不甚了解的话，建议不要使用。</strong></p>
+<p>##4.3 静态变量<br>静态变量（声明时添加static关键字）在用于局部变量或全局变量时具有不同的作用。局部变量被声明为static时，当函数返回后变量并不销毁，变量的值依旧被保留。<br>全局变量被声明为static时，该变量能够被此源文件中的所有函数调用，但不能被其他源文件中的函数调用。实际上是变量被隐藏了。<br>例如在文件mysource.c中有如下代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="keyword">static</span> real abs_coeff = <span class="number">1.0</span>; <span class="comment">/*静态全局变量*/</span></span><br><span class="line">  <span class="comment">/* 此变量只能被本文件中的其他函数调用 */</span></span><br><span class="line"> </span><br><span class="line">DEFINE_SOURCE(energy_source, c, t, dS, eqn)</span><br><span class="line">&#123;</span><br><span class="line">   real source; <span class="comment">/* 局部变量*/</span></span><br><span class="line">   <span class="keyword">int</span> P1 = ....; <span class="comment">/* 局部变量*/</span></span><br><span class="line"><span class="comment">/*变量只能被当前函数调用，但在函数返回时变量并不释放 */</span></span><br><span class="line">   dS[eqn] = <span class="number">-16.</span>* abs_coeff;</span><br><span class="line">   source =-abs_coeff *(<span class="number">4.</span>* SIGMA_SBC );</span><br><span class="line">   <span class="keyword">return</span> source;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">DEFINE_SOURCE(p1_source, c, t, dS, eqn)</span><br><span class="line">&#123;</span><br><span class="line">   real source;</span><br><span class="line">   <span class="keyword">int</span> P1 = ...;</span><br><span class="line">   dS[eqn] = -abs_coeff;</span><br><span class="line">   source = abs_coeff *(<span class="number">4.</span>* SIGMA_SBC);</span><br><span class="line">   <span class="keyword">return</span> source;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>更多关于static的描述可参见文章[<a href="http://www.cnblogs.com/stoneJin/archive/2011/09/21/2183313.html]" target="_blank" rel="noopener">www.cnblogs.com/stoneJin/archive/2011/09/21/2183313.html]</a> (<a href="http://www.cnblogs.com/stoneJin/archive/2011/09/21/2183313.html" target="_blank" rel="noopener">www.cnblogs.com/stoneJin/archive/2011/09/21/2183313.html</a>)<br><strong>温馨提示：与全局变量类似，静态变量也尽量少用，容易造成不必要的麻烦。</strong></p>
+<h1 id="5-用户自定义数据类型"><a href="#5-用户自定义数据类型" class="headerlink" title="5 用户自定义数据类型"></a>5 用户自定义数据类型</h1><p>C语言允许用户自己定义数据类型，通过使用结构体及<code>typedef</code>关键字。如定义类型：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    real b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;mylist;</span><br><span class="line">mylist x,y,z;</span><br></pre></td></tr></table></figure></p>
+<p>上例定义了一个结构体类型mylist，并定义了三个结构体变量x,y,z。</p>
+<h1 id="6-强制转换"><a href="#6-强制转换" class="headerlink" title="6 强制转换"></a>6 强制转换</h1><p>在C语言中，有时需要对类型进行强制转换，如将浮点型强制转换为整形，如下例中。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x =<span class="number">1</span>;</span><br><span class="line">real y=<span class="number">3.1415926</span>;</span><br><span class="line"><span class="keyword">int</span> z=x+(<span class="keyword">int</span>)y;</span><br></pre></td></tr></table></figure></p>
+<p>计算完毕后，z=4。</p>
+<h1 id="7-函数"><a href="#7-函数" class="headerlink" title="7 函数"></a>7 函数</h1><p>C语言中的函数执行独立的任务。函数能够被同一源文件中的其他函数调用，也可以由源文件之外的函数调用。<br>函数定义包含函数名以及被传递给函数的零个或多个参数列表。函数包含一个包含在大括号内的主体，主体中包含执行任务的指令。 函数可以返回特定类型的值。<br>函数返回特定数据类型的值（例如，实数），如果类型为void，则不返回任何值。 要确定DEFINE宏的返回数据类型，可查看udf.h文件中宏的相应#define语句。</p>
+<h1 id="8-数组"><a href="#8-数组" class="headerlink" title="8 数组"></a>8 数组</h1><p>C语言中数组变量定义为<code>name[size]</code>，其中name为数组变量的名称，size为数组中存储的单元数量。C语言中数组索引从0开始。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>], b[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line"><span class="comment">/*a</span></span><br><span class="line"><span class="comment">real rad[5];</span></span><br><span class="line"><span class="comment">a[0] = 1;</span></span><br><span class="line"><span class="comment">rad[4] = 3.14159265;</span></span><br><span class="line"><span class="comment">b[10][10] = 4;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="9-指针"><a href="#9-指针" class="headerlink" title="9 指针"></a>9 指针</h1><p>指针是一种存储变量内存地址的变量。换句话说，指针是一个变量，这个变量指向另外一个变量的内存地址。指针变量的声明:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip;<span class="comment">/*定义指针变量ip*/</span></span><br></pre></td></tr></table></figure></p>
+<p>定义了指针变量后，可以利用取址运算符将其他变量的地址赋予指针变量，如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip;</span><br><span class="line">ip =&amp;a;</span><br></pre></td></tr></table></figure></p>
+<p>也可以为指针变量赋值，如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*ip =<span class="number">4</span>;</span><br></pre></td></tr></table></figure></p>
+<p>当指针作为函数的参数，此时为传址调用，在函数体内修改指针参数的值，会改变调用函数时传递的参数的值。此功能可以实现一个函数返回多个值。<br>如下的C程序:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> *a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    sum = *a + b;</span><br><span class="line">    *a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">int</span> *ip;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    ip = &amp;a;</span><br><span class="line">    sum = add(ip,b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sum=%d,a=%d\n"</span>,sum,a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum=<span class="number">3</span>,a=<span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<p>传递的参数值被函数体内的程序改变。</p>
+<h1 id="10-流程控制"><a href="#10-流程控制" class="headerlink" title="10 流程控制"></a>10 流程控制</h1><p>C语言中可以用逻辑判断和循环来进行流程控制。</p>
+<h2 id="10-1-if语句"><a href="#10-1-if语句" class="headerlink" title="10.1 if语句"></a>10.1 if语句</h2><p>if语句用于逻辑判断。可写成:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(逻辑判断表达式)</span><br><span class="line">&#123;</span><br><span class="line">    语句块;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(q!=<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    a=<span class="number">0</span>;</span><br><span class="line">    b=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若逻辑判断存在多个分支，可以采用if-else结构。如:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(x&lt;<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    y = x/<span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>(x&gt;=<span class="number">0</span> &amp;&amp; x&lt;<span class="number">3</span>)</span><br><span class="line">&#123;</span><br><span class="line">    x=-x;</span><br><span class="line">    y = x/<span class="number">25</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    x= <span class="number">0</span>;</span><br><span class="line">    y = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="10-2-for循环"><a href="#10-2-for循环" class="headerlink" title="10.2 for循环"></a>10.2 for循环</h2><p>for语句常用于循环表达。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i,j,n&lt;=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    j = i*i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d%d\n"</span>,i,j)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="11-操作符"><a href="#11-操作符" class="headerlink" title="11 操作符"></a>11 操作符</h1><p>常用的代数操作符:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">= 赋值操作</span><br><span class="line">+ 加法计算</span><br><span class="line">- 减法计算</span><br><span class="line">* 乘法运算</span><br><span class="line">/ 除法运算</span><br><span class="line">% 求模运算</span><br><span class="line">++ 累加</span><br><span class="line">-- 累减</span><br></pre></td></tr></table></figure></p>
+<p>常用的逻辑操作符:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;  小于</span><br><span class="line">&lt;= 小于等于</span><br><span class="line"> &gt;  大于</span><br><span class="line"> &gt;=  大于等于</span><br><span class="line"> ==  等于</span><br><span class="line"> !=  不等于</span><br></pre></td></tr></table></figure></p>
+<h1 id="12-C库函数"><a href="#12-C库函数" class="headerlink" title="12 C库函数"></a>12 C库函数</h1><p>常用的三角函数:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">acos</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">asin</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">atan</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">atan2</span> <span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cos</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sin</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">tan</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cosh</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sinh</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">tanh</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>常用的数学函数:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">sqrt</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">pow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">exp</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">log</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">log10</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">fabs</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">ceil</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">floor</span> <span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>一些常用的标准输入输出函数:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FILE *<span class="title">fopen</span><span class="params">(<span class="keyword">char</span> *filename, <span class="keyword">char</span> *mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fclose</span><span class="params">(FILE *fp)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">char</span> *format,...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fscanf</span><span class="params">(FILE *fp, <span class="keyword">char</span> *format,...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fscanf</span><span class="params">(FILE *fp, <span class="keyword">char</span> *format,...)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>更多的内容可参阅C语言教程。</p>
+<hr>
+<p>更多CFD资料可微信扫描下方二维码关注微信公众号。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3577886-d669d698a12ddeea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信扫码关注公众号"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent-UDF介绍/" rel="tag"># Fluent UDF介绍</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/" rel="next" title="Fluent UDF【2】：学习途径">
+                <i class="fa fa-chevron-left"></i> Fluent UDF【2】：学习途径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" rel="prev" title="Fluent UDF【8】：编译型UDF">
+                Fluent UDF【8】：编译型UDF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-C语言中的注释"><span class="nav-text">1 C语言中的注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-基本数据类型"><span class="nav-text">2 基本数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-常数"><span class="nav-text">3 常数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-变量"><span class="nav-text">4 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-全局变量和局部变量"><span class="nav-text">4.1 全局变量和局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-外部变量"><span class="nav-text">4.2 外部变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-用户自定义数据类型"><span class="nav-text">5 用户自定义数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-强制转换"><span class="nav-text">6 强制转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-函数"><span class="nav-text">7 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-数组"><span class="nav-text">8 数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-指针"><span class="nav-text">9 指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-流程控制"><span class="nav-text">10 流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-if语句"><span class="nav-text">10.1 if语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-for循环"><span class="nav-text">10.2 for循环</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-操作符"><span class="nav-text">11 操作符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-C库函数"><span class="nav-text">12 C库函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

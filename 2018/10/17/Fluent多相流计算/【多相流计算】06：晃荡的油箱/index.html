@@ -170,7 +170,7 @@
 
 
   <meta name="description" content="本案例演示利用Fluent中的VOF模型仿真计算密闭油箱晃动过程中的自由液面问题。 1 案例描述汽车在颠簸的道路上行驶时，在变加速度作用下，可能会导致油箱内液面晃动。当晃动极为剧烈时，甚至会造成油泵无法吸取燃油，因此需要利用CFD研究油箱在晃动过程中液面分布情况。为简化计算，本案例采用2D模型，3D模型的仿真思路及设置过程与此完全相同。计算域几何如图所示。  对于油箱晃动过程，在Fluent中有两">
-<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta name="keywords" content="Fluent多相流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【多相流计算】06：晃荡的油箱">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/index.html">
@@ -200,7 +200,7 @@
 <meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-6-6/35402266.jpg">
 <meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-6-6/13970408.jpg">
 <meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-6-6/31377162.jpg">
-<meta property="og:updated_time" content="2018-10-17T04:58:27.113Z">
+<meta property="og:updated_time" content="2018-10-17T17:12:13.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【多相流计算】06：晃荡的油箱">
 <meta name="twitter:description" content="本案例演示利用Fluent中的VOF模型仿真计算密闭油箱晃动过程中的自由液面问题。 1 案例描述汽车在颠簸的道路上行驶时，在变加速度作用下，可能会导致油箱内液面晃动。当晃动极为剧烈时，甚至会造成油泵无法吸取燃油，因此需要利用CFD研究油箱在晃动过程中液面分布情况。为简化计算，本案例采用2D模型，3D模型的仿真思路及设置过程与此完全相同。计算域几何如图所示。  对于油箱晃动过程，在Fluent中有两">
@@ -436,12 +436,24 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 12:55:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-18 01:12:13" itemprop="dateModified" datetime="2018-10-18T01:12:13+08:00">2018-10-18</time>
               
             
           </span>
@@ -674,6 +686,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent多相流/" rel="tag"># Fluent多相流</a>
+          
+        </div>
+      
 
       
       
@@ -703,8 +721,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" rel="next" title="【多相流计算】04：重力驱动流">
-                <i class="fa fa-chevron-left"></i> 【多相流计算】04：重力驱动流
+              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" rel="next" title="【多相流计算】05：Rayleigh –Taylor不稳定现象模拟">
+                <i class="fa fa-chevron-left"></i> 【多相流计算】05：Rayleigh –Taylor不稳定现象模拟
               </a>
             
           </div>
@@ -713,8 +731,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" rel="prev" title="【多相流计算】09：DPM冲蚀计算">
-                【多相流计算】09：DPM冲蚀计算 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" rel="prev" title="【多相流计算】07：VOF波浪">
+                【多相流计算】07：VOF波浪 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -792,7 +810,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-count">107</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -823,12 +841,57 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
             </nav>
           

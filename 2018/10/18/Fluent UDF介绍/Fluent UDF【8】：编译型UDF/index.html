@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="UDF除了可以以解释的方式外，其还可以以编译的方式被Fluent加载。解释型UDF只能使用部分C语言功能，而编译型UDF则可以全面使用C语言的所有功能。 1 编译型UDF介绍编译型UDF的构建方式与ANSYS Fluent可执行文件自身的构建方式相同。在代码构建过程中，其利用一个名为Makefile的脚本文件来调用C编译器构建一个目标代码库。该对象库与其编译过程中所使用的Fluent版本及计算机体">
+<meta name="keywords" content="Fluent UDF介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent UDF【8】：编译型UDF">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="UDF除了可以以解释的方式外，其还可以以编译的方式被Fluent加载。解释型UDF只能使用部分C语言功能，而编译型UDF则可以全面使用C语言的所有功能。 1 编译型UDF介绍编译型UDF的构建方式与ANSYS Fluent可执行文件自身的构建方式相同。在代码构建过程中，其利用一个名为Makefile的脚本文件来调用C编译器构建一个目标代码库。该对象库与其编译过程中所使用的Fluent版本及计算机体">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPU06MXZA7AUAibicF7ia45ccXQKQpQg3wqQYeesw980bXroWicq2hYgNnNibA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUGY8WK9LVOGwicgicyxAH42JicuwGt1cdvQwib2pI8t9703wib1BA4xGqMBg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUOTLQC9SwU2hqyu66IzA7icXEPiaNMzticUibGT2YD7VzROSjRXSDtytAIQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPU2eXicXwEceulyLlyVzN6HNSzOC06tzQFjkic4TK095Xb4EEmicPOImGxg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUkkPZdwrVVwQJlWhEdLP2ibXfRsQRgSJG3Sa4icI8VDP9TYOFbDJxYBlA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUfno0Drib9a8icbZAS3JOCrtZb3An8Wx9vDzg6iaVAAcNz8va3waXJiakJg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUtVw8ibMLBJRVemzTreCJJj7xBiaa9TAkHJ9wepbtWBpDaJoYiaHJRGZ2w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:updated_time" content="2018-10-17T17:14:10.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent UDF【8】：编译型UDF">
+<meta name="twitter:description" content="UDF除了可以以解释的方式外，其还可以以编译的方式被Fluent加载。解释型UDF只能使用部分C语言功能，而编译型UDF则可以全面使用C语言的所有功能。 1 编译型UDF介绍编译型UDF的构建方式与ANSYS Fluent可执行文件自身的构建方式相同。在代码构建过程中，其利用一个名为Makefile的脚本文件来调用C编译器构建一个目标代码库。该对象库与其编译过程中所使用的Fluent版本及计算机体">
+<meta name="twitter:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPU06MXZA7AUAibicF7ia45ccXQKQpQg3wqQYeesw980bXroWicq2hYgNnNibA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent UDF【8】：编译型UDF | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于Me</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent UDF【8】：编译型UDF
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:10" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>UDF除了可以以解释的方式外，其还可以以编译的方式被Fluent加载。解释型UDF只能使用部分C语言功能，而编译型UDF则可以全面使用C语言的所有功能。</p>
+<h1 id="1-编译型UDF介绍"><a href="#1-编译型UDF介绍" class="headerlink" title="1 编译型UDF介绍"></a>1 编译型UDF介绍</h1><p>编译型UDF的构建方式与ANSYS Fluent可执行文件自身的构建方式相同。在代码构建过程中，其利用一个名为Makefile的脚本文件来调用C编译器构建一个目标代码库。该对象库与其编译过程中所使用的Fluent版本及计算机体系结构相关。因此，若改变了计算机操作系统或Fluent版本的话，UDF对象库必须重新构建。UDF的编译过程通常涉及到源代码的编译和加载两个步骤。</p>
+<p>编译/构建过程需要一个或多个UDF的源文件（例如myudf.c），并将它们编译成对象文件（例如myudf.o或myudf.obj），之后将其构建成一个“共享库” （例如，libudf.dll）与目标文件。</p>
+<p>如果使用GUI方式编译源文件，则当用户单击“Compiled UDF”对话框中的“Build”按钮时，将执行编译/构建过程。Fluent软件将自动为用户基于在该会话期间运行的ANSYS Fluent的体系结构和版本（例如，hpux11 / 2d）构建用户命名的共享库（例如libudf），并存储UDF对象文件。</p>
+<p>如果使用TUI方式编译源文件，则首先必须设置共享库的目标文件夹，同时修改名为Makefile的脚本文件以指定源参数，然后执行Makefile文件实现源代码的编译与构建。使用TUI方式编译UDF具有允许从非ANSYS Fluent源派生的预编译对象文件链接到ANSYS Fluent（链接非ANSYS Fluent源文件预编译的对象文件）的诸多优点，这些功能用GUI编译无法实现。<br>构建共享库（使用TUI或GUI）后，将UDF库加载到ANSYS Fluent中，然后再使用它。您可以使用“Compiled UDFs”对话框中的“Load”按钮来执行此操作。加载完成后，共享库中包含的所有已编译的UDF将在ANSYS Fluent的图形对话框中变为可见和可选。请注意，编译的UDF显示在ANSYS Fluent对话框中，相关联的UDF库名称由两个冒号（：:)分隔。例如，与名为libudf的共享库相关联的名为rrate的编译UDF将出现在ANSYS Fluent对话框中，如rrate :: libudf。此名称可以区分解释型UDF和编译型UDF。</p>
+<p>如果在加载UDF库时写入您的Case文件，则库将与Case文件一起保存，并在之后读取该Case文件时自动加载。这种“动态加载”过程可以节省用户每次运行模拟时重新加载编译库的时间。</p>
+<h1 id="2-C编译器"><a href="#2-C编译器" class="headerlink" title="2 C编译器"></a>2 C编译器</h1><p>不管是使用GUI还是使用TUI方式编译UDF，都需要使用本机运行的操作系统以及C编译器。大多数的Linux操作系统上都已经集成了C编译器，但是如果是在Microsoft Windows系统上编译UDF，则在编译之前必须确保本机山刚已经安装了MicroSoft Visual Studio。 对于Linux机器，ANSYS Fluent支持任意符合ANSI标准的C编译器(如GCC)。<br>在进行UDF编译之前，需要设置编译环境，这通常可以通过修改UDF.bat文件来实现。如下图所示。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPU06MXZA7AUAibicF7ia45ccXQKQpQg3wqQYeesw980bXroWicq2hYgNnNibA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<h1 id="3-GUI方式编译UDF"><a href="#3-GUI方式编译UDF" class="headerlink" title="3 GUI方式编译UDF"></a>3 GUI方式编译UDF</h1><p>利用GUI方式编译UDF源文件、构建共享库以及加载UDF库到Fluent中，可以采用以下步骤。<br><strong>注意:在Windows系统下编译UDF，必须预先安装Visual Studio。在安装Visual Studio时，确保选择安装c++语言，这样才会安装C编译器。</strong></p>
+<ul>
+<li><p>确保要编译的UDF源文件与cas和dat文件在同一工作路径下。</p>
+</li>
+<li><p>读取(或创建)case文件</p>
+</li>
+<li><p>打开<code>Compiled UDFs</code>对话框。可通过树形菜单<code>Parameters &amp; Customization →  User Defined Functions→Compiled...</code>启动该对话框。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUGY8WK9LVOGwicgicyxAH42JicuwGt1cdvQwib2pI8t9703wib1BA4xGqMBg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+</li>
+<li><p>在<code>Compiled UDF</code>对话框中点击按钮<code>Add...</code>添加源文件和头文件<br>在<code>Library Name</code>后的文本框中输入共享库的名称，之后点击<code>Build</code>按钮构建共享库。其间会弹出如下图所示的提示对话框。</p>
+</li>
+</ul>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUOTLQC9SwU2hqyu66IzA7icXEPiaNMzticUibGT2YD7VzROSjRXSDtytAIQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<p>可以选择无视，点击<code>OK</code>按钮继续。<br>编译完成后会在TUI窗口出现如图所示的对话框。仔细检查提示信息，没有出现error则表示编译成功。图中出现有乱码，不知道是从Fluent哪个版本开始就出现这种情况。其实可以不用管。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPU2eXicXwEceulyLlyVzN6HNSzOC06tzQFjkic4TK095Xb4EEmicPOImGxg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<ul>
+<li><p>点击<code>Load</code>按钮加载UDF<br>如果没有错误的话，加载完housing会在TUI窗口中出现如下图所示的对话框，其中会显示UDF宏名称。如下图中所示的velocity和domainInit。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUkkPZdwrVVwQJlWhEdLP2ibXfRsQRgSJG3Sa4icI8VDP9TYOFbDJxYBlA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<h1 id="4-TUI方式编译UDF"><a href="#4-TUI方式编译UDF" class="headerlink" title="4 TUI方式编译UDF"></a>4 TUI方式编译UDF</h1><p>除了可以利用图形界面编译UDF外，Fluent还提供了利用TUI命令的方式编译UDF。利用TUI方式进行编译，能够允许用户调用一些非Fluent源文件之外的库文件。<br>使用TUI进行编译，通常首先需要创建好文件目录结构，之后编辑Makefile文件，利用makefile文件编译源文件。</p>
+</li>
+</ul>
+<p>windows系统与Linux系统的编译方式有些不同，这里主要描述Windows下的构建过程，linux系统后面再说。</p>
+<h2 id="4-1-创建文件目录结构"><a href="#4-1-创建文件目录结构" class="headerlink" title="4.1 创建文件目录结构"></a>4.1 创建文件目录结构</h2><p>在windows系统中编译UDF，需要两个文件<code>makefile_nt.udf</code>与<code>user_nt.udf</code>。特别重要的是在user_nt.udf文件中指定源文件编译参数。构建文件目录结构采用以下步骤：</p>
+<ul>
+<li>在当前工作目录下，创建新的文件夹存储UDF库。（例如创建文件夹libudf）</li>
+<li>在libudf文件夹下创建新的文件夹，命名为<code>src</code></li>
+<li>将所有UDF源文件放入src文件夹中</li>
+<li>在libudf文件夹下创建架构文件夹。如64bit windows操作系统，则创建win64文件夹（路径libudf\win64）。</li>
+<li>在架构文件（libudf\win64）下创建Fluent版本文件夹。如单精度2d版本则创建文件夹2d。一些版本信息如下表所示。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>版本信息</th>
+<th>文件夹名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单精度2d</td>
+<td>2d</td>
+</tr>
+<tr>
+<td>当精度3d</td>
+<td>3d</td>
+</tr>
+<tr>
+<td>双精度2d</td>
+<td>2ddp</td>
+</tr>
+<tr>
+<td>双精度3d</td>
+<td>3ddp</td>
+</tr>
+<tr>
+<td>单精度并行2d</td>
+<td>2d_node及2d_host</td>
+</tr>
+<tr>
+<td>单精度并行3d</td>
+<td>3d_node及3d_host</td>
+</tr>
+<tr>
+<td>双精度并行2d</td>
+<td>2ddp_node及2ddp_host</td>
+</tr>
+<tr>
+<td>双精度并行3d</td>
+<td>3ddp_node及3ddp_host</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：在编译并行UDF时，需要创建两个版本文件夹。</strong></p>
+<ul>
+<li>从Fluent安装路径中（如c:\ANSYS Inc\v180\fluent\fluent18.0.0\src\udf)拷贝文件<code>user_nt.udf</code>到所有的版本子文件夹中（如libudf\win64\3d）</li>
+<li>从Fluent安装路径中（如c:\ANSYS Inc\v180\fluent\fluent18.0.0\src\udf)拷贝文件<code>makefile_nt.udf</code>到所有的版本子文件夹中（如libudf\win64\3d），并改名为<code>makefile</code></li>
+</ul>
+<p><strong>注意：若在Fluent外部编译UDF，则需要添加环境变量FLUENT_INC、FLUENT_ARCH到user_nt.udf文件中</strong></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUfno0Drib9a8icbZAS3JOCrtZb3An8Wx9vDzg6iaVAAcNz8va3waXJiakJg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<p>Linux环境下的文件目录设置与此有些许差异。</p>
+<h2 id="4-2-编译文件"><a href="#4-2-编译文件" class="headerlink" title="4.2 编译文件"></a>4.2 编译文件</h2><p>当文件目录设置完毕并且所有文件已经放置到指定位置后，就可以利用TUI来编译及构建UDF共享库了。</p>
+<p>在windows系统中，采用以下步骤：</p>
+<ul>
+<li>修改<code>user_nt.udf</code>文件。修改文件中的三个参数：<code>CSOURCES、HSOURCES、VERSION以及PARALLEL_NODE</code></li>
+</ul>
+<p>udf_nt.udf文件内容类似下图所示。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNyf4BpvqyVP1HnajM8YRAicPUtVw8ibMLBJRVemzTreCJJj7xBiaa9TAkHJ9wepbtWBpDaJoYiaHJRGZ2w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<p><strong>CSOURCES=</strong>：指定要编译的UDF源文件。在所有文件名前面加上前缀<code>$(SRC)</code>。（多个文件可以连着写，如<code></code>$(SRC)udfexample1.c $(SRC)udfexample2.c`）</p>
+<p><strong>HSOURCES=</strong>：指定要编译的UDF头文件。同样在所有文件名前面加上<code>$(SRC)</code>前缀。（多个文件可以连着写，如<code></code>$(SRC)udfexample1.h $(SRC)udfexample2.h`）</p>
+<p><strong>VERSION=</strong>：运行的求解器版本信息，与user_nt.udf文件所在文件夹保持一致。（(2d, 3d, 2ddp, 3ddp, 2d_host, 2d_node, 3d_host, 3d_node, 2ddp_host, 2ddp_node, 3ddp_host, or 3ddp_node)。</p>
+<p><strong>PARALLEL_NODE=</strong>指定并行通讯库。指定为<code>None</code>表示采用串行，其他并行包括：<code>ibmmpi</code>（利用IBM MPI并行）、<code>intel</code>(利用intel MPI并行)以及<code>msmpi</code>（利用微软MPI）。在并行计算中需要同时设置host及node文件夹下的user_nt.udf文件。</p>
+<ul>
+<li>利用Visual Studio命令行界面进入每一个版本文件夹（如libudf\win64\2d），输入<code>nmake</code>执行编译操作。若编译存在问题，可以在修改源文件后通过执行<code>nmake clean</code>及<code>nmake</code>重新编译。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent-UDF介绍/" rel="tag"># Fluent UDF介绍</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/" rel="next" title="Fluent UDF【4】：C语言基础">
+                <i class="fa fa-chevron-left"></i> Fluent UDF【4】：C语言基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/" rel="prev" title="Fluent UDF【1】：简介">
+                Fluent UDF【1】：简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-编译型UDF介绍"><span class="nav-text">1 编译型UDF介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-C编译器"><span class="nav-text">2 C编译器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-GUI方式编译UDF"><span class="nav-text">3 GUI方式编译UDF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-TUI方式编译UDF"><span class="nav-text">4 TUI方式编译UDF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-创建文件目录结构"><span class="nav-text">4.1 创建文件目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-编译文件"><span class="nav-text">4.2 编译文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

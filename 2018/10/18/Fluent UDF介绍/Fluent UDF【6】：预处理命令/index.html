@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="今天要讲的内容是关于C语言的预处理。搞清楚了这个，就可以分析UDF中的各种头文件源代码，从此写UDF不求人。 1 关于预处理在UDF的各种头文件中(文件路径D:\Program Files\ANSYS Inc\v180\fluent\fluent18.0.0\src)，存在各种以#开头的语句，如下图中所示。  这些以#开头的语句就是C语言的预处理命令。C语言的预处理工作由一个预处理程序来完成，任何">
+<meta name="keywords" content="Fluent UDF介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent UDF【6】：预处理命令">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="今天要讲的内容是关于C语言的预处理。搞清楚了这个，就可以分析UDF中的各种头文件源代码，从此写UDF不求人。 1 关于预处理在UDF的各种头文件中(文件路径D:\Program Files\ANSYS Inc\v180\fluent\fluent18.0.0\src)，存在各种以#开头的语句，如下图中所示。  这些以#开头的语句就是C语言的预处理命令。C语言的预处理工作由一个预处理程序来完成，任何">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNydCDQsgGTQzllUkfaDRYENCuCwMKaZXsCcxQlDTlgtLwUxKxrjIf1tfDLtUVzbGuSdm6jflicJxCfw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3577886-d669d698a12ddeea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-17T17:14:14.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent UDF【6】：预处理命令">
+<meta name="twitter:description" content="今天要讲的内容是关于C语言的预处理。搞清楚了这个，就可以分析UDF中的各种头文件源代码，从此写UDF不求人。 1 关于预处理在UDF的各种头文件中(文件路径D:\Program Files\ANSYS Inc\v180\fluent\fluent18.0.0\src)，存在各种以#开头的语句，如下图中所示。  这些以#开头的语句就是C语言的预处理命令。C语言的预处理工作由一个预处理程序来完成，任何">
+<meta name="twitter:image" content="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNydCDQsgGTQzllUkfaDRYENCuCwMKaZXsCcxQlDTlgtLwUxKxrjIf1tfDLtUVzbGuSdm6jflicJxCfw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent UDF【6】：预处理命令 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于Me</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent UDF【6】：预处理命令
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:14" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天要讲的内容是关于C语言的预处理。搞清楚了这个，就可以分析UDF中的各种头文件源代码，从此写UDF不求人。</p>
+<h1 id="1-关于预处理"><a href="#1-关于预处理" class="headerlink" title="1 关于预处理"></a>1 关于预处理</h1><p>在UDF的各种头文件中(文件路径D:\Program Files\ANSYS Inc\v180\fluent\fluent18.0.0\src)，存在各种以<code>#</code>开头的语句，如下图中所示。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNydCDQsgGTQzllUkfaDRYENCuCwMKaZXsCcxQlDTlgtLwUxKxrjIf1tfDLtUVzbGuSdm6jflicJxCfw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<p>这些以<code>#</code>开头的语句就是C语言的预处理命令。<br>C语言的预处理工作由一个预处理程序来完成，任何C系统都有一个预处理程序，其负责处理源程序中的所有预处理命令，从而生成不含预处理命令的源程序。C语言的预处理目的是为了方便编程。</p>
+<blockquote>
+<p>预处理命令以独立的预处理命令行的形式出现在源程序中，# 是其特殊的引导符号。如果源程序中某一行的第一个非空格符号是 # ,这就是一个预处理命令行。预处理命令的作用是要求预处理程序完成一些操作。</p>
+</blockquote>
+<h1 id="2-文件包含命令"><a href="#2-文件包含命令" class="headerlink" title="2 文件包含命令"></a>2 文件包含命令</h1><p>文件包含命令是以<code>#include</code>开始的行，其作用是把特定文件的内容复制到当前源文件中。其存在两种形式:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;文件名&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"文件名"</span></span></span><br></pre></td></tr></table></figure></p>
+<p>两者的差异在于文件搜索方式的不同。<br>第一种形式，预处理程序直接到系统指定的某些目录中去查找所需文件，目录指定方式由具体系统确定，通常指定几个系统目录。<br>第二种形式，预处理程序现在源文件所在目录中查找，若没找到文件则再到系统指定的目录中去查找。<br>文件包含命令的处理过程:首先查找所需文件，找到后就用该文件的内容取代这个包含命令行。替换进来的文件中若有预处理命令，也将被处理。</p>
+<h1 id="3-宏定义和宏替换"><a href="#3-宏定义和宏替换" class="headerlink" title="3 宏定义和宏替换"></a>3 宏定义和宏替换</h1><p>以<code>#define</code>开始的行称为宏定义命令行。宏定义包含两种形式:</p>
+<ul>
+<li>简单宏定义</li>
+<li>带参数宏定义</li>
+</ul>
+<h1 id="3-1-简单宏定义"><a href="#3-1-简单宏定义" class="headerlink" title="3.1 简单宏定义"></a>3.1 简单宏定义</h1><p>简单宏定义的形式为:<br><code>#define 宏名字 替代文本</code><br>其中宏名字是任意标识符，替代文本可以是任意一段正文，其中可以包括程序中能出现的任何字符(包括空格等)，一直延续到本行结束。如果需要写多行的替代文本，可以在行末写一个反斜杠<code>\</code>，这将使下一行内容继续被当做替代文本。<br><code>宏定义的作用就是为宏名字定义替代</code>。<br>如果一个宏名字的替代文本是数值或可以静态求值的表达式，当这个宏名字在程序某处出现，就相当于在那里写了这个数值或表达式。<br>例如，如果进行了如下定义:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SLD static long double</span></span><br></pre></td></tr></table></figure></p>
+<p>伺候，宏名字SLD就代表static long double。若程序中出现:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLD x=<span class="number">2.4</span>, y=<span class="number">9.16</span>;</span><br></pre></td></tr></table></figure></p>
+<p>经过预处理后，源代码被翻译为:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">double</span> x=<span class="number">2.4</span>,y=<span class="number">9.16</span>;</span><br></pre></td></tr></table></figure></p>
+<p>预处理并不检查宏定义中的替代文本是否为合法的C语言结构，也不检查替换之后的结果是否为正确的C语言程序段，其只是简单地完成文本替换工作。</p>
+<h1 id="3-2-带参数的宏定义"><a href="#3-2-带参数的宏定义" class="headerlink" title="3.2 带参数的宏定义"></a>3.2 带参数的宏定义</h1><p>带参数的宏定义形式为:<br><code>#define 宏名字(参数列表) 替代正文</code><br>使用带参宏时，不但要给出宏的名字，还要用类似函数实参的形式给出各宏参数的替代段，多个替代段之间用逗号分隔。这种形式也成为一个宏调用。<br>对宏调用的替换分两部分进行:首先用实际替代段去替换宏定义的替代正文里出现的各个宏参数，然后把替换的结果(展开后的替代正文)代入程序里出现宏调用的为准，新年广场宏替换的最后结果。</p>
+<p>例如，定义求两个数据中较小数，可定义宏:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> min(A,B) ((A)&lt;(B)?(A):(B))</span></span><br></pre></td></tr></table></figure></p>
+<p>若程序中出现如下语句:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = min(x+y,x*y)</span><br></pre></td></tr></table></figure></p>
+<p>则宏展开后则为:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = ((x+y)&lt;(x*y)?(x+y):(x*y));</span><br></pre></td></tr></table></figure></p>
+<p>带参数的宏定义与函数看起来很类似，但实际上有很大的不同。切记宏定义只是简单的文本替换。</p>
+<h1 id="4-条件编译命令"><a href="#4-条件编译命令" class="headerlink" title="4 条件编译命令"></a>4 条件编译命令</h1><p>条件编译的作用是在源程序中划出一些片段，使预处理程序可根据条件保留或丢掉一段，或从几段中选择一段保留。实现条件编译的预处理命令有四个，分别是:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p>其中，<code>#if</code>和<code>#elif</code>命令以一个能静态求出整型值的表达式为参数。另外两个没有参数。条件编译命令的常见使用形式有三种:</p>
+<ul>
+<li>形式一<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 整形表达式</span></span><br><span class="line">…… <span class="comment">/*代码片段，条件成立时保留*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>形式二<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 整形表达式</span></span><br><span class="line">…… <span class="comment">/*条件成立时保留*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">…… <span class="comment">/*条件不成立时保留*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>形式三<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 整形表达式</span></span><br><span class="line">…… <span class="comment">/*条件成立时保留*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> 整形表达式</span></span><br><span class="line">…… <span class="comment">/*elif部分，可以有多个*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> 整形表达式</span></span><br><span class="line">……</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">…… <span class="comment">/*条件都不成立时保留*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中整形表达式是预处理条件，值为0表示条件不成立，否则条件成立。这里常用==,!=等做判断，例如判断宏定义的符号是不是等于某个值等。<br>为了方便，C语言提供了一个特殊谓词<code>defined</code>，其使用形式有两种:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define 标识符</span><br><span class="line">define (标识符)</span><br></pre></td></tr></table></figure></p>
+<p>当标识符是有定义的宏名字时，<code>define(标识符)</code>将得到1，否则得到0。这种表达式常被作为条件编译的条件。此外还有两个预处理命令<code>#ifdef</code>和<code>ifndef</code>，他们相当于#if和#define混合的简写形式。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> 标识符 <span class="comment">/*相当于#if define(标识符)*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> 标识符 <span class="comment">/*相当于#if !define(标识符)*/</span></span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>更多CFD资料可微信扫描下方二维码关注微信公众号。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3577886-d669d698a12ddeea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信扫码关注公众号"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent-UDF介绍/" rel="tag"># Fluent UDF介绍</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/" rel="next" title="Fluent UDF【7】：解释型UDF">
+                <i class="fa fa-chevron-left"></i> Fluent UDF【7】：解释型UDF
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/" rel="prev" title="Fluent UDF【5】：第一个UDF">
+                Fluent UDF【5】：第一个UDF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-关于预处理"><span class="nav-text">1 关于预处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-文件包含命令"><span class="nav-text">2 文件包含命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-宏定义和宏替换"><span class="nav-text">3 宏定义和宏替换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-1-简单宏定义"><span class="nav-text">3.1 简单宏定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-2-带参数的宏定义"><span class="nav-text">3.2 带参数的宏定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-条件编译命令"><span class="nav-text">4 条件编译命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

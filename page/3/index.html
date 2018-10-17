@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/垂直轴风力机-滑移网格/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent运动模型/垂直轴风力机-滑移网格/" itemprop="url">
-                  垂直轴风力机-滑移网格
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/" itemprop="url">
+                  Fluent UDF【19】：源项
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 15:32:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:32:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:56:00 / 修改时间：01:13:46" itemprop="dateCreated datePublished" datetime="2018-10-18T00:56:00+08:00">2018-10-18</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent运动模型/" itemprop="url" rel="index"><span itemprop="name">Fluent运动模型</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent运动模型/垂直轴风力机-滑移网格/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent运动模型/垂直轴风力机-滑移网格/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,20 +484,22 @@
       
         
           
-          本案例在上一案例的基础上修改。
-在前面的案例中介绍了利用MRF解决旋转区域问题，本案例中利用滑移网格来解决相同的问题。利用滑移网格可以解决瞬态区域运动问题。
+          在UDF中定义源项通常利用宏DEFINE_SOURCE来实现。
+可以应用的地方包括：
 
-启动A3单元格进入Fluent工作界面
+质量、动量以及能量
+k与epsilon
+组分质量分数
+P1辐射模型
+UDS标量输运方程
+颗粒温度（欧拉、混合多相流模型）
 
-1 General设置
-双击模型树节点General
-右侧慢板设置激活选项Transient
-
-2
+1 DEFINE_SOURCE宏使用方式：
+1DEFINE_SOUCE(name, c,
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent运动模型/垂直轴风力机-滑移网格/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -556,7 +558,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -575,8 +577,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/" itemprop="url">
-                  垂直轴风力机-MRF
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/" itemprop="url">
+                  Fluent UDF【18】：UDS宏
                 </a>
               
             
@@ -602,7 +604,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 15:32:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:32:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:56:00 / 修改时间：01:13:49" itemprop="dateCreated datePublished" datetime="2018-10-18T00:56:00+08:00">2018-10-18</time>
             
 
             
@@ -624,7 +626,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent运动模型/" itemprop="url" rel="index"><span itemprop="name">Fluent运动模型</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -639,8 +641,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -670,12 +672,12 @@
       
         
           
-          本案例利用Fluent中的多参考系模型（Moving Frame of Reference，MRF）计算垂直轴风力机流场。
-1 问题描述考虑如图所示的垂直轴风力机（VAWT），其旋转直径12 cm，安装有3个等距叶片，每个叶片弦长为2 cm，正常工作时叶片旋转速度为40 RPM，假设空气流速10 m
+          ANSYS Fluent能够求解自定义标量输运方程。本文描述在Fluent中求解自定义标量方程需要使用的一些UDF宏。
+1 简介对于用户在ANSYS Fluent模型中指定的每个标量方程，可以为标量输运方程中的扩散系数、通量以及瞬态项提供单独的UDF进行指定。对于多相流问题，用户还可以为每一相指定U
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -734,7 +736,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -753,8 +755,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" itemprop="url">
-                  【多相流计算】07：VOF波浪
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/" itemprop="url">
+                  Fluent UDF【11】：单元数据访问宏
                 </a>
               
             
@@ -780,7 +782,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:14:04" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -802,7 +804,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -817,8 +819,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -848,18 +850,15 @@
       
         
           
-          本案例利用Fluent中的VOF模型模拟波浪。
-1 模型描述计算几何模型如图所示。
+          
+自己选的主题，哭着也要更新完。
 
-其中左侧面为入口面，水面标高0.04 m，波高0.155m，波长1.35m。
-模型顶部面为开敞边界，与大气相同。
-2 几何模型本案例几何模型采用外部导入。
-
-启动Workbench，添加Fluid Flow(Flu
+单元数据要比节点数据复杂得多。与节点数据仅仅存储节点坐标不同，单元数据中不仅包含单元中心节点等，还包含有各种物理量数据。单元数据访问宏返回网格单元内的信息。大部分的单元宏在头文件metric.h 中定义，这类的宏均以C_作为前缀。
+1 C_CENTROID宏C_C
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -918,7 +917,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -937,8 +936,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" itemprop="url">
-                  【多相流计算】08：Mixture离心泵空化
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/" itemprop="url">
+                  Fluent UDF【12】：几个常用的数据宏
                 </a>
               
             
@@ -964,7 +963,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：13:43:54" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:14:02" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -986,7 +985,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1001,8 +1000,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1032,16 +1031,19 @@
       
         
           
-          本案例利用Fluent中的Mixture多相流模型仿真计算离心泵内的空化情况。
-1 案例描述本案例j几何如图所示。
+          除了前面提到的网格单元数据获取宏、网格面数据获取宏及节点数据获取宏外，在数据获取方面，还有几个非常常用的宏。编写UDF程序时，经常与这些宏打交道。这些宏包括：
 
-离心泵入口总压0.6 MPa，出口静压0.2 MPa，叶轮旋转速度1200 RPM。流体域内介质为液态水，其在当前工作条件下饱和蒸汽压为3540 Pa。
-2 导入网格
-启动Fluen
+Loookup_Thread
+THREAD_ID
+Get_Domain
+F_PROFILE
+THREAD_SHADOW
+
+1 获取指定区域
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1100,7 +1102,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1119,8 +1121,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="url">
-                  【多相流计算】09：DPM冲蚀计算
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/" itemprop="url">
+                  Fluent UDF【13】：循环操作宏
                 </a>
               
             
@@ -1146,7 +1148,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：14:06:25" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:14:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -1168,7 +1170,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1183,8 +1185,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1214,18 +1216,14 @@
       
         
           
-          1 引子本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。本案例主要展示以下内容：
+          UDF使用过程中，经常要通过循环遍历的方式对数据进行操作，如设置边界条件时，需要给每一个边界网格面赋值，此时需要通过逐层循环的方式访问每一个边界网格面。Fluent UDF中提供了众多循环来实现此功能。这些宏包括：
 
-使用冲蚀模型分析3D弯头中的冲蚀现象
-使用离散相模型
-使用合适的求解参数求解案例
-计算后处理
-
-2 问题描述本案例的几何模型如下图所示。该模型由两个
+区域中单元循环thread_loop_c
+区域中网格面循环thread_loop_
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1284,7 +1282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1303,8 +1301,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" itemprop="url">
-                  【多相流计算】06：晃荡的油箱
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/" itemprop="url">
+                  Fluent UDF【15】：在Fluent外部编译UDF
                 </a>
               
             
@@ -1330,7 +1328,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:13:56" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -1352,7 +1350,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1367,8 +1365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1398,12 +1396,20 @@
       
         
           
-          本案例演示利用Fluent中的VOF模型仿真计算密闭油箱晃动过程中的自由液面问题。
-1 案例描述汽车在颠簸的道路上行驶时，在变加速度作用下，可能会导致油箱内液面晃动。当晃动极为剧烈时，甚至会造成油泵无法吸取燃油，因此需要利用CFD研究油箱在晃动过程中液面分布情况。为简化计算，本案例采用2D模型，3D
+          前面提到可以在vs提供的命令行界面编译UDF。今天尝试了一下，发现了很多的问题。基本步骤:
+
+准备UDF源文件。
+创建目录结构
+在case文件夹下创建libudf文件夹
+在libudf文件夹中创建两个文件夹，分别命名为src及win64
+在win64文件夹中创建文件夹2ddp
+
+
+将UDF源文件拷贝
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1462,7 +1468,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1481,8 +1487,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" itemprop="url">
-                  【多相流计算】04：重力驱动流
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/" itemprop="url">
+                  Fluent UDF【14】：向量操作宏
                 </a>
               
             
@@ -1508,7 +1514,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:54:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:54:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:13:58" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -1530,7 +1536,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1545,8 +1551,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1576,19 +1582,12 @@
       
         
           
-          本案例利用Fluent中的VOF模型仿真计算重力驱动下的气液两相流动。
-本案例模型来自于STAR CCM+案例文档。
-
-1 案例描述
-2 Fluent设置2.1 导入网格
-以2D、Double Precision模式启动Fluent
-利用菜单File → Read → Mesh…导入网格文件
-
-2.
+          CFD计算中存在众多的向量，典型的如速度、角速度等。向量的运算要比标量运算复杂，UDF提供了众多的向量操作宏用于向量的运算。
+对于这些向量操作宏，UDF头文件中对这些宏的名称进行了区分。如宏名称中包含v，则表示为向量，S表示为标量，D表示为向量的三个分量序列，在2D模型中，第三个分量被忽略。矢量函数
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1647,7 +1646,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1666,8 +1665,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" itemprop="url">
-                  【多相流计算】05：Rayleigh –Taylor不稳定现象模拟
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/" itemprop="url">
+                  Fluent UDF【17】：UDS
                 </a>
               
             
@@ -1693,7 +1692,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:54:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:54:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:13:52" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -1715,7 +1714,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1730,8 +1729,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1761,12 +1760,12 @@
       
         
           
-          本案例利用Fluent中的VOF模型模拟Rayleigh–Taylor不稳定现象。
-当两种密度不同的介质放置于同一个容器中，如下图所示，密度大的介质位于密度小的介质上方时，在重力作用下，两相界面会发生不稳定现象，称之为Rayleigh–Taylor不稳定现象，更专业的描述可参阅wIki百科（http
+          1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。
+2 UDS理论2.1 单相流
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1825,7 +1824,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1844,8 +1843,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/" itemprop="url">
-                  【一起学OpenFOAM】04 Cavity案例文件解析
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/" itemprop="url">
+                  Fluent UDF【16】：通用宏[1]
                 </a>
               
             
@@ -1871,7 +1870,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:13:54" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -1893,7 +1892,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1908,8 +1907,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1939,17 +1938,11 @@
       
         
           
-          1 OpenFOAM工程文件组织以OpenFOAM提供的测试案例来描述OpenFOAM工程文件的组织形式，此案例是OpenFOAM提供的Cavity。
-
-利用ls命令查看文件1ls -R cavity
-
-
-如下图所示，cavity文件夹中包含有三个文件夹：0、constant以及system。
-这些
+          有人留言说UDF专题好多内容是翻译自帮助文档，事实的确是这样的。UDF本没有太多需要介绍的内容，各位学习UDF的朋友们要养成查UDF文档的好习惯，没事儿多看看C语言，多动手练习。编程技能还是要靠不断地练习和总结，程序代码也要靠不断地修改和优化。从本期开始，UDF专题进入攻坚阶段。本期介绍UDF中的通
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2008,7 +2001,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -2027,8 +2020,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="url">
-                  【OpenFOAM案例】05 圆柱绕流
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/" itemprop="url">
+                  Fluent UDF【10】：网格面数据访问宏
                 </a>
               
             
@@ -2054,7 +2047,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:14:06" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
             
 
             
@@ -2076,7 +2069,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -2091,8 +2084,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2122,23 +2115,15 @@
       
         
           
-          圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。
-1 目标
-本案例的主要目的为讲解瞬态流动问题仿真
-案例考虑雷诺数为100的圆柱绕流问题，采用层流求解
-案例计算完毕后可以观察到涡脱落现象
+          前面介绍了获取节点数据的宏。本文讲解一些关于面数据获取的宏。这些面相关宏定义在头文件metric.h及mem.h中，并且所有的宏均以F_作为前缀。
 
-2 计算模型计算模型尺寸如图所示。
-尺寸如表所示。
+注意:面数据获取宏只能用于压力基求解器，并且一些与模型相关的宏，只在当模型被开启后才有效。
 
-
-
-Name
-Locatio
+Fluent的数据以分层方式保存，如下图所示。最顶级为D
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2186,7 +2171,7 @@ Locatio
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2233,7 +2218,7 @@ Locatio
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-count">107</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2264,12 +2249,57 @@ Locatio
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -2525,8 +2555,6 @@ Locatio
       
     
       
-        
-      
     
       
     
@@ -2542,30 +2570,6 @@ Locatio
     
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      TeX: {equationNumbers: { autoNumber: "AMS" }}
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    
   
 
 
