@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/" itemprop="url">
-                  Fluent UDF【1】：简介
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/" itemprop="url">
+                  Fluent UDF【13】：循环操作宏
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:24" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:33:00 / 修改时间：01:28:38" itemprop="dateCreated datePublished" datetime="2018-10-18T00:33:00+08:00">2018-10-18</time>
             
 
             
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,12 +484,14 @@
       
         
           
-          前面基本完成了动网格专题的发布，不过还是有一些内容并没有更新进去，比如说in-cylinder、接触检测、2.5D网格重构等。不过这些都是小技巧，写起来挺麻烦，以后有时间再通过案例视频的方式讲解好了。从今天开始最近一段时间准备发布Fluent UDF的一些内容。
-关于UDFUDF并不是什么神秘的东西
+          UDF使用过程中，经常要通过循环遍历的方式对数据进行操作，如设置边界条件时，需要给每一个边界网格面赋值，此时需要通过逐层循环的方式访问每一个边界网格面。Fluent UDF中提供了众多循环来实现此功能。这些宏包括：
+
+区域中单元循环thread_loop_c
+区域中网格面循环thread_loop_
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -548,7 +550,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -567,8 +569,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" itemprop="url">
-                  Fluent UDF【8】：编译型UDF
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/" itemprop="url">
+                  Fluent UDF【12】：几个常用的数据宏
                 </a>
               
             
@@ -594,7 +596,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:10" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:32:00 / 修改时间：01:28:40" itemprop="dateCreated datePublished" datetime="2018-10-18T00:32:00+08:00">2018-10-18</time>
             
 
             
@@ -631,8 +633,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -662,12 +664,19 @@
       
         
           
-          UDF除了可以以解释的方式外，其还可以以编译的方式被Fluent加载。解释型UDF只能使用部分C语言功能，而编译型UDF则可以全面使用C语言的所有功能。
-1 编译型UDF介绍编译型UDF的构建方式与ANSYS Fluent可执行文件自身的构建方式相同。在代码构建过程中，其利用一个名为Makefile
+          除了前面提到的网格单元数据获取宏、网格面数据获取宏及节点数据获取宏外，在数据获取方面，还有几个非常常用的宏。编写UDF程序时，经常与这些宏打交道。这些宏包括：
+
+Loookup_Thread
+THREAD_ID
+Get_Domain
+F_PROFILE
+THREAD_SHADOW
+
+1 获取指定区域
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -726,7 +735,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/复杂模型处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -745,8 +754,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/" itemprop="url">
-                  Fluent UDF【4】：C语言基础
+                <a class="post-title-link" href="/2018/10/18/Fluent技巧/复杂模型处理/" itemprop="url">
+                  复杂模型处理
                 </a>
               
             
@@ -772,7 +781,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:19" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:31:00 / 修改时间：01:24:35" itemprop="dateCreated datePublished" datetime="2018-10-18T00:31:00+08:00">2018-10-18</time>
             
 
             
@@ -794,7 +803,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent技巧/" itemprop="url" rel="index"><span itemprop="name">Fluent技巧</span></a></span>
 
                 
                 
@@ -809,8 +818,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent技巧/复杂模型处理/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent技巧/复杂模型处理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -840,14 +849,13 @@
       
         
           
-          Fluent UDF利用的是C语言，本文简单介绍在UDF中经常会用到的C语言常识。本文部分内容来自UDF手册。
-1 C语言中的注释C语言中的注释利用/*及*/来实现。例如:1/*这是一个注释*/
-注释也可以跨行实现，如:12/*这是一个跨行注释*/
-注意:在编写UDF的过程中，不能把DEFINE宏(
+          电脑性能不够，就拿人脑来凑。
+CFD计算非常消耗计算资源。从网格划分到求解计算，再到计算后会处理，整个过程无不对计算资源提出了非常高的要求。CPU、内存以及硬盘容量严重制约着计算规模。当遇到计算规模非常大的问题，现有的硬件设备又无法满足要求时，有没有办法解决？本文其实就是为解决此类问题而来。
+划分网
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent技巧/复杂模型处理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -906,7 +914,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -925,8 +933,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/" itemprop="url">
-                  Fluent UDF【2】：学习途径
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/" itemprop="url">
+                  Fluent UDF【11】：单元数据访问宏
                 </a>
               
             
@@ -952,7 +960,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:22" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:31:00 / 修改时间：01:28:43" itemprop="dateCreated datePublished" datetime="2018-10-18T00:31:00+08:00">2018-10-18</time>
             
 
             
@@ -989,8 +997,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1020,12 +1028,15 @@
       
         
           
-          要怎样做才能做到无畏惧编写任何UDF程序？估计很多与UDF打交道的人都会问到这个问题。面对UDF文档中那众多的宏描述，小伙伴们是不是感觉到茫然无措，不知从何入手。有时候读别人写好的程序感觉并不难，然而自己写的时候总是感觉不对劲。我们今天就来聊聊UDF到底该怎么学。
-关于C语言Fluent UDF使用
+          
+自己选的主题，哭着也要更新完。
+
+单元数据要比节点数据复杂得多。与节点数据仅仅存储节点坐标不同，单元数据中不仅包含单元中心节点等，还包含有各种物理量数据。单元数据访问宏返回网格单元内的信息。大部分的单元宏在头文件metric.h 中定义，这类的宏均以C_作为前缀。
+1 C_CENTROID宏C_C
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1084,7 +1095,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1103,8 +1114,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/" itemprop="url">
-                  Fluent UDF【3】：环境配置
+                <a class="post-title-link" href="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/" itemprop="url">
+                  养成良好的Fluent使用习惯
                 </a>
               
             
@@ -1130,7 +1141,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:21" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:30:00 / 修改时间：01:24:38" itemprop="dateCreated datePublished" datetime="2018-10-18T00:30:00+08:00">2018-10-18</time>
             
 
             
@@ -1152,7 +1163,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent技巧/" itemprop="url" rel="index"><span itemprop="name">Fluent技巧</span></a></span>
 
                 
                 
@@ -1167,8 +1178,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1198,12 +1209,15 @@
       
         
           
-          windows操作系统下UDF的编译需要借助Visual Studio中的C编译器。因此若要想编译UDF，则必须事先配置好编译环境。
-Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计IDE，可以用于windows环境下计算机软件的开发。以下内容来自百度百科
+          使用良好的软件使用习惯，有助于提高仿真的正确性。以下是关于Fluent使用过程中的一些好的习惯，同时也适用于其他CFD软件。
+1、检查网格质量
+在进行FLUENT仿真计算之前，有两件基本的事情需要做：
+
+进行网格检查以避免由于网格连接错误所导致的问题，应当确保软件所报告的最小网格体积为正值。有时候i
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1262,7 +1276,7 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1281,8 +1295,8 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/" itemprop="url">
-                  Fluent UDF【5】：第一个UDF
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/" itemprop="url">
+                  Fluent UDF【10】：网格面数据访问宏
                 </a>
               
             
@@ -1308,7 +1322,7 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:17" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:30:00 / 修改时间：01:28:47" itemprop="dateCreated datePublished" datetime="2018-10-18T00:30:00+08:00">2018-10-18</time>
             
 
             
@@ -1345,8 +1359,8 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1376,367 +1390,15 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
       
         
           
-          这里以一个简单的初始化案例来描述UDF的使用过程。
-0 Fluent中的PatchFluent中提供了全域初始化以及局部Patch功能。对于整体区域的全局初始化可以采用starndard及hybrid方法进行初始化，指定各种物理量的初始分布。而对于计算域中的局部区域初始化，则可以通过Patch功能来
+          前面介绍了获取节点数据的宏。本文讲解一些关于面数据获取的宏。这些面相关宏定义在头文件metric.h及mem.h中，并且所有的宏均以F_作为前缀。
+
+注意:面数据获取宏只能用于压力基求解器，并且一些与模型相关的宏，只在当模型被开启后才有效。
+
+Fluent的数据以分层方式保存，如下图所示。最顶级为D
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙[胡坤]">
-      <meta itemprop="description" content="应用CFD解决工程流体问题">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/" itemprop="url">
-                  Fluent UDF【6】：预处理命令
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:14" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          今天要讲的内容是关于C语言的预处理。搞清楚了这个，就可以分析UDF中的各种头文件源代码，从此写UDF不求人。
-1 关于预处理在UDF的各种头文件中(文件路径D:\Program Files\ANSYS Inc\v180\fluent\fluent18.0.0\src)，存在各种以#开头的语句，如下图
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙[胡坤]">
-      <meta itemprop="description" content="应用CFD解决工程流体问题">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/" itemprop="url">
-                  Fluent UDF【7】：解释型UDF
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:12" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          UDF宏有两种方式可以被Fluent所接受:编译和解释。其中有一些宏既可以被解释也可以被编译，而一些宏则只能被解释。有一些场合只接受编译后的UDF(如动网格中的一些宏)，而有些场合既可以接受编译的UDF，还能接受解释后的UDF。那么解释型的UDF与编译型的UDF到底存在何种差异？本文主要描述解释型U
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1841,7 +1503,7 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:14:08" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:29:00 / 修改时间：01:28:50" itemprop="dateCreated datePublished" datetime="2018-10-18T00:29:00+08:00">2018-10-18</time>
             
 
             
@@ -1975,7 +1637,7 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/Fluent中的脚本文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1994,8 +1656,8 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/" itemprop="url">
-                  养成良好的Fluent使用习惯
+                <a class="post-title-link" href="/2018/10/18/Fluent技巧/Fluent中的脚本文件/" itemprop="url">
+                  Fluent中的脚本文件
                 </a>
               
             
@@ -2021,7 +1683,7 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
                 
               
 
-              <time title="创建时间：2018-10-18 00:51:00 / 修改时间：01:11:58" itemprop="dateCreated datePublished" datetime="2018-10-18T00:51:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:29:00 / 修改时间：01:24:40" itemprop="dateCreated datePublished" datetime="2018-10-18T00:29:00+08:00">2018-10-18</time>
             
 
             
@@ -2058,8 +1720,8 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent技巧/Fluent中的脚本文件/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent技巧/Fluent中的脚本文件/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2089,15 +1751,369 @@ Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计ID
       
         
           
-          使用良好的软件使用习惯，有助于提高仿真的正确性。以下是关于Fluent使用过程中的一些好的习惯，同时也适用于其他CFD软件。
-1、检查网格质量
-在进行FLUENT仿真计算之前，有两件基本的事情需要做：
+          在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。
+1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。
 
-进行网格检查以避免由于网格连接错误所导致的问题，应当确保软件所报告的最小网格体积为正值。有时候i
+注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent技巧/养成良好的Fluent使用习惯/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent技巧/Fluent中的脚本文件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" itemprop="url">
+                  Fluent UDF【8】：编译型UDF
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-18 00:28:00 / 修改时间：01:28:55" itemprop="dateCreated datePublished" datetime="2018-10-18T00:28:00+08:00">2018-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          UDF除了可以以解释的方式外，其还可以以编译的方式被Fluent加载。解释型UDF只能使用部分C语言功能，而编译型UDF则可以全面使用C语言的所有功能。
+1 编译型UDF介绍编译型UDF的构建方式与ANSYS Fluent可执行文件自身的构建方式相同。在代码构建过程中，其利用一个名为Makefile
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/" itemprop="url">
+                  Fluent UDF【7】：解释型UDF
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-18 00:27:00 / 修改时间：01:28:59" itemprop="dateCreated datePublished" datetime="2018-10-18T00:27:00+08:00">2018-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          UDF宏有两种方式可以被Fluent所接受:编译和解释。其中有一些宏既可以被解释也可以被编译，而一些宏则只能被解释。有一些场合只接受编译后的UDF(如动网格中的一些宏)，而有些场合既可以接受编译的UDF，还能接受解释后的UDF。那么解释型的UDF与编译型的UDF到底存在何种差异？本文主要描述解释型U
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【7】：解释型UDF/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

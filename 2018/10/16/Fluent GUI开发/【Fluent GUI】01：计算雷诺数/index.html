@@ -169,29 +169,27 @@
 
 
 
-  <meta name="description" content="Fluent GUI具有三层结构：  Dialog：最顶层结构，所有的界面元素均放置于Dialog中。利用函数cx-create-panel创建 Tables：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数cx-create-table创建 控件 ：实现数据输入及命令响应的元素。如数据输入框、文本输入框、按钮、列表及下拉框等。  1 、Dialog在Fluent中，每一个">
+  <meta name="description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
 <meta name="keywords" content="Fluent GUI开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Fluent GUI】06：对话框与表格">
-<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/index.html">
+<meta property="og:title" content="【Fluent GUI】01：计算雷诺数">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/16/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/index.html">
 <meta property="og:site_name" content="CFDer club">
-<meta property="og:description" content="Fluent GUI具有三层结构：  Dialog：最顶层结构，所有的界面元素均放置于Dialog中。利用函数cx-create-panel创建 Tables：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数cx-create-table创建 控件 ：实现数据输入及命令响应的元素。如数据输入框、文本输入框、按钮、列表及下拉框等。  1 、Dialog在Fluent中，每一个">
+<meta property="og:description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/H6J7de0k5G.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/9486K8k8b2.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/CKk5GHCLb5.png">
-<meta property="og:updated_time" content="2018-10-17T17:14:46.411Z">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png">
+<meta property="og:updated_time" content="2018-10-17T17:30:10.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Fluent GUI】06：对话框与表格">
-<meta name="twitter:description" content="Fluent GUI具有三层结构：  Dialog：最顶层结构，所有的界面元素均放置于Dialog中。利用函数cx-create-panel创建 Tables：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数cx-create-table创建 控件 ：实现数据输入及命令响应的元素。如数据输入框、文本输入框、按钮、列表及下拉框等。  1 、Dialog在Fluent中，每一个">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/H6J7de0k5G.png">
+<meta name="twitter:title" content="【Fluent GUI】01：计算雷诺数">
+<meta name="twitter:description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/"/>
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/"/>
 
 
 
@@ -201,7 +199,7 @@
   };
 </script>
 
-  <title>【Fluent GUI】06：对话框与表格 | CFDer club</title>
+  <title>【Fluent GUI】01：计算雷诺数 | CFDer club</title>
   
 
 
@@ -374,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -391,7 +389,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【Fluent GUI】06：对话框与表格
+          <h2 class="post-title" itemprop="name headline">【Fluent GUI】01：计算雷诺数
               
             
           </h2>
@@ -416,7 +414,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 15:38:00" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-16 15:09:00" itemprop="dateCreated datePublished" datetime="2018-10-16T15:09:00+08:00">2018-10-16</time>
             
 
             
@@ -433,7 +431,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:14:46" itemprop="dateModified" datetime="2018-10-18T01:14:46+08:00">2018-10-18</time>
+                <time title="修改时间：2018-10-18 01:30:10" itemprop="dateModified" datetime="2018-10-18T01:30:10+08:00">2018-10-18</time>
               
             
           </span>
@@ -465,8 +463,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/" itemprop="commentCount"></span>
+                <a href="/2018/10/16/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/16/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -502,93 +500,21 @@
       
 
       
-        <p>Fluent GUI具有三层结构：</p>
+        <p>湖北的天气真是热啊，汗流浃背用程序代码来降温。</p>
+<p>最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。</p>
+<h1 id="1-Y-计算"><a href="#1-Y-计算" class="headerlink" title="1 Y+计算"></a>1 Y+计算</h1><p>Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png" alt="mark"></p>
+<p>Y+计算采用PointWise官方网页提供的计算方法。见网址<a href="http://www.pointwise.com/yplus/" target="_blank" rel="noopener"> http://www.pointwise.com/yplus/</a> 。该方法基于 Frank M. White’s   Fluid Mechanics   5th edition, page 467中关于平板边界层理论计算。<br>具体计算方法为：<br>先计算雷诺数：<br>$$<br>Re = \frac{\rho UL}{\mu}<br>$$</p>
+<p>通过雷诺数计算摩擦系数：<br>$$<br>C_f = \frac{0.026}{Re_{x}^{1/7}}<br>$$</p>
+<p>计算壁面剪切力：<br>$$<br>\tau_{wall} = \frac{C_f \rho U^2}{2}<br>$$<br>计算：<br>$$<br>U_{fric}=\sqrt{\frac{\tau_{wall}}{\rho}}<br>$$<br>得到第一层网格高度：<br>$$<br>\Delta S= \frac{y^+ \mu}{U_{fric}\rho}<br>$$</p>
+<h1 id="2-程序代码"><a href="#2-程序代码" class="headerlink" title="2 程序代码"></a>2 程序代码</h1><p>创建sheme代码，如下所示。代码很不简洁，是因为考虑到与UDF的接口。这里计算过于简单，并没有使用UDF。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">;RP Variable Create Function</span><br><span class="line">( define ( make-<span class="keyword">new</span>-rpvar name <span class="keyword">default</span> type )</span><br><span class="line">( <span class="keyword">if</span> ( <span class="keyword">not</span> (rp-var-object name))</span><br><span class="line">(rp-var-define name <span class="keyword">default</span> type #f )))</span><br><span class="line"> </span><br><span class="line">;RP Variable Declarations</span><br><span class="line">(make-new-rpvar 'myudf/velocity 1.0 'real ) ;freestream velocity</span><br><span class="line">(make-new-rpvar 'myudf/density 1.0 'real ) ;density</span><br><span class="line">(make-new-rpvar 'myudf/mu 1.0 'real ) ;mu</span><br><span class="line">(make-new-rpvar 'myudf/length 1.0 'real ) ; Length</span><br><span class="line">(make-new-rpvar 'myudf/yplus 1.0 'real ) ; yplus</span><br><span class="line">(make-new-rpvar 'myudf/deltas 0.0 'real ) ;/deltaS</span><br><span class="line">(make-new-rpvar 'myudf/re 0.0 'real ) ;Re</span><br><span class="line"> </span><br><span class="line">;Dialog Box Definition</span><br><span class="line">( define gui-dialog-box</span><br><span class="line">;Let Statement, Local Variable Declarations</span><br><span class="line">( let ((dialog-box #f )</span><br><span class="line">  (table)</span><br><span class="line">(myudf/box1)</span><br><span class="line">(myudf/box2)</span><br><span class="line">(myudf/velocity)</span><br><span class="line">(myudf/density)</span><br><span class="line">(myudf/mu)</span><br><span class="line">(myudf/length)</span><br><span class="line">(myudf/yplus)</span><br><span class="line">(myudf/deltas)</span><br><span class="line">(myudf/re)</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;Update-CB Function, Invoked When Dialog Box Is Opened</span><br><span class="line">( define ( update-cb . args )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/velocity <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/density <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/mu <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/length <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/yplus <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/deltas <span class="number">0.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/re <span class="number">0.0</span> )</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;Apply-CB Function, Invoked When <span class="string">"OK"</span> Button Is Clicked</span><br><span class="line">( define ( apply-cb . args )</span><br><span class="line">(Cal)</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;定义函数计算雷诺数与第一层网格高度</span><br><span class="line">( define ( Cal )</span><br><span class="line">(rpsetvar 'myudf/velocity (cx-show-real-entry myudf/velocity))</span><br><span class="line">(rpsetvar 'myudf/density (cx-show-real-entry myudf/density))</span><br><span class="line">(rpsetvar 'myudf/mu (cx-show-real-entry myudf/mu))</span><br><span class="line">(rpsetvar 'myudf/length (cx-show-real-entry myudf/length))</span><br><span class="line">(rpsetvar 'myudf/yplus (cx-show-real-entry myudf/yplus))</span><br><span class="line">(rpsetvar 'myudf/deltas (cx-show-real-entry myudf/deltas))</span><br><span class="line">(rpsetvar 'myudf/re (cx-show-real-entry myudf/re))</span><br><span class="line"> </span><br><span class="line">( define re (rpgetvar 'myudf/re ))</span><br><span class="line">( define density (rpgetvar 'myudf/density ))</span><br><span class="line">( define mu (rpgetvar 'myudf/mu ))</span><br><span class="line">( define length (rpgetvar 'myudf/length ))</span><br><span class="line">( define yplus (rpgetvar 'myudf/yplus ))</span><br><span class="line">( define deltas (rpgetvar 'myudf/deltas ))</span><br><span class="line">( define velocity (rpgetvar 'myudf/velocity ))</span><br><span class="line">( define cf)</span><br><span class="line">( define tau)</span><br><span class="line">( define u_fric)</span><br><span class="line"> </span><br><span class="line">( <span class="built_in">set</span>! re ( * density ( * velocity ( / length mu))))</span><br><span class="line">( <span class="built_in">set</span>! cf ( / <span class="number">0.026</span> ( expt re ( / <span class="number">1</span> <span class="number">7</span> ))))</span><br><span class="line">( <span class="built_in">set</span>! tau ( * cf ( * density ( * velocity ( / velocity <span class="number">2</span> )))))</span><br><span class="line">( <span class="built_in">set</span>! u_fric ( <span class="built_in">sqrt</span> ( / tau density)))</span><br><span class="line">( <span class="built_in">set</span>! deltas ( * yplus ( / mu ( * u_fric density))))</span><br><span class="line"> </span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/deltas deltas)</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/re re)</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;Button-CB Function, Invoked When <span class="string">"Test Button"</span> Is Clicked</span><br><span class="line">( define ( button-cb . args )</span><br><span class="line">(cal)</span><br><span class="line">)</span><br><span class="line">;Args Function, Used For Interface Setup, Required For Apply-CB, Update-CB, <span class="keyword">and</span> Button-CB Sections</span><br><span class="line"> </span><br><span class="line">(lambda args</span><br><span class="line">( <span class="keyword">if</span> ( <span class="keyword">not</span> dialog-box)</span><br><span class="line">     ( let ()</span><br><span class="line">       ( <span class="built_in">set</span>! dialog-box (cx-create-panel <span class="string">"Turbulent Calculator"</span> apply-cb update-cb))</span><br><span class="line">( set! table (cx-create-table dialog-box "" 'border #f 'below 0 'right-of 0 ))</span><br><span class="line"> </span><br><span class="line">( set! myudf/box1 (cx-create-table table "Data Inputs" 'row 0 ))</span><br><span class="line">( set! myudf/velocity (cx-create-real-entry myudf/box1 "Velocity[m/s]:" 'row 0 ))</span><br><span class="line">( set! myudf/density (cx-create-real-entry myudf/box1 "Density[kg/m3]:" 'row 1 ))</span><br><span class="line">( set! myudf/mu (cx-create-real-entry myudf/box1 "Viscosity[Pa.s]:" 'row 2 ))</span><br><span class="line">( set! myudf/length (cx-create-real-entry myudf/box1 "Length[m]:" 'row 3 ))</span><br><span class="line">( set! myudf/yplus (cx-create-real-entry myudf/box1 "YPlus:" 'row 4 ))</span><br><span class="line">(cx-create-button table "Calculate" 'activate-callback button-cb 'row 1 )</span><br><span class="line">( set! myudf/box2 (cx-create-table table "Data Output" 'row 2 ))</span><br><span class="line">( set! myudf/deltas (cx-create-real-entry myudf/box2 "DeltaS[m]" 'row 0 ))</span><br><span class="line">( set! myudf/re (cx-create-real-entry myudf/box2 "Re:" 'row 1 ))</span><br><span class="line">) ;End Of Let Statement</span><br><span class="line">) ;End Of If Statement</span><br><span class="line">;Call To Open Dialog Box</span><br><span class="line">(cx-show-panel dialog-box)</span><br><span class="line">) ;End Of Args Function</span><br><span class="line">) ;End Of Let Statement</span><br><span class="line">) ;End Of GUI-Dialog-Box Definition</span><br><span class="line"> </span><br><span class="line">(gui-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>代码使用方法：</p>
 <ul>
-<li><strong>Dialog</strong>：最顶层结构，所有的界面元素均放置于Dialog中。利用函数<strong>cx-create-panel</strong>创建</li>
-<li><strong>Tables</strong>：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数<strong>cx-create-table</strong>创建</li>
-<li><strong>控件 </strong>：实现数据输入及命令响应的元素。如数据输入框、文本输入框、按钮、列表及下拉框等。</li>
+<li>新建文本文件（如yplus.txt），修改文件名及扩展名为yplus.scm</li>
+<li>Fluent中利用菜单<strong>File  → Read → Scheme…</strong>加载文件yplus.scm即可开启对话框</li>
 </ul>
-<h1 id="1-、Dialog"><a href="#1-、Dialog" class="headerlink" title="1 、Dialog"></a>1 、Dialog</h1><p>在Fluent中，每一个弹出的对话框都称之为Dialog。</p>
-<p>对话框通常利用cx-create-panel创建，创建完毕后，还需要利用函数cx-show-panel将其显示出来。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-panel</span> title apply-cb update-cb)</span><br></pre></td></tr></table></figure>
-<p>函数中的参数：</p>
-<ul>
-<li><strong>title</strong>：对话框的名字，出现在对话框的标题上，变量为字符串类型</li>
-<li><strong>apply-cb</strong>：回调函数，当鼠标点击对话框的<strong>OK</strong>按钮后执行该函数</li>
-<li><strong>update-cb</strong>：回调函数，当对话框开启时执行该函数</li>
-</ul>
-<blockquote>
-<p>注意：apply-cb和update-cb参数通常是在对话框打开或单击OK按钮时调用的函数名，但这并非是必须的，apply-cb和update-cb参数也可以是布尔值，而不是函数名。使用布尔值来代替函数名时，点击OK按钮对话框不执行任何操作。</p>
-</blockquote>
-<p>显示对话框使用cx-show-panel函数：</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-show_panel</span> panel)</span><br></pre></td></tr></table></figure>
-<p>其中，panel为创建的panel对象。</p>
-<p>一个最简单的对话框代码如下所示：</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog (<span class="name">cx-create-panel</span> <span class="string">"my dialog box"</span> <span class="literal">#t</span> <span class="literal">#f</span>))</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog)</span><br></pre></td></tr></table></figure>
-<p>将上述代码保存到以scm为扩展名的文本文件中，启动Fluent后利用菜单<strong>File → Read → Scheme…</strong>读取保存的scm文件即可开启对话框。如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/H6J7de0k5G.png" alt="mark"></p>
-<p>这个对话框很简陋，除了三个什么功能都没有的按钮后就没别的了。</p>
-<p>下面来为按钮添加功能，比如说想要对话框启动后在TUI窗口打印消息，以及在点击OK按钮后打印消息。可以改造代码如下所示。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;定义apply-cb函数，该函数在点击OK按钮后执行</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"clicked OK button!\n"</span>)<span class="comment">;该行语句在TUI窗口打印文本消息</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">;定义update-cb函数，该函数在对话框启动时执行</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"dialog box opened!\n"</span>)</span><br><span class="line">)</span><br><span class="line"><span class="comment">;定义对话框my-dialog</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog (<span class="name">cx-create-panel</span> <span class="string">"my dialog box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog)</span><br></pre></td></tr></table></figure>
-<p>相同方式加载该scm文件后，如下图所示，在TUI窗口打印文本消息。点击OK按钮也会在TUI窗口打印文本消息。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/9486K8k8b2.png" alt="mark"></p>
-<h1 id="2、table"><a href="#2、table" class="headerlink" title="2、table"></a>2、table</h1><p>table主要用于布局。一个dialog中可以包含有多个table。</p>
-<p>table采用函数<strong>cx-create-table</strong>创建，函数形式如：</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-table</span> parent label border below right-of row column)</span><br></pre></td></tr></table></figure>
-<p>函数中的参数包括：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>parent</td>
-<td>object</td>
-<td>父级对象，可以是dialog或table</td>
-</tr>
-<tr>
-<td>label</td>
-<td>string</td>
-<td>GUI中显示的table名字，若不指定的话可留空</td>
-</tr>
-<tr>
-<td>border</td>
-<td>symble/boolean</td>
-<td>指示边框是否可见</td>
-</tr>
-<tr>
-<td>below</td>
-<td>symbol/int</td>
-<td>在对话框中的竖直位置</td>
-</tr>
-<tr>
-<td>right-of</td>
-<td>symbole/int</td>
-<td>在对话框中的水平位置</td>
-</tr>
-<tr>
-<td>row</td>
-<td>symbol/int</td>
-<td>若表格位于其他表格中，此处可指定表格位于母表格的行数</td>
-</tr>
-<tr>
-<td>column</td>
-<td>symbol/int</td>
-<td>若表格位于其他表格中，此处可指定表格位于母表格的 列数</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>注意: border, below, right-of, row, column为可选项。</p>
-</blockquote>
-<p>如下面的代码：</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"clicked OK button!\n"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"dialog box opened!\n"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog (<span class="name">cx-create-panel</span> <span class="string">"my dialog box"</span> apply-cb update-cb)) <span class="comment">;创建dialog</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog <span class="string">"input parameter"</span> ))<span class="comment">;创建table</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int1 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num1"</span> <span class="symbol">'row</span> <span class="number">0</span> <span class="symbol">'col</span> <span class="number">0</span>))<span class="comment">;创建int1输入框，其位于第1行第1列</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int2 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num2"</span> <span class="symbol">'row</span> <span class="number">1</span> <span class="symbol">'col</span> <span class="number">0</span>))<span class="comment">;创建int2输入框，其位于第2行第1列</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int3 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num3"</span> <span class="symbol">'row</span> <span class="number">0</span> <span class="symbol">'col</span> <span class="number">1</span>))<span class="comment">;创建int3输入框，其位于第1行第3列</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int4 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num4"</span> <span class="symbol">'row</span> <span class="number">1</span>' col <span class="number">1</span>))<span class="comment">;创建int4输入框，其位于第2行第2列</span></span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog)</span><br></pre></td></tr></table></figure>
-<p>显示对话框如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/CKk5GHCLb5.png" alt="mark"></p>
+<p>程序有待改进，比如自动提取设置的边界和网格信息进行计算，此功能后面有时间再玩。</p>
 
       
     </div>
@@ -688,18 +614,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】09：小结/" rel="next" title="【Fluent GUI】09：小结">
-                <i class="fa fa-chevron-left"></i> 【Fluent GUI】09：小结
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/" rel="prev" title="【Fluent GUI】07：控件">
-                【Fluent GUI】07：控件 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/16/Fluent GUI开发/【Fluent GUI】02：湍流参数/" rel="prev" title="【Fluent GUI】02：湍流参数">
+                【Fluent GUI】02：湍流参数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -905,7 +827,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-、Dialog"><span class="nav-text">1 、Dialog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、table"><span class="nav-text">2、table</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Y-计算"><span class="nav-text">1 Y+计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-程序代码"><span class="nav-text">2 程序代码</span></a></li></ol></div>
             
 
           </div>
