@@ -169,45 +169,27 @@
 
 
 
-  <meta name="description" content="1 问题描述本案例利用UDF指定壁面温度分布。案例模型如图所示。  入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：$$T(x)= 30+ 100 sin(\frac{\pi x}{0.005})$$下壁面温度分布采用UDF进行指定： 123456789101112131415#include &quot;udf.h&quot;#define PI 3.141592654DEFINE P">
+  <meta name="description" content="1 介绍本案例演示如何利用udf解决动网格问题。计算几何如下图所示。 模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。  2 UDF案例中利用到的UDF包括： 1234567891011121314151617181920212223242">
 <meta name="keywords" content="UDF实例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【UDF实例】02：壁面温度分布">
-<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】02：壁面温度分布/index.html">
+<meta property="og:title" content="【UDF实例】04：振动的薄膜">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】04：振动的薄膜/index.html">
 <meta property="og:site_name" content="CFDer club">
-<meta property="og:description" content="1 问题描述本案例利用UDF指定壁面温度分布。案例模型如图所示。  入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：$$T(x)= 30+ 100 sin(\frac{\pi x}{0.005})$$下壁面温度分布采用UDF进行指定： 123456789101112131415#include &quot;udf.h&quot;#define PI 3.141592654DEFINE P">
+<meta property="og:description" content="1 介绍本案例演示如何利用udf解决动网格问题。计算几何如下图所示。 模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。  2 UDF案例中利用到的UDF包括： 1234567891011121314151617181920212223242">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/44950543.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/1252790.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/75877875.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/77737057.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/41700353.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/24600326.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/69625941.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/22515979.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/40347841.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/14889539.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/30109865.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/28575406.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/47077035.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/91610524.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/35541092.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/90813644.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/30820478.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/3628680.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/16286068.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:22:59.739Z">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-9-7/82840719.jpg">
+<meta property="og:updated_time" content="2018-10-17T17:34:20.908Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【UDF实例】02：壁面温度分布">
-<meta name="twitter:description" content="1 问题描述本案例利用UDF指定壁面温度分布。案例模型如图所示。  入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：$$T(x)= 30+ 100 sin(\frac{\pi x}{0.005})$$下壁面温度分布采用UDF进行指定： 123456789101112131415#include &quot;udf.h&quot;#define PI 3.141592654DEFINE P">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/44950543.jpg">
+<meta name="twitter:title" content="【UDF实例】04：振动的薄膜">
+<meta name="twitter:description" content="1 介绍本案例演示如何利用udf解决动网格问题。计算几何如下图所示。 模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。  2 UDF案例中利用到的UDF包括： 1234567891011121314151617181920212223242">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-9-7/82840719.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】02：壁面温度分布/"/>
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】04：振动的薄膜/"/>
 
 
 
@@ -217,7 +199,7 @@
   };
 </script>
 
-  <title>【UDF实例】02：壁面温度分布 | CFDer club</title>
+  <title>【UDF实例】04：振动的薄膜 | CFDer club</title>
   
 
 
@@ -390,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】02：壁面温度分布/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】04：振动的薄膜/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -407,7 +389,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【UDF实例】02：壁面温度分布
+          <h2 class="post-title" itemprop="name headline">【UDF实例】04：振动的薄膜
               
             
           </h2>
@@ -432,12 +414,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:56:00 / 修改时间：01:22:59" itemprop="dateCreated datePublished" datetime="2018-10-18T00:56:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-16 00:58:00" itemprop="dateCreated datePublished" datetime="2018-10-16T00:58:00+08:00">2018-10-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-18 01:34:20" itemprop="dateModified" datetime="2018-10-18T01:34:20+08:00">2018-10-18</time>
               
             
           </span>
@@ -469,8 +463,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/UDF实例/【UDF实例】02：壁面温度分布/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/UDF实例/【UDF实例】02：壁面温度分布/" itemprop="commentCount"></span>
+                <a href="/2018/10/16/UDF实例/【UDF实例】04：振动的薄膜/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/16/UDF实例/【UDF实例】04：振动的薄膜/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -506,89 +500,11 @@
       
 
       
-        <h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>本案例利用UDF指定壁面温度分布。案例模型如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/44950543.jpg" alt=""></p>
-<p>入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：<br>$$<br>T(x)= 30+ 100 sin(\frac{\pi x}{0.005})<br>$$<br>下壁面温度分布采用UDF进行指定：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.141592654</span></span><br><span class="line"><span class="function">DEFINE <span class="title">PROFILE</span><span class="params">(temperature profile, thread, position)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  real r[<span class="number">3</span>];</span><br><span class="line">  real x;</span><br><span class="line">  face t f;</span><br><span class="line">  begin_f_loop(f, thread)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function">F <span class="title">CENTROID</span><span class="params">(r,f,thread)</span></span>;</span><br><span class="line">      x = r[<span class="number">0</span>];</span><br><span class="line">      <span class="function">F <span class="title">PROFILE</span><span class="params">(f, thread, position)</span> </span>= <span class="number">300.</span>+<span class="number">100.</span>*<span class="built_in">sin</span>(PI*x/<span class="number">0.005</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  end_f_loop(f, thread)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="2-读取网格"><a href="#2-读取网格" class="headerlink" title="2 读取网格"></a>2 读取网格</h1><ul>
-<li>利用菜单<strong>File → Read → Mesh</strong>读取网格文件</li>
-</ul>
-<p>网格如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/1252790.jpg" alt=""></p>
-<h1 id="3-开启能量方程"><a href="#3-开启能量方程" class="headerlink" title="3 开启能量方程"></a>3 开启能量方程</h1><ul>
-<li>右键选择模型树节点<strong>Setup &gt; Models &gt; Energy</strong>，选择弹出菜单项<strong>On</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/75877875.jpg" alt=""></p>
-<h1 id="4-编译UDF"><a href="#4-编译UDF" class="headerlink" title="4 编译UDF"></a>4 编译UDF</h1><p>本案例的UDF可以采用解释或编译的方式运行。这里采用解释的方式加载。</p>
-<ul>
-<li>右键选择模型树节点<strong>Parameters &amp; Customization &gt; User Defined Funcitons</strong>，选择菜单项<strong>Interpreted…</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/77737057.jpg" alt=""></p>
-<ul>
-<li>在弹出的对话框中点击按钮<strong>Browse…</strong>，选择UDF源文件wallprof.c，点击<strong>Interpret</strong>解释源文件</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/41700353.jpg" alt=""></p>
-<h1 id="5-边界条件设置"><a href="#5-边界条件设置" class="headerlink" title="5 边界条件设置"></a>5 边界条件设置</h1><h2 id="5-1-wall-1设置"><a href="#5-1-wall-1设置" class="headerlink" title="5.1 wall-1设置"></a>5.1 wall-1设置</h2><p>设置底部壁面温度分布。</p>
-<ul>
-<li>右键选择模型树节点<strong>Boundary Conditions &gt; wall-1</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/24600326.jpg" alt=""></p>
-<ul>
-<li>切换到<strong>Thermal</strong>标签页，选择<strong>Temperature</strong>，设置温度为前文解释得到的UDF，如下图中标志2所示</li>
-<li>点击<strong>OK</strong>按钮关闭对话框</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/69625941.jpg" alt=""></p>
-<h2 id="5-2-设置速度入口"><a href="#5-2-设置速度入口" class="headerlink" title="5.2 设置速度入口"></a>5.2 设置速度入口</h2><ul>
-<li>右键选择模型树节点<strong>Boundary Conditions &gt; velocity-inlet-1</strong></li>
-<li>在弹出的对话框中设置<strong>Velocity Magnitude</strong>为<strong>1 m/s</strong></li>
-<li>点击<strong>OK</strong>按钮关闭对话框</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/22515979.jpg" alt=""></p>
-<h1 id="6-设置残差"><a href="#6-设置残差" class="headerlink" title="6 设置残差"></a>6 设置残差</h1><p>降低收敛残差至1e-5。</p>
-<ul>
-<li>右键选择模型树节点<strong>Solution &gt; Monitors &gt; Residual</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/40347841.jpg" alt=""></p>
-<ul>
-<li>在弹出的对话框中，设置除energy外，其他物理量残差为1e-5</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/14889539.jpg" alt=""></p>
-<h1 id="7-初始化"><a href="#7-初始化" class="headerlink" title="7 初始化"></a>7 初始化</h1><ul>
-<li>右键选择模型树节点<strong>Solution &gt; Initialization</strong>，选择弹出菜单<strong>Initialize</strong>进行初始化</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/30109865.jpg" alt=""></p>
-<h1 id="8-计算求解"><a href="#8-计算求解" class="headerlink" title="8 计算求解"></a>8 计算求解</h1><ul>
-<li>鼠标双击模型树节点<strong>Solution &gt; Run Calculation</strong></li>
-<li>右侧面板中设置<strong>Number of Iterations</strong>为<strong>200</strong></li>
-<li>点击按钮<strong>Calculate</strong>进行计算</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/28575406.jpg" alt=""></p>
-<p>大约计算60多步达到收敛。收敛残差如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/47077035.jpg" alt=""></p>
-<h1 id="9-温度场分布"><a href="#9-温度场分布" class="headerlink" title="9 温度场分布"></a>9 温度场分布</h1><ul>
-<li>右键点击模型树节点<strong>Result &gt; Graphics &gt; Contours</strong>，选择弹出菜单<strong>Edit…</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/91610524.jpg" alt=""></p>
-<ul>
-<li>在弹出的对话框中，设置<strong>Contours of</strong>为<strong>Temperature</strong>及<strong>Static Temperature</strong></li>
-<li>点击<strong>Display</strong>按钮显示温度分布</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/35541092.jpg" alt=""></p>
-<p>显示温度如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/90813644.jpg" alt=""></p>
-<h1 id="10-显示底部面温度分布"><a href="#10-显示底部面温度分布" class="headerlink" title="10 显示底部面温度分布"></a>10 显示底部面温度分布</h1><p>以曲线形式显示底部面上温度沿X轴分布。</p>
-<ul>
-<li>右键点击模型树节点<strong>Results &gt; Plots &gt; XY Plot</strong>，选择弹出菜单<strong>Edit…</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/30820478.jpg" alt=""></p>
-<ul>
-<li>在弹出的对话框中，设置<strong>Y Axis Function</strong>为<strong>Temperature</strong>及<strong>Static Temperature</strong></li>
-<li>选择<strong>Surfaces</strong>列表项为<strong>Wall-1</strong></li>
-<li>点击按钮<strong>Save/Plot</strong>按钮显示曲线</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/3628680.jpg" alt=""></p>
-<p>显示的曲线分布如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/16286068.jpg" alt=""></p>
+        <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h1><p>本案例演示如何利用udf解决动网格问题。计算几何如下图所示。</p>
+<p>模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-9-7/82840719.jpg" alt=""></p>
+<h1 id="2-UDF"><a href="#2-UDF" class="headerlink" title="2 UDF"></a>2 UDF</h1><p>案例中利用到的UDF包括：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> R 0.109 <span class="comment">/* radius of the arc, meters */</span></span></span><br><span class="line"> </span><br><span class="line">DEFINE_CG_MOTION(flex, dt, cg_vel, cg_omega, time, dtime)</span><br><span class="line">&#123;</span><br><span class="line">  cg_omega[<span class="number">2</span>] = <span class="number">1.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">DEFINE_GRID_MOTION(moving_arc, domain, dt, time, dtime)</span><br><span class="line">&#123;</span><br><span class="line">  Thread *tf = DT_THREAD (dt);</span><br><span class="line">  <span class="keyword">face_t</span> f;</span><br><span class="line">  Node *node_p;</span><br><span class="line">  real alpha, theta, x, ymag, yfull, y;</span><br><span class="line">  <span class="keyword">int</span> n;</span><br><span class="line">  SET_DEFORMING_THREAD_FLAG (THREAD_T0 (tf));</span><br><span class="line">  alpha = omega * CURRENT_TIME;</span><br><span class="line">  theta = <span class="number">2.0</span> * alpha + <span class="number">3.0</span> * M_PI / <span class="number">2.0</span>;</span><br><span class="line">  begin_f_loop (f, tf)</span><br><span class="line">  &#123;</span><br><span class="line">      f_node_loop (f, tf, n)</span><br><span class="line">      &#123;</span><br><span class="line">          node_p = F_NODE (f, tf, n);</span><br><span class="line">        <span class="keyword">if</span> (NODE_POS_NEED_UPDATE (node_p))</span><br><span class="line">        &#123;</span><br><span class="line">            NODE_POS_UPDATED (node_p);</span><br><span class="line">            x = NODE_X (node_p);</span><br><span class="line">            ymag = <span class="built_in">sqrt</span> (R*R - x*x) + <span class="number">0.03</span>;</span><br><span class="line">            yfull = ymag - <span class="number">0.1</span>;</span><br><span class="line">            y = - <span class="number">0.1</span> + yfull * <span class="built_in">sin</span>(theta);</span><br><span class="line">            NODE_Y (node_p) = y;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  end_f_loop (f, tf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -688,8 +604,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/18/Fluent动网格/Fluent动网格【15】：Remeshing/" rel="next" title="Fluent动网格【15】：Remeshing">
-                <i class="fa fa-chevron-left"></i> Fluent动网格【15】：Remeshing
+              <a href="/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/" rel="next" title="【UDF实例】03：温度相关的粘度">
+                <i class="fa fa-chevron-left"></i> 【UDF实例】03：温度相关的粘度
               </a>
             
           </div>
@@ -698,8 +614,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/" rel="prev" title="Fluent动网格【16】：6DOF">
-                Fluent动网格【16】：6DOF <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/16/UDF实例/【UDF实例】05：UDS污水沉降/" rel="prev" title="【UDF实例】05：UDS污水沉降">
+                【UDF实例】05：UDS污水沉降 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -905,7 +821,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-读取网格"><span class="nav-text">2 读取网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开启能量方程"><span class="nav-text">3 开启能量方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-编译UDF"><span class="nav-text">4 编译UDF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-边界条件设置"><span class="nav-text">5 边界条件设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-wall-1设置"><span class="nav-text">5.1 wall-1设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-设置速度入口"><span class="nav-text">5.2 设置速度入口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-设置残差"><span class="nav-text">6 设置残差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-初始化"><span class="nav-text">7 初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-计算求解"><span class="nav-text">8 计算求解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-温度场分布"><span class="nav-text">9 温度场分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-显示底部面温度分布"><span class="nav-text">10 显示底部面温度分布</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-介绍"><span class="nav-text">1 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-UDF"><span class="nav-text">2 UDF</span></a></li></ol></div>
             
 
           </div>

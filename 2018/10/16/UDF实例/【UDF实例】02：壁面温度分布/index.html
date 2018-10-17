@@ -169,46 +169,45 @@
 
 
 
-  <meta name="description" content="1 案例描述本案例计算模型如下图所示。  几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：$$\mu =\begin{cases}    5.5\times 10^{-3} &amp;amp;    ,T&amp;gt;288K    \    143.2135-0.49725T &amp;">
+  <meta name="description" content="1 问题描述本案例利用UDF指定壁面温度分布。案例模型如图所示。  入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：$$T(x)= 30+ 100 sin(\frac{\pi x}{0.005})$$下壁面温度分布采用UDF进行指定： 123456789101112131415#include &quot;udf.h&quot;#define PI 3.141592654DEFINE P">
 <meta name="keywords" content="UDF实例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【UDF实例】03：温度相关的粘度">
-<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】03：温度相关的粘度/index.html">
+<meta property="og:title" content="【UDF实例】02：壁面温度分布">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】02：壁面温度分布/index.html">
 <meta property="og:site_name" content="CFDer club">
-<meta property="og:description" content="1 案例描述本案例计算模型如下图所示。  几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：$$\mu =\begin{cases}    5.5\times 10^{-3} &amp;amp;    ,T&amp;gt;288K    \    143.2135-0.49725T &amp;">
+<meta property="og:description" content="1 问题描述本案例利用UDF指定壁面温度分布。案例模型如图所示。  入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：$$T(x)= 30+ 100 sin(\frac{\pi x}{0.005})$$下壁面温度分布采用UDF进行指定： 123456789101112131415#include &quot;udf.h&quot;#define PI 3.141592654DEFINE P">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/20072836.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/58399670.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/55005109.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/50838381.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/56745953.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/94652447.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/3728706.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/62723033.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/78215629.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/90665389.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/72924842.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/92340818.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/88157707.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/18785148.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/91983380.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/38967303.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/78352818.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/22081214.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/73458489.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/38394102.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:22:56.566Z">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/44950543.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/1252790.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/75877875.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/77737057.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/41700353.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/24600326.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/69625941.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/22515979.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/40347841.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/14889539.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/30109865.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/28575406.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/47077035.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/91610524.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/35541092.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/90813644.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/30820478.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/3628680.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/16286068.jpg">
+<meta property="og:updated_time" content="2018-10-17T17:34:13.801Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【UDF实例】03：温度相关的粘度">
-<meta name="twitter:description" content="1 案例描述本案例计算模型如下图所示。  几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：$$\mu =\begin{cases}    5.5\times 10^{-3} &amp;amp;    ,T&amp;gt;288K    \    143.2135-0.49725T &amp;">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/20072836.jpg">
+<meta name="twitter:title" content="【UDF实例】02：壁面温度分布">
+<meta name="twitter:description" content="1 问题描述本案例利用UDF指定壁面温度分布。案例模型如图所示。  入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：$$T(x)= 30+ 100 sin(\frac{\pi x}{0.005})$$下壁面温度分布采用UDF进行指定： 123456789101112131415#include &quot;udf.h&quot;#define PI 3.141592654DEFINE P">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-30/44950543.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】03：温度相关的粘度/"/>
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】02：壁面温度分布/"/>
 
 
 
@@ -218,7 +217,7 @@
   };
 </script>
 
-  <title>【UDF实例】03：温度相关的粘度 | CFDer club</title>
+  <title>【UDF实例】02：壁面温度分布 | CFDer club</title>
   
 
 
@@ -391,7 +390,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】03：温度相关的粘度/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】02：壁面温度分布/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -408,7 +407,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【UDF实例】03：温度相关的粘度
+          <h2 class="post-title" itemprop="name headline">【UDF实例】02：壁面温度分布
               
             
           </h2>
@@ -433,12 +432,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:57:00 / 修改时间：01:22:56" itemprop="dateCreated datePublished" datetime="2018-10-18T00:57:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-16 00:56:00" itemprop="dateCreated datePublished" datetime="2018-10-16T00:56:00+08:00">2018-10-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-18 01:34:13" itemprop="dateModified" datetime="2018-10-18T01:34:13+08:00">2018-10-18</time>
               
             
           </span>
@@ -470,8 +481,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/UDF实例/【UDF实例】03：温度相关的粘度/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/UDF实例/【UDF实例】03：温度相关的粘度/" itemprop="commentCount"></span>
+                <a href="/2018/10/16/UDF实例/【UDF实例】02：壁面温度分布/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/16/UDF实例/【UDF实例】02：壁面温度分布/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -507,103 +518,89 @@
       
 
       
-        <h1 id="1-案例描述"><a href="#1-案例描述" class="headerlink" title="1 案例描述"></a>1 案例描述</h1><p>本案例计算模型如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/20072836.jpg" alt=""></p>
-<p>几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：<br>$$<br>\mu =\begin{cases}<br>    5.5\times 10^{-3} &amp;    ,T&gt;288K    \<br>    143.2135-0.49725T &amp;        ,286 \le T \le 288K \<br>    1&amp;    ,T &lt; 286 K    \<br>\end{cases}<br>$$<br>采用UDF红DEFINE_PPROPERTY定义粘度：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">DEFINE_PROPERTY(user_vis, cell, thread)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">float</span> temp, mu;</span><br><span class="line">  temp = C_T(cell, thread);</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> ( temp &gt; <span class="number">288.</span> )</span><br><span class="line">          mu = <span class="number">5.5e-3</span>;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> ( temp &gt;= <span class="number">286.</span> )</span><br><span class="line">          mu = <span class="number">143.2135</span> - <span class="number">0.49725</span> * temp;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">          mu = <span class="number">1.0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> mu;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>源文件中C_T宏为获取单元的温度。</p>
+        <h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>本案例利用UDF指定壁面温度分布。案例模型如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/44950543.jpg" alt=""></p>
+<p>入口为空气，温度为 300 K，上壁面为绝热，下壁面温度与X坐标相关，描述为：<br>$$<br>T(x)= 30+ 100 sin(\frac{\pi x}{0.005})<br>$$<br>下壁面温度分布采用UDF进行指定：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.141592654</span></span><br><span class="line"><span class="function">DEFINE <span class="title">PROFILE</span><span class="params">(temperature profile, thread, position)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  real r[<span class="number">3</span>];</span><br><span class="line">  real x;</span><br><span class="line">  face t f;</span><br><span class="line">  begin_f_loop(f, thread)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function">F <span class="title">CENTROID</span><span class="params">(r,f,thread)</span></span>;</span><br><span class="line">      x = r[<span class="number">0</span>];</span><br><span class="line">      <span class="function">F <span class="title">PROFILE</span><span class="params">(f, thread, position)</span> </span>= <span class="number">300.</span>+<span class="number">100.</span>*<span class="built_in">sin</span>(PI*x/<span class="number">0.005</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  end_f_loop(f, thread)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="2-读取网格"><a href="#2-读取网格" class="headerlink" title="2 读取网格"></a>2 读取网格</h1><ul>
-<li>以<strong>2D</strong>方式Fluent</li>
-<li>利用菜单<strong>File → Read → Mesh…</strong>读取网格文件</li>
+<li>利用菜单<strong>File → Read → Mesh</strong>读取网格文件</li>
 </ul>
-<p>本案例网格模型较为简单，如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/58399670.jpg" alt=""></p>
+<p>网格如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/1252790.jpg" alt=""></p>
 <h1 id="3-开启能量方程"><a href="#3-开启能量方程" class="headerlink" title="3 开启能量方程"></a>3 开启能量方程</h1><ul>
-<li>右键点击模型树节点<strong>Setup &gt; Models &gt; Energy</strong>，选择弹出菜单<strong>On</strong></li>
+<li>右键选择模型树节点<strong>Setup &gt; Models &gt; Energy</strong>，选择弹出菜单项<strong>On</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/55005109.jpg" alt=""></p>
-<h1 id="4-加载UDF"><a href="#4-加载UDF" class="headerlink" title="4 加载UDF"></a>4 加载UDF</h1><p>本UDF可以采用解释方式加载运行。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/75877875.jpg" alt=""></p>
+<h1 id="4-编译UDF"><a href="#4-编译UDF" class="headerlink" title="4 编译UDF"></a>4 编译UDF</h1><p>本案例的UDF可以采用解释或编译的方式运行。这里采用解释的方式加载。</p>
 <ul>
-<li>右键点击模型树节点<strong>Parameters &amp; Customization &gt; User Defined Functions &gt; Interpreted…</strong></li>
+<li>右键选择模型树节点<strong>Parameters &amp; Customization &gt; User Defined Funcitons</strong>，选择菜单项<strong>Interpreted…</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/50838381.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/77737057.jpg" alt=""></p>
 <ul>
-<li>在弹出的对话框中点击<strong>Browse</strong>按钮加载UDF文件viscosity.c</li>
-<li>点击按钮<strong>Interpret</strong>解释UDF并加载</li>
+<li>在弹出的对话框中点击按钮<strong>Browse…</strong>，选择UDF源文件wallprof.c，点击<strong>Interpret</strong>解释源文件</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/56745953.jpg" alt=""></p>
-<h1 id="5-添加材料"><a href="#5-添加材料" class="headerlink" title="5 添加材料"></a>5 添加材料</h1><ul>
-<li>鼠标右键点击模型树节点<strong>Materials &gt; Fluid</strong>，选择弹出菜单<strong>New…</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/94652447.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/41700353.jpg" alt=""></p>
+<h1 id="5-边界条件设置"><a href="#5-边界条件设置" class="headerlink" title="5 边界条件设置"></a>5 边界条件设置</h1><h2 id="5-1-wall-1设置"><a href="#5-1-wall-1设置" class="headerlink" title="5.1 wall-1设置"></a>5.1 wall-1设置</h2><p>设置底部壁面温度分布。</p>
 <ul>
-<li>在弹出的对话框中，设置<strong>Name</strong>为<strong>liquid_metal</strong></li>
-<li>设置<strong>Density</strong>为<strong>8000 kg/m3</strong></li>
-<li>设置<strong>Cp</strong>为<strong>680 j/kg-k</strong></li>
-<li>设置<strong>Thermal Conductivity</strong>为<strong>30 w/m-k</strong></li>
-<li>设置<strong>Viscosity</strong>为<strong>user-defined</strong>，并选择前面加载的udf</li>
-<li>点击按钮<strong>Change/Create</strong>创建材料</li>
+<li>右键选择模型树节点<strong>Boundary Conditions &gt; wall-1</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/3728706.jpg" alt=""></p>
-<h1 id="6-Cell-Zone-Conditions"><a href="#6-Cell-Zone-Conditions" class="headerlink" title="6 Cell Zone Conditions"></a>6 Cell Zone Conditions</h1><p>设置区域内的材料。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/24600326.jpg" alt=""></p>
 <ul>
-<li>右键点击模型树节点<strong>Cell Zone Conditions &gt; fluid-8</strong>，选择弹出菜单<strong>Edit…</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/62723033.jpg" alt=""></p>
-<ul>
-<li>在弹出的菜单中选<strong>Material Name</strong>为<strong>liquid_metal</strong></li>
+<li>切换到<strong>Thermal</strong>标签页，选择<strong>Temperature</strong>，设置温度为前文解释得到的UDF，如下图中标志2所示</li>
 <li>点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/78215629.jpg" alt=""></p>
-<h1 id="7-设置边界条件"><a href="#7-设置边界条件" class="headerlink" title="7 设置边界条件"></a>7 设置边界条件</h1><p><strong>1、wall-2</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/69625941.jpg" alt=""></p>
+<h2 id="5-2-设置速度入口"><a href="#5-2-设置速度入口" class="headerlink" title="5.2 设置速度入口"></a>5.2 设置速度入口</h2><ul>
+<li>右键选择模型树节点<strong>Boundary Conditions &gt; velocity-inlet-1</strong></li>
+<li>在弹出的对话框中设置<strong>Velocity Magnitude</strong>为<strong>1 m/s</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/22515979.jpg" alt=""></p>
+<h1 id="6-设置残差"><a href="#6-设置残差" class="headerlink" title="6 设置残差"></a>6 设置残差</h1><p>降低收敛残差至1e-5。</p>
 <ul>
-<li>右键点击模型树节点<strong>Boundary Conditions &gt; wall-2</strong>，选择菜单项<strong>Edit…</strong></li>
+<li>右键选择模型树节点<strong>Solution &gt; Monitors &gt; Residual</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/90665389.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/40347841.jpg" alt=""></p>
 <ul>
-<li>弹出的对话框中，设置<strong>Thermal</strong>标签页下<strong>Thermal Conditions</strong>为<strong>Temperature</strong>，设置<strong>Termperature</strong>为<strong>280 K</strong></li>
+<li>在弹出的对话框中，设置除energy外，其他物理量残差为1e-5</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/72924842.jpg" alt=""></p>
-<p><strong>2、 wall-3</strong></p>
-<p>采用相同的方式，设置wall-3边界的温度为<strong>290K</strong></p>
-<p><strong>3、Velocity-inlet-6</strong></p>
-<ul>
-<li>设置其速度为<strong>0.001 m/s</strong></li>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/14889539.jpg" alt=""></p>
+<h1 id="7-初始化"><a href="#7-初始化" class="headerlink" title="7 初始化"></a>7 初始化</h1><ul>
+<li>右键选择模型树节点<strong>Solution &gt; Initialization</strong>，选择弹出菜单<strong>Initialize</strong>进行初始化</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/92340818.jpg" alt=""></p>
-<ul>
-<li>设置其温度为<strong>290 K</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/88157707.jpg" alt=""></p>
-<p><strong>4、pressure-outlet-7</strong></p>
-<ul>
-<li>设置其<strong>Backflow Total Temperature</strong>为<strong>290 K</strong></li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/18785148.jpg" alt=""></p>
-<h1 id="8-初始化"><a href="#8-初始化" class="headerlink" title="8 初始化"></a>8 初始化</h1><ul>
-<li>右键点击模型树节点<strong>Solution &gt; Initialization</strong>，选择菜单项<strong>Initialize</strong>进行初始化</li>
-</ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/91983380.jpg" alt=""></p>
-<h1 id="9-进行计算"><a href="#9-进行计算" class="headerlink" title="9 进行计算"></a>9 进行计算</h1><ul>
-<li>双击模型树节点<strong>Run Calculation</strong></li>
-<li>右侧面板中设置<strong>Number of Iterations</strong>为<strong>300</strong></li>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/30109865.jpg" alt=""></p>
+<h1 id="8-计算求解"><a href="#8-计算求解" class="headerlink" title="8 计算求解"></a>8 计算求解</h1><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Run Calculation</strong></li>
+<li>右侧面板中设置<strong>Number of Iterations</strong>为<strong>200</strong></li>
 <li>点击按钮<strong>Calculate</strong>进行计算</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/38967303.jpg" alt=""></p>
-<p>计算在173步收敛到1e-3。计算残差如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/78352818.jpg" alt=""></p>
-<h1 id="10-后处理"><a href="#10-后处理" class="headerlink" title="10 后处理"></a>10 后处理</h1><p>查看粘度分布。</p>
-<ul>
-<li>右键点击模型树节点<strong>Results &gt; Graphics &gt; Contours</strong>，选择菜单项<strong>Edit…</strong></li>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/28575406.jpg" alt=""></p>
+<p>大约计算60多步达到收敛。收敛残差如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/47077035.jpg" alt=""></p>
+<h1 id="9-温度场分布"><a href="#9-温度场分布" class="headerlink" title="9 温度场分布"></a>9 温度场分布</h1><ul>
+<li>右键点击模型树节点<strong>Result &gt; Graphics &gt; Contours</strong>，选择弹出菜单<strong>Edit…</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/22081214.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/91610524.jpg" alt=""></p>
 <ul>
-<li>在弹出的对话框中设置<strong>contours of</strong>为<strong>Properties…</strong>及<strong>Molecular Viscosity</strong></li>
-<li>点击<strong>Save/Display</strong>按钮显示粘度云图分布</li>
+<li>在弹出的对话框中，设置<strong>Contours of</strong>为<strong>Temperature</strong>及<strong>Static Temperature</strong></li>
+<li>点击<strong>Display</strong>按钮显示温度分布</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/73458489.jpg" alt=""></p>
-<p>摩尔粘度分布如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/38394102.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/35541092.jpg" alt=""></p>
+<p>显示温度如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/90813644.jpg" alt=""></p>
+<h1 id="10-显示底部面温度分布"><a href="#10-显示底部面温度分布" class="headerlink" title="10 显示底部面温度分布"></a>10 显示底部面温度分布</h1><p>以曲线形式显示底部面上温度沿X轴分布。</p>
+<ul>
+<li>右键点击模型树节点<strong>Results &gt; Plots &gt; XY Plot</strong>，选择弹出菜单<strong>Edit…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/30820478.jpg" alt=""></p>
+<ul>
+<li>在弹出的对话框中，设置<strong>Y Axis Function</strong>为<strong>Temperature</strong>及<strong>Static Temperature</strong></li>
+<li>选择<strong>Surfaces</strong>列表项为<strong>Wall-1</strong></li>
+<li>点击按钮<strong>Save/Plot</strong>按钮显示曲线</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/3628680.jpg" alt=""></p>
+<p>显示的曲线分布如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-30/16286068.jpg" alt=""></p>
 
       
     </div>
@@ -703,8 +700,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/" rel="next" title="Fluent动网格【16】：6DOF">
-                <i class="fa fa-chevron-left"></i> Fluent动网格【16】：6DOF
+              <a href="/2018/10/16/UDF实例/【UDF实例】01：多孔介质/" rel="next" title="【UDF实例】01：多孔介质">
+                <i class="fa fa-chevron-left"></i> 【UDF实例】01：多孔介质
               </a>
             
           </div>
@@ -713,8 +710,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/18/UDF实例/【UDF实例】04：振动的薄膜/" rel="prev" title="【UDF实例】04：振动的薄膜">
-                【UDF实例】04：振动的薄膜 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/" rel="prev" title="【UDF实例】03：温度相关的粘度">
+                【UDF实例】03：温度相关的粘度 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -920,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-案例描述"><span class="nav-text">1 案例描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-读取网格"><span class="nav-text">2 读取网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开启能量方程"><span class="nav-text">3 开启能量方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-加载UDF"><span class="nav-text">4 加载UDF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-添加材料"><span class="nav-text">5 添加材料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Cell-Zone-Conditions"><span class="nav-text">6 Cell Zone Conditions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-设置边界条件"><span class="nav-text">7 设置边界条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-初始化"><span class="nav-text">8 初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-进行计算"><span class="nav-text">9 进行计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-后处理"><span class="nav-text">10 后处理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-读取网格"><span class="nav-text">2 读取网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开启能量方程"><span class="nav-text">3 开启能量方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-编译UDF"><span class="nav-text">4 编译UDF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-边界条件设置"><span class="nav-text">5 边界条件设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-wall-1设置"><span class="nav-text">5.1 wall-1设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-设置速度入口"><span class="nav-text">5.2 设置速度入口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-设置残差"><span class="nav-text">6 设置残差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-初始化"><span class="nav-text">7 初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-计算求解"><span class="nav-text">8 计算求解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-温度场分布"><span class="nav-text">9 温度场分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-显示底部面温度分布"><span class="nav-text">10 显示底部面温度分布</span></a></li></ol></div>
             
 
           </div>

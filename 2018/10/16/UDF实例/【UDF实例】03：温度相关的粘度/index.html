@@ -169,30 +169,46 @@
 
 
 
-  <meta name="description" content="在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。 1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。  注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。   2 脚本文">
-<meta name="keywords" content="Fluent技巧">
+  <meta name="description" content="1 案例描述本案例计算模型如下图所示。  几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：$$\mu =\begin{cases}    5.5\times 10^{-3} &amp;amp;    ,T&amp;gt;288K    \    143.2135-0.49725T &amp;">
+<meta name="keywords" content="UDF实例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fluent中的脚本文件">
-<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/Fluent中的脚本文件/index.html">
+<meta property="og:title" content="【UDF实例】03：温度相关的粘度">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/index.html">
 <meta property="og:site_name" content="CFDer club">
-<meta property="og:description" content="在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。 1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。  注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。   2 脚本文">
+<meta property="og:description" content="1 案例描述本案例计算模型如下图所示。  几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：$$\mu =\begin{cases}    5.5\times 10^{-3} &amp;amp;    ,T&amp;gt;288K    \    143.2135-0.49725T &amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/48866724.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/88390776.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/92111775.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/62111751.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:24:40.698Z">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/20072836.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/58399670.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/55005109.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/50838381.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/56745953.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/94652447.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/3728706.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/62723033.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/78215629.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/90665389.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/72924842.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/92340818.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/88157707.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/18785148.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/91983380.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/38967303.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/78352818.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/22081214.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/73458489.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/38394102.jpg">
+<meta property="og:updated_time" content="2018-10-17T17:34:16.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fluent中的脚本文件">
-<meta name="twitter:description" content="在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。 1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。  注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。   2 脚本文">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/48866724.jpg">
+<meta name="twitter:title" content="【UDF实例】03：温度相关的粘度">
+<meta name="twitter:description" content="1 案例描述本案例计算模型如下图所示。  几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：$$\mu =\begin{cases}    5.5\times 10^{-3} &amp;amp;    ,T&amp;gt;288K    \    143.2135-0.49725T &amp;">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-31/20072836.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/Fluent中的脚本文件/"/>
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/"/>
 
 
 
@@ -202,7 +218,7 @@
   };
 </script>
 
-  <title>Fluent中的脚本文件 | CFDer club</title>
+  <title>【UDF实例】03：温度相关的粘度 | CFDer club</title>
   
 
 
@@ -375,7 +391,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent技巧/Fluent中的脚本文件/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -392,7 +408,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Fluent中的脚本文件
+          <h2 class="post-title" itemprop="name headline">【UDF实例】03：温度相关的粘度
               
             
           </h2>
@@ -417,12 +433,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:29:00 / 修改时间：01:24:40" itemprop="dateCreated datePublished" datetime="2018-10-18T00:29:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-16 00:57:00" itemprop="dateCreated datePublished" datetime="2018-10-16T00:57:00+08:00">2018-10-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-18 01:34:16" itemprop="dateModified" datetime="2018-10-18T01:34:16+08:00">2018-10-18</time>
               
             
           </span>
@@ -439,7 +467,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent技巧/" itemprop="url" rel="index"><span itemprop="name">Fluent技巧</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/UDF实例/" itemprop="url" rel="index"><span itemprop="name">UDF实例</span></a></span>
 
                 
                 
@@ -454,8 +482,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent技巧/Fluent中的脚本文件/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent技巧/Fluent中的脚本文件/" itemprop="commentCount"></span>
+                <a href="/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/16/UDF实例/【UDF实例】03：温度相关的粘度/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -491,234 +519,103 @@
       
 
       
-        <p>在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。</p>
-<h1 id="1-脚本文件"><a href="#1-脚本文件" class="headerlink" title="1 脚本文件"></a>1 脚本文件</h1><p>利用Fluent菜单<strong>File → Write → Start Journal…</strong>可以开始录制jou文件。</p>
-<blockquote>
-<p>注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。</p>
-</blockquote>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/48866724.jpg" alt=""></p>
-<h1 id="2-脚本文件"><a href="#2-脚本文件" class="headerlink" title="2 脚本文件"></a>2 脚本文件</h1><p>Fluent脚本文件利用Scheme语言。</p>
-<p>如下图所示为抓取的某脚本文件片段。熟悉Scheme语言的话读起来非常简单。</p>
-<p>比如文件中的1、2行表示打开菜单项Read Mesh，读取网格文件pipe.msh。</p>
-<p>4、5行表示打开Scale对话框，其中并未进行任何操作，之后关闭该对话框。</p>
-<p>8~20行表示选择湍流模型为Realizable k-epsilon模型。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/88390776.jpg" alt=""></p>
-<blockquote>
-<p>如果没有参数化需求的话，仅仅只是录制脚本文件方便重复性工作，那么脚本文件通常不需要修改。若要进行参数化处理，则可以编辑脚本文件使其更加简洁。当用户对scheme语法非常熟悉时，甚至可以利用文本编辑器手动编写脚本文件。</p>
-</blockquote>
-<h1 id="3-脚本文件的使用"><a href="#3-脚本文件的使用" class="headerlink" title="3 脚本文件的使用"></a>3 脚本文件的使用</h1><p>Fluent脚本文件的加载方式主要有三种。</p>
-<p><strong>1、Fluent启动时指定</strong></p>
-<p>如下图所示，在Fluent启动界面中激活选项<strong>Use Journal File</strong>，并指定录制好的脚本文件路径。当点击下方的OK按钮后，Fluent会自动执行脚本文件内容。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/92111775.jpg" alt=""></p>
-<p><strong>2、Fluent中读取脚本文件</strong></p>
-<p>先启动Fluent，在Fluent中利用菜单<strong>File → Read → Journal File</strong>读取脚本文件</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/62111751.jpg" alt=""></p>
-<p><strong>3、命令行中读取脚本文件</strong></p>
-<p>这种方式在服务器中经常会使用。当Fluent GUI不方便开启时，利用命令行方式运行是比较常用的方式。</p>
-<p>在命令行中启动Fluent的方式很多，具体参见Fluent文档中<strong>Getting Started Guide</strong>部分的4.1.4节。</p>
-<p>命令形式如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H:\jour&gt;"D:\Program Files\ANSYS Inc\v181\fluent\ntbin\win64\fluent.exe" 3d -t6 -i h:\jour\pipe</span><br></pre></td></tr></table></figure>
-<p>启动cmd后，利用cd命令进入当前工作路径，只用利用命令参数-i带上journal文件。</p>
-<blockquote>
-<p>注意：若想要在无GUI界面下运行Fluent脚本，则相应的脚本必须全部使用TUI命令，不允许出现任何GUI操作语句。</p>
-</blockquote>
-<p>关于命令行运行参数，如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数选项</th>
-<th>平台</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-act</td>
-<td>全平台</td>
-<td>Fluent启动时加载ACT</td>
-</tr>
-<tr>
-<td style="text-align:left">-aas</td>
-<td>全平台</td>
-<td>以服务器形式启动Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-affinity=x</td>
-<td>全平台</td>
-<td>指定进程绑定设置</td>
-</tr>
-<tr>
-<td style="text-align:left">-cc</td>
-<td>全平台</td>
-<td>使用经典颜色设置</td>
-</tr>
-<tr>
-<td style="text-align:left">-ccp x</td>
-<td>windows平台</td>
-<td>使用microsoft job Scheduler，参数中的x为头结点名称</td>
-</tr>
-<tr>
-<td style="text-align:left">-cflush</td>
-<td>Linux平台</td>
-<td>确保文件缓存被写入</td>
-</tr>
-<tr>
-<td style="text-align:left">-cnf=x</td>
-<td>全平台</td>
-<td>多机并行参数，x为主机列表或列表文件</td>
-</tr>
-<tr>
-<td style="text-align:left">-driver</td>
-<td>全平台</td>
-<td>指定图形驱动（Linux平台下- opengl、x11或null，windows平台下为msw或null）</td>
-</tr>
-<tr>
-<td style="text-align:left">-env</td>
-<td>全平台</td>
-<td>显示环境变量</td>
-</tr>
-<tr>
-<td style="text-align:left">-g</td>
-<td>全平台</td>
-<td>以GUI或图形界面形式运行Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-gpgpu=ngpgpus</td>
-<td>Linux或win64</td>
-<td>指定每台机器的GPGPU数量，仅用于并行计算</td>
-</tr>
-<tr>
-<td style="text-align:left">-gr</td>
-<td>全平台</td>
-<td>无图形界面运行Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-gu</td>
-<td>全平台</td>
-<td>有图形界面但无GUI的方式启动Fluent，可以在此模式下操作图形对象</td>
-</tr>
-<tr>
-<td style="text-align:left">-help</td>
-<td>全平台</td>
-<td>显示命令参数描述</td>
-</tr>
-<tr>
-<td style="text-align:left">-hidden</td>
-<td>windows</td>
-<td>以最小化形式运行Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-host_ip=host:ip</td>
-<td>linux</td>
-<td>指定主机的ip地址</td>
-</tr>
-<tr>
-<td style="text-align:left">-i journal</td>
-<td>全平台</td>
-<td>读取指定的脚本文件</td>
-</tr>
-<tr>
-<td style="text-align:left">-lsf</td>
-<td>Linux</td>
-<td>使用LSF运行Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-meshing</td>
-<td>全平台</td>
-<td>以Meshing模式运行Fluent（必须指定3d或3ddp）</td>
-</tr>
-<tr>
-<td style="text-align:left">-mpi=mpi_name</td>
-<td>全平台</td>
-<td>指定mpi信息</td>
-</tr>
-<tr>
-<td style="text-align:left">-mpiopt=”x”</td>
-<td>Linux</td>
-<td>指定额外的mpi标志</td>
-</tr>
-<tr>
-<td style="text-align:left">-mpitest</td>
-<td>全平台</td>
-<td>启动MPI程序收集网络性能数据，并将打印显示信息</td>
-</tr>
-<tr>
-<td style="text-align:left">-nm</td>
-<td>全平台</td>
-<td>在读取网格后不显示网格</td>
-</tr>
-<tr>
-<td style="text-align:left">-pbs</td>
-<td>Linux</td>
-<td>在PBS系统下运行Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-pcheck</td>
-<td>Liunx</td>
-<td>检查所有的节点</td>
-</tr>
-<tr>
-<td style="text-align:left">-post</td>
-<td>全平台</td>
-<td>仅以后处理模式启动Fluent</td>
-</tr>
-<tr>
-<td style="text-align:left">-r</td>
-<td>全平台</td>
-<td>列举当前路径下安装的所有版本</td>
-</tr>
-<tr>
-<td style="text-align:left">-rsh</td>
-<td>全平台</td>
-<td>使用rsh作为远程连接方式</td>
-</tr>
-<tr>
-<td style="text-align:left">-rsh=\&lt;command></td>
-<td>windows</td>
-<td>指定rsh命令参数</td>
-</tr>
-<tr>
-<td style="text-align:left">-rx</td>
-<td>全平台</td>
-<td>指定运行的Fluent版本</td>
-</tr>
-<tr>
-<td style="text-align:left">-schost=x</td>
-<td>全平台</td>
-<td>指定System Coupling的主机名（替换x）</td>
-</tr>
-<tr>
-<td style="text-align:left">-scid=y</td>
-<td>全平台</td>
-<td>指定System Coupling的会话id（替换y）</td>
-</tr>
-<tr>
-<td style="text-align:left">-sclic=x</td>
-<td>全平台</td>
-<td>指定System Coupling的主机license（替换x）</td>
-</tr>
-<tr>
-<td style="text-align:left">-scport=y</td>
-<td>全平台</td>
-<td>指定System Coupling的主机端口号（替换y）</td>
-</tr>
-<tr>
-<td style="text-align:left">-scname=z</td>
-<td>全平台</td>
-<td>指定System Coupling的名称（替换z)</td>
-</tr>
-<tr>
-<td style="text-align:left">-tx</td>
-<td>全平台</td>
-<td>指定参与计算的CPU数量（替换x）</td>
-</tr>
-<tr>
-<td style="text-align:left">-tmx</td>
-<td>全平台</td>
-<td>指定用于meshing的CPU数量（替换x)</td>
-</tr>
-</tbody>
-</table>
+        <h1 id="1-案例描述"><a href="#1-案例描述" class="headerlink" title="1 案例描述"></a>1 案例描述</h1><p>本案例计算模型如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/20072836.jpg" alt=""></p>
+<p>几何采用对称模型，上壁面被分为2部分，其中一部分温度为290K，另一部分温度280K。入口速度0.001 m/s，温度290K。计算介质为液态金属，其粘度与温度相关，其粘度表示为：<br>$$<br>\mu =\begin{cases}<br>    5.5\times 10^{-3} &amp;    ,T&gt;288K    \<br>    143.2135-0.49725T &amp;        ,286 \le T \le 288K \<br>    1&amp;    ,T &lt; 286 K    \<br>\end{cases}<br>$$<br>采用UDF红DEFINE_PPROPERTY定义粘度：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">DEFINE_PROPERTY(user_vis, cell, thread)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">float</span> temp, mu;</span><br><span class="line">  temp = C_T(cell, thread);</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> ( temp &gt; <span class="number">288.</span> )</span><br><span class="line">          mu = <span class="number">5.5e-3</span>;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> ( temp &gt;= <span class="number">286.</span> )</span><br><span class="line">          mu = <span class="number">143.2135</span> - <span class="number">0.49725</span> * temp;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">          mu = <span class="number">1.0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> mu;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>源文件中C_T宏为获取单元的温度。</p>
+<h1 id="2-读取网格"><a href="#2-读取网格" class="headerlink" title="2 读取网格"></a>2 读取网格</h1><ul>
+<li>以<strong>2D</strong>方式Fluent</li>
+<li>利用菜单<strong>File → Read → Mesh…</strong>读取网格文件</li>
+</ul>
+<p>本案例网格模型较为简单，如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/58399670.jpg" alt=""></p>
+<h1 id="3-开启能量方程"><a href="#3-开启能量方程" class="headerlink" title="3 开启能量方程"></a>3 开启能量方程</h1><ul>
+<li>右键点击模型树节点<strong>Setup &gt; Models &gt; Energy</strong>，选择弹出菜单<strong>On</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/55005109.jpg" alt=""></p>
+<h1 id="4-加载UDF"><a href="#4-加载UDF" class="headerlink" title="4 加载UDF"></a>4 加载UDF</h1><p>本UDF可以采用解释方式加载运行。</p>
+<ul>
+<li>右键点击模型树节点<strong>Parameters &amp; Customization &gt; User Defined Functions &gt; Interpreted…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/50838381.jpg" alt=""></p>
+<ul>
+<li>在弹出的对话框中点击<strong>Browse</strong>按钮加载UDF文件viscosity.c</li>
+<li>点击按钮<strong>Interpret</strong>解释UDF并加载</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/56745953.jpg" alt=""></p>
+<h1 id="5-添加材料"><a href="#5-添加材料" class="headerlink" title="5 添加材料"></a>5 添加材料</h1><ul>
+<li>鼠标右键点击模型树节点<strong>Materials &gt; Fluid</strong>，选择弹出菜单<strong>New…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/94652447.jpg" alt=""></p>
+<ul>
+<li>在弹出的对话框中，设置<strong>Name</strong>为<strong>liquid_metal</strong></li>
+<li>设置<strong>Density</strong>为<strong>8000 kg/m3</strong></li>
+<li>设置<strong>Cp</strong>为<strong>680 j/kg-k</strong></li>
+<li>设置<strong>Thermal Conductivity</strong>为<strong>30 w/m-k</strong></li>
+<li>设置<strong>Viscosity</strong>为<strong>user-defined</strong>，并选择前面加载的udf</li>
+<li>点击按钮<strong>Change/Create</strong>创建材料</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/3728706.jpg" alt=""></p>
+<h1 id="6-Cell-Zone-Conditions"><a href="#6-Cell-Zone-Conditions" class="headerlink" title="6 Cell Zone Conditions"></a>6 Cell Zone Conditions</h1><p>设置区域内的材料。</p>
+<ul>
+<li>右键点击模型树节点<strong>Cell Zone Conditions &gt; fluid-8</strong>，选择弹出菜单<strong>Edit…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/62723033.jpg" alt=""></p>
+<ul>
+<li>在弹出的菜单中选<strong>Material Name</strong>为<strong>liquid_metal</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/78215629.jpg" alt=""></p>
+<h1 id="7-设置边界条件"><a href="#7-设置边界条件" class="headerlink" title="7 设置边界条件"></a>7 设置边界条件</h1><p><strong>1、wall-2</strong></p>
+<ul>
+<li>右键点击模型树节点<strong>Boundary Conditions &gt; wall-2</strong>，选择菜单项<strong>Edit…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/90665389.jpg" alt=""></p>
+<ul>
+<li>弹出的对话框中，设置<strong>Thermal</strong>标签页下<strong>Thermal Conditions</strong>为<strong>Temperature</strong>，设置<strong>Termperature</strong>为<strong>280 K</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/72924842.jpg" alt=""></p>
+<p><strong>2、 wall-3</strong></p>
+<p>采用相同的方式，设置wall-3边界的温度为<strong>290K</strong></p>
+<p><strong>3、Velocity-inlet-6</strong></p>
+<ul>
+<li>设置其速度为<strong>0.001 m/s</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/92340818.jpg" alt=""></p>
+<ul>
+<li>设置其温度为<strong>290 K</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/88157707.jpg" alt=""></p>
+<p><strong>4、pressure-outlet-7</strong></p>
+<ul>
+<li>设置其<strong>Backflow Total Temperature</strong>为<strong>290 K</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/18785148.jpg" alt=""></p>
+<h1 id="8-初始化"><a href="#8-初始化" class="headerlink" title="8 初始化"></a>8 初始化</h1><ul>
+<li>右键点击模型树节点<strong>Solution &gt; Initialization</strong>，选择菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/91983380.jpg" alt=""></p>
+<h1 id="9-进行计算"><a href="#9-进行计算" class="headerlink" title="9 进行计算"></a>9 进行计算</h1><ul>
+<li>双击模型树节点<strong>Run Calculation</strong></li>
+<li>右侧面板中设置<strong>Number of Iterations</strong>为<strong>300</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/38967303.jpg" alt=""></p>
+<p>计算在173步收敛到1e-3。计算残差如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/78352818.jpg" alt=""></p>
+<h1 id="10-后处理"><a href="#10-后处理" class="headerlink" title="10 后处理"></a>10 后处理</h1><p>查看粘度分布。</p>
+<ul>
+<li>右键点击模型树节点<strong>Results &gt; Graphics &gt; Contours</strong>，选择菜单项<strong>Edit…</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/22081214.jpg" alt=""></p>
+<ul>
+<li>在弹出的对话框中设置<strong>contours of</strong>为<strong>Properties…</strong>及<strong>Molecular Viscosity</strong></li>
+<li>点击<strong>Save/Display</strong>按钮显示粘度云图分布</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/73458489.jpg" alt=""></p>
+<p>摩尔粘度分布如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-31/38394102.jpg" alt=""></p>
 
       
     </div>
@@ -785,7 +682,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Fluent技巧/" rel="tag"># Fluent技巧</a>
+            <a href="/tags/UDF实例/" rel="tag"># UDF实例</a>
           
         </div>
       
@@ -818,8 +715,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【8】：编译型UDF/" rel="next" title="Fluent UDF【8】：编译型UDF">
-                <i class="fa fa-chevron-left"></i> Fluent UDF【8】：编译型UDF
+              <a href="/2018/10/16/UDF实例/【UDF实例】02：壁面温度分布/" rel="next" title="【UDF实例】02：壁面温度分布">
+                <i class="fa fa-chevron-left"></i> 【UDF实例】02：壁面温度分布
               </a>
             
           </div>
@@ -828,8 +725,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【9】：节点数据访问宏/" rel="prev" title="Fluent UDF【9】：节点数据访问宏">
-                Fluent UDF【9】：节点数据访问宏 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/16/UDF实例/【UDF实例】04：振动的薄膜/" rel="prev" title="【UDF实例】04：振动的薄膜">
+                【UDF实例】04：振动的薄膜 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1035,7 +932,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-脚本文件"><span class="nav-text">1 脚本文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-脚本文件"><span class="nav-text">2 脚本文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-脚本文件的使用"><span class="nav-text">3 脚本文件的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-案例描述"><span class="nav-text">1 案例描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-读取网格"><span class="nav-text">2 读取网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开启能量方程"><span class="nav-text">3 开启能量方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-加载UDF"><span class="nav-text">4 加载UDF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-添加材料"><span class="nav-text">5 添加材料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Cell-Zone-Conditions"><span class="nav-text">6 Cell Zone Conditions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-设置边界条件"><span class="nav-text">7 设置边界条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-初始化"><span class="nav-text">8 初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-进行计算"><span class="nav-text">9 进行计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-后处理"><span class="nav-text">10 后处理</span></a></li></ol></div>
             
 
           </div>

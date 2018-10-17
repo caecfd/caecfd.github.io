@@ -169,27 +169,30 @@
 
 
 
-  <meta name="description" content="1 介绍本案例演示如何利用udf解决动网格问题。计算几何如下图所示。 模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。  2 UDF案例中利用到的UDF包括： 1234567891011121314151617181920212223242">
-<meta name="keywords" content="UDF实例">
+  <meta name="description" content="在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。 1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。  注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。   2 脚本文">
+<meta name="keywords" content="Fluent技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【UDF实例】04：振动的薄膜">
-<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】04：振动的薄膜/index.html">
+<meta property="og:title" content="Fluent中的脚本文件">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent技巧/Fluent中的脚本文件/index.html">
 <meta property="og:site_name" content="CFDer club">
-<meta property="og:description" content="1 介绍本案例演示如何利用udf解决动网格问题。计算几何如下图所示。 模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。  2 UDF案例中利用到的UDF包括： 1234567891011121314151617181920212223242">
+<meta property="og:description" content="在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。 1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。  注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。   2 脚本文">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-9-7/82840719.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:22:53.208Z">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/48866724.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/88390776.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/92111775.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/62111751.jpg">
+<meta property="og:updated_time" content="2018-10-17T17:34:37.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【UDF实例】04：振动的薄膜">
-<meta name="twitter:description" content="1 介绍本案例演示如何利用udf解决动网格问题。计算几何如下图所示。 模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。  2 UDF案例中利用到的UDF包括： 1234567891011121314151617181920212223242">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-9-7/82840719.jpg">
+<meta name="twitter:title" content="Fluent中的脚本文件">
+<meta name="twitter:description" content="在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。 1 脚本文件利用Fluent菜单File → Write → Start Journal…可以开始录制jou文件。  注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。   2 脚本文">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-10-19/48866724.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】04：振动的薄膜/"/>
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent技巧/Fluent中的脚本文件/"/>
 
 
 
@@ -199,7 +202,7 @@
   };
 </script>
 
-  <title>【UDF实例】04：振动的薄膜 | CFDer club</title>
+  <title>Fluent中的脚本文件 | CFDer club</title>
   
 
 
@@ -372,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/UDF实例/【UDF实例】04：振动的薄膜/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent技巧/Fluent中的脚本文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -389,7 +392,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【UDF实例】04：振动的薄膜
+          <h2 class="post-title" itemprop="name headline">Fluent中的脚本文件
               
             
           </h2>
@@ -414,12 +417,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:58:00 / 修改时间：01:22:53" itemprop="dateCreated datePublished" datetime="2018-10-18T00:58:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-17 00:29:00" itemprop="dateCreated datePublished" datetime="2018-10-17T00:29:00+08:00">2018-10-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-18 01:34:37" itemprop="dateModified" datetime="2018-10-18T01:34:37+08:00">2018-10-18</time>
               
             
           </span>
@@ -436,7 +451,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/UDF实例/" itemprop="url" rel="index"><span itemprop="name">UDF实例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent技巧/" itemprop="url" rel="index"><span itemprop="name">Fluent技巧</span></a></span>
 
                 
                 
@@ -451,8 +466,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/UDF实例/【UDF实例】04：振动的薄膜/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/UDF实例/【UDF实例】04：振动的薄膜/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent技巧/Fluent中的脚本文件/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent技巧/Fluent中的脚本文件/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -488,11 +503,234 @@
       
 
       
-        <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h1><p>本案例演示如何利用udf解决动网格问题。计算几何如下图所示。</p>
-<p>模型中，边界wall-butterfly为旋转边界，其旋转速度利用UDF宏DEFINE_CG_MOTION进行指定。边界membrance为变形边界，采用UDF宏DEFINE_GRID_MOTION进行指定。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-9-7/82840719.jpg" alt=""></p>
-<h1 id="2-UDF"><a href="#2-UDF" class="headerlink" title="2 UDF"></a>2 UDF</h1><p>案例中利用到的UDF包括：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> R 0.109 <span class="comment">/* radius of the arc, meters */</span></span></span><br><span class="line"> </span><br><span class="line">DEFINE_CG_MOTION(flex, dt, cg_vel, cg_omega, time, dtime)</span><br><span class="line">&#123;</span><br><span class="line">  cg_omega[<span class="number">2</span>] = <span class="number">1.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">DEFINE_GRID_MOTION(moving_arc, domain, dt, time, dtime)</span><br><span class="line">&#123;</span><br><span class="line">  Thread *tf = DT_THREAD (dt);</span><br><span class="line">  <span class="keyword">face_t</span> f;</span><br><span class="line">  Node *node_p;</span><br><span class="line">  real alpha, theta, x, ymag, yfull, y;</span><br><span class="line">  <span class="keyword">int</span> n;</span><br><span class="line">  SET_DEFORMING_THREAD_FLAG (THREAD_T0 (tf));</span><br><span class="line">  alpha = omega * CURRENT_TIME;</span><br><span class="line">  theta = <span class="number">2.0</span> * alpha + <span class="number">3.0</span> * M_PI / <span class="number">2.0</span>;</span><br><span class="line">  begin_f_loop (f, tf)</span><br><span class="line">  &#123;</span><br><span class="line">      f_node_loop (f, tf, n)</span><br><span class="line">      &#123;</span><br><span class="line">          node_p = F_NODE (f, tf, n);</span><br><span class="line">        <span class="keyword">if</span> (NODE_POS_NEED_UPDATE (node_p))</span><br><span class="line">        &#123;</span><br><span class="line">            NODE_POS_UPDATED (node_p);</span><br><span class="line">            x = NODE_X (node_p);</span><br><span class="line">            ymag = <span class="built_in">sqrt</span> (R*R - x*x) + <span class="number">0.03</span>;</span><br><span class="line">            yfull = ymag - <span class="number">0.1</span>;</span><br><span class="line">            y = - <span class="number">0.1</span> + yfull * <span class="built_in">sin</span>(theta);</span><br><span class="line">            NODE_Y (node_p) = y;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  end_f_loop (f, tf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>在Fluent中应用脚本文件不仅可以提高工作效率，而且针对脚本文件可以进行参数化处理，实现仿真优化。</p>
+<h1 id="1-脚本文件"><a href="#1-脚本文件" class="headerlink" title="1 脚本文件"></a>1 脚本文件</h1><p>利用Fluent菜单<strong>File → Write → Start Journal…</strong>可以开始录制jou文件。</p>
+<blockquote>
+<p>注意：在点击菜单Start Journal之后，用户的任何操作都会被记录到脚本文件中，为了防止脚本文件记录过多的无用操作，在操作Fluent的过程中，尽量简单直接。</p>
+</blockquote>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/48866724.jpg" alt=""></p>
+<h1 id="2-脚本文件"><a href="#2-脚本文件" class="headerlink" title="2 脚本文件"></a>2 脚本文件</h1><p>Fluent脚本文件利用Scheme语言。</p>
+<p>如下图所示为抓取的某脚本文件片段。熟悉Scheme语言的话读起来非常简单。</p>
+<p>比如文件中的1、2行表示打开菜单项Read Mesh，读取网格文件pipe.msh。</p>
+<p>4、5行表示打开Scale对话框，其中并未进行任何操作，之后关闭该对话框。</p>
+<p>8~20行表示选择湍流模型为Realizable k-epsilon模型。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/88390776.jpg" alt=""></p>
+<blockquote>
+<p>如果没有参数化需求的话，仅仅只是录制脚本文件方便重复性工作，那么脚本文件通常不需要修改。若要进行参数化处理，则可以编辑脚本文件使其更加简洁。当用户对scheme语法非常熟悉时，甚至可以利用文本编辑器手动编写脚本文件。</p>
+</blockquote>
+<h1 id="3-脚本文件的使用"><a href="#3-脚本文件的使用" class="headerlink" title="3 脚本文件的使用"></a>3 脚本文件的使用</h1><p>Fluent脚本文件的加载方式主要有三种。</p>
+<p><strong>1、Fluent启动时指定</strong></p>
+<p>如下图所示，在Fluent启动界面中激活选项<strong>Use Journal File</strong>，并指定录制好的脚本文件路径。当点击下方的OK按钮后，Fluent会自动执行脚本文件内容。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/92111775.jpg" alt=""></p>
+<p><strong>2、Fluent中读取脚本文件</strong></p>
+<p>先启动Fluent，在Fluent中利用菜单<strong>File → Read → Journal File</strong>读取脚本文件</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/17-10-19/62111751.jpg" alt=""></p>
+<p><strong>3、命令行中读取脚本文件</strong></p>
+<p>这种方式在服务器中经常会使用。当Fluent GUI不方便开启时，利用命令行方式运行是比较常用的方式。</p>
+<p>在命令行中启动Fluent的方式很多，具体参见Fluent文档中<strong>Getting Started Guide</strong>部分的4.1.4节。</p>
+<p>命令形式如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H:\jour&gt;"D:\Program Files\ANSYS Inc\v181\fluent\ntbin\win64\fluent.exe" 3d -t6 -i h:\jour\pipe</span><br></pre></td></tr></table></figure>
+<p>启动cmd后，利用cd命令进入当前工作路径，只用利用命令参数-i带上journal文件。</p>
+<blockquote>
+<p>注意：若想要在无GUI界面下运行Fluent脚本，则相应的脚本必须全部使用TUI命令，不允许出现任何GUI操作语句。</p>
+</blockquote>
+<p>关于命令行运行参数，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数选项</th>
+<th>平台</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-act</td>
+<td>全平台</td>
+<td>Fluent启动时加载ACT</td>
+</tr>
+<tr>
+<td style="text-align:left">-aas</td>
+<td>全平台</td>
+<td>以服务器形式启动Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-affinity=x</td>
+<td>全平台</td>
+<td>指定进程绑定设置</td>
+</tr>
+<tr>
+<td style="text-align:left">-cc</td>
+<td>全平台</td>
+<td>使用经典颜色设置</td>
+</tr>
+<tr>
+<td style="text-align:left">-ccp x</td>
+<td>windows平台</td>
+<td>使用microsoft job Scheduler，参数中的x为头结点名称</td>
+</tr>
+<tr>
+<td style="text-align:left">-cflush</td>
+<td>Linux平台</td>
+<td>确保文件缓存被写入</td>
+</tr>
+<tr>
+<td style="text-align:left">-cnf=x</td>
+<td>全平台</td>
+<td>多机并行参数，x为主机列表或列表文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-driver</td>
+<td>全平台</td>
+<td>指定图形驱动（Linux平台下- opengl、x11或null，windows平台下为msw或null）</td>
+</tr>
+<tr>
+<td style="text-align:left">-env</td>
+<td>全平台</td>
+<td>显示环境变量</td>
+</tr>
+<tr>
+<td style="text-align:left">-g</td>
+<td>全平台</td>
+<td>以GUI或图形界面形式运行Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-gpgpu=ngpgpus</td>
+<td>Linux或win64</td>
+<td>指定每台机器的GPGPU数量，仅用于并行计算</td>
+</tr>
+<tr>
+<td style="text-align:left">-gr</td>
+<td>全平台</td>
+<td>无图形界面运行Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-gu</td>
+<td>全平台</td>
+<td>有图形界面但无GUI的方式启动Fluent，可以在此模式下操作图形对象</td>
+</tr>
+<tr>
+<td style="text-align:left">-help</td>
+<td>全平台</td>
+<td>显示命令参数描述</td>
+</tr>
+<tr>
+<td style="text-align:left">-hidden</td>
+<td>windows</td>
+<td>以最小化形式运行Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-host_ip=host:ip</td>
+<td>linux</td>
+<td>指定主机的ip地址</td>
+</tr>
+<tr>
+<td style="text-align:left">-i journal</td>
+<td>全平台</td>
+<td>读取指定的脚本文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-lsf</td>
+<td>Linux</td>
+<td>使用LSF运行Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-meshing</td>
+<td>全平台</td>
+<td>以Meshing模式运行Fluent（必须指定3d或3ddp）</td>
+</tr>
+<tr>
+<td style="text-align:left">-mpi=mpi_name</td>
+<td>全平台</td>
+<td>指定mpi信息</td>
+</tr>
+<tr>
+<td style="text-align:left">-mpiopt=”x”</td>
+<td>Linux</td>
+<td>指定额外的mpi标志</td>
+</tr>
+<tr>
+<td style="text-align:left">-mpitest</td>
+<td>全平台</td>
+<td>启动MPI程序收集网络性能数据，并将打印显示信息</td>
+</tr>
+<tr>
+<td style="text-align:left">-nm</td>
+<td>全平台</td>
+<td>在读取网格后不显示网格</td>
+</tr>
+<tr>
+<td style="text-align:left">-pbs</td>
+<td>Linux</td>
+<td>在PBS系统下运行Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-pcheck</td>
+<td>Liunx</td>
+<td>检查所有的节点</td>
+</tr>
+<tr>
+<td style="text-align:left">-post</td>
+<td>全平台</td>
+<td>仅以后处理模式启动Fluent</td>
+</tr>
+<tr>
+<td style="text-align:left">-r</td>
+<td>全平台</td>
+<td>列举当前路径下安装的所有版本</td>
+</tr>
+<tr>
+<td style="text-align:left">-rsh</td>
+<td>全平台</td>
+<td>使用rsh作为远程连接方式</td>
+</tr>
+<tr>
+<td style="text-align:left">-rsh=\&lt;command></td>
+<td>windows</td>
+<td>指定rsh命令参数</td>
+</tr>
+<tr>
+<td style="text-align:left">-rx</td>
+<td>全平台</td>
+<td>指定运行的Fluent版本</td>
+</tr>
+<tr>
+<td style="text-align:left">-schost=x</td>
+<td>全平台</td>
+<td>指定System Coupling的主机名（替换x）</td>
+</tr>
+<tr>
+<td style="text-align:left">-scid=y</td>
+<td>全平台</td>
+<td>指定System Coupling的会话id（替换y）</td>
+</tr>
+<tr>
+<td style="text-align:left">-sclic=x</td>
+<td>全平台</td>
+<td>指定System Coupling的主机license（替换x）</td>
+</tr>
+<tr>
+<td style="text-align:left">-scport=y</td>
+<td>全平台</td>
+<td>指定System Coupling的主机端口号（替换y）</td>
+</tr>
+<tr>
+<td style="text-align:left">-scname=z</td>
+<td>全平台</td>
+<td>指定System Coupling的名称（替换z)</td>
+</tr>
+<tr>
+<td style="text-align:left">-tx</td>
+<td>全平台</td>
+<td>指定参与计算的CPU数量（替换x）</td>
+</tr>
+<tr>
+<td style="text-align:left">-tmx</td>
+<td>全平台</td>
+<td>指定用于meshing的CPU数量（替换x)</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -559,7 +797,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/UDF实例/" rel="tag"># UDF实例</a>
+            <a href="/tags/Fluent技巧/" rel="tag"># Fluent技巧</a>
           
         </div>
       
@@ -592,8 +830,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/18/UDF实例/【UDF实例】03：温度相关的粘度/" rel="next" title="【UDF实例】03：温度相关的粘度">
-                <i class="fa fa-chevron-left"></i> 【UDF实例】03：温度相关的粘度
+              <a href="/2018/10/16/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/" rel="next" title="【Fluent GUI】10：添加菜单改变图形窗口颜色">
+                <i class="fa fa-chevron-left"></i> 【Fluent GUI】10：添加菜单改变图形窗口颜色
               </a>
             
           </div>
@@ -602,8 +840,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/18/UDF实例/【UDF实例】05：UDS污水沉降/" rel="prev" title="【UDF实例】05：UDS污水沉降">
-                【UDF实例】05：UDS污水沉降 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/17/Fluent技巧/养成良好的Fluent使用习惯/" rel="prev" title="养成良好的Fluent使用习惯">
+                养成良好的Fluent使用习惯 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -809,7 +1047,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-介绍"><span class="nav-text">1 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-UDF"><span class="nav-text">2 UDF</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-脚本文件"><span class="nav-text">1 脚本文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-脚本文件"><span class="nav-text">2 脚本文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-脚本文件的使用"><span class="nav-text">3 脚本文件的使用</span></a></li></ol></div>
             
 
           </div>
