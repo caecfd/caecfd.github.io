@@ -1676,7 +1676,7 @@ pre .javascript .function {
   font-style: normal;
   font-variant: normal;
   font-stretch: normal;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Microsoft Yahei";
   background: #f44336;
 }
@@ -1997,7 +1997,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d4ff18;
+  background: #58ff12;
 }
 .links-of-blogroll {
   font-size: 13px;
