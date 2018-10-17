@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例演示利用Fluent求解计算自然对流问题。 1 案例描述两个无限长同心圆柱体，其中小圆柱半径1.78 cm，壁面温度306.3 K，大圆柱半径1.628 cm，壁面温度293.7 K，计算由于壁面温度差异引起两圆柱间的环形空间内自然对流情况。几何模型尺寸如图所示。  本案例采用2D模型进行计算，考虑几何与流场的对称性，采用1/2模型进行计算。 计算域中介质材料为空气，其物理属性如表所示。">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent热分析】02：管内自然对流">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="本案例演示利用Fluent求解计算自然对流问题。 1 案例描述两个无限长同心圆柱体，其中小圆柱半径1.78 cm，壁面温度306.3 K，大圆柱半径1.628 cm，壁面温度293.7 K，计算由于壁面温度差异引起两圆柱间的环形空间内自然对流情况。几何模型尺寸如图所示。  本案例采用2D模型进行计算，考虑几何与流场的对称性，采用1/2模型进行计算。 计算域中介质材料为空气，其物理属性如表所示。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-2/84912047.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-2/10534277.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/92439160.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/92926633.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/67794132.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/22454716.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/42969120.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/2297630.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/88177185.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/13468651.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/87538757.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/29781021.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/47263057.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/57503409.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/99396112.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/84835527.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-3/98253580.jpg">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent热分析】02：管内自然对流">
+<meta name="twitter:description" content="本案例演示利用Fluent求解计算自然对流问题。 1 案例描述两个无限长同心圆柱体，其中小圆柱半径1.78 cm，壁面温度306.3 K，大圆柱半径1.628 cm，壁面温度293.7 K，计算由于壁面温度差异引起两圆柱间的环形空间内自然对流情况。几何模型尺寸如图所示。  本案例采用2D模型进行计算，考虑几何与流场的对称性，采用1/2模型进行计算。 计算域中介质材料为空气，其物理属性如表所示。">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-2/84912047.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent热分析】02：管内自然对流 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent热分析】02：管内自然对流
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:34:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:34:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例演示利用Fluent求解计算自然对流问题。</p>
+<h1 id="1-案例描述"><a href="#1-案例描述" class="headerlink" title="1 案例描述"></a>1 案例描述</h1><p>两个无限长同心圆柱体，其中小圆柱半径1.78 cm，壁面温度306.3 K，大圆柱半径1.628 cm，壁面温度293.7 K，计算由于壁面温度差异引起两圆柱间的环形空间内自然对流情况。几何模型尺寸如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-2/84912047.jpg" alt=""></p>
+<p>本案例采用2D模型进行计算，考虑几何与流场的对称性，采用1/2模型进行计算。</p>
+<p>计算域中介质材料为空气，其物理属性如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>密度（kg/m3)</td>
+<td>1.1614</td>
+</tr>
+<tr>
+<td>动力粘度（Pa.s)</td>
+<td>1.846E-5</td>
+</tr>
+<tr>
+<td>运动粘度（m2/s)</td>
+<td>1.589E-5</td>
+</tr>
+<tr>
+<td>比热（J/kg-K）</td>
+<td>1007.0</td>
+</tr>
+<tr>
+<td>热膨胀系数（1/K）</td>
+<td>0.00333</td>
+</tr>
+<tr>
+<td>热传导系数（W/m-K)</td>
+<td>0.0263</td>
+</tr>
+<tr>
+<td>热扩散率（m2/s）</td>
+<td>2.249E-5</td>
+</tr>
+</tbody>
+</table>
+<p>案例参数基于实验数据，相应的瑞利数约为2.66E-4。</p>
+<h1 id="2-几何建模"><a href="#2-几何建模" class="headerlink" title="2 几何建模"></a>2 几何建模</h1><p>本案例模型在DM中进行创建。</p>
+<ul>
+<li>启动Workbench，添加模块<strong>Fluid Flow(fluent)</strong></li>
+<li>右键选择<strong>A2</strong>单元格，点击弹出菜单项<strong>New DesignModeler Geometry…</strong>进入DM模块</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-2/10534277.jpg" alt=""></p>
+<ul>
+<li>在<strong>XYPlane</strong>上创建如下图所示草图</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/92439160.jpg" alt=""></p>
+<ul>
+<li>选择菜单<strong>Concept → Surface from Sketches</strong>，属性窗口中设置<strong>Base Objects</strong>为前一步创建的草图，点击工具栏按钮<strong>Generate</strong>生成几何</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/92926633.jpg" alt=""></p>
+<ul>
+<li>关闭DM模块，返回至Workbench工作界面</li>
+</ul>
+<h1 id="3-网格划分"><a href="#3-网格划分" class="headerlink" title="3 网格划分"></a>3 网格划分</h1><ul>
+<li>双击<strong>A3</strong>单元格进入Mesh模块</li>
+<li>右键选择模型树节点<strong>Mesh</strong>，点击弹出菜单<strong>Insert → Sizing</strong>，属性窗口中设置<strong>Geometry</strong>为如图所示的两条半圆弧，设置<strong>Type</strong>为<strong>Number of Divisions</strong>，并设置其参数值为<strong>40</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/67794132.jpg" alt=""></p>
+<ul>
+<li>右键选择模型树节点<strong>Mesh</strong>，点击弹出菜单<strong>Insert → Sizing</strong>，属性窗口中设置<strong>Geometry</strong>为如图所示的两条直边，设置<strong>Type</strong>为<strong>Number of Divisions</strong>，并设置其参数值为<strong>40</strong>，设置<strong>Bias Type</strong>，并设置<strong>Bias Factor</strong>参数值为<strong>10</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/22454716.jpg" alt=""></p>
+<ul>
+<li>右键选择模型树节点<strong>Mesh</strong>，点击弹出菜单<strong>Insert → Face Meshing</strong>，属性窗口中设置<strong>Geometry</strong>为几何面</li>
+<li>右键选择模型树节点<strong>Mesh</strong>，选择<strong>Generate Mesh</strong>生成网格</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/42969120.jpg" alt=""></p>
+<ul>
+<li>边界命名，如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/2297630.jpg" alt=""></p>
+<ul>
+<li>鼠标选中模型树节点<strong>Mesh</strong>，点击工具栏按钮<strong>Update</strong>更新网格</li>
+<li>关闭Mesh模块，返回至Workbench工作界面</li>
+</ul>
+<h1 id="4-Fluent设置"><a href="#4-Fluent设置" class="headerlink" title="4 Fluent设置"></a>4 Fluent设置</h1><ul>
+<li>双击<strong>A4</strong>单元格启动Fluent模块，启动界面中激活选项<strong>Double Precision</strong></li>
+</ul>
+<h2 id="4-1-General设置"><a href="#4-1-General设置" class="headerlink" title="4.1 General设置"></a>4.1 General设置</h2><ul>
+<li>双击模型树节点<strong>General</strong>，右侧面板中激活选项<strong>Gravity</strong></li>
+<li>设置重力加速度为<strong>(0 -9.81)</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/88177185.jpg" alt=""></p>
+<h2 id="4-2-Models设置"><a href="#4-2-Models设置" class="headerlink" title="4.2 Models设置"></a>4.2 Models设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Energy</strong>，选择菜单<strong>On</strong>激活能量方程</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/13468651.jpg" alt=""></p>
+<h2 id="4-3-Materials设置"><a href="#4-3-Materials设置" class="headerlink" title="4.3 Materials设置"></a>4.3 Materials设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Materials &gt; fluid &gt; air</strong>，弹出材料设置对话框，按下图所示进行参数设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/87538757.jpg" alt=""></p>
+<h2 id="4-4-Boundary-Conditions设置"><a href="#4-4-Boundary-Conditions设置" class="headerlink" title="4.4 Boundary Conditions设置"></a>4.4 Boundary Conditions设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inner</strong>，弹出边界设置对话框</li>
+<li>切换至<strong>Thermal</strong>标签页，激活选项<strong>Temperature</strong>，设置温度为<strong>306.3 K</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/29781021.jpg" alt=""></p>
+<ul>
+<li>相同方式设置<strong>outer</strong>边界，设置其温度为<strong>293.7 K</strong></li>
+</ul>
+<h2 id="4-5-Methods设置"><a href="#4-5-Methods设置" class="headerlink" title="4.5 Methods设置"></a>4.5 Methods设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Methods</strong>，右侧面板中设置<strong>Scheme</strong>为<strong>Coupled</strong></li>
+<li>激活选项<strong>Pseudo Transient</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/47263057.jpg" alt=""></p>
+<h2 id="4-6-初始化及计算"><a href="#4-6-初始化及计算" class="headerlink" title="4.6 初始化及计算"></a>4.6 初始化及计算</h2><ul>
+<li>右键选择模型树节点<strong>Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>进行初始化</li>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板设置<strong>Number of Iterations</strong>为<strong>500</strong>，点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/57503409.jpg" alt=""></p>
+<ul>
+<li>计算结束后关闭Fluent返回至Workbench工作窗口</li>
+</ul>
+<h1 id="5-计算后处理"><a href="#5-计算后处理" class="headerlink" title="5 计算后处理"></a>5 计算后处理</h1><ul>
+<li>鼠标双击<strong>A6</strong>单元格进入CFD-Post模块</li>
+</ul>
+<h2 id="5-1-温度分布"><a href="#5-1-温度分布" class="headerlink" title="5.1 温度分布"></a>5.1 温度分布</h2><ul>
+<li>鼠标双击模型树节点<strong>symmetry 1</strong>，下方属性窗口中设置<strong>Mode</strong>为<strong>Variable</strong>，设置<strong>Variable</strong>为<strong>Temperature</strong>，设置<strong>Range</strong>为<strong>Local</strong></li>
+<li>点击下方的<strong>Apply</strong>按钮显示温度分布</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/99396112.jpg" alt=""></p>
+<p>温度分布如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/84835527.jpg" alt=""></p>
+<h2 id="5-2-实验值比较"><a href="#5-2-实验值比较" class="headerlink" title="5.2 实验值比较"></a>5.2 实验值比较</h2><p>计算自然对流过程中的平衡导热率。Kuehn and Goldstein利用实验方式测量了本案例模型的平衡热导率(equivalent  conductivity)  。平衡热导率定义为实际传热量与单纯到热量的比值：<br>$$<br>k_{eq} = \frac{q_{act}}{q_{cond}}<br>$$<br>对于同心圆柱体：<br>$$<br>q_{cond} = \frac{2 \pi k \Delta T}{\ln (R_o / R_i)}<br>$$<br>代入计算参数，可得$q_{cond} = 2.177 W/m$</p>
+<p>计算$q_{act}$可以通过表达式计算：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-3/98253580.jpg" alt=""></p>
+<p>由于是半模型，因此$q_{act} = 2.79825 \times 2 = 5.5965$</p>
+<p>带入上式可得：<br>$$<br>k_{eq} = \frac{5.5965}{2.177}= 2.571<br>$$<br>与实验值相吻合。</p>
+<blockquote>
+<p>参考文献： Kuehn, T. H and Goldstein, R. J. An experimental study of natural convection heat transfer in concentric and eccentric horizontal cylindrical annuli. J. Heat Trans. (100) pp. 635-640, 1978.</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/" rel="next" title="【Fluent热分析】03：换热器">
+                <i class="fa fa-chevron-left"></i> 【Fluent热分析】03：换热器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent运动模型/运动小球-重叠网格/" rel="prev" title="运动小球-重叠网格">
+                运动小球-重叠网格 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-案例描述"><span class="nav-text">1 案例描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-几何建模"><span class="nav-text">2 几何建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-网格划分"><span class="nav-text">3 网格划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Fluent设置"><span class="nav-text">4 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-General设置"><span class="nav-text">4.1 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Models设置"><span class="nav-text">4.2 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Materials设置"><span class="nav-text">4.3 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Boundary-Conditions设置"><span class="nav-text">4.4 Boundary Conditions设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-Methods设置"><span class="nav-text">4.5 Methods设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-初始化及计算"><span class="nav-text">4.6 初始化及计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-计算后处理"><span class="nav-text">5 计算后处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-温度分布"><span class="nav-text">5.1 温度分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-实验值比较"><span class="nav-text">5.2 实验值比较</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -170,15 +170,15 @@
 
 
   <meta name="description" content="应用CFD解决工程流体问题">
-<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CFD Views">
+<meta property="og:title" content="CFDer club">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/index.html">
-<meta property="og:site_name" content="CFD Views">
+<meta property="og:site_name" content="CFDer club">
 <meta property="og:description" content="应用CFD解决工程流体问题">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CFD Views">
+<meta name="twitter:title" content="CFDer club">
 <meta name="twitter:description" content="应用CFD解决工程流体问题">
 
 
@@ -196,7 +196,7 @@
   };
 </script>
 
-  <title>CFD Views</title>
+  <title>CFDer club</title>
   
 
 
@@ -255,7 +255,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">CFD Views</span>
+        <span class="site-title">CFDer club</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -370,16 +370,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -389,8 +389,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="url">
-                  【多相流计算】09：DPM冲蚀计算
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/" itemprop="url">
+                  【Fluent GUI】04：Scheme语言[上]
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：14:06:25" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,18 +484,13 @@
       
         
           
-          1 引子本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。本案例主要展示以下内容：
-
-使用冲蚀模型分析3D弯头中的冲蚀现象
-使用离散相模型
-使用合适的求解参数求解案例
-计算后处理
-
-2 问题描述本案例的几何模型如下图所示。该模型由两个
+          Fluent GUI开发采用Scheme语言来实现。本文简单介绍Scheme语言。
+1 Scheme语言简介以下内容来自维基百科：
+Scheme是一种函数式编程语言，是Lisp的两种主要方言之一（另一种为Common Lisp）。不同于Common Lisp，Scheme遵循极简主义&amp;act
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -554,16 +549,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】03：与UDF通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -573,8 +568,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" itemprop="url">
-                  【多相流计算】06：晃荡的油箱
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】03：与UDF通信/" itemprop="url">
+                  【Fluent GUI】03：与UDF通信
                 </a>
               
             
@@ -600,7 +595,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -622,7 +617,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -637,8 +632,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】03：与UDF通信/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】03：与UDF通信/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -668,12 +663,15 @@
       
         
           
-          本案例演示利用Fluent中的VOF模型仿真计算密闭油箱晃动过程中的自由液面问题。
-1 案例描述汽车在颠簸的道路上行驶时，在变加速度作用下，可能会导致油箱内液面晃动。当晃动极为剧烈时，甚至会造成油泵无法吸取燃油，因此需要利用CFD研究油箱在晃动过程中液面分布情况。为简化计算，本案例采用2D模型，3D
+          前面的例子中，计算工作都是利用Scheme完成的。本案例演示利用Scheme构建界面，利用UDF执行计算。其中核心内容在于Scheme与UDF之间的数据交换。
+
+本案例实际上只包含了将Scheme数据传递给Fluent，并没有搞清楚如何将UDF计算完成的数据传递给Scheme。
+
+完成的界面如下图所
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】03：与UDF通信/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -732,16 +730,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -751,8 +749,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" itemprop="url">
-                  【多相流计算】07：VOF波浪
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/" itemprop="url">
+                  【Fluent GUI】06：对话框与表格
                 </a>
               
             
@@ -778,7 +776,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -800,7 +798,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -815,8 +813,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -846,18 +844,15 @@
       
         
           
-          本案例利用Fluent中的VOF模型模拟波浪。
-1 模型描述计算几何模型如图所示。
+          Fluent GUI具有三层结构：
 
-其中左侧面为入口面，水面标高0.04 m，波高0.155m，波长1.35m。
-模型顶部面为开敞边界，与大气相同。
-2 几何模型本案例几何模型采用外部导入。
-
-启动Workbench，添加Fluid Flow(Flu
+Dialog：最顶层结构，所有的界面元素均放置于Dialog中。利用函数cx-create-panel创建
+Tables：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数cx-create-table创建
+控件 ：实现数据输入及命令响应的
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】06：对话框与表格/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -916,16 +911,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】08：菜单/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -935,8 +930,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" itemprop="url">
-                  【多相流计算】08：Mixture离心泵空化
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】08：菜单/" itemprop="url">
+                  【Fluent GUI】08：菜单
                 </a>
               
             
@@ -962,7 +957,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:55:00 / 修改时间：13:43:54" itemprop="dateCreated datePublished" datetime="2018-10-17T12:55:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -984,7 +979,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -999,8 +994,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】08：菜单/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】08：菜单/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1030,16 +1025,17 @@
       
         
           
-          本案例利用Fluent中的Mixture多相流模型仿真计算离心泵内的空化情况。
-1 案例描述本案例j几何如图所示。
+          本文描述如何在Fluent GUI开发中为软件添加菜单。
+Fluent菜单包括顶级菜单、子菜单以及菜单项。
+1 添加顶级菜单利用函数cx-add-menu可以添加新的顶级菜单。该函数如下：
 
-离心泵入口总压0.6 MPa，出口静压0.2 MPa，叶轮旋转速度1200 RPM。流体域内介质为液态水，其在当前工作条件下饱和蒸汽压为3540 Pa。
-2 导入网格
-启动Fluen
+(cx-add-menu name mnemonic)
+
+函数参数中，name为字符串，为显示在GUI上的菜
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】08：菜单/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1098,16 +1094,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】09：小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1117,8 +1113,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" itemprop="url">
-                  【多相流计算】04：重力驱动流
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】09：小结/" itemprop="url">
+                  【Fluent GUI】09：小结
                 </a>
               
             
@@ -1144,7 +1140,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:54:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:54:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -1166,7 +1162,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -1181,8 +1177,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】09：小结/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】09：小结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1212,19 +1208,17 @@
       
         
           
-          本案例利用Fluent中的VOF模型仿真计算重力驱动下的气液两相流动。
-本案例模型来自于STAR CCM+案例文档。
+          本文描述如何在Fluent GUI开发中为软件添加菜单。
+Fluent菜单包括顶级菜单、子菜单以及菜单项。
+1 添加顶级菜单利用函数cx-add-menu可以添加新的顶级菜单。该函数如下：
 
-1 案例描述
-2 Fluent设置2.1 导入网格
-以2D、Double Precision模式启动Fluent
-利用菜单File → Read → Mesh…导入网格文件
+(cx-add-menu name mnemonic)
 
-2.
+函数参数中，name为字符串，为显示在GUI上的菜
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】09：小结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1283,16 +1277,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1302,8 +1296,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" itemprop="url">
-                  【多相流计算】05：Rayleigh –Taylor不稳定现象模拟
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/" itemprop="url">
+                  【Fluent GUI】10：添加菜单改变图形窗口颜色
                 </a>
               
             
@@ -1329,7 +1323,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:54:00 / 修改时间：12:58:27" itemprop="dateCreated datePublished" datetime="2018-10-17T12:54:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -1351,7 +1345,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -1366,8 +1360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1397,12 +1391,12 @@
       
         
           
-          本案例利用Fluent中的VOF模型模拟Rayleigh–Taylor不稳定现象。
-当两种密度不同的介质放置于同一个容器中，如下图所示，密度大的介质位于密度小的介质上方时，在重力作用下，两相界面会发生不稳定现象，称之为Rayleigh–Taylor不稳定现象，更专业的描述可参阅wIki百科（http
+          在利用Fluent进行后处理的过程中，经常要将图形窗口改成白底黑子的背景。利用TUI命令很容易实现。
+123display/set/colors/color-scheme/classicdisplay/set/colors/background "white"display/set/colors/b
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1461,16 +1455,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1480,8 +1474,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="url">
-                  【OpenFOAM案例】05 圆柱绕流
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/" itemprop="url">
+                  【Fluent GUI】07：控件
                 </a>
               
             
@@ -1507,7 +1501,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -1529,7 +1523,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -1544,8 +1538,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1575,23 +1569,19 @@
       
         
           
-          圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。
-1 目标
-本案例的主要目的为讲解瞬态流动问题仿真
-案例考虑雷诺数为100的圆柱绕流问题，采用层流求解
-案例计算完毕后可以观察到涡脱落现象
+          本文描述Fluent GUI开发中的控件。
+Fluent GUI中的控件类型并不多，主要包括以下几种：
 
-2 计算模型计算模型尺寸如图所示。
-尺寸如表所示。
-
-
-
-Name
-Locatio
+Integer Entry：整形数据输入框
+Real Entry：浮点数据输入框
+Text Entry：字符串输入框
+Check Box：复选框
+Radio Button：单选框
+Button：
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1650,16 +1640,16 @@ Locatio
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】01 elbow/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1669,8 +1659,8 @@ Locatio
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】01 elbow/" itemprop="url">
-                  【OpenFOAM案例】01 elbow
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/" itemprop="url">
+                  【Fluent GUI】05：Scheme语言[下]
                 </a>
               
             
@@ -1696,7 +1686,7 @@ Locatio
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
             
 
             
@@ -1718,7 +1708,7 @@ Locatio
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -1733,8 +1723,8 @@ Locatio
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】01 elbow/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】01 elbow/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1764,13 +1754,12 @@ Locatio
       
         
           
-          本案例演示利用OpenFOAM的icoFoam求解器计算弯曲管道中的混合流动问题。
-1 拷贝tutorials文件启动终端，且拷贝tutorials文件夹中的文件。利用命令:1cp -r $FOAM_TUTORIALS/incompressible/icoFoam/elbow/ $FOAM_RUN
-
+          以下内容来自https://www.ibm.com/developerworks/cn/linux/l-schm/index2.html。
+1 常用结构2.1 顺序结构也可以说成由多个form组成的form，用begin来将多个form放在一对小括号内，最终形成一个form。格式为：(begin f
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】01 elbow/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1829,16 +1818,16 @@ Locatio
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1848,8 +1837,8 @@ Locatio
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/" itemprop="url">
-                  【一起学OpenFOAM】04 Cavity案例文件解析
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/" itemprop="url">
+                  【Fluent GUI】01：计算雷诺数
                 </a>
               
             
@@ -1875,7 +1864,7 @@ Locatio
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:37:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:37:00+08:00">2018-10-17</time>
             
 
             
@@ -1897,7 +1886,7 @@ Locatio
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -1912,8 +1901,8 @@ Locatio
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1943,17 +1932,15 @@ Locatio
       
         
           
-          1 OpenFOAM工程文件组织以OpenFOAM提供的测试案例来描述OpenFOAM工程文件的组织形式，此案例是OpenFOAM提供的Cavity。
+          湖北的天气真是热啊，汗流浃背用程序代码来降温。
+最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。
+1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。
 
-利用ls命令查看文件1ls -R cavity
-
-
-如下图所示，cavity文件夹中包含有三个文件夹：0、constant以及system。
-这些
+Y+计算采用Po
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】04 Cavity案例文件解析/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2012,16 +1999,16 @@ Locatio
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】02：湍流参数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -2031,8 +2018,8 @@ Locatio
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/" itemprop="url">
-                  【OpenFOAM案例】07 pitzDaily
+                <a class="post-title-link" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】02：湍流参数/" itemprop="url">
+                  【Fluent GUI】02：湍流参数
                 </a>
               
             
@@ -2058,7 +2045,7 @@ Locatio
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:37:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:37:00+08:00">2018-10-17</time>
             
 
             
@@ -2080,7 +2067,7 @@ Locatio
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
 
                 
                 
@@ -2095,8 +2082,8 @@ Locatio
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】02：湍流参数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】02：湍流参数/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2126,19 +2113,15 @@ Locatio
       
         
           
-          本案例演示simpleFoam求解器模型准备。simpleFoam求解器是一个稳态求解器，支持以下湍流模型:
+          本文描述了利用Fluent GUI来计算湍流参数。
+昨天搞了个计算yplus和Re的GUI，基本上可以当做太阳能手电筒了。因为在Fluent中并不填需要这些计算结果。
+今天来点儿有用的，利用GUI来计算湍流参数，界面如下图所示。
 
-kEpsilon(RAS)
-kOmega(RAS)
-LRR(RAS)本案例的目标:
-理解湍流模型建模过程
-理解稳态模拟过程
-
-1 拷贝文件本案例文件来自于官方提供的案例。利用命令将文件拷贝
+1 基本公式计算公式取自Fluent User Guide 6.3.
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent GUI开发/【Fluent GUI】02：湍流参数/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2186,7 +2169,7 @@ LRR(RAS)本案例的目标:
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2220,9 +2203,9 @@ LRR(RAS)本案例的目标:
             
               <img class="site-author-image" itemprop="image"
                 src="https://faee0.github.io/images/avatar.gif"
-                alt="流沙" />
+                alt="流沙[胡坤]" />
             
-              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
               <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
           </div>
 
@@ -2233,7 +2216,7 @@ LRR(RAS)本案例的目标:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2256,7 +2239,15 @@ LRR(RAS)本案例的目标:
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2316,7 +2307,7 @@ LRR(RAS)本案例的目标:
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">流沙</span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
 
   
 
@@ -2513,8 +2504,6 @@ LRR(RAS)本案例的目标:
   
     
       
-        
-      
     
       
     
@@ -2536,30 +2525,6 @@ LRR(RAS)本案例的目标:
     
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      TeX: {equationNumbers: { autoNumber: "AMS" }}
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    
   
 
 

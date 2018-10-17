@@ -170,15 +170,15 @@
 
 
   <meta name="description" content="应用CFD解决工程流体问题">
-<meta name="keywords" content="CFD 仿真 流体力学 计算流体力学">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CFD Views">
+<meta property="og:title" content="CFDer club">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/page/2/index.html">
-<meta property="og:site_name" content="CFD Views">
+<meta property="og:site_name" content="CFDer club">
 <meta property="og:description" content="应用CFD解决工程流体问题">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CFD Views">
+<meta name="twitter:title" content="CFDer club">
 <meta name="twitter:description" content="应用CFD解决工程流体问题">
 
 
@@ -196,7 +196,7 @@
   };
 </script>
 
-  <title>CFD Views</title>
+  <title>CFDer club</title>
   
 
 
@@ -255,7 +255,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">CFD Views</span>
+        <span class="site-title">CFDer club</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -370,16 +370,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】00：流固耦合简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -389,8 +389,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/" itemprop="url">
-                  【一起学OpenFOAM】06 标准求解器
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】00：流固耦合简介/" itemprop="url">
+                  【流固耦合案例】00：流固耦合简介
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:36:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:36:00+08:00">2018-10-17</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/流固耦合/【流固耦合案例】00：流固耦合简介/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/流固耦合/【流固耦合案例】00：流固耦合简介/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,12 +484,12 @@
       
         
           
-          OpenFOAM中提供了众多的标准求解器。有了这些标准求解器，即使你对程序设计一无所知，你也可以将OpenFOAM当做是一款CFD软件。实际上OpenFOAM的功能不只是求解器流体流动问题。
-OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每一个目录下均包含众多的求解器
+          所谓流固耦合计算，通常指的是同时利用流体求解器和固体结构求解器计算流体和固体相互作用问题。流体求解器主要负责流场压力、速度、温度、组分等物理量的计算，而固体结构求解器则负责位移、应力、应变等计算。在这些求解变量中，同时存在于流体和固体求解中的物理量是压力和位移。
+在流体求解器中，压力是直接解出量，而
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】00：流固耦合简介/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -548,16 +548,16 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】01：挡板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -567,8 +567,8 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/" itemprop="url">
-                  【一起学OpenFOAM】03 OpenFOAM基本使用流程
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】01：挡板/" itemprop="url">
+                  【流固耦合案例】01：挡板
                 </a>
               
             
@@ -594,7 +594,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:36:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:36:00+08:00">2018-10-17</time>
             
 
             
@@ -616,7 +616,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -631,8 +631,8 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/流固耦合/【流固耦合案例】01：挡板/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/流固耦合/【流固耦合案例】01：挡板/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -662,11 +662,14 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
       
         
           
-          OpenFOAM初学者常常对于软件的使用流程感到很迷惑，与其他的具有GUI的CFD软件不同，OpenFOAM的所有操作均为基于文本操作，譬如说里面各种计算模型、计算参数、流程控制参数等，均为通过修改对应的文本文件来进行指定。那么什么时候该用哪些文件，该修改哪些参数，要了这些则需要花费时间去了解Ope
+          以一个简单的案例来描述在Fluent+Mechanical体系中计算单向流固耦合问题的一般步骤。
+1 案例描述本案例要计算的模型如下图所示（单位为mm），其三维拉伸厚度为50mm。
+
+流动区域内存在一个高度60mm，宽10mm，厚度50mm的金属挡板，采用流固耦合方法计算挡板在流体作用下的应力分布。
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】01：挡板/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -725,16 +728,16 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -744,8 +747,8 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/" itemprop="url">
-                  【OpenFOAM案例】02 自己动手
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/" itemprop="url">
+                  【流固耦合案例】02：柔性挡板
                 </a>
               
             
@@ -771,7 +774,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:36:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:36:00+08:00">2018-10-17</time>
             
 
             
@@ -793,7 +796,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -808,8 +811,8 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -839,12 +842,12 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
       
         
           
-          
-前言：很多人说OpenFOAM很难，要啃上很多的理论书籍，什么流体力学、计算流体力学、矩阵理论、线性代数、数值计算、C++程序设计神马的，看看光这一堆书就能吓倒绝大多数的人。其实我们并不一定要从这些基础的东西入手，我觉得要学习使用一个工具，首先使它运转起来才是最靠谱的。通过大量实例练习，做多了自然
+          当固体材料较软时，在流体作用下其发生较大变形，从而影响到原有流场分布，此时应该考虑利用双向流固耦合计算。本案例沿用上一个案例的几何，考虑双向耦合作用下，固体材料的应力应变。案例中固体采用采用超弹性橡胶材料。
+计算流程搭建的计算流程如图所示。其中几何模型在流体流程中导入，双向耦合数据通过System 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -903,16 +906,16 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -922,8 +925,8 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/" itemprop="url">
-                  【OpenFOAM案例】03 Docker安装OpenFOAM
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/" itemprop="url">
+                  【流固耦合案例】03 共轭传热
                 </a>
               
             
@@ -949,7 +952,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:36:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:36:00+08:00">2018-10-17</time>
             
 
             
@@ -971,7 +974,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -986,8 +989,8 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1017,14 +1020,14 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
       
         
           
-          “工欲善其事必先利其器”，软件装不上，讲再多的使用技巧也是白搭。近期不少留言说OpenFOAM不容易安装， 今天来谈谈如何在Linux下利用Docker安装OpenFOAM。
-Linux发行版众多，估计有几百种，比较流行的是三个派系：
+          本案例利用Fluent计算共轭传热问题。
+1 案例描述案例几何如图所示。流体域中存在一个固体区域，其中，固体域初始温度为343K，其底部温度为343K，其他边为与流体域耦合面。流体域中两条竖直边温度293K，其他边界为绝热边界。
 
-RHEL系。比较出名的发行版像Red Hat Enterpri
+其中固体域材料为铝合金，其密度为2800 kg/m3，比热为880 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1083,16 +1086,16 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1102,8 +1105,8 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/" itemprop="url">
-                  【OpenFOAM案例】04 编译安装OpenFOAM
+                <a class="post-title-link" href="/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/" itemprop="url">
+                  【Fluent热分析】04：辐射换热
                 </a>
               
             
@@ -1129,7 +1132,7 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:35:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:35:00+08:00">2018-10-17</time>
             
 
             
@@ -1151,7 +1154,7 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
 
                 
                 
@@ -1166,8 +1169,8 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1197,15 +1200,21 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
       
         
           
-          利用编译方式安装OpenFOAM，此种方式适合于所有的Linux系统发行版，最大的好处在于可以对编译过程进行控制，有可能实现代码优化。
-1 文件准备首先需要下载两个文件包：
+          1 简介本案例利用Fluent中的DO辐射模型计算汽车头大灯内的辐射及自然对流现象。
+涉及到的内容包括：
 
-OpenFOAM安装包：http://dl.openfoam.org/source/4-1
-第三方程序包：http://dl
+在ANSYS FLUENT中读取现有的网格文件。
+设置DO辐射模型。
+设置材料属性和边界条件。
+求解能量和流动方程。
+初始化并计算求解。
+后处理结果数据。
+
+2 案例描述如图所示为汽车前大灯结
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1264,16 +1273,16 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】05 OpenFOAM的学习资源/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/运动小球-重叠网格/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1283,8 +1292,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】05 OpenFOAM的学习资源/" itemprop="url">
-                  【一起学OpenFOAM】05 OpenFOAM的学习资源
+                <a class="post-title-link" href="/2018/10/17/Fluent运动模型/运动小球-重叠网格/" itemprop="url">
+                  运动小球-重叠网格
                 </a>
               
             
@@ -1310,7 +1319,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:34:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:34:00+08:00">2018-10-17</time>
             
 
             
@@ -1332,7 +1341,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent运动模型/" itemprop="url" rel="index"><span itemprop="name">Fluent运动模型</span></a></span>
 
                 
                 
@@ -1347,8 +1356,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】05 OpenFOAM的学习资源/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】05 OpenFOAM的学习资源/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent运动模型/运动小球-重叠网格/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent运动模型/运动小球-重叠网格/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1378,11 +1387,17 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
       
         
           
-          OpenFOAM的学习资料并不多，个人猜测也许是与软件的类型有关系。对于商用软件来讲，由于要占领市场，软件开发商自然是巴不得会用软件的人越多越好，因为他们卖的是软件，会用的人越多，软件卖得越好。他们的主要经济来源是卖软件，而软件的培训工作通常是软件出售所附带的服务。所以呢，非官方的培训越多越好，大伙
+          本案例利用Fluent的重叠网格（Overset）功能实现部件的运动。
+
+重叠网格能实现与传统动网格相同的功能，然而却不必担忧会出现负体积。目前最大的缺点可能在网格准备及计算精度上。
+
+1 案例描述如图所示一个长400mm，宽80mm的密闭容器中存在一个直径10mm的小球，其运动轨迹为正弦分布。
+
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】05 OpenFOAM的学习资源/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent运动模型/运动小球-重叠网格/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1441,16 +1456,16 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1460,8 +1475,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/" itemprop="url">
-                  【一起学OpenFOAM】00 系列由来
+                <a class="post-title-link" href="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/" itemprop="url">
+                  【Fluent热分析】02：管内自然对流
                 </a>
               
             
@@ -1487,7 +1502,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:34:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:34:00+08:00">2018-10-17</time>
             
 
             
@@ -1509,7 +1524,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
 
                 
                 
@@ -1524,8 +1539,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1555,11 +1570,14 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
       
         
           
-          1 为什么要学习OpenFOAM掐指算起来，接触CFD也差不多有十个年头了，其间一直使用的商用CFD软件，有Fluent、CFX、StarCCM+等，这些商用软件各有其优缺点，都能较好的解决常规的工程问题。然而，最近当我试图往这些软件中添加一些核心求解算法时，发现这是一个不可完成的任务，这些软件的核
+          本案例演示利用Fluent求解计算自然对流问题。
+1 案例描述两个无限长同心圆柱体，其中小圆柱半径1.78 cm，壁面温度306.3 K，大圆柱半径1.628 cm，壁面温度293.7 K，计算由于壁面温度差异引起两圆柱间的环形空间内自然对流情况。几何模型尺寸如图所示。
+
+本案例采用2D模型进行计算
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1618,16 +1636,16 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1637,8 +1655,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/" itemprop="url">
-                  【一起学OpenFOAM】01 OpenFoam的优势
+                <a class="post-title-link" href="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/" itemprop="url">
+                  【Fluent热分析】03：换热器
                 </a>
               
             
@@ -1664,7 +1682,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:34:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:34:00+08:00">2018-10-17</time>
             
 
             
@@ -1686,7 +1704,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
 
                 
                 
@@ -1701,8 +1719,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1732,11 +1750,15 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
       
         
           
-          CFD技术发展到今天，已经超过了大半个世纪了，已经涌现出非常多的CFD软件可供人们使用。通用商业CFD软件譬如Fluent、CFX、Star CCM+等在工业上得到了广泛的应用，另外一些专用的软件（如旋转机械领域Numeca、电子散热领域的Flotherm等）也以其专业性牢牢占据着各自领域的市场。这
+          本案例演示Fluent中的Heat Exchanger模型。
+1 案例介绍本案例利用Heat Exchanger模块模拟换热器换热。
+如图所示为一个单程换热器。
+
+流动参数如表所示。| 边界参数            | 参数中值       || ————— | ———- || 空气入口温度（Ta
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1795,16 +1817,16 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1814,8 +1836,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/" itemprop="url">
-                  【一起学OpenFOAM】02 软件准备
+                <a class="post-title-link" href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/" itemprop="url">
+                  【Fluent热分析】01：固体导热
                 </a>
               
             
@@ -1841,7 +1863,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:34:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:34:00+08:00">2018-10-17</time>
             
 
             
@@ -1863,7 +1885,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
 
                 
                 
@@ -1878,8 +1900,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1909,11 +1931,18 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
       
         
           
-          “工欲善其事必先利其器”，在利用OpenFoam解决我们的工程问题之前，首先要做的事情是搭建一个OpenFoam运行环境。很遗憾的是，OpenFoam的原生开发系统是Linux，因此对于习惯使用Linux操作系统的使用者来讲，自然不存在任何的问题，但是对于长期使用Windows操作系统的人，就需要掌
+          如图所示的圆柱体，其直径与高度均为1m，其顶部面温度为100℃，下端面及侧面温度为0℃，利用Fluent计算圆柱体内部温度分布。
+计算模型如图所示。
+1 几何模型
+启动Workbench，添加Fluid Flow(Fluent)模块
+
+
+
+右键选择A2单元格，选择菜单New DesignModele
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1972,16 +2001,16 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/封闭容器叶片旋转-动网格/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="流沙">
+      <meta itemprop="name" content="流沙[胡坤]">
       <meta itemprop="description" content="应用CFD解决工程流体问题">
       <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFD Views">
+      <meta itemprop="name" content="CFDer club">
     </span>
 
     
@@ -1991,8 +2020,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/" itemprop="url">
-                  【OpenFOAM案例】06 障碍物
+                <a class="post-title-link" href="/2018/10/17/Fluent运动模型/封闭容器叶片旋转-动网格/" itemprop="url">
+                  封闭容器叶片旋转-动网格
                 </a>
               
             
@@ -2018,7 +2047,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:37 / 修改时间：00:20:37" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:37+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:33:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:33:00+08:00">2018-10-17</time>
             
 
             
@@ -2040,7 +2069,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent运动模型/" itemprop="url" rel="index"><span itemprop="name">Fluent运动模型</span></a></span>
 
                 
                 
@@ -2055,8 +2084,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/" itemprop="commentCount"></span>
+                <a href="/2018/10/17/Fluent运动模型/封闭容器叶片旋转-动网格/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent运动模型/封闭容器叶片旋转-动网格/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2086,15 +2115,15 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
       
         
           
-          
-相同的食材，不同的烹制方法。
+          本案例利用Fluent的动网格功能仿真计算封闭容器内旋转叶片运动下流场分布。
+本案例的目的仅为动网格设置演示。案例计算域模型如图所示。
 
-利用OpenFOAM求解气流通过障碍物后的流场分布。
-案例描述： 本案例来自于丹麦海事研究所。流动计算域模型如图所示，包含入口、出口及壁面。案例采用 2D 模型计算。计算域流体介质为空气（标准大气压，温度 293K ），来流速度 1.17m/s 。雷诺数基于障碍物高
+容器直径120 mm，三个叶片的中心均匀分布在距离圆心40 mm的圆周上，叶片长20 mm，宽2 mm，旋转速度40 RPM。
+1 几何模型本案例几何采用外部导入
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/Fluent运动模型/封闭容器叶片旋转-动网格/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2142,7 +2171,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2176,9 +2205,9 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
             
               <img class="site-author-image" itemprop="image"
                 src="https://faee0.github.io/images/avatar.gif"
-                alt="流沙" />
+                alt="流沙[胡坤]" />
             
-              <p class="site-author-name" itemprop="name">流沙</p>
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
               <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
           </div>
 
@@ -2189,7 +2218,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2212,7 +2241,15 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2272,7 +2309,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">流沙</span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
 
   
 

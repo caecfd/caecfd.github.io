@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent GUI】01：计算雷诺数">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent GUI】01：计算雷诺数">
+<meta name="twitter:description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent GUI】01：计算雷诺数 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent GUI】01：计算雷诺数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:37:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:37:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>湖北的天气真是热啊，汗流浃背用程序代码来降温。</p>
+<p>最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。</p>
+<h1 id="1-Y-计算"><a href="#1-Y-计算" class="headerlink" title="1 Y+计算"></a>1 Y+计算</h1><p>Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png" alt="mark"></p>
+<p>Y+计算采用PointWise官方网页提供的计算方法。见网址<a href="http://www.pointwise.com/yplus/" target="_blank" rel="noopener"> http://www.pointwise.com/yplus/</a> 。该方法基于 Frank M. White’s   Fluid Mechanics   5th edition, page 467中关于平板边界层理论计算。<br>具体计算方法为：<br>先计算雷诺数：<br>$$<br>Re = \frac{\rho UL}{\mu}<br>$$</p>
+<p>通过雷诺数计算摩擦系数：<br>$$<br>C_f = \frac{0.026}{Re_{x}^{1/7}}<br>$$</p>
+<p>计算壁面剪切力：<br>$$<br>\tau_{wall} = \frac{C_f \rho U^2}{2}<br>$$<br>计算：<br>$$<br>U_{fric}=\sqrt{\frac{\tau_{wall}}{\rho}}<br>$$<br>得到第一层网格高度：<br>$$<br>\Delta S= \frac{y^+ \mu}{U_{fric}\rho}<br>$$</p>
+<h1 id="2-程序代码"><a href="#2-程序代码" class="headerlink" title="2 程序代码"></a>2 程序代码</h1><p>创建sheme代码，如下所示。代码很不简洁，是因为考虑到与UDF的接口。这里计算过于简单，并没有使用UDF。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">;RP Variable Create Function</span><br><span class="line">( define ( make-<span class="keyword">new</span>-rpvar name <span class="keyword">default</span> type )</span><br><span class="line">( <span class="keyword">if</span> ( <span class="keyword">not</span> (rp-var-object name))</span><br><span class="line">(rp-var-define name <span class="keyword">default</span> type #f )))</span><br><span class="line"> </span><br><span class="line">;RP Variable Declarations</span><br><span class="line">(make-new-rpvar 'myudf/velocity 1.0 'real ) ;freestream velocity</span><br><span class="line">(make-new-rpvar 'myudf/density 1.0 'real ) ;density</span><br><span class="line">(make-new-rpvar 'myudf/mu 1.0 'real ) ;mu</span><br><span class="line">(make-new-rpvar 'myudf/length 1.0 'real ) ; Length</span><br><span class="line">(make-new-rpvar 'myudf/yplus 1.0 'real ) ; yplus</span><br><span class="line">(make-new-rpvar 'myudf/deltas 0.0 'real ) ;/deltaS</span><br><span class="line">(make-new-rpvar 'myudf/re 0.0 'real ) ;Re</span><br><span class="line"> </span><br><span class="line">;Dialog Box Definition</span><br><span class="line">( define gui-dialog-box</span><br><span class="line">;Let Statement, Local Variable Declarations</span><br><span class="line">( let ((dialog-box #f )</span><br><span class="line">  (table)</span><br><span class="line">(myudf/box1)</span><br><span class="line">(myudf/box2)</span><br><span class="line">(myudf/velocity)</span><br><span class="line">(myudf/density)</span><br><span class="line">(myudf/mu)</span><br><span class="line">(myudf/length)</span><br><span class="line">(myudf/yplus)</span><br><span class="line">(myudf/deltas)</span><br><span class="line">(myudf/re)</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;Update-CB Function, Invoked When Dialog Box Is Opened</span><br><span class="line">( define ( update-cb . args )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/velocity <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/density <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/mu <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/length <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/yplus <span class="number">1.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/deltas <span class="number">0.0</span> )</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/re <span class="number">0.0</span> )</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;Apply-CB Function, Invoked When <span class="string">"OK"</span> Button Is Clicked</span><br><span class="line">( define ( apply-cb . args )</span><br><span class="line">(Cal)</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;定义函数计算雷诺数与第一层网格高度</span><br><span class="line">( define ( Cal )</span><br><span class="line">(rpsetvar 'myudf/velocity (cx-show-real-entry myudf/velocity))</span><br><span class="line">(rpsetvar 'myudf/density (cx-show-real-entry myudf/density))</span><br><span class="line">(rpsetvar 'myudf/mu (cx-show-real-entry myudf/mu))</span><br><span class="line">(rpsetvar 'myudf/length (cx-show-real-entry myudf/length))</span><br><span class="line">(rpsetvar 'myudf/yplus (cx-show-real-entry myudf/yplus))</span><br><span class="line">(rpsetvar 'myudf/deltas (cx-show-real-entry myudf/deltas))</span><br><span class="line">(rpsetvar 'myudf/re (cx-show-real-entry myudf/re))</span><br><span class="line"> </span><br><span class="line">( define re (rpgetvar 'myudf/re ))</span><br><span class="line">( define density (rpgetvar 'myudf/density ))</span><br><span class="line">( define mu (rpgetvar 'myudf/mu ))</span><br><span class="line">( define length (rpgetvar 'myudf/length ))</span><br><span class="line">( define yplus (rpgetvar 'myudf/yplus ))</span><br><span class="line">( define deltas (rpgetvar 'myudf/deltas ))</span><br><span class="line">( define velocity (rpgetvar 'myudf/velocity ))</span><br><span class="line">( define cf)</span><br><span class="line">( define tau)</span><br><span class="line">( define u_fric)</span><br><span class="line"> </span><br><span class="line">( <span class="built_in">set</span>! re ( * density ( * velocity ( / length mu))))</span><br><span class="line">( <span class="built_in">set</span>! cf ( / <span class="number">0.026</span> ( expt re ( / <span class="number">1</span> <span class="number">7</span> ))))</span><br><span class="line">( <span class="built_in">set</span>! tau ( * cf ( * density ( * velocity ( / velocity <span class="number">2</span> )))))</span><br><span class="line">( <span class="built_in">set</span>! u_fric ( <span class="built_in">sqrt</span> ( / tau density)))</span><br><span class="line">( <span class="built_in">set</span>! deltas ( * yplus ( / mu ( * u_fric density))))</span><br><span class="line"> </span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/deltas deltas)</span><br><span class="line">(cx-<span class="built_in">set</span>-real-entry myudf/re re)</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">;Button-CB Function, Invoked When <span class="string">"Test Button"</span> Is Clicked</span><br><span class="line">( define ( button-cb . args )</span><br><span class="line">(cal)</span><br><span class="line">)</span><br><span class="line">;Args Function, Used For Interface Setup, Required For Apply-CB, Update-CB, <span class="keyword">and</span> Button-CB Sections</span><br><span class="line"> </span><br><span class="line">(lambda args</span><br><span class="line">( <span class="keyword">if</span> ( <span class="keyword">not</span> dialog-box)</span><br><span class="line">     ( let ()</span><br><span class="line">       ( <span class="built_in">set</span>! dialog-box (cx-create-panel <span class="string">"Turbulent Calculator"</span> apply-cb update-cb))</span><br><span class="line">( set! table (cx-create-table dialog-box "" 'border #f 'below 0 'right-of 0 ))</span><br><span class="line"> </span><br><span class="line">( set! myudf/box1 (cx-create-table table "Data Inputs" 'row 0 ))</span><br><span class="line">( set! myudf/velocity (cx-create-real-entry myudf/box1 "Velocity[m/s]:" 'row 0 ))</span><br><span class="line">( set! myudf/density (cx-create-real-entry myudf/box1 "Density[kg/m3]:" 'row 1 ))</span><br><span class="line">( set! myudf/mu (cx-create-real-entry myudf/box1 "Viscosity[Pa.s]:" 'row 2 ))</span><br><span class="line">( set! myudf/length (cx-create-real-entry myudf/box1 "Length[m]:" 'row 3 ))</span><br><span class="line">( set! myudf/yplus (cx-create-real-entry myudf/box1 "YPlus:" 'row 4 ))</span><br><span class="line">(cx-create-button table "Calculate" 'activate-callback button-cb 'row 1 )</span><br><span class="line">( set! myudf/box2 (cx-create-table table "Data Output" 'row 2 ))</span><br><span class="line">( set! myudf/deltas (cx-create-real-entry myudf/box2 "DeltaS[m]" 'row 0 ))</span><br><span class="line">( set! myudf/re (cx-create-real-entry myudf/box2 "Re:" 'row 1 ))</span><br><span class="line">) ;End Of Let Statement</span><br><span class="line">) ;End Of If Statement</span><br><span class="line">;Call To Open Dialog Box</span><br><span class="line">(cx-show-panel dialog-box)</span><br><span class="line">) ;End Of Args Function</span><br><span class="line">) ;End Of Let Statement</span><br><span class="line">) ;End Of GUI-Dialog-Box Definition</span><br><span class="line"> </span><br><span class="line">(gui-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>代码使用方法：</p>
+<ul>
+<li>新建文本文件（如yplus.txt），修改文件名及扩展名为yplus.scm</li>
+<li>Fluent中利用菜单<strong>File  → Read → Scheme…</strong>加载文件yplus.scm即可开启对话框</li>
+</ul>
+<p>程序有待改进，比如自动提取设置的边界和网格信息进行计算，此功能后面有时间再玩。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】02：湍流参数/" rel="next" title="【Fluent GUI】02：湍流参数">
+                <i class="fa fa-chevron-left"></i> 【Fluent GUI】02：湍流参数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/" rel="prev" title="【Fluent GUI】05：Scheme语言[下]">
+                【Fluent GUI】05：Scheme语言[下] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Y-计算"><span class="nav-text">1 Y+计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-程序代码"><span class="nav-text">2 程序代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1 简介本案例利用Fluent中的DO辐射模型计算汽车头大灯内的辐射及自然对流现象。 涉及到的内容包括：  在ANSYS FLUENT中读取现有的网格文件。 设置DO辐射模型。 设置材料属性和边界条件。 求解能量和流动方程。 初始化并计算求解。 后处理结果数据。  2 案例描述如图所示为汽车前大灯结构。其中灯泡功率为40W， 通过辐射及自然对流与外界交换热量。灯泡由玻璃制成，透镜，外壳和反光镜则由">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent热分析】04：辐射换热">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="1 简介本案例利用Fluent中的DO辐射模型计算汽车头大灯内的辐射及自然对流现象。 涉及到的内容包括：  在ANSYS FLUENT中读取现有的网格文件。 设置DO辐射模型。 设置材料属性和边界条件。 求解能量和流动方程。 初始化并计算求解。 后处理结果数据。  2 案例描述如图所示为汽车前大灯结构。其中灯泡功率为40W， 通过辐射及自然对流与外界交换热量。灯泡由玻璃制成，透镜，外壳和反光镜则由">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/90985696.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/90523275.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/7275656.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/2420948.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/54624484.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/21219488.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/78052477.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/42687812.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/94024044.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/1253316.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/79955268.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/29792654.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/50251002.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/16872699.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-7/297323.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-8/98770476.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-8/7520858.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-8/86708808.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-8/37302867.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/24101250.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/60906880.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/54579976.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/51669708.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/78073881.jpg">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.735Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent热分析】04：辐射换热">
+<meta name="twitter:description" content="1 简介本案例利用Fluent中的DO辐射模型计算汽车头大灯内的辐射及自然对流现象。 涉及到的内容包括：  在ANSYS FLUENT中读取现有的网格文件。 设置DO辐射模型。 设置材料属性和边界条件。 求解能量和流动方程。 初始化并计算求解。 后处理结果数据。  2 案例描述如图所示为汽车前大灯结构。其中灯泡功率为40W， 通过辐射及自然对流与外界交换热量。灯泡由玻璃制成，透镜，外壳和反光镜则由">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-13/90985696.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent热分析】04：辐射换热 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent热分析】04：辐射换热
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:35:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:35:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】04：辐射换热/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p>本案例利用Fluent中的DO辐射模型计算汽车头大灯内的辐射及自然对流现象。</p>
+<p>涉及到的内容包括：</p>
+<ul>
+<li>在ANSYS FLUENT中读取现有的网格文件。</li>
+<li>设置DO辐射模型。</li>
+<li>设置材料属性和边界条件。</li>
+<li>求解能量和流动方程。</li>
+<li>初始化并计算求解。</li>
+<li>后处理结果数据。</li>
+</ul>
+<h1 id="2-案例描述"><a href="#2-案例描述" class="headerlink" title="2 案例描述"></a>2 案例描述</h1><p>如图所示为汽车前大灯结构。其中灯泡功率为40W， 通过辐射及自然对流与外界交换热量。灯泡由玻璃制成，透镜，外壳和反光镜则由聚碳酸酯制成。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/90985696.jpg" alt=""></p>
+<h1 id="3-Fluent设置"><a href="#3-Fluent设置" class="headerlink" title="3 Fluent设置"></a>3 Fluent设置</h1><h2 id="3-1-启动Fluent并读取网格"><a href="#3-1-启动Fluent并读取网格" class="headerlink" title="3.1 启动Fluent并读取网格"></a>3.1 启动Fluent并读取网格</h2><ul>
+<li>以<strong>Double Precision</strong>方式启动Fluent</li>
+<li>点击菜单项<strong>File → Read → Mesh…</strong>读取网格文件<strong>head-lamp.msh.gz</strong></li>
+</ul>
+<p>查看网格如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/90523275.jpg" alt=""></p>
+<h2 id="3-2-缩放网格"><a href="#3-2-缩放网格" class="headerlink" title="3.2 缩放网格"></a>3.2 缩放网格</h2><ul>
+<li>双击模型树节点<strong>General</strong>，点击右侧额面板按钮<strong>Scale…</strong>，弹出网格缩放对话框</li>
+<li>设置<strong>Mesh Was Created In</strong>为<strong>mm</strong>，点击按钮<strong>Scale</strong>进行网格缩放</li>
+<li>点击按钮<strong>Close</strong>关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/7275656.jpg" alt=""></p>
+<h2 id="3-3-Models设置"><a href="#3-3-Models设置" class="headerlink" title="3.3 Models设置"></a>3.3 Models设置</h2><p>启动DO辐射模型。</p>
+<ul>
+<li>双击模型树节点<strong>Models &gt; Radiation</strong>，弹出辐射模型设置对话框</li>
+<li>选择<strong>Model</strong>为<strong>Discrete Ordinates</strong></li>
+<li>设置<strong>Energy Iteration per Radiation Iteration</strong>为<strong>1</strong></li>
+<li>设置<strong>Angular Discretization</strong>下的<strong>Theta Divisions及Phi Divisions</strong>均为<strong>2</strong></li>
+<li>设置<strong>Theta Pixels及Phi Pixels</strong>均为<strong>6</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/2420948.jpg" alt=""></p>
+<blockquote>
+<p>注意：对于存在半透明介质的辐射问题，通常设置<strong>Theta Divisions及Phi Divisions</strong>不小于3，然而该参数值越大，计算量越大。</p>
+</blockquote>
+<h2 id="3-4-Materials"><a href="#3-4-Materials" class="headerlink" title="3.4 Materials"></a>3.4 Materials</h2><ul>
+<li>鼠标右键选择模型树节点<strong>Materials &gt; Solid</strong>，点击弹出菜单项<strong>New…</strong>新建材料</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/54624484.jpg" alt=""></p>
+<ul>
+<li>如下图所示定义材料<strong>glass</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/21219488.jpg" alt=""></p>
+<p>相同方式定义其他材料，如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>Polycarbonate</th>
+<th>coating</th>
+<th>socket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Density</td>
+<td>1200</td>
+<td>2000</td>
+<td>2719</td>
+</tr>
+<tr>
+<td>Cp</td>
+<td>1250</td>
+<td>400</td>
+<td>871</td>
+</tr>
+<tr>
+<td>Thermal Conductivity</td>
+<td>0.3</td>
+<td>0.5</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>Absorption Coefficient</td>
+<td>930</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Scattering Coefficient</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Refractive Index</td>
+<td>1.57</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>材料创建完毕后，模型树节点如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/78052477.jpg" alt=""></p>
+<ul>
+<li>双击模型树节点<strong>Materials &gt; Fluid &gt; air</strong>，弹出属性修改对话框</li>
+<li>修改<strong>Density</strong>为<strong>incompressible-ideal-gas</strong>，设置<strong>Thermal  Conductivity</strong>为<strong>polynomial</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/42687812.jpg" alt=""></p>
+<ul>
+<li>设置<strong>Thermal Conductivity</strong>为<strong>polynomial</strong>，点击后方的<strong>Edit</strong>按钮编辑参数</li>
+<li>设置<strong>Coefficients</strong>为<strong>4</strong>，分别设置系数为<strong>-2.0004e-03, 1.1163e-04, -6.3191e-08, 2.1301e-11</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/94024044.jpg" alt=""></p>
+<ul>
+<li>点击按钮<strong>Change/Create</strong>修改参数</li>
+</ul>
+<blockquote>
+<p>由于计算域中温度范围很宽，从350 K~2800 K，在如此宽的温度范围内，空气的热传导系数不应该是一个常数。这里将热传导系数定义为温度的多项式函数。</p>
+</blockquote>
+<h2 id="3-5-Cell-Zone-Conditions"><a href="#3-5-Cell-Zone-Conditions" class="headerlink" title="3.5 Cell Zone Conditions"></a>3.5 Cell Zone Conditions</h2><p>为区域指定材料。</p>
+<ul>
+<li>双击模型树节点<strong>Cell Zone Conditions</strong>，右侧面板列表框中显示了所有计算域</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/1253316.jpg" alt=""></p>
+<ul>
+<li>双击列表项<strong>cell-reflector</strong>，弹出区域设置对话框，设置选项<strong>Material Name</strong>为<strong>polycarbonate</strong>，激活选项<strong>Participates In Radiation</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/79955268.jpg" alt=""></p>
+<p>相同方式设置其他计算域材料，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>计算域</th>
+<th>材料</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cell-bulb</td>
+<td>glass</td>
+</tr>
+<tr>
+<td>cells-housing-air</td>
+<td>air</td>
+</tr>
+<tr>
+<td>cells-lens</td>
+<td>polycarbonate</td>
+</tr>
+<tr>
+<td>cells-bulb-inside</td>
+<td>air</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-6-Operating-Conditions"><a href="#3-6-Operating-Conditions" class="headerlink" title="3.6 Operating Conditions"></a>3.6 Operating Conditions</h2><ul>
+<li>双击模型树节点<strong>Cells Zone Conditions</strong>，点击右侧面板中按钮<strong>Operating Conditions…</strong>，弹出操作添加设置对话框</li>
+<li>激活选项<strong>Gravity</strong>，设置重力加速度为<strong>Y方向-9.81 m/s2</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/29792654.jpg" alt=""></p>
+<blockquote>
+<p>注意：本案例流体介质密度定义为温度的函数（不可压缩理想气体），因此需要指定沿重力加速度方向体积力项参考密度。若不指定参考密度，系统会利用计算域平均密度作为参考密度。</p>
+</blockquote>
+<h2 id="3-7-Boundary-Conditions"><a href="#3-7-Boundary-Conditions" class="headerlink" title="3.7 Boundary Conditions"></a>3.7 Boundary Conditions</h2><p><strong>1、设置边界lens-inner</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions</strong>，双击右侧面板边界列表项<strong>lens-inner</strong>，弹出边界设置对话框</li>
+<li>切换至<strong>Radiation</strong>标签页，设置<strong>BC Type</strong>为<strong>semi-transparent</strong>，设置<strong>Diffuse Fraction</strong>为<strong>0.05</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/50251002.jpg" alt=""></p>
+<p><strong>2、设置边界lens-inner-shadow</strong></p>
+<ul>
+<li>相同方式设置边界<strong>lens-inner-shadow</strong>的<strong>BC Type</strong>为<strong>semi-transparent</strong>，<strong>Diffuse Fraction</strong>为<strong>0.05</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/16872699.jpg" alt=""></p>
+<p><strong>3、设置边界lens-outer</strong></p>
+<ul>
+<li>设置边界<strong>lens-outer</strong>，其<strong>Thermal</strong>标签页如下图所示设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-7/297323.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Radiation</strong>标签页，按下图所示设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-8/98770476.jpg" alt=""></p>
+<p><strong>4、设置边界bulb-outer</strong></p>
+<ul>
+<li>双击列表项<strong>bulb-outer</strong>，弹出边界设置对话框，切换至<strong>Raidation</strong>标签页</li>
+<li>设置<strong>BC Type</strong>为<strong>semi-transparent</strong>，设置<strong>Diffuse Fraction</strong>为<strong>0.05</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><strong>5、设置边界bulb-outer-shadow</strong></p>
+<ul>
+<li>双击列表项<strong>bulb-outer-shadow</strong>，弹出边界设置对话框，切换至<strong>Raidation</strong>标签页</li>
+<li>设置<strong>BC Type</strong>为<strong>semi-transparent</strong>，设置<strong>Diffuse Fraction</strong>为<strong>0.05</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><strong>6、设置边界bulb-inner</strong></p>
+<ul>
+<li>双击列表项<strong>bulb-inner</strong>，弹出边界设置对话框，切换至<strong>Raidation</strong>标签页</li>
+<li>设置<strong>BC Type</strong>为<strong>semi-transparent</strong>，设置<strong>Diffuse Fraction</strong>为<strong>0.05</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><strong>7、设置边界bulb-inner-shadow</strong></p>
+<ul>
+<li>双击列表项<strong>bulb-inner-shadow</strong>，弹出边界设置对话框，切换至<strong>Raidation</strong>标签页</li>
+<li>设置<strong>BC Type</strong>为<strong>semi-transparent</strong>，设置<strong>Diffuse Fraction</strong>为<strong>0.05</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><strong>8、设置边界bulb-coatings</strong></p>
+<ul>
+<li>双击列表项<strong>bulb-coatings</strong>，弹出边界设置对话框，切换至<strong>Thermal</strong>标签页</li>
+<li>设置<strong>Materials Name</strong>为<strong>coating</strong></li>
+<li>设置<strong>Wall Thickness</strong>为<strong>0.1 mm</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-8/7520858.jpg" alt=""></p>
+<p><strong>9、设置边界reflector-outer</strong></p>
+<ul>
+<li>双击列表项<strong>Reflector-outer</strong>，在弹出的对话框中切换至<strong>Thermal</strong>标签页</li>
+<li>设置<strong>Thermal Conditions</strong>为<strong>Mixed</strong></li>
+<li>设置<strong>Heat Transfer Coefficient</strong>为<strong>7 w/m2-k</strong></li>
+<li>设置<strong>Free Stream Temperature</strong>为<strong>7 K</strong></li>
+<li>设置<strong>External Emissivity</strong>为<strong>0.95</strong></li>
+<li>设置<strong>External Radiation Temperature</strong>为<strong>300 K</strong></li>
+</ul>
+<p>其他参数保持默认设置。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-8/86708808.jpg" alt=""></p>
+<p><strong>10、设置reflector-inner</strong></p>
+<ul>
+<li>设置<strong>Thermal</strong>标签页下参数<strong>Internal Emissivity</strong>为<strong>0.2</strong></li>
+<li>设置<strong>Radiation</strong>标签页下参数<strong>Diffuse Fraction</strong>为<strong>0.3</strong></li>
+<li>其他参数保持默认设置</li>
+</ul>
+<p><strong>11、设置Rfelctor-inner-shadow</strong></p>
+<ul>
+<li>设置<strong>Thermal</strong>标签页下参数<strong>Internal Emissivity</strong>为<strong>0.2</strong></li>
+<li>设置<strong>Radiation</strong>标签页下参数<strong>Diffuse Fraction</strong>为<strong>0.3</strong></li>
+<li>其他参数保持默认设置</li>
+</ul>
+<p><strong>12、设置边界filament</strong></p>
+<p>假设灯泡电功率为40 W，灯泡表面积6.9413E-6 m2，可计算得到热通量为<strong>5760000 W/m2</strong>。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-8/37302867.jpg" alt=""></p>
+<h2 id="3-8-Solution"><a href="#3-8-Solution" class="headerlink" title="3.8 Solution"></a>3.8 Solution</h2><ul>
+<li>双击模型树节点<strong>Methods</strong>，右侧面板中设置<strong>Scheme</strong>为<strong>Coupled</strong></li>
+<li>设置<strong>Pressure</strong>为<strong>Body Force Weighted</strong></li>
+<li>激活选项<strong>Warped-Face Gradient Correction</strong>及<strong>High Order Term Relaxation</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/24101250.jpg" alt=""></p>
+<h2 id="3-9-Initialization"><a href="#3-9-Initialization" class="headerlink" title="3.9 Initialization"></a>3.9 Initialization</h2><ul>
+<li>双击模型树节点<strong>Initialization</strong>，右侧面板中激活选项<strong>Standard Initialization</strong></li>
+<li>选择选项<strong>Compute from</strong>为<strong>all-zones</strong>，点击按钮<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/60906880.jpg" alt=""></p>
+<ul>
+<li>点击按钮<strong>Patch</strong>，弹出设置对话框</li>
+<li>选择<strong>Variable</strong>为<strong>Temperature</strong>，选择<strong>Zones to Patch</strong>为<strong>cells-bulb-inside</strong>，设置<strong>Value</strong>为<strong>500 k</strong>，点击<strong>Patch</strong>按钮进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/54579976.jpg" alt=""></p>
+<h2 id="3-10-Run-Calculation"><a href="#3-10-Run-Calculation" class="headerlink" title="3.10  Run Calculation"></a>3.10  Run Calculation</h2><ul>
+<li>双击模型树节点<strong>Run Calculation</strong></li>
+<li>右侧面板设置参数<strong>Number of Iterations</strong>为<strong>500</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<h1 id="4-计算结果"><a href="#4-计算结果" class="headerlink" title="4 计算结果"></a>4 计算结果</h1><ul>
+<li>双击模型树节点<strong>Results &gt; Contours</strong>，弹出对话框中选择查看对称面上温度分布，如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/51669708.jpg" alt=""></p>
+<p>对称面温度分布如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-13/78073881.jpg" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent运动模型/运动小球-重叠网格/" rel="next" title="运动小球-重叠网格">
+                <i class="fa fa-chevron-left"></i> 运动小球-重叠网格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/" rel="prev" title="【流固耦合案例】03 共轭传热">
+                【流固耦合案例】03 共轭传热 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简介"><span class="nav-text">1 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-案例描述"><span class="nav-text">2 案例描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Fluent设置"><span class="nav-text">3 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-启动Fluent并读取网格"><span class="nav-text">3.1 启动Fluent并读取网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-缩放网格"><span class="nav-text">3.2 缩放网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Models设置"><span class="nav-text">3.3 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Materials"><span class="nav-text">3.4 Materials</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-Cell-Zone-Conditions"><span class="nav-text">3.5 Cell Zone Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-Operating-Conditions"><span class="nav-text">3.6 Operating Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-Boundary-Conditions"><span class="nav-text">3.7 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-Solution"><span class="nav-text">3.8 Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-9-Initialization"><span class="nav-text">3.9 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-Run-Calculation"><span class="nav-text">3.10  Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-计算结果"><span class="nav-text">4 计算结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

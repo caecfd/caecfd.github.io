@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例利用Fluent中的多参考系模型（Moving Frame of Reference，MRF）计算垂直轴风力机流场。 1 问题描述考虑如图所示的垂直轴风力机（VAWT），其旋转直径12 cm，安装有3个等距叶片，每个叶片弦长为2 cm，正常工作时叶片旋转速度为40 RPM，假设空气流速10 m/s。 注意：本案例假设VAWT以均匀速度旋转，实际上真实情况并非如此。在实际工程中，风力机叶片转动">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垂直轴风力机-MRF">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="本案例利用Fluent中的多参考系模型（Moving Frame of Reference，MRF）计算垂直轴风力机流场。 1 问题描述考虑如图所示的垂直轴风力机（VAWT），其旋转直径12 cm，安装有3个等距叶片，每个叶片弦长为2 cm，正常工作时叶片旋转速度为40 RPM，假设空气流速10 m/s。 注意：本案例假设VAWT以均匀速度旋转，实际上真实情况并非如此。在实际工程中，风力机叶片转动">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/81628925.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/56132130.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/6880386.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/19184541.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/44341198.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/84553263.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/91085882.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/97125416.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/58786442.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/40766060.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/56945361.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/84128193.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/38636776.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/62888859.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/22039224.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/54370746.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/48153748.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/22462221.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/70182092.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-15/76426791.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-15/36558671.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-15/21493983.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-15/98364495.jpg">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.736Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="垂直轴风力机-MRF">
+<meta name="twitter:description" content="本案例利用Fluent中的多参考系模型（Moving Frame of Reference，MRF）计算垂直轴风力机流场。 1 问题描述考虑如图所示的垂直轴风力机（VAWT），其旋转直径12 cm，安装有3个等距叶片，每个叶片弦长为2 cm，正常工作时叶片旋转速度为40 RPM，假设空气流速10 m/s。 注意：本案例假设VAWT以均匀速度旋转，实际上真实情况并非如此。在实际工程中，风力机叶片转动">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-14/81628925.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>垂直轴风力机-MRF | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">垂直轴风力机-MRF
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:32:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:32:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent运动模型/" itemprop="url" rel="index"><span itemprop="name">Fluent运动模型</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent运动模型/垂直轴风力机-MRF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例利用Fluent中的多参考系模型（Moving Frame of Reference，MRF）计算垂直轴风力机流场。</p>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>考虑如图所示的垂直轴风力机（VAWT），其旋转直径12 cm，安装有3个等距叶片，每个叶片弦长为2 cm，正常工作时叶片旋转速度为40 RPM，假设空气流速10 m/s。</p>
+<p>注意：本案例假设VAWT以均匀速度旋转，实际上真实情况并非如此。在实际工程中，风力机叶片转动是由于空气流动而引起，且旋转速度并非均匀。如果要计算风力机叶片受空气流动而旋转的话，需要利用到动网格及6DOF模型，本案例并不涉及此内容。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/81628925.jpg" alt=""></p>
+<h1 id="2-几何与网格"><a href="#2-几何与网格" class="headerlink" title="2 几何与网格"></a>2 几何与网格</h1><p>本案例的几何与网格采用外部导入的方式加载。</p>
+<ul>
+<li>启动Workbench，添加模块<strong>Fluid Flow(Fluent)</strong></li>
+<li>右键选择<strong>A3</strong>单元格，点击菜单项<strong>Import Mesh File…→ Browse…</strong>，在弹出的文件选择对话框中选择网格文件<strong>vawt.msh</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/56132130.jpg" alt=""></p>
+<ul>
+<li>鼠标双击<strong>Setup</strong>单元格以<strong>Double Precision</strong>模式启动Fluent</li>
+</ul>
+<h1 id="3-Fluent设置"><a href="#3-Fluent设置" class="headerlink" title="3 Fluent设置"></a>3 Fluent设置</h1><h2 id="3-1-创建interface"><a href="#3-1-创建interface" class="headerlink" title="3.1 创建interface"></a>3.1 创建interface</h2><p>案例网格中包含了5个区域，且区域之间的网格节点并不对应，因此需要创建interface。</p>
+<ul>
+<li>右键选择模型树节点<strong>Boundary Conditions &gt; blade_bot_in</strong>，点击弹出菜单项<strong>Type → interface</strong>，将该边界类型修改为interface</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/6880386.jpg" alt=""></p>
+<ul>
+<li>相同方式修改<strong>blade_bot_in、blade_bot_outer、blade_right_in、blade_right_outer、blade_top_in、blade_top_outer、hub_inner、hub_outer</strong>的类型为<strong>interface</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/19184541.jpg" alt=""></p>
+<p>修改完毕后边界列表如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/44341198.jpg" alt=""></p>
+<ul>
+<li>双击模型树节点<strong>Mesh Interfaces</strong>，点击弹出设置对话框中的<strong>Manual Create…</strong>按钮弹出Interface创建对话框</li>
+<li>设置<strong>Mesh Interface</strong>为<strong>blade_bot</strong>，选择<strong>Interface Zone Side 1</strong>为<strong>blade_bot_in</strong>，选择<strong>Interface Zone Side 2</strong>为<strong>blade_bot_outer</strong>，点击按钮<strong>Create/Edit…</strong>创建交界面</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/84553263.jpg" alt=""></p>
+<p>相同方式创建另外3个交界面，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>Mesh Interface</th>
+<th>Interface Zone 1</th>
+<th>Interface Zone 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blade_bot</td>
+<td>blade_bot_in</td>
+<td>blade_bot_outer</td>
+</tr>
+<tr>
+<td>blade_right</td>
+<td>blade_right_in</td>
+<td>blade_right_outer</td>
+</tr>
+<tr>
+<td>blade_top</td>
+<td>blade_top_in</td>
+<td>blade_top_outer</td>
+</tr>
+<tr>
+<td>hub</td>
+<td>hub_inner</td>
+<td>hub_outer</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：确保选择的配对边界无误。</p>
+</blockquote>
+<h2 id="3-2-General设置"><a href="#3-2-General设置" class="headerlink" title="3.2 General设置"></a>3.2 General设置</h2><p>修改角速度单位为RPM。</p>
+<ul>
+<li>鼠标双击模型树节点<strong>General</strong>，点击右侧面板按钮<strong>Units…</strong></li>
+<li>弹出对话框中选择<strong>angular-velocity</strong>，设置<strong>units</strong>为<strong>rpm</strong></li>
+<li>点击<strong>Close</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/91085882.jpg" alt=""></p>
+<h2 id="3-3-Models设置"><a href="#3-3-Models设置" class="headerlink" title="3.3 Models设置"></a>3.3 Models设置</h2><p>选择Realizable k-epsilon湍流模型。</p>
+<ul>
+<li>右键选择模型树节点<strong>Models &gt; Viscous</strong>，点击弹出菜单项<strong>Model → Realizable k-epsilon</strong>启用湍流模型</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/97125416.jpg" alt=""></p>
+<h2 id="3-4-Materials设置"><a href="#3-4-Materials设置" class="headerlink" title="3.4 Materials设置"></a>3.4 Materials设置</h2><p>采用air默认属性。密度1.225 kg/m3，粘度1.7894E-5 kg/m-s。</p>
+<h2 id="3-5-Cell-Zone-Conditions"><a href="#3-5-Cell-Zone-Conditions" class="headerlink" title="3.5 Cell Zone Conditions"></a>3.5 Cell Zone Conditions</h2><p>计算域中包含有5个子区域，需要为每个区域指定属性。</p>
+<p><strong>1、fluid-surface-body区域</strong></p>
+<p>该区域为最外围区域，静止区域，介质为air，采用默认参数即可。</p>
+<p><strong>2、inner区域</strong></p>
+<ul>
+<li>右键选择模型树节点<strong>Cell Zone Conditions &gt; inner</strong>，点击弹出菜单项<strong>Edit…</strong>，打开设置对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/58786442.jpg" alt=""></p>
+<ul>
+<li>弹出的菜单项中设置<strong>Material Name</strong>为<strong>air</strong></li>
+<li>激活选项<strong>Frame Motion</strong></li>
+<li>设置<strong>Relative to Cell Zone</strong>为<strong>absolute</strong></li>
+<li>设置<strong>Speed</strong>为<strong>40 rpm</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/40766060.jpg" alt=""></p>
+<p><strong>3、blade_top区域</strong></p>
+<ul>
+<li>打开<strong>blade_top</strong>区域设置对话框</li>
+<li>激活选项<strong>Frame Motion</strong>，设置<strong>Relative To Cell Zone</strong>为<strong>inner</strong></li>
+<li>设置<strong>Rotation-Axis Origin</strong>为<strong>(-0.02 0.034641)</strong></li>
+<li>设置<strong>Speed</strong>为<strong>0 rpm</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/56945361.jpg" alt=""></p>
+<ul>
+<li>相同的方式设置另外两个计算区域<strong>blade_bot及blade_right</strong>，按下表中的参数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Zone name</th>
+<th>Centroid (X,Y)</th>
+<th>Angular velocity (RPM)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blade_top</td>
+<td>(-0.02, 0.034641)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>blade_bot</td>
+<td>(-0.02, -0.034641)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>blade_right</td>
+<td>(0.04, 0)</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>提示：这里可以利用copy…进行区域参数复制。如果是手动设置的话，不要忘记设置相对区域为inner</p>
+</blockquote>
+<h2 id="3-6-Boundary-Conditions"><a href="#3-6-Boundary-Conditions" class="headerlink" title="3.6 Boundary Conditions"></a>3.6 Boundary Conditions</h2><p><strong>1、farfield1设置</strong></p>
+<ul>
+<li>右键选择模型树节点<strong>Boundary Conditions &gt; farfield1</strong>，点击弹出菜单项<strong>Type → velocity-inlet</strong>，弹出参数设置对话框</li>
+<li>设置<strong>Velocity Specification Method</strong>为<strong>Components</strong></li>
+<li>设置<strong>X-Velocity</strong>为<strong>10 m/s</strong></li>
+<li>设置<strong>Specification Method</strong>为<strong>Intensity and Length Scale</strong></li>
+<li>设置<strong>Turbulence Intensity (%)</strong> 为 <strong>5</strong> ，设置<strong>Turbulent Length Scale (m)</strong> 为 <strong>1</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/84128193.jpg" alt=""></p>
+<p><strong>2、farfield2设置</strong></p>
+<ul>
+<li>右键选择模型树节点<strong>Boundary Conditions &gt; farfield2</strong>，点击弹出菜单项<strong>Type → pressure-outlet</strong>，弹出参数设置对话框</li>
+<li>设置<strong>Specification Method</strong>为<strong>Intensity and Length Scale</strong></li>
+<li>设置<strong>Turbulence Intensity (%)</strong> 为 <strong>5</strong> ，设置<strong>Turbulent Length Scale (m)</strong> 为 <strong>1</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/38636776.jpg" alt=""></p>
+<p><strong>3、wall_blade_hot设置</strong></p>
+<ul>
+<li>右键选择模型树节点<strong>Boundary Conditions &gt; wall_blade_hot</strong>，点击弹出菜单项<strong>Edit…</strong>，弹出参数设置对话框</li>
+<li>设置<strong>Wall Motion</strong>为<strong>Moving Wall</strong></li>
+<li>设置<strong>Motion</strong> 为 <strong>Rotational</strong></li>
+<li>设置<strong>Rotation-Axis Origin</strong> 为 <strong>(-0.02 -0.034641)</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/62888859.jpg" alt=""></p>
+<p><strong>4、其他Wall设置</strong></p>
+<ul>
+<li>双击模型树节点<strong>Boundary</strong>，点击右侧面板中的<strong>Copy</strong>按钮，弹出边界复制对话框</li>
+<li>选择<strong>From Boundary Zone</strong>列表项<strong>wall_blade_bot</strong>，选择<strong>To Boundary Zones</strong>列表项<strong>wall_blade_right</strong>及<strong>wall_blade_top</strong></li>
+<li>点击<strong>Copy</strong>按钮辅助边界信息</li>
+<li>点击<strong>Close</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/22039224.jpg" alt=""></p>
+<ul>
+<li>按下表数据修改<strong>wall_blade_right</strong>及<strong>wall_blade_top</strong>边界的<strong>Rotation-Axis Origin</strong>参数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Boundary Zone</th>
+<th>Centroid (X,Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wall_blade_top</td>
+<td>(-0.02, 0.034641)</td>
+</tr>
+<tr>
+<td>wall_blade_right</td>
+<td>(0.04, 0)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-7-Methods"><a href="#3-7-Methods" class="headerlink" title="3.7 Methods"></a>3.7 Methods</h2><ul>
+<li>双击模型树节点<strong>Methods</strong>，右侧面板中设置<strong>Scheme</strong>选项为<strong>Coupled</strong></li>
+<li>激活选项<strong>Warped-Face Gradient Correction</strong>及<strong>High Order Term Relaxation</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/54370746.jpg" alt=""></p>
+<h2 id="3-8-Monitors"><a href="#3-8-Monitors" class="headerlink" title="3.8 Monitors"></a>3.8 Monitors</h2><p>软件默认计算残差为0.001，对于二维模型计算，可以将残差设置得更低一些，以提高计算精度。</p>
+<ul>
+<li>双击模型树节点<strong>Monitors &gt; Residual</strong>，弹出残差设置对话框</li>
+<li>设置所有方程的<strong>Absolute Criteria</strong>均为<strong>1E-6</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/48153748.jpg" alt=""></p>
+<h2 id="3-9-Initialization"><a href="#3-9-Initialization" class="headerlink" title="3.9 Initialization"></a>3.9 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Initialization</strong>，点击菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/22462221.jpg" alt=""></p>
+<h2 id="3-10-Run-Calculation"><a href="#3-10-Run-Calculation" class="headerlink" title="3.10 Run Calculation"></a>3.10 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>1000</strong></li>
+<li>点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-14/70182092.jpg" alt=""></p>
+<h1 id="4-计算后处理"><a href="#4-计算后处理" class="headerlink" title="4 计算后处理"></a>4 计算后处理</h1><ul>
+<li>双击模型树节点<strong>Results &gt; Graphics &gt; Contours</strong>，弹出云图设置对话框，如下图所示设置</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-15/76426791.jpg" alt=""></p>
+<p>显示速度分布如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-15/36558671.jpg" alt=""></p>
+<ul>
+<li>如下图所示设置显示涡量分布</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-15/21493983.jpg" alt=""></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-15/98364495.jpg" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" rel="next" title="【多相流计算】08：Mixture离心泵空化">
+                <i class="fa fa-chevron-left"></i> 【多相流计算】08：Mixture离心泵空化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent运动模型/垂直轴风力机-滑移网格/" rel="prev" title="垂直轴风力机-滑移网格">
+                垂直轴风力机-滑移网格 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-几何与网格"><span class="nav-text">2 几何与网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Fluent设置"><span class="nav-text">3 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-创建interface"><span class="nav-text">3.1 创建interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-General设置"><span class="nav-text">3.2 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Models设置"><span class="nav-text">3.3 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Materials设置"><span class="nav-text">3.4 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-Cell-Zone-Conditions"><span class="nav-text">3.5 Cell Zone Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-Boundary-Conditions"><span class="nav-text">3.6 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-Methods"><span class="nav-text">3.7 Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-Monitors"><span class="nav-text">3.8 Monitors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-9-Initialization"><span class="nav-text">3.9 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-Run-Calculation"><span class="nav-text">3.10 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-计算后处理"><span class="nav-text">4 计算后处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

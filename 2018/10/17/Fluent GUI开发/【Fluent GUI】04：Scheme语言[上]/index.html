@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Fluent GUI开发采用Scheme语言来实现。本文简单介绍Scheme语言。 1 Scheme语言简介以下内容来自维基百科： Scheme是一种函数式编程语言，是Lisp的两种主要方言之一（另一种为Common Lisp）。不同于Common Lisp，Scheme遵循极简主义&amp;amp;action=edit&amp;amp;redlink=1)哲学，以一个小型语言核心作为标准，加上各种强力语言工具">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent GUI】04：Scheme语言[上]">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="Fluent GUI开发采用Scheme语言来实现。本文简单介绍Scheme语言。 1 Scheme语言简介以下内容来自维基百科： Scheme是一种函数式编程语言，是Lisp的两种主要方言之一（另一种为Common Lisp）。不同于Common Lisp，Scheme遵循极简主义&amp;amp;action=edit&amp;amp;redlink=1)哲学，以一个小型语言核心作为标准，加上各种强力语言工具">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/2A1IlCi8i3.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/FAbA80a7FG.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/mEm790LHab.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/B2I9B2dDDh.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/Dd52laieIG.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/kAB01b4fJA.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/3mHi2JEBH1.png">
+<meta property="og:image" content="https://www.ibm.com/developerworks/cn/linux/l-schm/images/image001.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/m4ib8ie3c7.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/9D02Ecld55.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/hmhg4EbC8G.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/bgICGH76a4.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/6aDJbmmHbi.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/L8cLG685A9.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/88edA7iIdF.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/5e8c8BEAdi.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/GDkgjCC0EB.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/8cAlE039mC.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/d872HDhIa6.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/D37aEKF5j7.png">
+<meta property="og:image" content="https://www.ibm.com/developerworks/cn/linux/l-schm/images/image003.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/5mcegJbiHK.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/KAjLEKklA4.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/6blf3KFi1K.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/De12JfEagj.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/ha4fj10aa1.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/G3GFEfjEKD.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/lDGe92e74L.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/de8e039kLa.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/75K8jdJFB8.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/icHceLL3fL.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/AhHl5dhJ23.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/29LiHKKC1c.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/2C3Adi6hLG.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/kaj2F6daj7.png">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent GUI】04：Scheme语言[上]">
+<meta name="twitter:description" content="Fluent GUI开发采用Scheme语言来实现。本文简单介绍Scheme语言。 1 Scheme语言简介以下内容来自维基百科： Scheme是一种函数式编程语言，是Lisp的两种主要方言之一（另一种为Common Lisp）。不同于Common Lisp，Scheme遵循极简主义&amp;amp;action=edit&amp;amp;redlink=1)哲学，以一个小型语言核心作为标准，加上各种强力语言工具">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/2A1IlCi8i3.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent GUI】04：Scheme语言[上] | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent GUI】04：Scheme语言[上]
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】04：Scheme语言[上]/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Fluent GUI开发采用Scheme语言来实现。本文简单介绍Scheme语言。</p>
+<h1 id="1-Scheme语言简介"><a href="#1-Scheme语言简介" class="headerlink" title="1 Scheme语言简介"></a>1 Scheme语言简介</h1><p>以下内容来自维基百科：</p>
+<p><strong>Scheme</strong>是一种<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">函数式编程语言</a>，是<a href="https://zh.wikipedia.org/wiki/Lisp" target="_blank" rel="noopener">Lisp</a>的两种主要方言之一（另一种为<a href="https://zh.wikipedia.org/wiki/Common_Lisp" target="_blank" rel="noopener">Common Lisp</a>）。不同于<a href="https://zh.wikipedia.org/wiki/Common_Lisp" target="_blank" rel="noopener">Common Lisp</a>，Scheme遵循<a href="https://zh.wikipedia.org/w/index.php?title=%E6%A5%B5%E7%B0%A1%E4%B8%BB%E7%BE%A9_(%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88" target="_blank" rel="noopener">极简主义</a>&amp;action=edit&amp;redlink=1)哲学，以一个小型语言核心作为标准，加上各种强力语言工具（<a href="https://zh.wikipedia.org/wiki/%E8%AF%AD%E6%B3%95%E7%B3%96" target="_blank" rel="noopener">语法糖</a>）来扩展语言本身。</p>
+<p>MIT与其他院校曾采用Scheme教授计算机科学入门课程。著名的入门教材《<a href="https://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%A7%8B%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8B" target="_blank" rel="noopener">计算机程序的构造和解释</a>》（SICP）利用Scheme来解释程序设计。Scheme的广泛受众被视为一个主要优势，然而不同实现之间的差异成为了它的一个劣势。</p>
+<p>Scheme最早由MIT的 Gerald J. Sussman 和 Guy L. Steele Jr.在1970年代发展出来，并由两人发表的“λ论文集”推广开来。 Scheme语言与<a href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97" target="_blank" rel="noopener">λ演算</a>关系十分密切。小写字母“λ”是Scheme语言的<a href="https://zh.wikipedia.org/wiki/%E6%A8%99%E8%AA%8C" target="_blank" rel="noopener">标志</a>。</p>
+<p>Scheme的哲学是：设计计算机语言不应该进行功能的堆砌，而应该尽可能减少弱点和限制，使剩下的功能显得必要。Scheme是第一个使用<strong>静态作用域</strong>的Lisp方言，也是第一个引入“干净宏”和第一类续延的编程语言。</p>
+<p>更多关于Scheme语言的介绍，可查看维基百科相应词条。</p>
+<p>关于Scheme的教材：</p>
+<ul>
+<li>《<a href="https://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%A7%8B%E9%80%A0%E5%92%8C%E8%A7%A3%E9%87%8B" target="_blank" rel="noopener">计算机程序的构造和解释</a>》（SICP）是最著名的使用Scheme语言的计算机科学教科书，由Scheme创始人之一萨斯曼与Harold Abelson编写。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/2A1IlCi8i3.png" alt="mark"></p>
+<ul>
+<li>《<a href="https://zh.wikipedia.org/wiki/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">程序设计方法</a>》对SICP中的一些被认为过于艰涩的概念进行了改进，由Felleison等人编写。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/FAbA80a7FG.png" alt="mark"></p>
+<ul>
+<li><a href="http://www.cs.berkeley.edu/~bh/ss-toc2.html" target="_blank" rel="noopener"><em>Simply Scheme</em></a>是一本专为中学级别，无计算机科学基础的学生编写的入门书，由<a href="https://zh.wikipedia.org/wiki/%E6%9F%8F%E5%85%8B%E8%90%8A%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">伯克利加州大学</a>资深讲师<a href="https://zh.wikipedia.org/wiki/%E5%B8%83%E8%90%8A%E6%81%A9%C2%B7%E5%93%88%E7%B6%AD" target="_blank" rel="noopener">布莱恩·哈维</a>编写。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/mEm790LHab.png" alt="mark"></p>
+<ul>
+<li>《The Scheme Programming Language》：目前为第四版，可用在网站<a href="https://scheme.com/tspl4/在线阅读。" target="_blank" rel="noopener">https://scheme.com/tspl4/在线阅读。</a></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/B2I9B2dDDh.png" alt="mark"></p>
+<h1 id="2-常用的编辑器"><a href="#2-常用的编辑器" class="headerlink" title="2 常用的编辑器"></a>2 常用的编辑器</h1><p>Scheme语言是一种解释型计算机语言，目前比较常用的是DrRacket及chez Scheme，两个都是免费可用的。</p>
+<ul>
+<li>chez Scheme：可在网站<a href="https://cisco.github.io/ChezScheme/找到详细描述及相应文档。" target="_blank" rel="noopener">https://cisco.github.io/ChezScheme/找到详细描述及相应文档。</a></li>
+<li>DrRacket：可在网站<a href="http://racket-lang.org/找到其具体描述及文档。" target="_blank" rel="noopener">http://racket-lang.org/找到其具体描述及文档。</a></li>
+</ul>
+<p>要编制程序，首先要编写源代码。Scheme的源代码可用采用任何文本编辑器进行编写。但为了提高效率，能够进行语法高亮的编辑器自然是优先选择。</p>
+<p>常用的编辑器：</p>
+<ul>
+<li><strong>Visual Studio Code</strong>：微软搞出来的开源IDE，深受程序猿的喜爱。免费开源的代码编辑器。工作界面如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/Dd52laieIG.png" alt="mark"></p>
+<ul>
+<li><strong>DrRacket</strong>：DrRacket提供的代码编辑工具。工作界面如下图所示。</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/kAB01b4fJA.png" alt="mark"></p>
+<ul>
+<li><strong>sublime text</strong>：一个文本编辑工具，诸如此类的工具很多，如notpad++，notepad2、ultraEdit等等。</li>
+<li><strong>Fluent TUI</strong></li>
+</ul>
+<p>事实上，也开源将Fluent的TUI窗口当做一个Scheme语言的编辑器。如在TUI窗口中定义函数计算变量的平方值，如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/3mHi2JEBH1.png" alt="mark"></p>
+<h1 id="3-Scheme基本概念"><a href="#3-Scheme基本概念" class="headerlink" title="3 Scheme基本概念"></a>3 Scheme基本概念</h1><p>以下内容来自网址<a href="https://www.ibm.com/developerworks/cn/linux/l-schm/index1.html，部分作了修正。" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-schm/index1.html，部分作了修正。</a></p>
+<h2 id="3-1-注释"><a href="#3-1-注释" class="headerlink" title="3.1 注释"></a>3.1 注释</h2><p>Scheme语言中的注释是单行注释，以分号[;]开始一直到行尾结束，其中间的内容为注释，在程序运行时不做处理，如：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">; <span class="keyword">this</span> <span class="keyword">is</span> a scheme comment line.</span><br></pre></td></tr></table></figure></p>
+<p>标准的Scheme语言定义中没有多行注释，不过在它的实现中几乎都有。在Scheme中就有多行注释，以符号组合”#!”开始，以相反的另一符号组合”!#”结束，其中内容为注释，如：<br><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!there are scheme comment area.``you can write mulity lines here . !#</span></span><br></pre></td></tr></table></figure></p>
+<p>注意的是，符号组合”#!”和”!#”一定分做两行来写。</p>
+<h2 id="3-2-Scheme用做脚本语言"><a href="#3-2-Scheme用做脚本语言" class="headerlink" title="3.2 Scheme用做脚本语言"></a>3.2 Scheme用做脚本语言</h2><p>Scheme语言可以象sh，perl，python等语言那样作为一种脚本语言来使用，用它来编写可执行脚本，在Linux中如果用Scheme语言写可执行脚本，它的第一行和第二行一般是类似下面的内容：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /usr/local/bin/Scheme -s``!#`</span></span><br></pre></td></tr></table></figure>
+<p>这样的话代码在运行时会自动调用Scheme来解释执行，标准的文件尾缀是”.scm”。</p>
+<h2 id="3-3-块-form"><a href="#3-3-块-form" class="headerlink" title="3.3  块(form)"></a>3.3  块(form)</h2><p>块(form)是Scheme语言中的最小程序单元，一个Scheme语言程序是由一个或多个form构成。没有特殊说明的情况下 form 都由小括号括起来，形如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(define x 123)</span><br><span class="line">(+ 1 2)</span><br><span class="line">(* 4 5 6)</span><br><span class="line">(display &quot;hello,world&quot;)</span><br></pre></td></tr></table></figure>
+<p>一个 form 也可以是一个表达式，一个变量定义，也可以是一个过程。</p>
+<h2 id="3-4-form嵌套"><a href="#3-4-form嵌套" class="headerlink" title="3.4 form嵌套"></a>3.4 form嵌套</h2><p>Scheme语言中允许form的嵌套，这使它可以轻松的实现复杂的表达式，同时也是一种非常有自己特色的表达式。 下图示意了嵌套的稍复杂一点的表达式的运算过程：</p>
+<p><img src="https://www.ibm.com/developerworks/cn/linux/l-schm/images/image001.png" alt="img"></p>
+<h2 id="3-5-变量定义"><a href="#3-5-变量定义" class="headerlink" title="3.5  变量定义"></a>3.5  变量定义</h2><p>可以用define来定义一个变量，形式如下：</p>
+<blockquote>
+<p>(define 变量名 值)</p>
+</blockquote>
+<p>如： (define x 123) ，定义一个变量x，其值为123。</p>
+<h2 id="3-6-更改变量的值"><a href="#3-6-更改变量的值" class="headerlink" title="3.6  更改变量的值"></a>3.6  更改变量的值</h2><p>可以用set!来改变变量的值，格式如下：</p>
+<blockquote>
+<p>(set! 变量名 值)</p>
+</blockquote>
+<p>如： (set! x “hello”) ，将变量x的值改为”hello” 。</p>
+<p>Scheme语言是一种高级语言，和很多高级语言(如python，perl)一样，它的变量类型不是固定的，可以随时改变。</p>
+<h1 id="4．数据类型"><a href="#4．数据类型" class="headerlink" title="4．数据类型"></a>4．数据类型</h1><h2 id="4-1-简单数据类型"><a href="#4-1-简单数据类型" class="headerlink" title="4.1 简单数据类型"></a>4.1 简单数据类型</h2><p><strong>逻辑型(boolean)</strong></p>
+<p>最基本的数据类型，也是很多计算机语言中都支持的最简单的数据类型，只能取两个值：#t，相当于其它计算机语言中的 TRUE；#f，相当于其它计算机语言中的 FALSE。</p>
+<p>Scheme语言中的boolean类型只有一种操作：not。其意为取相反的值，即：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/m4ib8ie3c7.png" alt="mark"></p>
+<p>not的引用，与逻辑非运算操作类似</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/9D02Ecld55.png" alt="mark"></p>
+<p>从上面的操作中可以看出来，只要not后面的参数不是逻辑型，其返回值均为#f。</p>
+<p><strong>数字型(number)</strong></p>
+<p>它又分为四种子类型：<strong>整型(integer)，有理数型(rational)，实型(real)，复数型(complex)</strong>；它们又被统一称为数字类型(number)。</p>
+<p>如：</p>
+<p>复数型(complex) 可以定义为 (define c 3+2i)<br>实数型（real）可以定义为 (define f 22/7)<br>有理数型（rational）可以定义为 (define p 3.1415)<br>整数型(integer) 可以定义为 (define i 123)</p>
+<p>Scheme语言中，数字类型的数据还可以按照进制分类，即二进制，八进制，十进制和十六进制，在外观形式上它们分别以符号组合 #b、 #o、 #d、 #x 来作为表示数字进制类型的前缀，其中表示十进制的#d可以省略不写，如：二进制的 #b1010 ，八进制的 #o567，十进制的123或 #d123，十六进制的 #x1afc 。</p>
+<p>Scheme语言的这种严格按照数学定理来为数字类型进行分类的方法可以看出Scheme语言里面渗透着很深的数学思想，Scheme语言是由数学家们创造出来的，在这方面表现得也比较鲜明。</p>
+<p><strong>字符型(char)</strong></p>
+<p>Scheme语言中的字符型数据均以符号组合 “#\” 开始，表示单个字符，可以是字母、数字或”[ ! $ % &amp; * + - . / : %lt; = &gt; ? @ ^ _ ~ ]”等等其它字符，如：<br>#\A 表示大写字母A，#\0表示字符0，<br>其中特殊字符有：#\space 表示空格符和 \n 表示换行符。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/hmhg4EbC8G.png" alt="mark"></p>
+<p><strong>符号型(symbol)</strong></p>
+<p>符号类型是Scheme语言中有多种用途的符号名称，它可以是单词，用括号括起来的多个单词，也可以是无意义的字母组合或符号组合，它在某种意义上可以理解为C中的枚举类型。看下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/bgICGH76a4.png" alt="mark"></p>
+<p>此处也说明单引号’ 与quote是等价的，并且更简单一些。符号类型与字符串不同的是符号类型不能象字符串那样可以取得长度或改变其中某一成员字符的值，但二者之间可以互相转换。</p>
+<h2 id="4-2-复合数据类型"><a href="#4-2-复合数据类型" class="headerlink" title="4.2 复合数据类型"></a>4.2 复合数据类型</h2><p>可以说复合数据类型是由基本的简单数据类型通过某种方式加以组合形成的数据类型，特点是可以容纳多种或多个单一的简单数据类型的数据，多数是基于某一种数学模型创建的。</p>
+<p>字符串(string) 由多个字符组成的数据类型，可以直接写成由双引号括起的内容，如：”hello” 。下面是Scheme中的字符串定义和相关操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/6aDJbmmHbi.png" alt="mark"></p>
+<p>字符串还可以用下面的形式定义：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/L8cLG685A9.png" alt="mark"></p>
+<p>字符串中出现引号时用反斜线加引号代替，如：”abc\”def” 。</p>
+<p><strong>点对(pair)</strong></p>
+<p>我把它译成”点对”，它是一种非常有趣的类型，也是一些其它类型的基础类型，它是由一个点和被它分隔开的两个所值组成的。形如： (1 . 2) 或 (a . b) ，注意的是点的两边有空格。</p>
+<p>这是最简单的复合数据类型，同是它也是其它复合数据类型的基础类型，如列表类型（list）就是由它来实现的。</p>
+<p>其中在点前面的值被称为 car ，在点后面的值被称为 cdr ，car和cdr同时又成为取pair的这两个值的过程，如：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/88edA7iIdF.png" alt="mark"></p>
+<p><strong>列表(list)</strong></p>
+<p>列表是由多个相同或不同的数据连续组成的数据类型，它是编程中最常用的复合数据类型之一，很多过程操作都与它相关。下面是在Scheme中列表的定义和相关操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/5e8c8BEAdi.png" alt="mark"></p>
+<p>make-list用来创建列表，第一个参数是列表的长度，第二个参数是列表中添充的内容；还可以实现多重列表，即列表的元素也是列表，如：(list (list 1 2 3) (list 4 5 6))。</p>
+<p><strong>列表与pair的关系</strong></p>
+<p>回过头来，我们再看看下面的定义：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/GDkgjCC0EB.png" alt="mark"></p>
+<p>由上可见，a本来是我们上面定义的点对，最后形成的却是列表。事实上列表是在点对的基础上形成的一种特殊格式。</p>
+<p>再看下面的代码：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/8cAlE039mC.png" alt="mark"></p>
+<p>由此可见，list是pair的子类型，list一定是一个pair，而pair不是list。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/d872HDhIa6.png" alt="mark"></p>
+<p>其cdr又是一个列表，可见用于pair的操作过程大多可以用于list。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/D37aEKF5j7.png" alt="mark"></p>
+<p>上面的操作中用到的cadr，cdddr等过程是专门对PAIR型数据再复合形成的数据操作的过程，最多可以支持在中间加四位a或d，如cdddr，caaddr等。</p>
+<p>下图表示了由pairs定义形成的列表：</p>
+<p><img src="https://www.ibm.com/developerworks/cn/linux/l-schm/images/image003.png" alt="img"></p>
+<p>这个列表可以由pair定义为如下形式：<code>(define x (cons &#39;a (cons &#39;b (cons &#39;c (cons &#39;d &#39;())))))</code>而列表的实际内容则为：(a b c d)由pair类型还可以看出它可以轻松的表示树型结构，尤其是标准的二叉树。</p>
+<p><strong>向量（vector）</strong></p>
+<p>可以说是一个非常好用的类型 ，是一种元素按整数来索引的对象，异源的数据结构，在占用空间上比同样元素的列表要少，在外观上：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/5mcegJbiHK.png" alt="mark"></p>
+<p>vector是一种比较常用的复合类型，它的元素索引从0开始，至第 n-1 结束，这一点有点类似C语言中的数组。关于向量表（vector）的常用操作过程：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/KAjLEKklA4.png" alt="mark"></p>
+<p>make-vector用来创建一个向量表，第一个参数是数量，后一个参数是添充的值，这和列表中的make-list非常相似。我们可以看出，在Scheme语言中，每种数据类型都有一些基本的和它相关的操作过程，如字符串，列表等相关的操作，这些操作过程都很有规律，过程名的单词之间都用-号隔开，很容易理解。对于学过C++的朋友来说，更类似于某个对象的方法，只不过表现的形式不同了。</p>
+<h2 id="4-3-类型的判断、比较、运算、转换与方法"><a href="#4-3-类型的判断、比较、运算、转换与方法" class="headerlink" title="4.3 类型的判断、比较、运算、转换与方法"></a>4.3 类型的判断、比较、运算、转换与方法</h2><p><strong>类型判断</strong></p>
+<p>Scheme语言中所有判断都是用类型名加问号再加相应的常量或变量构成，形如：</p>
+<blockquote>
+<p>(类型? 变量)</p>
+</blockquote>
+<p>Scheme语言在类型定义中有比较严格的界定，如在C语言等一些语言中数字0来代替逻辑类型数据False，在Scheme语言中是不允许的。</p>
+<p>以下为常见的类型判断和附加说明：</p>
+<p>逻辑型：</p>
+<blockquote>
+<p>(boolean? #t) =&gt; #t</p>
+<p>(boolean? #f) =&gt; #t  因为#t和#f都是boolean类型，所以其值为#t</p>
+<p>(boolean? 2)  =&gt; #f  因为2是数字类型，所以其值为 #f</p>
+</blockquote>
+<p>字符型</p>
+<blockquote>
+<p>(char? #\space) =&gt; #t</p>
+<p>(char? #\newline)   =&gt; #t    以上两个特殊字符：空格和换行</p>
+<p>(char? #\f)     =&gt; #t    小写字母 f</p>
+<p>(char? #\;)     =&gt; #t    分号 ;</p>
+<p>(char? #\5)     =&gt; #t    字符 5    ，以上这些都是正确的，所以返回值都是 #t</p>
+<p>(char? 5)       =&gt; #f    这是数字 5 ，不是字符类型，所以返回 #f</p>
+</blockquote>
+<p>数字型</p>
+<blockquote>
+<p>(integer? 1)        =&gt; #t</p>
+<p>(integer? 2345) =&gt; #t</p>
+<p>(integer? -90)      =&gt; #t    以上三个数均为整数</p>
+<p>(integer? 8.9)      =&gt; #f   8.9不整数</p>
+<p>(rational? 22/7)    =&gt; #t</p>
+<p>(rational? 2.3)     =&gt; #t</p>
+<p>(real? 1.2)     =&gt; #t</p>
+<p>(real? 3.14159) =&gt; #t</p>
+<p>(real? -198.34)     =&gt; #t    以上三个数均为实数型</p>
+<p>real? 23)      =&gt; #t   因为整型属于实型</p>
+<p>(number? 5) =&gt; #t</p>
+<p>(number? 2.345) =&gt; #t</p>
+<p>(number? 22/7)  =&gt; #t</p>
+</blockquote>
+<p>其它型:</p>
+<blockquote>
+<p>(null? ‘())     =&gt; #t  ; null意为空类型，它表示为 ‘() ，即括号里什么都没有的符号</p>
+<p>(null? 5)       =&gt; #f</p>
+<p>define x 123)      定义变量x其值为123</p>
+<p>(symbol? x)     =&gt; #f</p>
+<p>(symbol? ‘x)        =&gt; #t  ; 此时 ‘x 为符号x，并不表示变量x的值</p>
+</blockquote>
+<p>在Scheme语言中如此众多的类型判断功能，使得Scheme语言有着非常好的自省功能。即在判断过程的参数是否附合过程的要求。</p>
+<p><strong>比较运算</strong></p>
+<p>Scheme语言中可以用&lt;，&gt;，&lt;=，&gt;=，= 来判断数字类型值或表达式的关系，如判断变量x是否等于零，它的形式是这样的：(= x 0) ，如x的值为0则表达式的值为#t，否则为#f。</p>
+<p>还有下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/6blf3KFi1K.png" alt="mark"></p>
+<p>以上两个form功能相同，说明 eqv? 也可以用于数字的判断。</p>
+<p>在Scheme语言中有三种相等的定义，两个变量正好是同一个对象；两个对象具有相同的值；两个对象具有相同的结构并且结构中的内容相同。除了上面提到的符号判断过程和eqv?外，还有eq?和equal?也是判断是否相等的过程。</p>
+<p><strong>eq?，eqv?，equal?</strong></p>
+<p>eq?，eqv?和equal?是三个判断两个参数是否相等的过程，其中eq?和eqv?的功能基本是相同的，只在不同的Scheme语言中表现不一样。</p>
+<p>eq?是判断两个参数是否指向同一个对象，如果是才返回#t；equal?则是判断两个对象是否具有相同的结构并且结构中的内容是否相同，它用eq?来比较结构中成员的数量；equal?多用来判断点对，列表，向量表，字符串等复合结构数据类型。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/De12JfEagj.png" alt="mark"></p>
+<p>以上操作说明了eq? 和equal? 的不同之处，下面的操作更是证明了这一点：</p>
+<p><strong>算术运算</strong></p>
+<p>Scheme语言中的运算符有：<br>+ , - , * , / 和 expt (指数运算)<br>其中 - 和 / 还可以用于单目运算，如：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/ha4fj10aa1.png" alt="mark"></p>
+<p>此外还有许多扩展的库提供了很多有用的过程，</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/G3GFEfjEKD.png" alt="mark"></p>
+<p>除了max，min，abs外，还有很多数学运算过程，这要根据你用的Scheme语言的运行环境有关，不过它们大多是相同的。在R5RS中规定了很多运算过程，在R5RS的参考资料中可以很容易找到。</p>
+<p><strong>转换</strong></p>
+<p>Scheme语言中用符号组合”-&gt;”来标明类型间的转换（很象C语言中的指针）的过程，就象用问号来标明类型判断过程一样。下面是一些常见的类型转换过程：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/lDGe92e74L.png" alt="mark"></p>
+<h1 id="5-过程定义"><a href="#5-过程定义" class="headerlink" title="5 过程定义"></a>5 过程定义</h1><h2 id="5-1-过程（Procedure）"><a href="#5-1-过程（Procedure）" class="headerlink" title="5.1 过程（Procedure）"></a>5.1 过程（Procedure）</h2><p>在Scheme语言中，过程相当于C语言中的函数，不同的是Scheme语言过程是一种数据类型，这也是为什么Scheme语言将程序和数据作为同一对象处理的原因。如果我们在Scheme提示符下输入加号然后回车，会出现下面的情况：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/de8e039kLa.png" alt="mark"></p>
+<p>这告诉我们”+”是一个过程，而且是一个原始的过程，即Scheme语言中最基础的过程，在Scheme中内部已经实现的过程，这和类型判断一样，如boolean?等，它们都是Scheme语言中最基本的定义。注意：不同的Scheme语言实现环境，出现的提示信息可能不尽相同，但意义是一样的。</p>
+<p>define不仅可以定义变量，还可以定义过程，因在Scheme语言中过程（或函数）都是一种数据类型，所以都可以通过define来定义。不同的是标准的过程定义要使用lambda这一关键字来标识。</p>
+<h2 id="5-2-Lambda关键字"><a href="#5-2-Lambda关键字" class="headerlink" title="5.2 Lambda关键字"></a>5.2 Lambda关键字</h2><p>Scheme语言中可以用lambda来定义过程，其格式如下：<br>(define 过程名 ( lambda (参数 …) (操作过程 …)))</p>
+<p>我们可以自定义一个简单的过程，如下：</p>
+<blockquote>
+<p>(define add5 (lambda (x) (+ x 5)))</p>
+</blockquote>
+<p>此过程需要一个参数，其功能为返回此参数加5 的值，如：</p>
+<blockquote>
+<p>(add5 11) =&gt; 16</p>
+</blockquote>
+<p>下面是简单的求平方过程square的定义：</p>
+<blockquote>
+<p>(define square (lambda (x)  (* x x)))</p>
+</blockquote>
+<h2 id="5-3-与lambda相同的另一种方式"><a href="#5-3-与lambda相同的另一种方式" class="headerlink" title="5.3  与lambda相同的另一种方式"></a>5.3  与lambda相同的另一种方式</h2><p>在Scheme语言中，也可以不用lambda，而直接用define来定义过程，它的格式为：<br>(define (过程名 参数) (过程内容 …))</p>
+<p>如下面操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/75K8jdJFB8.png" alt="mark"></p>
+<p>再看下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/icHceLL3fL.png" alt="mark"></p>
+<h2 id="5-4-更多的过程定义"><a href="#5-4-更多的过程定义" class="headerlink" title="5.4 更多的过程定义"></a>5.4 更多的过程定义</h2><p>上面定义的过程fun有三个参数，其中第一个参数proc也是一个操作过程（因为在Scheme语言中过程也是一种数据，可以作为过程的参数），另外两个参数是数值，所以会出现上面的调用结果。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/AhHl5dhJ23.png" alt="mark"></p>
+<p>继续上面操作，我们定义一个过程add，将add作为参数传递给fun过程，得出和(fun + 100 200)相同的结果。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/29LiHKKC1c.png" alt="mark"></p>
+<p>上面的 (lambda(x) (+ x x)) 事实上是简单的过程定义，在后面直接加上操作参数5，得出结果10，这样实现了匿名过程，直接用过程定义来操作参数，得出运算结果。</p>
+<p>通过上面的操作，相信你已初步了解了过程的用法。 既然过程是一种数据类型，所以将过程作为过程的参数是完全可以的。以下过程为判断参数是否为过程，给出一个参数，用 procedure? 来判断参数是否为过程，采用if结构（关于if结构见下面的介绍）：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/2C3Adi6hLG.png" alt="mark"></p>
+<p>上面的过程就体现了Scheme语言的参数自省（辨别）能力，’0’是数字型，所以返回notaprocedure；而’+’是一个最基础的操作过程，所以返回isaprocedure。</p>
+<h2 id="5-5-过程的嵌套定义"><a href="#5-5-过程的嵌套定义" class="headerlink" title="5.5  过程的嵌套定义"></a>5.5  过程的嵌套定义</h2><p>在Scheme语言中，过程定义也可以嵌套，一般情况下，过程的内部过程定义只有在过程内部才有效，相当C语言中的局部变量。</p>
+<p>如下面的代码的最终结果是50：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/kaj2F6daj7.png" alt="mark"></p>
+<p>此时过程add只在fix过程内部起做用，这事实上涉及了过程和变量的绑定，可以参考下面的关于过程绑定（let，let* 和letrec）的介绍。</p>
+<p>过程是初学者难理解的一个关键，随着过程参数的增加和功能的增强，过程的内容变得越来越复杂，小括号也会更多，如果不写出清晰的代码的话，读代码也会成为一个难题。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】03：与UDF通信/" rel="next" title="【Fluent GUI】03：与UDF通信">
+                <i class="fa fa-chevron-left"></i> 【Fluent GUI】03：与UDF通信
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Scheme语言简介"><span class="nav-text">1 Scheme语言简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-常用的编辑器"><span class="nav-text">2 常用的编辑器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Scheme基本概念"><span class="nav-text">3 Scheme基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-注释"><span class="nav-text">3.1 注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Scheme用做脚本语言"><span class="nav-text">3.2 Scheme用做脚本语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-块-form"><span class="nav-text">3.3  块(form)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-form嵌套"><span class="nav-text">3.4 form嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-变量定义"><span class="nav-text">3.5  变量定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-更改变量的值"><span class="nav-text">3.6  更改变量的值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4．数据类型"><span class="nav-text">4．数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-简单数据类型"><span class="nav-text">4.1 简单数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-复合数据类型"><span class="nav-text">4.2 复合数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-类型的判断、比较、运算、转换与方法"><span class="nav-text">4.3 类型的判断、比较、运算、转换与方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-过程定义"><span class="nav-text">5 过程定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-过程（Procedure）"><span class="nav-text">5.1 过程（Procedure）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Lambda关键字"><span class="nav-text">5.2 Lambda关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-与lambda相同的另一种方式"><span class="nav-text">5.3  与lambda相同的另一种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-更多的过程定义"><span class="nav-text">5.4 更多的过程定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-过程的嵌套定义"><span class="nav-text">5.5  过程的嵌套定义</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="以下内容来自https://www.ibm.com/developerworks/cn/linux/l-schm/index2.html。 1 常用结构2.1 顺序结构也可以说成由多个form组成的form，用begin来将多个form放在一对小括号内，最终形成一个form。格式为：(begin form1 form2 …) 如用Scheme语言写成的经典的helloworld程序是如下样子的：">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent GUI】05：Scheme语言[下]">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="以下内容来自https://www.ibm.com/developerworks/cn/linux/l-schm/index2.html。 1 常用结构2.1 顺序结构也可以说成由多个form组成的form，用begin来将多个form放在一对小括号内，最终形成一个form。格式为：(begin form1 form2 …) 如用Scheme语言写成的经典的helloworld程序是如下样子的：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/86Lj3G32F0.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/45FhfIllEF.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/D0LE5FIBed.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/7J1L6emhk6.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/cec6h7DFhJ.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/d165EDK108.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/Jgbmb9jGl9.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/FE02A0F6me.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/Dlmcb8jgDE.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/3d9J29Eaff.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/he62kIDgLm.png">
+<meta property="og:image" content="https://www.ibm.com/developerworks/cn/linux/l-schm/images/image002.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/GK7b6fCaAl.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/2CbF30hgJ1.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/CBI9Gj3369.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/cbIGlkAbCA.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/8FFJb57ecc.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/c8d0h7BBlb.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/F3j0f3g07a.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/3H3Gee6aAI.png">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.724Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent GUI】05：Scheme语言[下]">
+<meta name="twitter:description" content="以下内容来自https://www.ibm.com/developerworks/cn/linux/l-schm/index2.html。 1 常用结构2.1 顺序结构也可以说成由多个form组成的form，用begin来将多个form放在一对小括号内，最终形成一个form。格式为：(begin form1 form2 …) 如用Scheme语言写成的经典的helloworld程序是如下样子的：">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/86Lj3G32F0.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent GUI】05：Scheme语言[下] | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent GUI】05：Scheme语言[下]
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以下内容来自<a href="https://www.ibm.com/developerworks/cn/linux/l-schm/index2.html。" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-schm/index2.html。</a></p>
+<h1 id="1-常用结构"><a href="#1-常用结构" class="headerlink" title="1 常用结构"></a>1 常用结构</h1><h2 id="2-1-顺序结构"><a href="#2-1-顺序结构" class="headerlink" title="2.1 顺序结构"></a>2.1 顺序结构</h2><p>也可以说成由多个form组成的form，用begin来将多个form放在一对小括号内，最终形成一个form。格式为：(begin form1 form2 …)</p>
+<p>如用Scheme语言写成的经典的helloworld程序是如下样子的：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/86Lj3G32F0.png" alt="mark"></p>
+<h2 id="2-2-if结构"><a href="#2-2-if结构" class="headerlink" title="2.2 if结构"></a>2.2 if结构</h2><p>Scheme语言的if结构有两种格式，一种格式为：(if 测试 过程1 过程2)，即测试条件成立则执行过程1，否则执行过程2。例如下面代码：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/45FhfIllEF.png" alt="mark"></p>
+<p>根据类型判断来实现自省功能，下面代码判断给定的参数是否为字符串：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/D0LE5FIBed.png" alt="mark"></p>
+<p>如执行 (fun 123) 则返回值为”not a string”，这样的功能在C++或JAVA中实现的话可能会很费力气。</p>
+<h2 id="2-3-cond结构"><a href="#2-3-cond结构" class="headerlink" title="2.3 cond结构"></a>2.3 cond结构</h2><p>Scheme语言中的cond结构类似于C语言中的switch结构，cond的格式为：</p>
+<blockquote>
+<p>(cond ((测试) 操作) … (else 操作))</p>
+</blockquote>
+<p>如下是在Guile中的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/7J1L6emhk6.png" alt="mark"></p>
+<p>上面程序代码中，我们定义了过程w，它有一个参数x，如果x的值大于0，则返回符号upper，如x的值小于0则返回符号lower，如x 的值为0则返回符号equal。</p>
+<p>cond可以用if形式来写，上面的过程可以如下定义：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/cec6h7DFhJ.png" alt="mark"></p>
+<p>这在功能上是和cond一样的，可以看出cond实际上是实现了if的一种多重嵌套。</p>
+<h2 id="2-4-case结构"><a href="#2-4-case结构" class="headerlink" title="2.4 case结构"></a>2.4 case结构</h2><p>case结构和cond结构有点类似，它的格式为：</p>
+<blockquote>
+<p>(case (表达式) ((值) 操作))    … (else 操作)))</p>
+</blockquote>
+<p>case结构中的值可以是复合类型数据，如列表，向量表等，只要列表中含有表达式的这个结果，则进行相应的操作，如下面的代码：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/d165EDK108.png" alt="mark"></p>
+<p>上面的例子返回结果是composite，因为列表(1 4 6 8 9)中含有表达式(* 2 3)的结果6；下面是在Guile中定义的func过程，用到了case结构：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/Jgbmb9jGl9.png" alt="mark"></p>
+<h2 id="2-5-and结构"><a href="#2-5-and结构" class="headerlink" title="2.5 and结构"></a>2.5 and结构</h2><p>and结构与逻辑与运算操作类似，and后可以有多个参数，只有它后面的参数的表达式的值都为#t时，它的返回值才为#t，否则为#f。看下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/FE02A0F6me.png" alt="mark"></p>
+<p>如果表达式的值都不是boolean型的话，返回最后一个表达式的值，如下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/Dlmcb8jgDE.png" alt="mark"></p>
+<h2 id="2-6-or结构"><a href="#2-6-or结构" class="headerlink" title="2.6 or结构"></a>2.6 or结构</h2><p>or结构与逻辑或运算操作类似，or后可以有多个参数，只要其中有一个参数的表达式值为#t，其结果就为#t，只有全为#f时其结果才为#f。如下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/3d9J29Eaff.png" alt="mark"></p>
+<p>我们还可以用and和or结构来实现较复杂的判断表达式，如在C语言中的表达式：</p>
+<blockquote>
+<p>((x &gt; 100) &amp;&amp; (y &lt; <code>100</code>)) 和 ((x &gt; 100) || (y &gt; 100))</p>
+</blockquote>
+<p>在Scheme中可以表示为：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/he62kIDgLm.png" alt="mark"></p>
+<p>Scheme语言中只有if结构是系统原始提供的，其它的cond，case，and，or，另外还有do，when，unless等都是可以用宏定义的方式来定义的，这一点充分体现了Scheme的元语言特性。</p>
+<h1 id="2-递归调用"><a href="#2-递归调用" class="headerlink" title="2 递归调用"></a>2 递归调用</h1><h2 id="2-1-用递归实现阶乘"><a href="#2-1-用递归实现阶乘" class="headerlink" title="2.1 用递归实现阶乘"></a>2.1 用递归实现阶乘</h2><p>在Scheme语言中，递归是一个非常重要的概念，可以编写简单的代码很轻松的实现递归调用，如下面的阶乘过程定义：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span>  factoral (<span class="name"><span class="builtin-name">lambda</span></span> (x)</span><br><span class="line">          (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">&lt;=</span></span> x <span class="number">1</span>) <span class="number">1</span></span><br><span class="line">              (<span class="name"><span class="builtin-name">*</span></span> x (<span class="name">factoral</span> (<span class="name"><span class="builtin-name">-</span></span> x <span class="number">1</span>))))))</span><br></pre></td></tr></table></figure>
+<p>我们可以将下面的调用(factoral 4)，即4的阶乘的运算过程图示如下：</p>
+<p><img src="https://www.ibm.com/developerworks/cn/linux/l-schm/images/image002.jpg" alt="img"></p>
+<p>以下为factoral过程在Guile中的运行情况：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; (define factoral (lambda (x) (if (&lt;= x 1) 1 (* x (factoral (- x 1))))))</span><br><span class="line">&gt; factoral</span><br><span class="line">#&lt;procedure factoral (x)&gt;</span><br><span class="line">&gt; (factoral 4)</span><br><span class="line"><span class="number">24</span></span><br></pre></td></tr></table></figure>
+<p>另一种递归方式<strong>下面是一另一种递归方式的定义：</strong></p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">factoral</span> n)</span><br><span class="line">    (<span class="name"><span class="builtin-name">define</span></span> (<span class="name">iter</span> product counter)</span><br><span class="line">        (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">&gt;</span></span> counter n)</span><br><span class="line">            product</span><br><span class="line">            (<span class="name">iter</span> (<span class="name"><span class="builtin-name">*</span></span> counter product) (<span class="name"><span class="builtin-name">+</span></span> counter <span class="number">1</span>))))</span><br><span class="line">    (<span class="name">iter</span> <span class="number">1</span> <span class="number">1</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">display</span></span> (<span class="name">factoral</span> <span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>这个定义的功能和上面的完全相同，只是实现的方法不一样了，我们在过程内部实现了一个过程iter，它用counter参数来计数，调用时从1开始累计，这样它的展开过程正好和我们上面的递归过程的从4到1相反，而是从1到4。</p>
+<h2 id="2-2-循环的实现"><a href="#2-2-循环的实现" class="headerlink" title="2.2 循环的实现"></a>2.2 循环的实现</h2><p>Scheme语言中循环采用do来实现，如：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">do</span></span> ((<span class="name">vec</span> (<span class="name"><span class="builtin-name">make-vector</span></span> <span class="number">5</span>))</span><br><span class="line">     (<span class="name">i</span> <span class="number">0</span> (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)))</span><br><span class="line">  ((<span class="name"><span class="builtin-name">=</span></span> i <span class="number">5</span>) vec)</span><br><span class="line">  (<span class="name"><span class="builtin-name">vector-set!</span></span> vec i i))</span><br></pre></td></tr></table></figure>
+<p>循环结构可以用递归来很轻松的实现（在Scheme语言中只有通过递归才能实现循环）。对于用惯了C语言循环的朋友，在Scheme中可以用递归简单实现：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> loop</span><br><span class="line">         (<span class="name"><span class="builtin-name">lambda</span></span>(x y)</span><br><span class="line">             (<span class="name"><span class="builtin-name">when</span></span> (<span class="name"><span class="builtin-name">&lt;=</span></span> x y)</span><br><span class="line">                (<span class="name"><span class="builtin-name">begin</span></span> (<span class="name"><span class="builtin-name">display</span></span> x) (<span class="name"><span class="builtin-name">display</span></span> <span class="literal">#\space</span>) (<span class="name"><span class="builtin-name">set!</span></span> x (<span class="name"><span class="builtin-name">+</span></span> x <span class="number">1</span>))</span><br><span class="line">                    (<span class="name">loop</span> x y)))))</span><br></pre></td></tr></table></figure>
+<p>这只是一种简单的循环定义，过程有两个参数，第一个参数是循环的初始值，第二个参数是循环终止值，每次增加1。相信读者朋友一定会写出更漂亮更实用的循环操作来的。</p>
+<h1 id="3-变量和过程的绑定"><a href="#3-变量和过程的绑定" class="headerlink" title="3 变量和过程的绑定"></a>3 变量和过程的绑定</h1><h2 id="3-1-let，let-，letrec"><a href="#3-1-let，let-，letrec" class="headerlink" title="3.1 let，let*，letrec"></a>3.1 let，let*，letrec</h2><p>在多数编程语言中都有关于变量的存在的时限问题，Scheme语言中用let，let*和letrec来确定变量的存在的时限问题，即局部变量和全局变量，一般情况下，全局变量都用define来定义，并放在过程代码的外部；而局部变量则用let等绑定到过程内部使用。</p>
+<p>用let可以将变量或过程绑定在过程的内部，即实现局部变量。下面的代码显示了let的用法（注意多了一层括号）：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/GK7b6fCaAl.png" alt="mark"></p>
+<p>它的格式是：(let ((…)…) …)，下面是稍复杂的用法：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/2CbF30hgJ1.png" alt="mark"></p>
+<p>以上是Scheme中的代码实现情况。它的实现过程大致是：(foo 8) 展开后形成 (bar 5 8)，再展开后形成 (+ (* 5 8) 5) ，最后其值为45。</p>
+<p>再看下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/CBI9Gj3369.png" alt="mark"></p>
+<p>let的绑定在过程内有效，过程外则无效，这和上面提到的过程的嵌套定是一样的，上面的iszero?过程在操作过程内定义并使用的，操作结束后再另行引用则无效，显示过程未定义出错信息。</p>
+<p>下面操作演示了let*的用法：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/cbIGlkAbCA.png" alt="mark"></p>
+<p>还有letrec，看下面的操作过程：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/8FFJb57ecc.png" alt="mark"></p>
+<p>上面的操作过程中，内部定义了两个判断过程even?和odd?，这两个过程是互相递归引用的，如果将letrec换成let或let*都会不正常，因为letrec是将内部定义的过程或变量间进行相互引用的。看下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/c8d0h7BBlb.png" alt="mark"></p>
+<p>letrec帮助局部过程实现递归的操作，这不仅在letrec绑定的过程内，而且还包括所有初始化的东西，这使得在编写较复杂的过程中经常用到letrec，也成了理解它的一个难点。</p>
+<h2 id="3-2-apply"><a href="#3-2-apply" class="headerlink" title="3.2 apply"></a>3.2 apply</h2><p>apply的功能是为数据赋予某一操作过程，它的第一个参数必需是一个过程，随后的其它参数必需是列表，如：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/F3j0f3g07a.png" alt="mark"></p>
+<p>以上定义了求和过程sum和求平均的过程avg，其中求和的过程sum中用到了apply来绑定”+”过程操作到列表，结果返回列表中所有数的总和。</p>
+<h2 id="3-3-map"><a href="#3-3-map" class="headerlink" title="3.3 map"></a>3.3 map</h2><p>map的功能和apply有些相似，它的第一个参数也必需是一个过程，随后的参数必需是多个列表，返回的结果是此过程来操作列表后的值，如下面的操作：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/3H3Gee6aAI.png" alt="mark"></p>
+<p>除了apply，map以外，Scheme语言中还有很多，诸如：eval，delay，for-each，force，call-with-current-continuation等过程绑定的操作定义，它们都无一例外的提供了相当灵活的数据处理能力，也就是另初学者望而生畏的算法，当你仔细的体会了运算过程中用到的简直妙不可言的算法后，你就会发现Scheme语言设计者的思想是多么伟大。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】01：计算雷诺数/" rel="next" title="【Fluent GUI】01：计算雷诺数">
+                <i class="fa fa-chevron-left"></i> 【Fluent GUI】01：计算雷诺数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/" rel="prev" title="【Fluent GUI】07：控件">
+                【Fluent GUI】07：控件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-常用结构"><span class="nav-text">1 常用结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-顺序结构"><span class="nav-text">2.1 顺序结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-if结构"><span class="nav-text">2.2 if结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-cond结构"><span class="nav-text">2.3 cond结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-case结构"><span class="nav-text">2.4 case结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-and结构"><span class="nav-text">2.5 and结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-or结构"><span class="nav-text">2.6 or结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-递归调用"><span class="nav-text">2 递归调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-用递归实现阶乘"><span class="nav-text">2.1 用递归实现阶乘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-循环的实现"><span class="nav-text">2.2 循环的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-变量和过程的绑定"><span class="nav-text">3 变量和过程的绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-let，let-，letrec"><span class="nav-text">3.1 let，let*，letrec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-apply"><span class="nav-text">3.2 apply</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-map"><span class="nav-text">3.3 map</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

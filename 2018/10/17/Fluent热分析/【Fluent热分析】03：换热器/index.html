@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例演示Fluent中的Heat Exchanger模型。 1 案例介绍本案例利用Heat Exchanger模块模拟换热器换热。 如图所示为一个单程换热器。  流动参数如表所示。| 边界参数            | 参数中值       || ————— | ———- || 空气入口温度（Ta_in）   | 48.89℃     || 冷却液入口温度(Tc_in)  | 115.56 ℃">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent热分析】03：换热器">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="本案例演示Fluent中的Heat Exchanger模型。 1 案例介绍本案例利用Heat Exchanger模块模拟换热器换热。 如图所示为一个单程换热器。  流动参数如表所示。| 边界参数            | 参数中值       || ————— | ———- || 空气入口温度（Ta_in）   | 48.89℃     || 冷却液入口温度(Tc_in)  | 115.56 ℃">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/64626697.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/17295314.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/76109676.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/90628515.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/23605964.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/84853199.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/78004541.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/24766782.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/79725865.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/70635871.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/22980713.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/56696757.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-5/33225939.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/84724434.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/50160305.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/81790738.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/20289254.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/81007935.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/30925765.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/50831221.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/45834975.jpg">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/50977843.jpg">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent热分析】03：换热器">
+<meta name="twitter:description" content="本案例演示Fluent中的Heat Exchanger模型。 1 案例介绍本案例利用Heat Exchanger模块模拟换热器换热。 如图所示为一个单程换热器。  流动参数如表所示。| 边界参数            | 参数中值       || ————— | ———- || 空气入口温度（Ta_in）   | 48.89℃     || 冷却液入口温度(Tc_in)  | 115.56 ℃">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-1-6/64626697.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent热分析】03：换热器 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent热分析】03：换热器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:34:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:34:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】03：换热器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例演示Fluent中的Heat Exchanger模型。</p>
+<h1 id="1-案例介绍"><a href="#1-案例介绍" class="headerlink" title="1 案例介绍"></a>1 案例介绍</h1><p>本案例利用Heat Exchanger模块模拟换热器换热。</p>
+<p>如图所示为一个单程换热器。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/64626697.jpg" alt=""></p>
+<p>流动参数如表所示。<br>| 边界参数            | 参数中值       |<br>| ————— | ———- |<br>| 空气入口温度（Ta_in）   | 48.89℃     |<br>| 冷却液入口温度(Tc_in)  | 115.56 ℃   |<br>| 空气质量流量(mdot_a)  | 1.140 kg/s |<br>| 冷却液质量流量(mdot_c) | 2.87 kg/s  |<br>| 总散热量            | 57345.96 w |</p>
+<p>利用输入边界条件计算得到总散热量，并与57345.96 w进行对比，以验证模型。</p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><h2 id="2-1-启动Fluent"><a href="#2-1-启动Fluent" class="headerlink" title="2.1 启动Fluent"></a>2.1 启动Fluent</h2><ul>
+<li>启动Fluent，激活选项<strong>Double Precision</strong></li>
+<li>选择<strong>3D</strong>模式，点击<strong>OK</strong>按钮启动Fluent</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/17295314.jpg" alt=""></p>
+<h2 id="2-2-读取网格"><a href="#2-2-读取网格" class="headerlink" title="2.2 读取网格"></a>2.2 读取网格</h2><ul>
+<li>利用菜单<strong>File → Read → Mesh…</strong>打开文件选择对话框，选择网格文件<strong>wedge.msh.gz</strong></li>
+</ul>
+<p>计算网格如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/76109676.jpg" alt=""></p>
+<h2 id="2-3-缩放网格"><a href="#2-3-缩放网格" class="headerlink" title="2.3 缩放网格"></a>2.3 缩放网格</h2><ul>
+<li>双击模型树节点<strong>General</strong>，点击右侧面板按钮<strong>Scale…</strong>，弹出模型缩放对话框</li>
+<li>设置<strong>Mesh Was Created In</strong>选项为<strong>mm</strong>，点击按钮<strong>Scale</strong>缩放网格</li>
+<li>点击<strong>Close</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/90628515.jpg" alt=""></p>
+<h2 id="2-4-Models设置"><a href="#2-4-Models设置" class="headerlink" title="2.4  Models设置"></a>2.4  Models设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Energy</strong>，点击弹出菜单项<strong>On</strong>激活能量方程</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/23605964.jpg" alt=""></p>
+<ul>
+<li>双击模型树节点<strong>Models &gt; Heat Exchanger</strong>，弹出Heat Exchanger Model参数设置对话框，激活选项<strong>Ungrouped Macro Model</strong>及<strong>Macro Model Group</strong>，如下图所示</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/84853199.jpg" alt=""></p>
+<ul>
+<li>点击Ungrouped Macro Model选项后方的<strong>Define…</strong>按钮，弹出参数设置对话框</li>
+<li>打开<strong>Model Data</strong>标签页，激活选项<strong>Fixed Inlet Temperature</strong>，设置<strong>Auxiliary Fluid Temperature</strong>为<strong>115.56℃</strong>，设置<strong>Primary Fluid Temperature</strong>为<strong>48.89001℃</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/78004541.jpg" alt=""></p>
+<ul>
+<li>点击上图中按钮<strong>Heat Transfer Data…</strong>弹出换热参数设置对话框，点击按钮<strong>Read…</strong>，在弹出的文件选择对话框中选择文件<strong>rad.tab</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/24766782.jpg" alt=""></p>
+<p>软件读入文件后自动显示文件内容，如下图所示，对应着主流体及副流体质量流量条件下的换热量矩阵。点击<strong>OK</strong>按钮关闭对话框返回至Heat Exchanger Model参数设置对话框。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/79725865.jpg" alt=""></p>
+<ul>
+<li>切换至<strong>Geometry</strong>标签页，设置<strong>Number of Passes</strong>为<strong>1</strong>，设置<strong>Number of Rows/Pass</strong>为<strong>1</strong>，设置<strong>Number of Columns/Pass</strong>为<strong>1</strong></li>
+<li>设置<strong>Auxiliary Fluid Inlet Direction(Height)</strong>为<strong>(0 -1 0)</strong></li>
+<li>设置<strong>Pass-to-Pass Direction(width)</strong>为<strong>(1 0 0)</strong></li>
+<li>点击<strong>Apply</strong>按钮确认设置，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/70635871.jpg" alt=""></p>
+<ul>
+<li>切换到<strong>Auxiliary Fluid</strong>标签页，设置<strong>Auxiliary Fluid Specific Heat</strong>为<strong>3559 j/kg-k</strong></li>
+<li>设置<strong>Auxiliary Fluid Flow Rate (kg/s)</strong>为<strong>2.870001</strong></li>
+<li>设置<strong>Inlet Temperature (c)</strong>为<strong>115.56 ℃</strong></li>
+<li>点击<strong>Apply</strong>按钮并关闭Ungrouped Macro Heat Exchanger对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/22980713.jpg" alt=""></p>
+<h2 id="2-5-Boundary-Conditions"><a href="#2-5-Boundary-Conditions" class="headerlink" title="2.5 Boundary Conditions"></a>2.5 Boundary Conditions</h2><ul>
+<li>双击模型树节点<strong>Boundary Conditions &gt; inlet</strong>，弹出质量流量入口设置对话框</li>
+<li>设置<strong>Mass Flow Rate</strong>为<strong>1.14 kg/s</strong>，设置<strong>Direction Specification Method</strong>为<strong>Normal to Boundary</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/56696757.jpg" alt=""></p>
+<blockquote>
+<p>注：一般情况下不可压缩流动计算，速度入口要比流量入口用得更多。</p>
+</blockquote>
+<ul>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Total Temperature</strong>为<strong>48.89 ℃</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-5/33225939.jpg" alt=""></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; outlet</strong>，弹出出口条件设置对话框</li>
+<li>切换至<strong>Thermal</strong>标签页，设置<strong>Backflow Total Temperature</strong>为<strong>48.89 ℃</strong></li>
+<li>点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/84724434.jpg" alt=""></p>
+<h2 id="2-6-Methods"><a href="#2-6-Methods" class="headerlink" title="2.6 Methods"></a>2.6 Methods</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Methods</strong>，右侧面板中设置<strong>Scheme</strong>为<strong>Coupled</strong></li>
+<li>激活选项<strong>Warped-Face Gradient Correction</strong>及<strong>High Order Term Relaxation</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/50160305.jpg" alt=""></p>
+<h2 id="2-7-Controls设置"><a href="#2-7-Controls设置" class="headerlink" title="2.7 Controls设置"></a>2.7 Controls设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Solution &gt; Controls</strong>，右侧面板中设置<strong>Flow Courant Number</strong>为<strong>50</strong></li>
+<li>修改<strong>Energy</strong>亚松弛因子为<strong>0.8</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/81790738.jpg" alt=""></p>
+<h2 id="2-8-Initialization"><a href="#2-8-Initialization" class="headerlink" title="2.8 Initialization"></a>2.8 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Solution &gt; Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>初始化</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/20289254.jpg" alt=""></p>
+<h2 id="2-9-Run-Calculation"><a href="#2-9-Run-Calculation" class="headerlink" title="2.9 Run Calculation"></a>2.9 Run Calculation</h2><ul>
+<li>双击模型树节点<strong>Run Calculation</strong>，右侧面板中设置<strong>Number of Iterations</strong>为<strong>200</strong></li>
+<li>点击按钮<strong>Calculation</strong>进行计算</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/81007935.jpg" alt=""></p>
+<p>大约35步迭代后计算收敛。</p>
+<h1 id="3-计算后处理"><a href="#3-计算后处理" class="headerlink" title="3 计算后处理"></a>3 计算后处理</h1><h2 id="3-1-统计总散热量"><a href="#3-1-统计总散热量" class="headerlink" title="3.1 统计总散热量"></a>3.1 统计总散热量</h2><ul>
+<li>鼠标双击模型树节点<strong>Results &gt; Reports &gt; Heat Exchanger</strong>，弹出换热器数据统计对话框，选择<strong>Option</strong>选项为<strong>Computed Heat Rejection</strong>，选择<strong>Heat Exchanger</strong>列表项<strong>rad-cells</strong>，点击按钮<strong>Compute</strong>进行计算</li>
+<li>如图所示，计算得到的散热量为<strong>57343.12 W</strong></li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/30925765.jpg" alt=""></p>
+<h2 id="3-2-计算出口平均温度"><a href="#3-2-计算出口平均温度" class="headerlink" title="3.2 计算出口平均温度"></a>3.2 计算出口平均温度</h2><ul>
+<li>鼠标双击模型树节点<strong>Results &gt;Reports &gt; Surface Integrals</strong>，弹出设置对话框</li>
+<li>设置<strong>Report Type</strong>为<strong>Area-Weighted Average</strong>，设置<strong>Field Variable</strong>为<strong>Temperature…</strong></li>
+<li>选中<strong>Surface</strong>列表项<strong>outlet</strong></li>
+<li>点击<strong>Compute</strong>按钮进行计算</li>
+</ul>
+<p>如图所示，出口平均温度为<strong>372.0195 K</strong></p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/50831221.jpg" alt=""></p>
+<h1 id="4-修改模型"><a href="#4-修改模型" class="headerlink" title="4 修改模型"></a>4 修改模型</h1><p>前面计算的换热器是单个换热单元，这里修改换热单元数量。</p>
+<ul>
+<li>双击模型树节点<strong>Models &gt; Heat Exchanger</strong>打开模型设置对话框</li>
+<li>点击<strong>Ungrouped Macro Model</strong>后方的<strong>Define…</strong>按钮打开参数设置对话框</li>
+<li>设置<strong>Number of Passes</strong>为<strong>60</strong>，设置<strong>Number of Column/Pass</strong>为<strong>70</strong></li>
+<li>点击<strong>Apply</strong>按钮并关闭对话框</li>
+</ul>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/45834975.jpg" alt=""></p>
+<ul>
+<li>双击模型树节点<strong>Run Calculation</strong>，右侧面板中点击按钮<strong>Calculate</strong>进行计算</li>
+</ul>
+<p>计算完毕后统计散热量为<strong>58234.01 W</strong>，如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/18-1-6/50977843.jpg" alt=""></p>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h1><ul>
+<li>Fluent中的Heat Exchanger模型非常复杂，不过相比较换热器真实建模来讲要简单得多</li>
+<li>Heat Exchanger模型需要输入大量的实验数据，否则计算误差非常大</li>
+<li>Dual Cell Model模型可用于构建更为复杂的换热器，不过模型也更加的复杂</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/" rel="next" title="【Fluent热分析】01：固体导热">
+                <i class="fa fa-chevron-left"></i> 【Fluent热分析】01：固体导热
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent热分析/【Fluent热分析】02：管内自然对流/" rel="prev" title="【Fluent热分析】02：管内自然对流">
+                【Fluent热分析】02：管内自然对流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-案例介绍"><span class="nav-text">1 案例介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-启动Fluent"><span class="nav-text">2.1 启动Fluent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-读取网格"><span class="nav-text">2.2 读取网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-缩放网格"><span class="nav-text">2.3 缩放网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Models设置"><span class="nav-text">2.4  Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Boundary-Conditions"><span class="nav-text">2.5 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Methods"><span class="nav-text">2.6 Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Controls设置"><span class="nav-text">2.7 Controls设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Initialization"><span class="nav-text">2.8 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-Run-Calculation"><span class="nav-text">2.9 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-计算后处理"><span class="nav-text">3 计算后处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-统计总散热量"><span class="nav-text">3.1 统计总散热量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-计算出口平均温度"><span class="nav-text">3.2 计算出口平均温度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-修改模型"><span class="nav-text">4 修改模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-总结"><span class="nav-text">5 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

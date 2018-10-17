@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文描述Fluent GUI开发中的控件。 Fluent GUI中的控件类型并不多，主要包括以下几种：  Integer Entry：整形数据输入框 Real Entry：浮点数据输入框 Text Entry：字符串输入框 Check Box：复选框 Radio Button：单选框 Button：按钮 List：列表框 Drop Down List：下拉框  1、Integer Entry利用I">
+<meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Fluent GUI】07：控件">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/index.html">
+<meta property="og:site_name" content="CFDer club">
+<meta property="og:description" content="本文描述Fluent GUI开发中的控件。 Fluent GUI中的控件类型并不多，主要包括以下几种：  Integer Entry：整形数据输入框 Real Entry：浮点数据输入框 Text Entry：字符串输入框 Check Box：复选框 Radio Button：单选框 Button：按钮 List：列表框 Drop Down List：下拉框  1、Integer Entry利用I">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/kdcBf1Ae2e.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/fjLCG3CeBH.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/ac2Hj9AEdC.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180826/fmILJ7FLd4.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180826/CbLalgBK9J.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180826/65EHBhGmFK.png">
+<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180826/cmBe6E32gD.png">
+<meta property="og:updated_time" content="2018-10-17T07:40:27.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Fluent GUI】07：控件">
+<meta name="twitter:description" content="本文描述Fluent GUI开发中的控件。 Fluent GUI中的控件类型并不多，主要包括以下几种：  Integer Entry：整形数据输入框 Real Entry：浮点数据输入框 Text Entry：字符串输入框 Check Box：复选框 Radio Button：单选框 Button：按钮 List：列表框 Drop Down List：下拉框  1、Integer Entry利用I">
+<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/kdcBf1Ae2e.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Fluent GUI】07：控件 | CFDer club</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer club</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个合格的CFDer</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="https://faee0.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer club">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Fluent GUI】07：控件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 15:38:00 / 修改时间：15:40:27" itemprop="dateCreated datePublished" datetime="2018-10-17T15:38:00+08:00">2018-10-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-GUI开发/" itemprop="url" rel="index"><span itemprop="name">Fluent GUI开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent GUI开发/【Fluent GUI】07：控件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文描述Fluent GUI开发中的控件。</p>
+<p>Fluent GUI中的控件类型并不多，主要包括以下几种：</p>
+<ul>
+<li><strong>Integer Entry</strong>：整形数据输入框</li>
+<li><strong>Real Entry</strong>：浮点数据输入框</li>
+<li><strong>Text Entry</strong>：字符串输入框</li>
+<li><strong>Check Box</strong>：复选框</li>
+<li><strong>Radio Button</strong>：单选框</li>
+<li><strong>Button</strong>：按钮</li>
+<li><strong>List</strong>：列表框</li>
+<li><strong>Drop Down List</strong>：下拉框</li>
+</ul>
+<h1 id="1、Integer-Entry"><a href="#1、Integer-Entry" class="headerlink" title="1、Integer Entry"></a>1、Integer Entry</h1><p>利用Integer Entry可以输入整数。包括正整数、零和负整数。</p>
+<p>整数输入框的使用主要包括三个函数：<strong>cx-create-integer-entry、cx-set-integer-entry及cx-show-integer-entry</strong>。</p>
+<p><strong>1、cx-create-integer-entry</strong></p>
+<p>利用函数cx-create-integer-entry可以创建整数输入框。该函数使用方式为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-integer-entry</span> parent label row column)</span><br></pre></td></tr></table></figure>
+<p>参数包括：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>object</td>
+<td>父级对象，常常为table对象</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>显示在GUI上的输入框的名称</td>
+</tr>
+<tr>
+<td>row</td>
+<td>symbol/int</td>
+<td>输入框位于table中的行数</td>
+</tr>
+<tr>
+<td>column</td>
+<td>symbol/int</td>
+<td>输入框位于table中的列数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2、cx-set-integer-entry</strong></p>
+<p>利用cx-set-integer-entry可以设置输入框中的值。该函数使用方式为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-set-integer-entry</span> intentry value)</span><br></pre></td></tr></table></figure>
+<p>包括两个参数：</p>
+<ul>
+<li>intentry：输入框的名称</li>
+<li>value：要设置的值</li>
+</ul>
+<p><strong>3、cx-show-integer-entry</strong></p>
+<p>该函数可用于获取输入框中的数据，其使用方式为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-show-integer-entry</span> intentry)</span><br></pre></td></tr></table></figure>
+<p>该函数只有一个参数，该参数为输入框的名称。</p>
+<p>一个简单的整形输入框代码如下所示：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    <span class="comment">;将输入框中的数据输出到TUI窗口</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> (<span class="name"><span class="builtin-name">string-append</span></span>  <span class="string">"number is "</span> (<span class="name"><span class="builtin-name">number-&gt;string</span></span> (<span class="name">cx-show-integer-entry</span> intField))))</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    <span class="comment">;设置输入框初始数据为3</span></span><br><span class="line">    (<span class="name">cx-set-integer-entry</span> intField <span class="number">3</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog-box (<span class="name">cx-create-panel</span> <span class="string">"Dialog Box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog-box <span class="string">"This is an example Dialog Box"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> intField (<span class="name">cx-create-integer-entry</span> table <span class="string">"Integer Entry Field"</span>))</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>运行代码后对话框如图所示：</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/kdcBf1Ae2e.png" alt=""></p>
+<p>点击按钮<strong>OK</strong>后，TUI窗口显示输入框中的数据。</p>
+<h1 id="2-Real-Entry及Text-Entry"><a href="#2-Real-Entry及Text-Entry" class="headerlink" title="2 Real Entry及Text Entry"></a>2 Real Entry及Text Entry</h1><p>Real Entry与Text Entry的内容与Integer Entry类似。以一个简单代码片段描述。</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    <span class="comment">;将输入框中的数据输出到TUI窗口</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> (<span class="name"><span class="builtin-name">string-append</span></span>  <span class="string">"number is "</span> (<span class="name"><span class="builtin-name">number-&gt;string</span></span> (<span class="name">cx-show-integer-entry</span> intField)) <span class="string">"\n"</span>))</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> (<span class="name"><span class="builtin-name">string-append</span></span>  <span class="string">"number is "</span> (<span class="name"><span class="builtin-name">number-&gt;string</span></span> (<span class="name">cx-show-Real-entry</span> realField)) <span class="string">"\n"</span>))</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> (<span class="name"><span class="builtin-name">string-append</span></span>  <span class="string">"number is "</span> (<span class="name">cx-show-text-entry</span> textField)))</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    <span class="comment">;设置输入框初始数据</span></span><br><span class="line">    (<span class="name">cx-set-integer-entry</span> intField <span class="number">3</span>)</span><br><span class="line">    (<span class="name">cx-set-real-entry</span> realField <span class="number">0.5</span>)</span><br><span class="line">    (<span class="name">cx-set-text-entry</span> textField <span class="string">"text test"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog-box (<span class="name">cx-create-panel</span> <span class="string">"Dialog Box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog-box <span class="string">"This is an example Dialog Box"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> intField (<span class="name">cx-create-integer-entry</span> table <span class="string">"Integer Entry Field"</span> <span class="symbol">'row</span> <span class="number">0</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> realField (<span class="name">cx-create-real-entry</span> table <span class="string">"Real Entry Field"</span> <span class="symbol">'row</span> <span class="number">1</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> textField (<span class="name">cx-create-text-entry</span> table <span class="string">"Text Entry Field"</span> <span class="symbol">'row</span> <span class="number">2</span>))</span><br><span class="line"> </span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>运行结果如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/fjLCG3CeBH.png" alt="mark"></p>
+<p>点击OK按钮后，TUI窗口显示如图所示的信息。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/ac2Hj9AEdC.png" alt="mark"></p>
+<h1 id="3-复选框与单选框"><a href="#3-复选框与单选框" class="headerlink" title="3 复选框与单选框"></a>3 复选框与单选框</h1><p>复选框常用于多项选择，而单选框则用于单项选择。</p>
+<p>Fluent GUI中利用函数<strong>cx-create-button-box</strong>来创建复选框，利用函数<strong>cx-create-toggle-button</strong>来创建单选框。</p>
+<p>复选框与单选框均可以利用函数<strong>cx-set-toggle-button</strong>来设置按钮的选择状态，利用函数<strong>cx-show-toggle-button</strong>来获取选择状态。</p>
+<p><strong>1、cx-create-button-box</strong></p>
+<p>该函数使用方法为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-button-box</span> parent label radio-mode)</span><br></pre></td></tr></table></figure>
+<p>其中参数包括：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>object</td>
+<td>父级对象，常常为table对象</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>显示在GUI上的输入框的名称</td>
+</tr>
+<tr>
+<td>radio-mode</td>
+<td>symbol/Boolean</td>
+<td>通过此选项设置为复选框还是单选框</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2、cx-create-toggle-button</strong></p>
+<p>该函数用于创建单选框，其用法为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-toggle-button</span> parent label row column)</span><br></pre></td></tr></table></figure>
+<p>函数参数与前述相同，这里不重复描述。</p>
+<p><strong>3、cx-set-toggle-button</strong></p>
+<p>该函数用于设置按钮的选择状态，其使用方式为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-set-toggle-button</span> togglebutton value)</span><br></pre></td></tr></table></figure>
+<p>其中参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>togglebutton</td>
+<td>object</td>
+<td>需要设置的按钮对象</td>
+</tr>
+<tr>
+<td>value</td>
+<td>boolean</td>
+<td>按钮状态，设置为#t表示被选中，#f表示不被选中</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4、cx-show-toggle-button</strong></p>
+<p>获取按钮的选择状态，使用方式为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-show-toggle-button</span> togglebutton)</span><br></pre></td></tr></table></figure>
+<p>关于复选框与单选框的使用方式，可参阅下面的程序代码：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    <span class="comment">;将复选框checkbox1的选中状态输出到TUI窗口</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">if</span></span> (<span class="name">cx-show-toggle-button</span> checkBox1)</span><br><span class="line">        (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"checkBox1 has been checked!"</span>)</span><br><span class="line">        (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"checkBox1 has not been checked!"</span>)</span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    <span class="comment">;设置复选框的选中状态</span></span><br><span class="line">    (<span class="name">cx-set-toggle-button</span> checkBox1 <span class="literal">#t</span>)  </span><br><span class="line">    (<span class="name">cx-set-toggle-button</span> radioButton2 <span class="literal">#t</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog-box (<span class="name">cx-create-panel</span> <span class="string">"My Dialog Box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog-box <span class="string">"This is an example Dialog Box"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> buttonBox (<span class="name">cx-create-button-box</span> table <span class="string">"Button Box"</span> <span class="symbol">'radio-mode</span> <span class="literal">#f</span>  <span class="symbol">'row</span> <span class="number">0</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> checkBox1 (<span class="name">cx-create-toggle-button</span> buttonBox <span class="string">"Check Box 1"</span>) )</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> checkBox2 (<span class="name">cx-create-toggle-button</span> buttonBox <span class="string">"Check Box 2"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> buttonBox (<span class="name">cx-create-button-box</span> table <span class="string">"Button Box"</span> <span class="symbol">'radio-mode</span> <span class="literal">#t</span> <span class="symbol">'row</span> <span class="number">1</span>) )</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> radioButton1 (<span class="name">cx-create-toggle-button</span> buttonBox <span class="string">"Radio Button 1"</span>) )</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> radioButton2 (<span class="name">cx-create-toggle-button</span> buttonBox <span class="string">"Radio Button 2"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> radioButton3 (<span class="name">cx-create-toggle-button</span> buttonBox <span class="string">"Radio Button 3"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> radioButton4 (<span class="name">cx-create-toggle-button</span> buttonBox <span class="string">"Radio Button 4"</span>))</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>程序执行后弹出的对话框如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180826/fmILJ7FLd4.png" alt="mark"></p>
+<p>点击OK按钮可在TUI窗口输出多选框Check Box 1的选中状态。</p>
+<h1 id="4-Button"><a href="#4-Button" class="headerlink" title="4 Button"></a>4 Button</h1><p>Button通常用于执行一系列指令。采用函数<strong>cx-create-button</strong>创建。</p>
+<p>函数使用方式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(cx-create-button parent label callback row column))</span><br></pre></td></tr></table></figure>
+<p>函数中的参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>object</td>
+<td>父级对象</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>按钮上的文本</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>symbol/function</td>
+<td>函数名，当按钮被点击时执行该函数</td>
+</tr>
+<tr>
+<td>row</td>
+<td>symbol/int</td>
+<td>按钮在表格中的行定位</td>
+</tr>
+<tr>
+<td>column</td>
+<td>symbol/int</td>
+<td>按钮在表格中的列定位</td>
+</tr>
+</tbody>
+</table>
+<p>如下所示的按钮示例：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"nothing"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"load"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> counter <span class="number">0</span>)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">button-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">set!</span></span> counter (<span class="name"><span class="builtin-name">+</span></span> <span class="number">1</span> counter))</span><br><span class="line">    (<span class="name">cx-set-text-entry</span> txtField (<span class="name"><span class="builtin-name">string-append</span></span> <span class="string">"times Clicked:"</span> (<span class="name"><span class="builtin-name">number-&gt;string</span></span> counter)))</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog-box (<span class="name">cx-create-panel</span> <span class="string">"My Dialog Box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog-box <span class="string">"this is an example dialog box"</span> ))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> txtField (<span class="name">cx-create-text-entry</span> table <span class="string">""</span> <span class="symbol">'row</span> <span class="number">0</span> <span class="symbol">'col</span> <span class="number">0</span>))</span><br><span class="line">(<span class="name">cx-create-button</span> table <span class="string">"Click"</span> <span class="symbol">'activate-callback</span> button-cb <span class="symbol">'row</span> <span class="number">1</span> <span class="symbol">'col</span> <span class="number">0</span>)</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>该代码执行后弹出对话框如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180826/CbLalgBK9J.png" alt="mark"></p>
+<p>点击Click按钮后，文本框中的文本内容会随之改变。</p>
+<h1 id="5-List与dropdown-List"><a href="#5-List与dropdown-List" class="headerlink" title="5 List与dropdown List"></a>5 List与dropdown List</h1><p>列表框与下拉框常用于选项选择。其使用涉及到5个函数：</p>
+<ul>
+<li><strong>cx-create-list</strong>：创建列表框</li>
+<li><strong>cx-create-drop-down-list</strong>：创建下拉框</li>
+<li><strong>cx-set-list-items</strong>：设置列表框及下拉框中的列表项</li>
+<li><strong>cx-set-list-selections</strong>：设置初始化选中项</li>
+<li><strong>cx-show-list-selections</strong>：获取选中项</li>
+</ul>
+<p><strong>1、cx-create-list</strong></p>
+<p>此函数用于创建列表框。其用法为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-list</span> parent label visible-line multiple-selections row column)</span><br></pre></td></tr></table></figure>
+<p>参数包括：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>object</td>
+<td>父级对象</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>GUI上显示的列表名称</td>
+</tr>
+<tr>
+<td>visible-lines</td>
+<td>symbol/int</td>
+<td>设置显示的行数，超过数量就显示滚动条</td>
+</tr>
+<tr>
+<td>multiple-selections</td>
+<td>symbol/Boolean</td>
+<td>设置是否允许选择多项</td>
+</tr>
+<tr>
+<td>row</td>
+<td>symbol/int</td>
+<td>设置列表框放置的位置</td>
+</tr>
+<tr>
+<td>column</td>
+<td>symbol/int</td>
+<td>设置列表框放置的位置</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：参数visible-lines, multiple-selections, row, column为可选参数。若不设置这些参数，则visible-lines默认为10行，multiple-selections默认为#f，row与column默认均为0。</p>
+</blockquote>
+<p><strong>2、cx-create-drop-down-list</strong></p>
+<p>此函数用于创建下拉框，其用法为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-drop-down-list</span> parent label multiple-selections row column)</span><br></pre></td></tr></table></figure>
+<p>包含参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>object</td>
+<td>父级对象</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>GUI上显示的列表名称</td>
+</tr>
+<tr>
+<td>row</td>
+<td>symbol/int</td>
+<td>设置列表框放置的位置</td>
+</tr>
+<tr>
+<td>column</td>
+<td>symbol/int</td>
+<td>设置列表框放置的位置</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：参数row与column为可选参数。</p>
+</blockquote>
+<p><strong>3、cx-set-list-items</strong></p>
+<p>该函数用于为列表设置列表项。其用法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(cx-set-list-items list items)</span><br></pre></td></tr></table></figure>
+<p>函数参数包括：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>list</td>
+<td>需要添加列表项的list名称</td>
+</tr>
+<tr>
+<td>items</td>
+<td>strings</td>
+<td>需要添加的列表项字符串</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4、cx-set-list-selections</strong></p>
+<p>该函数用于设置列表框中被选中的列表项。其用法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(cx-set-list-selections list selections)</span><br></pre></td></tr></table></figure>
+<p>函数参数包括：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>list</td>
+<td>需要添加列表项的list名称</td>
+</tr>
+<tr>
+<td>selections</td>
+<td>list</td>
+<td>需要被选中的列表项</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5、cx-show-list-selections</strong></p>
+<p>函数用于获取被选中的列表项，其用法为：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-show-list-selections</span> list)</span><br></pre></td></tr></table></figure>
+<p>参数仅包含一个列表框名称list。</p>
+<p>下面是一个简单描述列表框的使用的案例。</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"nothing"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"load"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">button-cb</span> . args)</span><br><span class="line">  (<span class="name">cx-set-list-items</span> myList2 (<span class="name">cx-show-list-selections</span> myList1))</span><br><span class="line">  (<span class="name">cx-set-list-selections</span> myList2 (<span class="name">cx-show-list-selections</span> myList1))</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog-box (<span class="name">cx-create-panel</span> <span class="string">"My Dialog Box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog-box <span class="string">"This is an example Dialog Box"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> myList1 (<span class="name">cx-create-list</span> table <span class="string">"List 1"</span> <span class="symbol">'visible-lines</span> <span class="number">3</span> <span class="symbol">'multiple-selections</span> <span class="literal">#t</span> <span class="symbol">'row</span> <span class="number">0</span>))</span><br><span class="line">(<span class="name">cx-set-list-items</span> myList1 (<span class="name"><span class="builtin-name">list</span></span> <span class="string">"Item 1"</span> <span class="string">"Item 2"</span> <span class="string">"Item 3"</span> <span class="string">"Item 4"</span> <span class="string">"Item 5"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> myList2 (<span class="name">cx-create-list</span> table <span class="string">"List 2"</span> <span class="symbol">'visible-lines</span> <span class="number">5</span> <span class="symbol">'multiple-selections</span> <span class="literal">#t</span> <span class="symbol">'row</span> <span class="number">1</span>))</span><br><span class="line">(<span class="name">cx-create-button</span> table <span class="string">"Button"</span> <span class="symbol">'activate-callback</span> button-cb <span class="symbol">'row</span> <span class="number">2</span>)</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>代码运行结果如下图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180826/65EHBhGmFK.png" alt="mark"></p>
+<p>一个描述下拉框应用的案例如下所示。</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"nothing"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"load"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">button-cb</span> . args)</span><br><span class="line">  (<span class="name">cx-set-list-items</span> myDropList2 (<span class="name">cx-show-list-selections</span> myDropList1))</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog-box (<span class="name">cx-create-panel</span> <span class="string">"My Dialog Box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog-box <span class="string">"This is an example Dialog Box"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> myDropList1 (<span class="name">cx-create-drop-down-list</span> table <span class="string">"Drop Down List 1"</span> <span class="symbol">'row</span> <span class="number">0</span>))</span><br><span class="line">(<span class="name">cx-set-list-items</span> myDropList1 (<span class="name"><span class="builtin-name">list</span></span> <span class="string">"Item 1"</span> <span class="string">"Item 2"</span> <span class="string">"Item 3"</span> <span class="string">"Item 4"</span> <span class="string">"Item 5"</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> myDropList2 (<span class="name">cx-create-drop-down-list</span> table <span class="string">"Drop Down List 2"</span> <span class="symbol">'row</span> <span class="number">1</span>))</span><br><span class="line">(<span class="name">cx-create-button</span> table <span class="string">"Button"</span> <span class="symbol">'activate-callback</span> button-cb <span class="symbol">'row</span> <span class="number">2</span>)</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog-box)</span><br></pre></td></tr></table></figure>
+<p>代码加载后对话框如图所示。</p>
+<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180826/cmBe6E32gD.png" alt="mark"></p>
+<p>点击按钮Button，可将List1中选中的选项Copy到list2中。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://olx22rz2y.bkt.clouddn.com/blog/181016/lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】05：Scheme语言[下]/" rel="next" title="【Fluent GUI】05：Scheme语言[下]">
+                <i class="fa fa-chevron-left"></i> 【Fluent GUI】05：Scheme语言[下]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/Fluent GUI开发/【Fluent GUI】10：添加菜单改变图形窗口颜色/" rel="prev" title="【Fluent GUI】10：添加菜单改变图形窗口颜色">
+                【Fluent GUI】10：添加菜单改变图形窗口颜色 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://faee0.github.io/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、Integer-Entry"><span class="nav-text">1、Integer Entry</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Real-Entry及Text-Entry"><span class="nav-text">2 Real Entry及Text Entry</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-复选框与单选框"><span class="nav-text">3 复选框与单选框</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Button"><span class="nav-text">4 Button</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-List与dropdown-List"><span class="nav-text">5 List与dropdown List</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
