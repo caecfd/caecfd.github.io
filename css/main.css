@@ -1997,7 +1997,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3270e9;
+  background: #ff8c96;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3068,4 +3068,31 @@ img {
   max-width: 100%;
   height: auto;
   align-items: center;
+}
+.site-title {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 36px;
+  font-size: 24px;
+  font-weight: normal;
+  font-family: 'Comic Sans MS', sans-serif, "Microsoft YaHei", 'Lobster Two', 'Lato', "PingFang SC", sans-serif;
+}
+.post-button {
+  margin-top: 30px;
+  text-align: left;
+}
+.post-button .btn {
+  color: #fff;
+  font-size: 15px;
+  background: #686868;
+  border-radius: 16px;
+  line-height: 2;
+  margin: 0 4px 8px 4px;
+  padding: 0 20px;
+}
+.post-button a {
+  border-bottom: 1px solid #666;
+}
+.post-button a:hover {
+  color: #7784ba;
 }

@@ -172,13 +172,13 @@
   <meta name="description" content="应用CFD解决工程流体问题">
 <meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CFDer club">
+<meta property="og:title" content="CFDer聚乐埠">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/index.html">
-<meta property="og:site_name" content="CFDer club">
+<meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="应用CFD解决工程流体问题">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CFDer club">
+<meta name="twitter:title" content="CFDer聚乐埠">
 <meta name="twitter:description" content="应用CFD解决工程流体问题">
 
 
@@ -196,7 +196,7 @@
   };
 </script>
 
-  <title>CFDer club</title>
+  <title>CFDer聚乐埠</title>
   
 
 
@@ -255,7 +255,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">CFDer club</span>
+        <span class="site-title">CFDer聚乐埠</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例42：液体混合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -379,7 +379,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/" itemprop="url">
-                  Fluent动网格【18】：Overset实例
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例42：液体混合/" itemprop="url">
+                  Fluent验证案例42：液体混合
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 01:59:00 / 修改时间：01:27:20" itemprop="dateCreated datePublished" datetime="2018-10-18T01:59:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:42:00 / 修改时间：22:33:34" itemprop="dateCreated datePublished" datetime="2018-10-21T22:42:00+08:00">2018-10-21</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例42：液体混合/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例42：液体混合/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,11 +484,27 @@
       
         
           
-          重叠网格在Fluent中仍然是新生儿，目前还存在诸多限制。比如说物理模型方面的限制，求解算法方面的限制等。小伙伴们目前可以将其当做玩具，但Fluent更新得这么快，重叠网格技术其实又比较成熟，谁也难保哪一天Fluent突然发力将其加强呢。本次以一个简单的案例来描述在Fluent中应用重叠网格解决大位
+          本案例利用Fluent计算两种不同密度介质（清水与盐水）的湍流混合问题。
+1 问题描述计算模型如图所示。
+
+计算参数如表所示。
+
+
+
+材料参数
+几何条件
+边界条件
+
+
+
+
+清水密度：1015 kg/m3盐水密度：1030 kg/m3混合扩散系数：1e-9 m2/s
+混合槽长度40 m
+清水入口速度：
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例42：液体混合/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -547,7 +563,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例41：机翼跨声速流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -556,7 +572,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -566,8 +582,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/" itemprop="url">
-                  Fluent动网格【17】：overset网格
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例41：机翼跨声速流动/" itemprop="url">
+                  Fluent验证案例41：机翼跨声速流动
                 </a>
               
             
@@ -593,7 +609,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 01:58:00 / 修改时间：01:27:26" itemprop="dateCreated datePublished" datetime="2018-10-18T01:58:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:41:00 / 修改时间：22:33:25" itemprop="dateCreated datePublished" datetime="2018-10-21T22:41:00+08:00">2018-10-21</time>
             
 
             
@@ -615,7 +631,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -630,8 +646,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例41：机翼跨声速流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例41：机翼跨声速流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -661,11 +677,27 @@
       
         
           
-          overset网格(重叠网格)技术其实并不是Fluent专有的，确切的说，是Fluent在比较新的版本中才添加的方法，用于处理的动网格处理。在一些成熟的商用CFD软件中，重叠网格技术已经被当做了解决动网格问题的主要方法。重叠网格技术原理上还是比较复杂的，但是在实际应用中要比网格重构简单得多，而且也不
+          本案例描述利用Fluent计算空气流经RAE 2822翼型的跨声速流动。
+1 案例描述计算模型如图所示。
+
+RAE 2822翼型，攻角为3.19°，计算条件如表所示。
+
+
+
+材料参数
+几何条件
+边界条件
+
+
+
+
+密度：ideal gas粘度：1.831e-5 kg/m-s
+机翼弦长：1 m
+入口平均
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例41：机翼跨声速流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -724,7 +756,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例40：扩散管中的流动分离/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -733,7 +765,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -743,8 +775,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/" itemprop="url">
-                  Fluent动网格【16】：6DOF
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例40：扩散管中的流动分离/" itemprop="url">
+                  Fluent验证案例40：扩散管中的流动分离
                 </a>
               
             
@@ -770,7 +802,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:57:00 / 修改时间：01:27:29" itemprop="dateCreated datePublished" datetime="2018-10-18T00:57:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:40:00 / 修改时间：22:33:20" itemprop="dateCreated datePublished" datetime="2018-10-21T22:40:00+08:00">2018-10-21</time>
             
 
             
@@ -792,7 +824,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -807,8 +839,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例40：扩散管中的流动分离/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例40：扩散管中的流动分离/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -838,12 +870,28 @@
       
         
           
-          6DOF模型主要用于模拟计算域中的刚体在受到流体作用后的轨迹及姿态，属于典型的被动型动网格问题。
-主动运动与被动运动我们把运动状态已知的动网格问题称之为主动运动。如子弹以速度1000m/s运动，此时运动轨迹可以通过速度直接积分计算得到。但流体中运动的物体，在受到流体作用力时，我们往往很难明确知道其运
+          本案例利用Fluent计算并验证扩散管道中的湍流分离现象。
+1 案例描述本案例计算模型如图所示。
+
+计算条件如表所示。
+
+
+
+材料参数
+几何条件
+边界条件
+
+
+
+
+密度：1.2kg/m3粘度：1.5e-5 kg/m-s
+圆柱度直径：140 mm计算域长度：1100 mm
+入口平均速度：30 m/s
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例40：扩散管中的流动分离/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -902,7 +950,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【15】：Remeshing/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例39：管内沸腾/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -911,7 +959,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -921,8 +969,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【15】：Remeshing/" itemprop="url">
-                  Fluent动网格【15】：Remeshing
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例39：管内沸腾/" itemprop="url">
+                  Fluent验证案例39：管内沸腾
                 </a>
               
             
@@ -948,7 +996,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:56:00 / 修改时间：01:27:32" itemprop="dateCreated datePublished" datetime="2018-10-18T00:56:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:39:00 / 修改时间：22:33:16" itemprop="dateCreated datePublished" datetime="2018-10-21T22:39:00+08:00">2018-10-21</time>
             
 
             
@@ -970,7 +1018,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -985,8 +1033,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【15】：Remeshing/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【15】：Remeshing/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例39：管内沸腾/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例39：管内沸腾/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1016,12 +1064,27 @@
       
         
           
-          Fluent动网格中的Remeshing网格重构是最终极的网格更新方式。不管边界运动幅度有多大，都可以采用Remshing方法解决网格更新的问题。
-基本思路Fluent的Remeshing思路比较简单。在边界运动过程中，程序不断检测计算域中的网格质量，并标记低质量网格。在动网格更新过程中，对标记的网
+          本案例演示利用Fluent仿真计算管内介质受管壁加热后沸腾现象。
+1 案例描述计算模型如图所示。
+
+计算参数如表所示。
+
+
+
+材料参数
+几何模型
+边界条件
+
+
+
+
+包含两相介质：水（连续相）+水蒸气（分散相）气泡直径：由温度决定
+管道半径：7.7 mm管道长度：2 m
+质量流量入口：900 kg/m
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【15】：Remeshing/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例39：管内沸腾/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1080,7 +1143,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【14】：Layering/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例37：前向台阶流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1089,7 +1152,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1099,8 +1162,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【14】：Layering/" itemprop="url">
-                  Fluent动网格【14】：Layering
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例37：前向台阶流动/" itemprop="url">
+                  Fluent验证案例37：前向台阶流动
                 </a>
               
             
@@ -1126,7 +1189,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:55:00 / 修改时间：01:27:36" itemprop="dateCreated datePublished" datetime="2018-10-18T00:55:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:37:00 / 修改时间：22:33:11" itemprop="dateCreated datePublished" datetime="2018-10-21T22:37:00+08:00">2018-10-21</time>
             
 
             
@@ -1148,7 +1211,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1163,8 +1226,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【14】：Layering/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【14】：Layering/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例37：前向台阶流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例37：前向台阶流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1194,12 +1257,33 @@
       
         
           
-          Layering是Fluent动网格技术中用于处理拉伸体网格变形的一种非常有效的方法。与光顺方法不同，Layering方法可以处理网格拓扑的变化（如网格节点的增加或删除），因此在Layering方法可以用于变形幅度非常大的场合。
-Fluent中的Layering在Fluent中激活Layering方
+          本案例计算流经前向台阶的湍流流动，并对壁面压力系数进行验证。
+1 案例描述计算模型如图所示。
+
+计算条件如表所示。
+
+
+
+材料参数
+几何模型
+边界条件
+
+
+
+
+密度：1.02kg/m3粘度：1.5E-5 kg/m-s
+H= 0.0758
+入口速度：9.7 m/s
+
+
+
+计算网格如图所示。
+
+2 Fl
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【14】：Layering/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例37：前向台阶流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1258,7 +1342,7 @@ Fluent中的Layering在Fluent中激活Layering方
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【13】：网格光顺总结及实例/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例35：单级轴流压缩机/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1267,7 +1351,7 @@ Fluent中的Layering在Fluent中激活Layering方
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1277,8 +1361,8 @@ Fluent中的Layering在Fluent中激活Layering方
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【13】：网格光顺总结及实例/" itemprop="url">
-                  Fluent动网格【13】：网格光顺总结及实例
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例35：单级轴流压缩机/" itemprop="url">
+                  Fluent验证案例35：单级轴流压缩机
                 </a>
               
             
@@ -1304,7 +1388,7 @@ Fluent中的Layering在Fluent中激活Layering方
                 
               
 
-              <time title="创建时间：2018-10-18 00:54:00 / 修改时间：01:27:39" itemprop="dateCreated datePublished" datetime="2018-10-18T00:54:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:34:00 / 修改时间：22:33:00" itemprop="dateCreated datePublished" datetime="2018-10-21T22:34:00+08:00">2018-10-21</time>
             
 
             
@@ -1326,7 +1410,7 @@ Fluent中的Layering在Fluent中激活Layering方
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1341,8 +1425,8 @@ Fluent中的Layering在Fluent中激活Layering方
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【13】：网格光顺总结及实例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【13】：网格光顺总结及实例/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例35：单级轴流压缩机/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例35：单级轴流压缩机/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1372,15 +1456,25 @@ Fluent中的Layering在Fluent中激活Layering方
       
         
           
-          光顺(Smoothing)方法是最基本的网格节点更新方法。Fluent提供了三种光顺方法:
+          本案例计算单级轴流压缩机内部流场，并验证出口压力及流量。
+1 问题描述计算模型如图所示。
 
-Spring弹簧光顺
-Diffusion扩散光顺
-Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光顺|线弹性光顺||—|—|—|—||计算量|小|适中|大||网格质量|
+采用单个转子叶片与单个定子叶片进行计算，利用旋转参考系模型模拟转子的转动，计算参数如表所示。
+
+
+
+材料参数
+几何模型
+边界条件
+
+
+
+
+密度：ideal-gas分子量：28.966比热：1006.43  J
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【13】：网格光顺总结及实例/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例35：单级轴流压缩机/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1439,7 +1533,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【12】：扩散光顺/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例33：环形空间粘性热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1448,7 +1542,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1458,8 +1552,8 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【12】：扩散光顺/" itemprop="url">
-                  Fluent动网格【12】：扩散光顺
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例33：环形空间粘性热/" itemprop="url">
+                  Fluent验证案例33：环形空间粘性热
                 </a>
               
             
@@ -1485,7 +1579,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
                 
               
 
-              <time title="创建时间：2018-10-18 00:53:00 / 修改时间：01:27:42" itemprop="dateCreated datePublished" datetime="2018-10-18T00:53:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:33:00 / 修改时间：22:32:55" itemprop="dateCreated datePublished" datetime="2018-10-21T22:33:00+08:00">2018-10-21</time>
             
 
             
@@ -1507,7 +1601,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1522,8 +1616,8 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【12】：扩散光顺/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【12】：扩散光顺/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例33：环形空间粘性热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例33：环形空间粘性热/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1553,12 +1647,22 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
       
         
           
-          扩散光顺是Fluent提供的另外一种常用的网格光顺方法。其基本原理是通过求解扩散方程得到网格节点的运动位移。
-扩散光顺基本计算扩散光顺通过求解 以下扩散方程来设置网格的节点位置。$$\nabla \cdot (\gamma \nabla \vec{u})=0$$其中，u为网格的运动速度。求解出运动速
+          本案例模拟环形空间壁面旋转产生的粘性热及质量流量。并利用解析值进行验证。
+1 案例描述本案例要模拟的模型如图所示。
+
+计算条件参数如下表所示。
+
+采用2D模型进行计算，计算网格如图所示。
+
+
+注：网格有点粗，可以尝试加密网格。
+
+2 Fluent设置
+以2D、Double Precision方式启动
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【12】：扩散光顺/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例33：环形空间粘性热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1617,7 +1721,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【11】：弹簧光顺/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例32：后体流动分离/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1626,7 +1730,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1636,8 +1740,8 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【11】：弹簧光顺/" itemprop="url">
-                  Fluent动网格【11】：弹簧光顺
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例32：后体流动分离/" itemprop="url">
+                  Fluent验证案例32：后体流动分离
                 </a>
               
             
@@ -1663,7 +1767,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
                 
               
 
-              <time title="创建时间：2018-10-18 00:52:00 / 修改时间：01:27:45" itemprop="dateCreated datePublished" datetime="2018-10-18T00:52:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:32:00 / 修改时间：22:32:50" itemprop="dateCreated datePublished" datetime="2018-10-21T22:32:00+08:00">2018-10-21</time>
             
 
             
@@ -1685,7 +1789,7 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1700,8 +1804,8 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【11】：弹簧光顺/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【11】：弹簧光顺/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例32：后体流动分离/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例32：后体流动分离/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1731,13 +1835,20 @@ Linearly Elastic Solid光顺三种方法比较|比较项|弹簧光顺|扩散光�
       
         
           
-          动网格除了前面讲了很多的关于运动指定之外，另一个重要主题则为网格的更新。在部件运动之后，不可避免的会造成网格形状的变化，如若不对网格加以控制，在持续运动的过程中，则可能造成网格极度变形、歪曲率过大，甚至产生负体积。因此必须对发生变形的网格进行矫正。Fluent主要提供了三种方式控制网格:
+          本案例利用Fluent模拟流经轴对称后体（如船体、汽车等）的流动分离现象。
+1 案例描述本案例要计算的模型及边界类型如下图所示。
 
-Smoo
+计算参数如表所示。
+
+2 Fluent设置
+以2D、Double Precision方式启动Fluent并加载case文件
+
+2.1 General设置
+鼠标双击模型树
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【11】：弹簧光顺/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例32：后体流动分离/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1796,7 +1907,7 @@ Smoo
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【10】：区域运动案例/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例31：V型槽尾流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1805,7 +1916,7 @@ Smoo
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1815,8 +1926,8 @@ Smoo
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【10】：区域运动案例/" itemprop="url">
-                  Fluent动网格【10】：区域运动案例
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例31：V型槽尾流/" itemprop="url">
+                  Fluent验证案例31：V型槽尾流
                 </a>
               
             
@@ -1842,7 +1953,7 @@ Smoo
                 
               
 
-              <time title="创建时间：2018-10-18 00:51:00 / 修改时间：01:27:48" itemprop="dateCreated datePublished" datetime="2018-10-18T00:51:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:31:00 / 修改时间：22:32:46" itemprop="dateCreated datePublished" datetime="2018-10-21T22:31:00+08:00">2018-10-21</time>
             
 
             
@@ -1864,7 +1975,7 @@ Smoo
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1879,8 +1990,8 @@ Smoo
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【10】：区域运动案例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【10】：区域运动案例/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例31：V型槽尾流/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例31：V型槽尾流/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1910,19 +2021,17 @@ Smoo
       
         
           
-          本案例主要描述如何在Fluent中处理包含了公转和自转的复合运动。涉及到的内容包括：
+          本案例模拟20 m/s风速条件下狭缝V型槽后方的尾流结构。
+1 问题描述穿过狭缝的流动与壁面剪切层之间相互作用形成非对称尾流结构。由于Coanda效应，尾部流动会偏向于一侧挡板。（注：关于
 
-多区域模型创建
-滑移网格设置
-区域运动UDF宏DEFINE_ZONE_MOTION
+计算参数如表所示。
 
-案例描述案例几何如图所示。
-
-其中红色区域为静止区域，绿色区域绕圆心以角速度1 rad/s旋转，蓝色区域随绿色区域绕圆心旋转的
+2 Fluent设置
+以2D、Double Precision方式启动Fluent并加
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【10】：区域运动案例/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例31：V型槽尾流/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1981,7 +2090,7 @@ Smoo
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【9】：区域运动/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例30：90°弯管/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1990,7 +2099,7 @@ Smoo
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -2000,8 +2109,8 @@ Smoo
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【9】：区域运动/" itemprop="url">
-                  Fluent动网格【9】：区域运动
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例30：90°弯管/" itemprop="url">
+                  Fluent验证案例30：90°弯管
                 </a>
               
             
@@ -2027,7 +2136,7 @@ Smoo
                 
               
 
-              <time title="创建时间：2018-10-18 00:50:00 / 修改时间：01:27:51" itemprop="dateCreated datePublished" datetime="2018-10-18T00:50:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:30:00 / 修改时间：22:32:43" itemprop="dateCreated datePublished" datetime="2018-10-21T22:30:00+08:00">2018-10-21</time>
             
 
             
@@ -2049,7 +2158,7 @@ Smoo
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -2064,8 +2173,8 @@ Smoo
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【9】：区域运动/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【9】：区域运动/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例30：90°弯管/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例30：90°弯管/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2095,14 +2204,15 @@ Smoo
       
         
           
-          本文所述的区域运动并非动网格中的运动域，而是指在多参考系（MRF）或滑移网格中所涉及到的区域的运动。
-在滑移网格中指定区域运动时，除了能够指定绝对运动外，还能指定某一区域与其他区域间的相对运动，如图所示。
+          本案例利用Fluent计算90°弯管内流体流动。
+弯管内流动看似简单，然而由于存在严重的分离附着以及二次流问题，想要精确模拟内部的流场特征并不容易。
+1 案例描述本案例计算模型如下图所示。
 
-区域运动的指定，除了可以采用Profile文件外，还可以利用UDF宏DEFINE_TRANS
+管道中流体介质密度为1 kg/m3，粘度2.3256e-5 kg/m-s，管道半径0.5m，管道入口为充分发
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【9】：区域运动/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例30：90°弯管/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2150,7 +2260,7 @@ Smoo
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2197,7 +2307,7 @@ Smoo
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2236,7 +2346,9 @@ Smoo
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2275,7 +2387,9 @@ Smoo
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

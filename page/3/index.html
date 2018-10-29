@@ -172,13 +172,13 @@
   <meta name="description" content="应用CFD解决工程流体问题">
 <meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CFDer club">
+<meta property="og:title" content="CFDer聚乐埠">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/page/3/index.html">
-<meta property="og:site_name" content="CFDer club">
+<meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="应用CFD解决工程流体问题">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CFDer club">
+<meta name="twitter:title" content="CFDer聚乐埠">
 <meta name="twitter:description" content="应用CFD解决工程流体问题">
 
 
@@ -196,7 +196,7 @@
   };
 </script>
 
-  <title>CFDer club</title>
+  <title>CFDer聚乐埠</title>
   
 
 
@@ -255,7 +255,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">CFDer club</span>
+        <span class="site-title">CFDer聚乐埠</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例18：超音速流动中的激波反射/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -379,7 +379,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/" itemprop="url">
-                  Fluent UDF【18】：UDS宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例18：超音速流动中的激波反射/" itemprop="url">
+                  Fluent验证案例18：超音速流动中的激波反射
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:38:00 / 修改时间：01:28:23" itemprop="dateCreated datePublished" datetime="2018-10-18T00:38:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:18:00 / 修改时间：22:31:44" itemprop="dateCreated datePublished" datetime="2018-10-21T22:18:00+08:00">2018-10-21</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例18：超音速流动中的激波反射/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例18：超音速流动中的激波反射/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,12 +484,13 @@
       
         
           
-          ANSYS Fluent能够求解自定义标量输运方程。本文描述在Fluent中求解自定义标量方程需要使用的一些UDF宏。
-1 简介对于用户在ANSYS Fluent模型中指定的每个标量方程，可以为标量输运方程中的扩散系数、通量以及瞬态项提供单独的UDF进行指定。对于多相流问题，用户还可以为每一相指定U
+          本案例模拟超燃冲压发动机喷嘴内的超声速流动。
+1 案例描述计算域模型如下图所示，喷嘴射流被一个与其中心线平行的后部壁面所限制，喷嘴出口传播的激波被后部壁面反射。案例验证后部壁面（after body）的压力分布及换热率。
+案例采用稳态计算，采用密度基求解器。计算中将比热定义为温度的线性函数，计算域入
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例18：超音速流动中的激波反射/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -548,7 +549,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例17：RAE2822翼型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -557,7 +558,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -567,8 +568,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/" itemprop="url">
-                  Fluent UDF【17】：UDS
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例17：RAE2822翼型/" itemprop="url">
+                  Fluent验证案例17：RAE2822翼型
                 </a>
               
             
@@ -594,7 +595,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:37:00 / 修改时间：01:28:26" itemprop="dateCreated datePublished" datetime="2018-10-18T00:37:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:17:00 / 修改时间：22:31:41" itemprop="dateCreated datePublished" datetime="2018-10-21T22:17:00+08:00">2018-10-21</time>
             
 
             
@@ -616,7 +617,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -631,8 +632,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例17：RAE2822翼型/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例17：RAE2822翼型/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -662,12 +663,12 @@
       
         
           
-          1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。
-2 UDS理论2.1 单相流
+          本案例利用Fluent计算RAE 2822翼型跨音速流动，并对计算得到的升力系数与阻力系数进行验证。
+1 案例描述如下图所示，自由来流以攻角2.79°，速度0.73马赫流过RAE 2822翼型。计算为二维、可压缩（跨音速）及湍流流动。RAE 2822翼型的几何结构如图所示，该翼型弦长为1米，最大厚度
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例17：RAE2822翼型/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -726,7 +727,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例16：过渡管内流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -735,7 +736,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -745,8 +746,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/" itemprop="url">
-                  Fluent UDF【16】：通用宏[1]
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例16：过渡管内流动/" itemprop="url">
+                  Fluent验证案例16：过渡管内流动
                 </a>
               
             
@@ -772,7 +773,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:36:00 / 修改时间：01:28:29" itemprop="dateCreated datePublished" datetime="2018-10-18T00:36:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:16:00 / 修改时间：22:31:35" itemprop="dateCreated datePublished" datetime="2018-10-21T22:16:00+08:00">2018-10-21</time>
             
 
             
@@ -794,7 +795,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -809,8 +810,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例16：过渡管内流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例16：过渡管内流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -840,11 +841,13 @@
       
         
           
-          有人留言说UDF专题好多内容是翻译自帮助文档，事实的确是这样的。UDF本没有太多需要介绍的内容，各位学习UDF的朋友们要养成查UDF文档的好习惯，没事儿多看看C语言，多动手练习。编程技能还是要靠不断地练习和总结，程序代码也要靠不断地修改和优化。从本期开始，UDF专题进入攻坚阶段。本期介绍UDF中的通
+          本案例利用Fluent计算具有相同横截面积的圆形到矩形过渡管道内流体流动。在如下图所示几何的过渡位置，管道壁面突变引起强烈的压力驱动二次流，同时在管道侧壁附近形成一对反向旋涡。考虑到流场的对称性，本案例采用四分之一管道模型。流场监测验证界面位于入口下游23 m处，如下图所示。
+
+本案例采用雷诺应力模
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【16】：通用宏[1]/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例16：过渡管内流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -903,7 +906,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例15：发动机缸内流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -912,7 +915,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -922,8 +925,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/" itemprop="url">
-                  Fluent UDF【15】：在Fluent外部编译UDF
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例15：发动机缸内流动/" itemprop="url">
+                  Fluent验证案例15：发动机缸内流动
                 </a>
               
             
@@ -949,7 +952,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:35:00 / 修改时间：01:28:32" itemprop="dateCreated datePublished" datetime="2018-10-18T00:35:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:15:00 / 修改时间：22:31:31" itemprop="dateCreated datePublished" datetime="2018-10-21T22:15:00+08:00">2018-10-21</time>
             
 
             
@@ -971,7 +974,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -986,8 +989,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例15：发动机缸内流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例15：发动机缸内流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1017,20 +1020,15 @@
       
         
           
-          前面提到可以在vs提供的命令行界面编译UDF。今天尝试了一下，发现了很多的问题。基本步骤:
+          本验证案例计算气缸内流体流动。
+1 问题描述本案例较为简单，计算几何如下图所示。计算模拟理想的发动机气缸内流动情况，计算域包含一个直进口及一个升程10 mm的阀门。采用3D几何模型、稳态等温及不可压缩模拟，利用标准k-epsilon湍流模型及标准壁面函数进行计算。
 
-准备UDF源文件。
-创建目录结构
-在case文件夹下创建libudf文件夹
-在libudf文件夹中创建两个文件夹，分别命名为src及win64
-在win64文件夹中创建文件夹2ddp
-
-
-将UDF源文件拷贝
+2 Fluent设置
+以3D、D
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【15】：在Fluent外部编译UDF/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例15：发动机缸内流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1089,7 +1087,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例14：同轴射流组分混合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1098,7 +1096,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1108,8 +1106,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/" itemprop="url">
-                  Fluent UDF【14】：向量操作宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例14：同轴射流组分混合/" itemprop="url">
+                  Fluent验证案例14：同轴射流组分混合
                 </a>
               
             
@@ -1135,7 +1133,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:34:00 / 修改时间：01:28:35" itemprop="dateCreated datePublished" datetime="2018-10-18T00:34:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:14:00 / 修改时间：22:31:28" itemprop="dateCreated datePublished" datetime="2018-10-21T22:14:00+08:00">2018-10-21</time>
             
 
             
@@ -1157,7 +1155,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1172,8 +1170,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例14：同轴射流组分混合/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例14：同轴射流组分混合/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1203,12 +1201,14 @@
       
         
           
-          CFD计算中存在众多的向量，典型的如速度、角速度等。向量的运算要比标量运算复杂，UDF提供了众多的向量操作宏用于向量的运算。
-对于这些向量操作宏，UDF头文件中对这些宏的名称进行了区分。如宏名称中包含v，则表示为向量，S表示为标量，D表示为向量的三个分量序列，在2D模型中，第三个分量被忽略。矢量函数
+          验证利用Fluent的组分输运模型计算两种不同组分混合问题。
+1 案例概况
+参考文献：
+R.W. Schefer, R.W. Dibble, “Simultaneous Measurements of Velocity and Density in a Turbulent Non-premixed 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【14】：向量操作宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例14：同轴射流组分混合/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1267,7 +1267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例13：后向台阶湍流传热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1276,7 +1276,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1286,8 +1286,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/" itemprop="url">
-                  Fluent UDF【13】：循环操作宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例13：后向台阶湍流传热/" itemprop="url">
+                  Fluent验证案例13：后向台阶湍流传热
                 </a>
               
             
@@ -1313,7 +1313,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:33:00 / 修改时间：01:28:38" itemprop="dateCreated datePublished" datetime="2018-10-18T00:33:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:13:00 / 修改时间：22:31:25" itemprop="dateCreated datePublished" datetime="2018-10-21T22:13:00+08:00">2018-10-21</time>
             
 
             
@@ -1335,7 +1335,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1350,8 +1350,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例13：后向台阶湍流传热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例13：后向台阶湍流传热/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1381,14 +1381,12 @@
       
         
           
-          UDF使用过程中，经常要通过循环遍历的方式对数据进行操作，如设置边界条件时，需要给每一个边界网格面赋值，此时需要通过逐层循环的方式访问每一个边界网格面。Fluent UDF中提供了众多循环来实现此功能。这些宏包括：
-
-区域中单元循环thread_loop_c
-区域中网格面循环thread_loop_
+          本案例对2D后向台阶的流体流动和对流换热进行了数值模拟。突扩几何导致的流动分离及边界层再附会影响到其后方恒定热流表面的局部换热。本案例利用测量的热流表面的局部Nusselt数分布验证CFD仿真结果。
+本案例计算模型如下图所示（图中H=1 m）。采用非均匀四边形网格划分，采用稳态计算，不考虑流体的可压
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【13】：循环操作宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例13：后向台阶湍流传热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1447,7 +1445,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例12：波形通道中湍流流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1456,7 +1454,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1466,8 +1464,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/" itemprop="url">
-                  Fluent UDF【12】：几个常用的数据宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例12：波形通道中湍流流动/" itemprop="url">
+                  Fluent验证案例12：波形通道中湍流流动
                 </a>
               
             
@@ -1493,7 +1491,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:32:00 / 修改时间：01:28:40" itemprop="dateCreated datePublished" datetime="2018-10-18T00:32:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:12:00 / 修改时间：22:31:21" itemprop="dateCreated datePublished" datetime="2018-10-21T22:12:00+08:00">2018-10-21</time>
             
 
             
@@ -1515,7 +1513,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1530,8 +1528,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例12：波形通道中湍流流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例12：波形通道中湍流流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1561,19 +1559,13 @@
       
         
           
-          除了前面提到的网格单元数据获取宏、网格面数据获取宏及节点数据获取宏外，在数据获取方面，还有几个非常常用的宏。编写UDF程序时，经常与这些宏打交道。这些宏包括：
+          本案例利用Fluent计算波形通道中流体湍流流动。
 
-Loookup_Thread
-THREAD_ID
-Get_Domain
-F_PROFILE
-THREAD_SHADOW
-
-1 获取指定区域
+参考数据：J.D. Kuzan, “Velocity Measurements for Turbulent Separated and Near-Separated Flows Over Solid Waves”. Ph.D. thesis. D
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【12】：几个常用的数据宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例12：波形通道中湍流流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1632,7 +1624,7 @@ THREAD_SHADOW
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例11：三角形腔体内层流流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1641,7 +1633,7 @@ THREAD_SHADOW
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1651,8 +1643,8 @@ THREAD_SHADOW
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/" itemprop="url">
-                  Fluent UDF【11】：单元数据访问宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例11：三角形腔体内层流流动/" itemprop="url">
+                  Fluent验证案例11：三角形腔体内层流流动
                 </a>
               
             
@@ -1678,7 +1670,7 @@ THREAD_SHADOW
                 
               
 
-              <time title="创建时间：2018-10-18 00:31:00 / 修改时间：01:28:43" itemprop="dateCreated datePublished" datetime="2018-10-18T00:31:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:11:00 / 修改时间：22:31:19" itemprop="dateCreated datePublished" datetime="2018-10-21T22:11:00+08:00">2018-10-21</time>
             
 
             
@@ -1700,7 +1692,7 @@ THREAD_SHADOW
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1715,8 +1707,8 @@ THREAD_SHADOW
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例11：三角形腔体内层流流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例11：三角形腔体内层流流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1746,15 +1738,13 @@ THREAD_SHADOW
       
         
           
-          
-自己选的主题，哭着也要更新完。
+          本案例利用Fluent计算三角形腔体内流体流动特征。
 
-单元数据要比节点数据复杂得多。与节点数据仅仅存储节点坐标不同，单元数据中不仅包含单元中心节点等，还包含有各种物理量数据。单元数据访问宏返回网格单元内的信息。大部分的单元宏在头文件metric.h 中定义，这类的宏均以C_作为前缀。
-1 C_CENTROID宏C_C
+参考文献：R. Jyotsna, S.P. Vanka. “Multigrid Calculation of Steady, Viscous Flow in a Triangular Cavity”. J. Comp. Phys., Vol 1
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【11】：单元数据访问宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例11：三角形腔体内层流流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1813,7 +1803,7 @@ THREAD_SHADOW
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例10：T型管流量分配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1822,7 +1812,7 @@ THREAD_SHADOW
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1832,8 +1822,8 @@ THREAD_SHADOW
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/" itemprop="url">
-                  Fluent UDF【10】：网格面数据访问宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例10：T型管流量分配/" itemprop="url">
+                  Fluent验证案例10：T型管流量分配
                 </a>
               
             
@@ -1859,7 +1849,7 @@ THREAD_SHADOW
                 
               
 
-              <time title="创建时间：2018-10-18 00:30:00 / 修改时间：01:28:47" itemprop="dateCreated datePublished" datetime="2018-10-18T00:30:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:10:00 / 修改时间：22:31:13" itemprop="dateCreated datePublished" datetime="2018-10-21T22:10:00+08:00">2018-10-21</time>
             
 
             
@@ -1881,7 +1871,7 @@ THREAD_SHADOW
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1896,8 +1886,8 @@ THREAD_SHADOW
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例10：T型管流量分配/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例10：T型管流量分配/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1927,15 +1917,14 @@ THREAD_SHADOW
       
         
           
-          前面介绍了获取节点数据的宏。本文讲解一些关于面数据获取的宏。这些面相关宏定义在头文件metric.h及mem.h中，并且所有的宏均以F_作为前缀。
+          本验证案例利用Fluent计算T型管中流量分配问题。
+如下图所示的T型管道，几何尺寸L=3.0m， W=1.0m。
 
-注意:面数据获取宏只能用于压力基求解器，并且一些与模型相关的宏，只在当模型被开启后才有效。
-
-Fluent的数据以分层方式保存，如下图所示。最顶级为D
+管内流动介质为空气Air，其密度为1 kg/m3，动力粘度0.003333 kg/m-s。空气从下方入口流入，其轴线速度满足雷诺数：$$Re = \frac{\rho V_c W}{
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【10】：网格面数据访问宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例10：T型管流量分配/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1994,7 +1983,7 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【9】：节点数据访问宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例9：同心管内自然对流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -2003,7 +1992,7 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -2013,8 +2002,8 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【9】：节点数据访问宏/" itemprop="url">
-                  Fluent UDF【9】：节点数据访问宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例9：同心管内自然对流/" itemprop="url">
+                  Fluent验证案例9：同心管内自然对流
                 </a>
               
             
@@ -2040,7 +2029,7 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
                 
               
 
-              <time title="创建时间：2018-10-18 00:29:00 / 修改时间：01:28:50" itemprop="dateCreated datePublished" datetime="2018-10-18T00:29:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:09:00 / 修改时间：22:30:36" itemprop="dateCreated datePublished" datetime="2018-10-21T22:09:00+08:00">2018-10-21</time>
             
 
             
@@ -2062,7 +2051,7 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -2077,8 +2066,8 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【9】：节点数据访问宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【9】：节点数据访问宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例9：同心管内自然对流/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例9：同心管内自然对流/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2108,14 +2097,12 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
       
         
           
-          1 辅助宏从今天开始，我们即将走入UDF的核心世界，仔细剖析每一个宏的使用方法以及使用过程中需要注意的内容。
-前文提过，UDF程序编写的核心内容在于搞明白数据如何获取？数据如何转换？数据如何返回？Fluent提供了众多的辅助宏来实现这三个功能。主要包括：
-
-数据访问。主要功能为获取求解器中的数据，如
+          案例概述
+参考文献：T.H. Kuehn, R.J. Goldstein, “An Experimental Study of Natural Convection Heat Transfer in Concentric and Eccentric Horizontal Cylindrical An
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【9】：节点数据访问宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例9：同心管内自然对流/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2163,7 +2150,7 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2210,7 +2197,7 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2249,7 +2236,9 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2288,7 +2277,9 @@ Fluent的数据以分层方式保存，如下图所示。最顶级为D
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

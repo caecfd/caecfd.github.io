@@ -172,13 +172,13 @@
   <meta name="description" content="应用CFD解决工程流体问题">
 <meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CFDer club">
+<meta property="og:title" content="CFDer聚乐埠">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/page/2/index.html">
-<meta property="og:site_name" content="CFDer club">
+<meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="应用CFD解决工程流体问题">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CFDer club">
+<meta name="twitter:title" content="CFDer聚乐埠">
 <meta name="twitter:description" content="应用CFD解决工程流体问题">
 
 
@@ -196,7 +196,7 @@
   };
 </script>
 
-  <title>CFDer club</title>
+  <title>CFDer聚乐埠</title>
   
 
 
@@ -255,7 +255,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">CFDer club</span>
+        <span class="site-title">CFDer聚乐埠</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【8】：网格节点运动案例/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例29：各向异性热传导/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -379,7 +379,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【8】：网格节点运动案例/" itemprop="url">
-                  Fluent动网格【8】：网格节点运动案例
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例29：各向异性热传导/" itemprop="url">
+                  Fluent验证案例29：各向异性热传导
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:49:00 / 修改时间：01:27:54" itemprop="dateCreated datePublished" datetime="2018-10-18T00:49:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:29:00 / 修改时间：22:32:39" itemprop="dateCreated datePublished" datetime="2018-10-21T22:29:00+08:00">2018-10-21</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -453,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【8】：网格节点运动案例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【8】：网格节点运动案例/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例29：各向异性热传导/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例29：各向异性热传导/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -484,16 +484,13 @@
       
         
           
-          Fluent动网格中的DEFINE_GRID_MOTION宏允许用户定义网格节点的运动。本案例演示采用DEFINE_GRID_MOTION宏指定边界节点的运动。
-案例动网格效果如图所示。
-
-案例描述本案例几何模型如图所示。
-
-如图所示的同心圆柱体，内圆柱面进行扩张与收缩运动。其脉动位移可表达为：$$
+          本案例演示在具有各相异性导热率的固体中的热传导现象。
+1 问题描述案例模型为2D的边长1m的正方形，两侧壁面温度分别为100K及200K，上表面及底部温度采用DEFINE_PROFILE宏进行指定。
+上下两壁面温度分布为：$$T=\begin{cases}    \begin{matrix}    
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【8】：网格节点运动案例/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例29：各向异性热传导/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -552,7 +549,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【7】：网格节点运动/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例28：突扩管传热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -561,7 +558,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -571,8 +568,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【7】：网格节点运动/" itemprop="url">
-                  Fluent动网格【7】：网格节点运动
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例28：突扩管传热/" itemprop="url">
+                  Fluent验证案例28：突扩管传热
                 </a>
               
             
@@ -598,7 +595,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:48:00 / 修改时间：01:27:58" itemprop="dateCreated datePublished" datetime="2018-10-18T00:48:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:28:00 / 修改时间：22:32:36" itemprop="dateCreated datePublished" datetime="2018-10-21T22:28:00+08:00">2018-10-21</time>
             
 
             
@@ -620,7 +617,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -635,8 +632,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【7】：网格节点运动/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【7】：网格节点运动/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例28：突扩管传热/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例28：突扩管传热/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -666,12 +663,13 @@
       
         
           
-          在动网格中，对于那些既包含了运动也包含了变形的区域，可以通过UDF来指定区域中每一个节点的位置。这给了用户最大的自由度来指定网格的运动。在其他的动网格技术中（如重叠网格）则很难做到这一点。定义网格节点的位置是通过UDF宏DEFINE_GRID_MOTION来实现的。
-步骤可以通过以下步骤来指定既包含
+          本案例利用Fluent计算突扩管内传热问题并进行验证。
+1 案例描述如图所示的突扩管道，关闭热通量为0.3 W/m2，
+完全发展的湍流通过轴对称管膨胀建模。流动重新附接到膨胀管下游的管壁，包围回流区。膨胀管下游的管壁以恒定的速率加热。进入计算域的入口位于膨胀的上游1步高度和下游40个台阶高度处的出口
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【7】：网格节点运动/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例28：突扩管传热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -730,7 +728,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例27：后向台阶湍流流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -739,7 +737,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -749,8 +747,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/" itemprop="url">
-                  Fluent动网格【6】：部件变形案例
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例27：后向台阶湍流流动/" itemprop="url">
+                  Fluent验证案例27：后向台阶湍流流动
                 </a>
               
             
@@ -776,7 +774,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:47:00 / 修改时间：01:28:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:47:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:27:00 / 修改时间：22:32:34" itemprop="dateCreated datePublished" datetime="2018-10-21T22:27:00+08:00">2018-10-21</time>
             
 
             
@@ -798,7 +796,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -813,8 +811,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例27：后向台阶湍流流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例27：后向台阶湍流流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -844,14 +842,16 @@
       
         
           
-          本案例描述使用动网格过程中处理边界变形的问题。
-案例描述本案例几何为一个抛物线旋转成型的几何体。如图所示。
+          本案例利用Fluent计算后向台阶湍流流动问题。
+1 案例描述后向台阶流动中，流体介质在台阶处发生分离后在底部面上重新附着。计算区域如下图所示，入口位于上游4 h，出口位于台阶位置下游30 h处，其中h=1 m为台阶高度。基于台阶高度的雷诺数约为37400。
 
-其中上壁面刚体运动引起抛物面变形。刚体运动方程为：$$v=\left{ \begin{array}{c}    \begin{matrix}    -0.3t&amp;        ,t&
+计算条件如表所示。
+
+计算网格如图所示
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例27：后向台阶湍流流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -910,7 +910,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例26：真实气体超声速流动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -919,7 +919,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -929,8 +929,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/" itemprop="url">
-                  Fluent动网格【5】：部件变形
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例26：真实气体超声速流动/" itemprop="url">
+                  Fluent验证案例26：真实气体超声速流动
                 </a>
               
             
@@ -956,7 +956,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:46:00 / 修改时间：01:28:03" itemprop="dateCreated datePublished" datetime="2018-10-18T00:46:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:26:00 / 修改时间：22:32:30" itemprop="dateCreated datePublished" datetime="2018-10-21T22:26:00+08:00">2018-10-21</time>
             
 
             
@@ -978,7 +978,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -993,8 +993,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例26：真实气体超声速流动/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例26：真实气体超声速流动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1024,20 +1024,12 @@
       
         
           
-          在动网格中关于部件运动除了指定刚体运动外，有时还需要指定某些边界的变形，这种情况经常会遇到，尤其是与运动部件存在相连接边界的情况下，如下图中边界1运动导致与之相连的边界2和边界3发生变形。
-
-Fluent中预制了三种变形方式：
-
-faceted
-plane
-cylinder
-
-
-除此以外，Fluen
+          本案例模拟激波管内氢气瞬态流动，并利用解析解对计算结果进行验证。
+计算模型如图所示，长度1m，截面积0.01 m2的激波管内，初始时刻管道被分隔为高压区域（压力50 MPa）与低压区域（压力10 MPa），之后将分隔物撤离，高压区域向低压区域运动过程中形成激波。利用解析解验证激波管轴线上压力及温度分
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例26：真实气体超声速流动/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1096,7 +1088,7 @@ cylinder
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例25：非预混燃烧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1105,7 +1097,7 @@ cylinder
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1115,8 +1107,8 @@ cylinder
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/" itemprop="url">
-                  Fluent动网格【4】：DEFINE_CG_MOTION宏实例
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例25：非预混燃烧/" itemprop="url">
+                  Fluent验证案例25：非预混燃烧
                 </a>
               
             
@@ -1142,7 +1134,7 @@ cylinder
                 
               
 
-              <time title="创建时间：2018-10-18 00:45:00 / 修改时间：01:28:06" itemprop="dateCreated datePublished" datetime="2018-10-18T00:45:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:25:00 / 修改时间：22:32:28" itemprop="dateCreated datePublished" datetime="2018-10-21T22:25:00+08:00">2018-10-21</time>
             
 
             
@@ -1164,7 +1156,7 @@ cylinder
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1179,8 +1171,8 @@ cylinder
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例25：非预混燃烧/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例25：非预混燃烧/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1210,14 +1202,16 @@ cylinder
       
         
           
-          DEFINE_CG_MOTION宏通常用于定义刚体部件的运动。本文以一个简单的案例描述DEFINE_CG_MOTION的使用方法。
-案例描述本次计算的案例如图所示。在计算域中有一个刚体块（图中的小正方形），其运动速度为：$$u_x = 0.1sin(6.8t)$$由速度方程可知其运动周期为1s。
+          本案例利用Fluent的非预混燃烧模型计算燃烧器内甲烷燃烧过程，并利用实验值对计算结果进行验证。
+计算模型如图所示，甲烷与空气从不同的入口进入燃烧室，并在燃烧室内混合燃烧，计算过程中考虑辐射换热。
 
+计算参数如表所示。
 
+本次计算采用稳态计算，利用Realizable k-epsilon湍流模型计算
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例25：非预混燃烧/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1276,7 +1270,7 @@ cylinder
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例24：旋转圆筒中两种不混溶液体的界面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1285,7 +1279,7 @@ cylinder
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1295,8 +1289,8 @@ cylinder
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/" itemprop="url">
-                  Fluent动网格【3】：DEFINE_CG_MOTION宏
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例24：旋转圆筒中两种不混溶液体的界面/" itemprop="url">
+                  Fluent验证案例24：旋转圆筒中两种不混溶液体的界面
                 </a>
               
             
@@ -1322,7 +1316,7 @@ cylinder
                 
               
 
-              <time title="创建时间：2018-10-18 00:44:00 / 修改时间：01:28:08" itemprop="dateCreated datePublished" datetime="2018-10-18T00:44:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:24:00 / 修改时间：22:32:25" itemprop="dateCreated datePublished" datetime="2018-10-21T22:24:00+08:00">2018-10-21</time>
             
 
             
@@ -1344,7 +1338,7 @@ cylinder
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1359,8 +1353,8 @@ cylinder
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例24：旋转圆筒中两种不混溶液体的界面/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例24：旋转圆筒中两种不混溶液体的界面/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1390,18 +1384,14 @@ cylinder
       
         
           
-          除了利用Profile进行运动指定之外，Fluent中还可以使用UDF宏来指定部件的运动。其中用于运动指定的宏主要有三个：
+          本案例利用Fluent模拟两种互不相溶介质在密闭旋转容器中的分界面。
+一个竖直放置的圆柱形密闭容器，其中盛装有不相溶的两种介质（水和硅油），其中硅油密度较小位于容器上部，水位于容器下半部。容器以恒定角速度旋转，如下图所示。本案例利用Fluent模拟容器旋转后水及硅油间的分界面。
 
-DEFINE_CG_MOTION
-DEFINE_GEOM
-DEFINE_GRID_MOTION
-
-今天主要看第一个UDF宏DEFINE_CG_MOTION。
-用途DEFINE
+计算参数如下表所示
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例24：旋转圆筒中两种不混溶液体的界面/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1460,7 +1450,7 @@ DEFINE_GRID_MOTION
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例23：层流圆柱绕流的振荡分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1469,7 +1459,7 @@ DEFINE_GRID_MOTION
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1479,8 +1469,8 @@ DEFINE_GRID_MOTION
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/" itemprop="url">
-                  Fluent动网格【2】：Profile文件
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例23：层流圆柱绕流的振荡分析/" itemprop="url">
+                  Fluent验证案例23：层流圆柱绕流的振荡分析
                 </a>
               
             
@@ -1506,7 +1496,7 @@ DEFINE_GRID_MOTION
                 
               
 
-              <time title="创建时间：2018-10-18 00:42:00 / 修改时间：01:28:11" itemprop="dateCreated datePublished" datetime="2018-10-18T00:42:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:23:00 / 修改时间：22:32:07" itemprop="dateCreated datePublished" datetime="2018-10-21T22:23:00+08:00">2018-10-21</time>
             
 
             
@@ -1528,7 +1518,7 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1543,8 +1533,8 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例23：层流圆柱绕流的振荡分析/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例23：层流圆柱绕流的振荡分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1574,12 +1564,16 @@ DEFINE_GRID_MOTION
       
         
           
-          动网格中一个重要任务是部件运动方式的指定。在动网格中指定部件的运动，往往将部件的运动方式指定为其加速度、速度或位移与时间的相关关系，本文主要讲述如何在Fluent中利用瞬态Profile文件指定部件的运动方式。
-在Fluent中指定部件运动主要有两种方式：Profile与UDF宏。当运动方程已知时，
+          本案例利用Strouhal数验证Fluent计算层流圆柱绕流。
+
+计算参数如下表所示。
+
+雷诺数为100，流动为层流流动。为获取绕流过程中圆柱壁面的升力系数，本案例采用瞬态计算。利用FFT确定其震荡频率及Strouhal数。
+Strouhal数定义为：$$S = \frac{N\cdot D}{U_
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例23：层流圆柱绕流的振荡分析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1638,7 +1632,7 @@ DEFINE_GRID_MOTION
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例22：低压入口的锐缘孔口空化模拟/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1647,7 +1641,7 @@ DEFINE_GRID_MOTION
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1657,8 +1651,8 @@ DEFINE_GRID_MOTION
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/" itemprop="url">
-                  Fluent动网格【1】：概述
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例22：低压入口的锐缘孔口空化模拟/" itemprop="url">
+                  Fluent验证案例22：低压入口的锐缘孔口空化模拟
                 </a>
               
             
@@ -1684,7 +1678,7 @@ DEFINE_GRID_MOTION
                 
               
 
-              <time title="创建时间：2018-10-18 00:41:00 / 修改时间：01:28:14" itemprop="dateCreated datePublished" datetime="2018-10-18T00:41:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:22:00 / 修改时间：22:32:04" itemprop="dateCreated datePublished" datetime="2018-10-21T22:22:00+08:00">2018-10-21</time>
             
 
             
@@ -1706,7 +1700,7 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1721,8 +1715,8 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例22：低压入口的锐缘孔口空化模拟/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例22：低压入口的锐缘孔口空化模拟/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1752,11 +1746,14 @@ DEFINE_GRID_MOTION
       
         
           
-          动网格技术在流体仿真中很特殊，应用也很广。生活中能够碰到形形色色的包含有部件运动的问题，比如说我现在想要出门，那么开门的一瞬间，门的运动会影响到房间内部的空气流动，这就是一个典型的动网格问题。在工程中，动网格应用也非常的广泛，如依靠转子运动而工作的泵和压缩机、依靠旋翼旋转而飞行的直升机、随海浪起伏的
+          本案例利用Fluent中的空化模型模拟高压流体流经几何突变孔口后发生的空化现象，并利用文献中的流量系数对仿真结果进行验证。
+1 案例描述计算模型如下图所示。
+
+计算假设流体介质为不可压缩，采用压力基求解器计算稳态结果。利用Realizable k-epsilon湍流模型及标准壁面函数计算湍流流动。空
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例22：低压入口的锐缘孔口空化模拟/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1815,7 +1812,7 @@ DEFINE_GRID_MOTION
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例21：高压入口的锐缘孔口空化模拟/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1824,7 +1821,7 @@ DEFINE_GRID_MOTION
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1834,8 +1831,8 @@ DEFINE_GRID_MOTION
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/" itemprop="url">
-                  Fluent UDF【20】：UDS介绍
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例21：高压入口的锐缘孔口空化模拟/" itemprop="url">
+                  Fluent验证案例21：高压入口的锐缘孔口空化模拟
                 </a>
               
             
@@ -1861,7 +1858,7 @@ DEFINE_GRID_MOTION
                 
               
 
-              <time title="创建时间：2018-10-18 00:40:00 / 修改时间：01:28:17" itemprop="dateCreated datePublished" datetime="2018-10-18T00:40:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:21:00 / 修改时间：22:32:01" itemprop="dateCreated datePublished" datetime="2018-10-21T22:21:00+08:00">2018-10-21</time>
             
 
             
@@ -1883,7 +1880,7 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -1898,8 +1895,8 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例21：高压入口的锐缘孔口空化模拟/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例21：高压入口的锐缘孔口空化模拟/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1929,12 +1926,14 @@ DEFINE_GRID_MOTION
       
         
           
-          1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。
-2 UDS理论2.1 单相流
+          本案例利用Fluent中的空化模型模拟高压流体流经几何突变孔口后发生的空化现象，并利用文献中的流量系数对仿真结果进行验证。
+1 案例描述计算模型如下图所示。
+
+计算假设流体介质为不可压缩，采用压力基求解器计算稳态结果。利用Realizable k-epsilon湍流模型及标准壁面函数计算湍流流动。空
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例21：高压入口的锐缘孔口空化模拟/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1993,7 +1992,7 @@ DEFINE_GRID_MOTION
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/21/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -2002,7 +2001,7 @@ DEFINE_GRID_MOTION
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -2012,8 +2011,8 @@ DEFINE_GRID_MOTION
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/" itemprop="url">
-                  Fluent UDF【19】：源项
+                <a class="post-title-link" href="/2018/10/21/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/" itemprop="url">
+                  Fluent验证案例20：往复活塞对气缸内空气的绝热压缩
                 </a>
               
             
@@ -2039,7 +2038,7 @@ DEFINE_GRID_MOTION
                 
               
 
-              <time title="创建时间：2018-10-18 00:39:00 / 修改时间：01:28:20" itemprop="dateCreated datePublished" datetime="2018-10-18T00:39:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-21 22:19:00 / 修改时间：22:31:49" itemprop="dateCreated datePublished" datetime="2018-10-21T22:19:00+08:00">2018-10-21</time>
             
 
             
@@ -2061,7 +2060,7 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
 
                 
                 
@@ -2076,8 +2075,8 @@ DEFINE_GRID_MOTION
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/" itemprop="commentCount"></span>
+                <a href="/2018/10/21/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/21/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2107,22 +2106,16 @@ DEFINE_GRID_MOTION
       
         
           
-          在UDF中定义源项通常利用宏DEFINE_SOURCE来实现。
-可以应用的地方包括：
+          本案例利用Fluent中的In-Cylinder方法模拟发动机气缸内活塞运动导致的压力及温度变化，并将仿真结果与解析值进行比较。
+计算模型如下图所示。气缸活塞往复运动受曲轴控制，本案例利用2D模型模拟气缸，活塞运动通过In-Cylinder方法进行指定。
 
-质量、动量以及能量
-k与epsilon
-组分质量分数
-P1辐射模型
-UDS标量输运方程
-颗粒温度（欧拉、混合多相流模型）
+计算域尺寸如图所示。
 
-1 DEFINE_SOURCE宏使用方式：
-1DEFINE_SOUCE(name, c,
+假定缸内气体压缩过
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/#more" rel="contents">
+            <a class="btn" href="/2018/10/21/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2170,7 +2163,7 @@ UDS标量输运方程
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2217,7 +2210,7 @@ UDS标量输运方程
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2256,7 +2249,9 @@ UDS标量输运方程
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2295,7 +2290,9 @@ UDS标量输运方程
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

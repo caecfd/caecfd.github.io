@@ -172,13 +172,13 @@
   <meta name="description" content="应用CFD解决工程流体问题">
 <meta name="keywords" content="CFD,仿真,流体力学,计算流体力学,Fluent">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CFDer club">
+<meta property="og:title" content="CFDer聚乐埠">
 <meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/page/6/index.html">
-<meta property="og:site_name" content="CFDer club">
+<meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="应用CFD解决工程流体问题">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CFDer club">
+<meta name="twitter:title" content="CFDer聚乐埠">
 <meta name="twitter:description" content="应用CFD解决工程流体问题">
 
 
@@ -196,7 +196,7 @@
   };
 </script>
 
-  <title>CFDer club</title>
+  <title>CFDer聚乐埠</title>
   
 
 
@@ -255,7 +255,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">CFDer club</span>
+        <span class="site-title">CFDer聚乐埠</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -379,7 +379,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/" itemprop="url">
-                  【Fluent热分析】01：固体导热
+                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/" itemprop="url">
+                  Fluent动网格【6】：部件变形案例
                 </a>
               
             
@@ -416,24 +416,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 15:32:00" itemprop="dateCreated datePublished" datetime="2018-10-17T15:32:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:47:00 / 修改时间：01:28:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:47:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:29" itemprop="dateModified" datetime="2018-10-18T01:24:29+08:00">2018-10-18</time>
               
             
           </span>
@@ -450,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent热分析/" itemprop="url" rel="index"><span itemprop="name">Fluent热分析</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
 
                 
                 
@@ -465,8 +453,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -496,18 +484,14 @@
       
         
           
-          如图所示的圆柱体，其直径与高度均为1m，其顶部面温度为100℃，下端面及侧面温度为0℃，利用Fluent计算圆柱体内部温度分布。
-计算模型如图所示。
-1 几何模型
-启动Workbench，添加Fluid Flow(Fluent)模块
+          本案例描述使用动网格过程中处理边界变形的问题。
+案例描述本案例几何为一个抛物线旋转成型的几何体。如图所示。
 
-
-
-右键选择A2单元格，选择菜单New DesignModele
+其中上壁面刚体运动引起抛物面变形。刚体运动方程为：$$v=\left{ \begin{array}{c}    \begin{matrix}    -0.3t&amp;        ,t&
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent热分析/【Fluent热分析】01：固体导热/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【6】：部件变形案例/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -566,7 +550,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -575,7 +559,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -585,8 +569,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="url">
-                  【多相流计算】09：DPM冲蚀计算
+                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/" itemprop="url">
+                  Fluent动网格【5】：部件变形
                 </a>
               
             
@@ -612,24 +596,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:28:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:28:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:46:00 / 修改时间：01:28:03" itemprop="dateCreated datePublished" datetime="2018-10-18T00:46:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:44" itemprop="dateModified" datetime="2018-10-18T01:24:44+08:00">2018-10-18</time>
               
             
           </span>
@@ -646,7 +618,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
 
                 
                 
@@ -661,8 +633,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -692,18 +664,20 @@
       
         
           
-          1 引子本案例的目的在于演示如何使用FLUENT软件模拟计算3D弯头中的冲蚀现象。冲蚀现象在工程应用中是一种非常普遍的现象。本案例主要展示以下内容：
+          在动网格中关于部件运动除了指定刚体运动外，有时还需要指定某些边界的变形，这种情况经常会遇到，尤其是与运动部件存在相连接边界的情况下，如下图中边界1运动导致与之相连的边界2和边界3发生变形。
 
-使用冲蚀模型分析3D弯头中的冲蚀现象
-使用离散相模型
-使用合适的求解参数求解案例
-计算后处理
+Fluent中预制了三种变形方式：
 
-2 问题描述本案例的几何模型如下图所示。该模型由两个
+faceted
+plane
+cylinder
+
+
+除此以外，Fluen
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】09：DPM冲蚀计算/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【5】：部件变形/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -762,7 +736,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -771,7 +745,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -781,8 +755,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" itemprop="url">
-                  【多相流计算】08：Mixture离心泵空化
+                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/" itemprop="url">
+                  Fluent动网格【4】：DEFINE_CG_MOTION宏实例
                 </a>
               
             
@@ -808,24 +782,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:27:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:27:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:45:00 / 修改时间：01:28:06" itemprop="dateCreated datePublished" datetime="2018-10-18T00:45:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:47" itemprop="dateModified" datetime="2018-10-18T01:24:47+08:00">2018-10-18</time>
               
             
           </span>
@@ -842,7 +804,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
 
                 
                 
@@ -857,8 +819,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -888,16 +850,14 @@
       
         
           
-          本案例利用Fluent中的Mixture多相流模型仿真计算离心泵内的空化情况。
-1 案例描述本案例j几何如图所示。
+          DEFINE_CG_MOTION宏通常用于定义刚体部件的运动。本文以一个简单的案例描述DEFINE_CG_MOTION的使用方法。
+案例描述本次计算的案例如图所示。在计算域中有一个刚体块（图中的小正方形），其运动速度为：$$u_x = 0.1sin(6.8t)$$由速度方程可知其运动周期为1s。
 
-离心泵入口总压0.6 MPa，出口静压0.2 MPa，叶轮旋转速度1200 RPM。流体域内介质为液态水，其在当前工作条件下饱和蒸汽压为3540 Pa。
-2 导入网格
-启动Fluen
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】08：Mixture离心泵空化/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -956,7 +916,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -965,7 +925,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -975,8 +935,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" itemprop="url">
-                  【多相流计算】07：VOF波浪
+                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/" itemprop="url">
+                  Fluent动网格【3】：DEFINE_CG_MOTION宏
                 </a>
               
             
@@ -1002,24 +962,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:26:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:26:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:44:00 / 修改时间：01:28:08" itemprop="dateCreated datePublished" datetime="2018-10-18T00:44:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:51" itemprop="dateModified" datetime="2018-10-18T01:24:51+08:00">2018-10-18</time>
               
             
           </span>
@@ -1036,7 +984,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
 
                 
                 
@@ -1051,8 +999,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1082,18 +1030,18 @@
       
         
           
-          本案例利用Fluent中的VOF模型模拟波浪。
-1 模型描述计算几何模型如图所示。
+          除了利用Profile进行运动指定之外，Fluent中还可以使用UDF宏来指定部件的运动。其中用于运动指定的宏主要有三个：
 
-其中左侧面为入口面，水面标高0.04 m，波高0.155m，波长1.35m。
-模型顶部面为开敞边界，与大气相同。
-2 几何模型本案例几何模型采用外部导入。
+DEFINE_CG_MOTION
+DEFINE_GEOM
+DEFINE_GRID_MOTION
 
-启动Workbench，添加Fluid Flow(Flu
+今天主要看第一个UDF宏DEFINE_CG_MOTION。
+用途DEFINE
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】07：VOF波浪/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1152,7 +1100,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1161,7 +1109,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1171,8 +1119,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" itemprop="url">
-                  【多相流计算】06：晃荡的油箱
+                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/" itemprop="url">
+                  Fluent动网格【2】：Profile文件
                 </a>
               
             
@@ -1198,24 +1146,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:25:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:25:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:42:00 / 修改时间：01:28:11" itemprop="dateCreated datePublished" datetime="2018-10-18T00:42:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:53" itemprop="dateModified" datetime="2018-10-18T01:24:53+08:00">2018-10-18</time>
               
             
           </span>
@@ -1232,7 +1168,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
 
                 
                 
@@ -1247,8 +1183,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1278,12 +1214,12 @@
       
         
           
-          本案例演示利用Fluent中的VOF模型仿真计算密闭油箱晃动过程中的自由液面问题。
-1 案例描述汽车在颠簸的道路上行驶时，在变加速度作用下，可能会导致油箱内液面晃动。当晃动极为剧烈时，甚至会造成油泵无法吸取燃油，因此需要利用CFD研究油箱在晃动过程中液面分布情况。为简化计算，本案例采用2D模型，3D
+          动网格中一个重要任务是部件运动方式的指定。在动网格中指定部件的运动，往往将部件的运动方式指定为其加速度、速度或位移与时间的相关关系，本文主要讲述如何在Fluent中利用瞬态Profile文件指定部件的运动方式。
+在Fluent中指定部件运动主要有两种方式：Profile与UDF宏。当运动方程已知时，
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】06：晃荡的油箱/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1342,7 +1278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1351,7 +1287,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1361,8 +1297,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" itemprop="url">
-                  【多相流计算】05：Rayleigh –Taylor不稳定现象模拟
+                <a class="post-title-link" href="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/" itemprop="url">
+                  Fluent动网格【1】：概述
                 </a>
               
             
@@ -1388,24 +1324,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:24:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:24:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:41:00 / 修改时间：01:28:14" itemprop="dateCreated datePublished" datetime="2018-10-18T00:41:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:56" itemprop="dateModified" datetime="2018-10-18T01:24:56+08:00">2018-10-18</time>
               
             
           </span>
@@ -1422,7 +1346,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent动网格/" itemprop="url" rel="index"><span itemprop="name">Fluent动网格</span></a></span>
 
                 
                 
@@ -1437,8 +1361,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1468,12 +1392,11 @@
       
         
           
-          本案例利用Fluent中的VOF模型模拟Rayleigh–Taylor不稳定现象。
-当两种密度不同的介质放置于同一个容器中，如下图所示，密度大的介质位于密度小的介质上方时，在重力作用下，两相界面会发生不稳定现象，称之为Rayleigh–Taylor不稳定现象，更专业的描述可参阅wIki百科（http
+          动网格技术在流体仿真中很特殊，应用也很广。生活中能够碰到形形色色的包含有部件运动的问题，比如说我现在想要出门，那么开门的一瞬间，门的运动会影响到房间内部的空气流动，这就是一个典型的动网格问题。在工程中，动网格应用也非常的广泛，如依靠转子运动而工作的泵和压缩机、依靠旋翼旋转而飞行的直升机、随海浪起伏的
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】05：Rayleigh –Taylor不稳定现象模拟/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent动网格/Fluent动网格【1】：概述/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1532,7 +1455,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1541,7 +1464,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1551,8 +1474,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" itemprop="url">
-                  【多相流计算】04：重力驱动流
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/" itemprop="url">
+                  Fluent UDF【20】：UDS介绍
                 </a>
               
             
@@ -1578,24 +1501,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:23:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:23:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:40:00 / 修改时间：01:28:17" itemprop="dateCreated datePublished" datetime="2018-10-18T00:40:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:24:59" itemprop="dateModified" datetime="2018-10-18T01:24:59+08:00">2018-10-18</time>
               
             
           </span>
@@ -1612,7 +1523,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1627,8 +1538,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1658,19 +1569,12 @@
       
         
           
-          本案例利用Fluent中的VOF模型仿真计算重力驱动下的气液两相流动。
-本案例模型来自于STAR CCM+案例文档。
-
-1 案例描述
-2 Fluent设置2.1 导入网格
-以2D、Double Precision模式启动Fluent
-利用菜单File → Read → Mesh…导入网格文件
-
-2.
+          1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。
+2 UDS理论2.1 单相流
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】04：重力驱动流/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【20】：UDS介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1729,7 +1633,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】03：圆形坯料连续铸造/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1738,7 +1642,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1748,8 +1652,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】03：圆形坯料连续铸造/" itemprop="url">
-                  【多相流计算】03：圆形坯料连续铸造
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/" itemprop="url">
+                  Fluent UDF【19】：源项
                 </a>
               
             
@@ -1775,24 +1679,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:22:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:22:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:39:00 / 修改时间：01:28:20" itemprop="dateCreated datePublished" datetime="2018-10-18T00:39:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:25:01" itemprop="dateModified" datetime="2018-10-18T01:25:01+08:00">2018-10-18</time>
               
             
           </span>
@@ -1809,7 +1701,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1824,8 +1716,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】03：圆形坯料连续铸造/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】03：圆形坯料连续铸造/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1855,17 +1747,22 @@
       
         
           
-          本案例利用Fluent中的凝固熔化模型模拟圆柱形坯料的连续铸造过程。
-1 问题描述本案例考虑的问题如图1所示。
+          在UDF中定义源项通常利用宏DEFINE_SOURCE来实现。
+可以应用的地方包括：
 
-通过直喷嘴(喷嘴直径:0.03 m)将钢水引入圆形钢坯(模具直径0.115 m)，凝固的壳体以0.03 m/s的速度离开。铸造条件如下表所示。
+质量、动量以及能量
+k与epsilon
+组分质量分数
+P1辐射模型
+UDS标量输运方程
+颗粒温度（欧拉、混合多相流模型）
 
-2 Fluent设置2.1 准备
-准备网
+1 DEFINE_SOURCE宏使用方式：
+1DEFINE_SOUCE(name, c,
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】03：圆形坯料连续铸造/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【19】：源项/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1924,7 +1821,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/Fluent多相流计算/【多相流计算】02：旋涂工艺/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1933,7 +1830,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -1943,8 +1840,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/Fluent多相流计算/【多相流计算】02：旋涂工艺/" itemprop="url">
-                  【多相流计算】02：旋涂工艺
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/" itemprop="url">
+                  Fluent UDF【18】：UDS宏
                 </a>
               
             
@@ -1970,24 +1867,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:21:00" itemprop="dateCreated datePublished" datetime="2018-10-17T12:21:00+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:38:00 / 修改时间：01:28:23" itemprop="dateCreated datePublished" datetime="2018-10-18T00:38:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:25:07" itemprop="dateModified" datetime="2018-10-18T01:25:07+08:00">2018-10-18</time>
               
             
           </span>
@@ -2004,7 +1889,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent多相流计算/" itemprop="url" rel="index"><span itemprop="name">Fluent多相流计算</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -2019,8 +1904,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/Fluent多相流计算/【多相流计算】02：旋涂工艺/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/Fluent多相流计算/【多相流计算】02：旋涂工艺/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2050,13 +1935,12 @@
       
         
           
-          本案例利用Fluent的VOF模型研究旋涂工艺过程。
-旋涂工艺是半导体制造中的重要工艺过程，该工艺将球形液滴放置于圆盘上，之后告诉旋转圆盘，从而将液滴均匀的分布于圆盘上。圆盘高速旋转过程中，液滴粘度、表面张力及液滴液体与圆盘表面的的润湿角决定了液滴扩散的速度及扩散形成的轮廓。
-案例采用轴对称模型进行
+          ANSYS Fluent能够求解自定义标量输运方程。本文描述在Fluent中求解自定义标量方程需要使用的一些UDF宏。
+1 简介对于用户在ANSYS Fluent模型中指定的每个标量方程，可以为标量输运方程中的扩散系数、通量以及瞬态项提供单独的UDF进行指定。对于多相流问题，用户还可以为每一相指定U
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/Fluent多相流计算/【多相流计算】02：旋涂工艺/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【18】：UDS宏/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2115,7 +1999,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -2124,7 +2008,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CFDer club">
+      <meta itemprop="name" content="CFDer聚乐埠">
     </span>
 
     
@@ -2134,8 +2018,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/" itemprop="url">
-                  【一起学OpenFOAM】06 标准求解器
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/" itemprop="url">
+                  Fluent UDF【17】：UDS
                 </a>
               
             
@@ -2161,24 +2045,12 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:54" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:54+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:37:00 / 修改时间：01:28:26" itemprop="dateCreated datePublished" datetime="2018-10-18T00:37:00+08:00">2018-10-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-18 01:23:06" itemprop="dateModified" datetime="2018-10-18T01:23:06+08:00">2018-10-18</time>
               
             
           </span>
@@ -2195,7 +2067,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -2210,8 +2082,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2241,12 +2113,12 @@
       
         
           
-          OpenFOAM中提供了众多的标准求解器。有了这些标准求解器，即使你对程序设计一无所知，你也可以将OpenFOAM当做是一款CFD软件。实际上OpenFOAM的功能不只是求解器流体流动问题。
-OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每一个目录下均包含众多的求解器
+          1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。
+2 UDS理论2.1 单相流
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】06 标准求解器/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【17】：UDS/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2294,7 +2166,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2341,7 +2213,7 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2380,7 +2252,9 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2419,7 +2293,9 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2674,8 +2550,6 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
       
     
       
-        
-      
     
       
     
@@ -2695,30 +2569,6 @@ OpenFOAM的标准求解器位于$FOAM_SOLVERS目录下。如下图所示，每�
     
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      TeX: {equationNumbers: { autoNumber: "AMS" }}
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    
   
 
 
