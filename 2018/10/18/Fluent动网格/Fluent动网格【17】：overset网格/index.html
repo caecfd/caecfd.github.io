@@ -169,25 +169,30 @@
 
 
 
-  <meta name="description" content="除了利用Profile进行运动指定之外，Fluent中还可以使用UDF宏来指定部件的运动。其中用于运动指定的宏主要有三个：  DEFINE_CG_MOTION DEFINE_GEOM DEFINE_GRID_MOTION  今天主要看第一个UDF宏DEFINE_CG_MOTION。 用途DEFINE_CG_MOTION宏主要用于描述刚体的运动。所谓“刚体”，指的是在运动过程中部件几何形状不会发生任">
+  <meta name="description" content="overset网格(重叠网格)技术其实并不是Fluent专有的，确切的说，是Fluent在比较新的版本中才添加的方法，用于处理的动网格处理。在一些成熟的商用CFD软件中，重叠网格技术已经被当做了解决动网格问题的主要方法。重叠网格技术原理上还是比较复杂的，但是在实际应用中要比网格重构简单得多，而且也不会担心出现出现负体积的情况。 简单介绍重叠网格在使用过程中需要使用两套网格，如下图所示。 图中包含了">
 <meta name="keywords" content="Fluent动网格">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fluent动网格【3】：DEFINE_CG_MOTION宏">
-<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/index.html">
+<meta property="og:title" content="Fluent动网格【17】：Overset网格">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/index.html">
 <meta property="og:site_name" content="CFDer聚乐埠">
-<meta property="og:description" content="除了利用Profile进行运动指定之外，Fluent中还可以使用UDF宏来指定部件的运动。其中用于运动指定的宏主要有三个：  DEFINE_CG_MOTION DEFINE_GEOM DEFINE_GRID_MOTION  今天主要看第一个UDF宏DEFINE_CG_MOTION。 用途DEFINE_CG_MOTION宏主要用于描述刚体的运动。所谓“刚体”，指的是在运动过程中部件几何形状不会发生任">
+<meta property="og:description" content="overset网格(重叠网格)技术其实并不是Fluent专有的，确切的说，是Fluent在比较新的版本中才添加的方法，用于处理的动网格处理。在一些成熟的商用CFD软件中，重叠网格技术已经被当做了解决动网格问题的主要方法。重叠网格技术原理上还是比较复杂的，但是在实际应用中要比网格重构简单得多，而且也不会担心出现出现负体积的情况。 简单介绍重叠网格在使用过程中需要使用两套网格，如下图所示。 图中包含了">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-24T11:14:19.375Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_59247389.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_34954293.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_55301479.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_G3JAlH6HI6.png">
+<meta property="og:updated_time" content="2018-11-24T11:39:38.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fluent动网格【3】：DEFINE_CG_MOTION宏">
-<meta name="twitter:description" content="除了利用Profile进行运动指定之外，Fluent中还可以使用UDF宏来指定部件的运动。其中用于运动指定的宏主要有三个：  DEFINE_CG_MOTION DEFINE_GEOM DEFINE_GRID_MOTION  今天主要看第一个UDF宏DEFINE_CG_MOTION。 用途DEFINE_CG_MOTION宏主要用于描述刚体的运动。所谓“刚体”，指的是在运动过程中部件几何形状不会发生任">
+<meta name="twitter:title" content="Fluent动网格【17】：Overset网格">
+<meta name="twitter:description" content="overset网格(重叠网格)技术其实并不是Fluent专有的，确切的说，是Fluent在比较新的版本中才添加的方法，用于处理的动网格处理。在一些成熟的商用CFD软件中，重叠网格技术已经被当做了解决动网格问题的主要方法。重叠网格技术原理上还是比较复杂的，但是在实际应用中要比网格重构简单得多，而且也不会担心出现出现负体积的情况。 简单介绍重叠网格在使用过程中需要使用两套网格，如下图所示。 图中包含了">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_59247389.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/"/>
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/"/>
 
 
 
@@ -197,7 +202,7 @@
   };
 </script>
 
-  <title>Fluent动网格【3】：DEFINE_CG_MOTION宏 | CFDer聚乐埠</title>
+  <title>Fluent动网格【17】：Overset网格 | CFDer聚乐埠</title>
   
 
 
@@ -370,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -387,7 +392,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Fluent动网格【3】：DEFINE_CG_MOTION宏
+          <h2 class="post-title" itemprop="name headline">Fluent动网格【17】：Overset网格
               
             
           </h2>
@@ -412,7 +417,7 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:44:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:44:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 01:58:00" itemprop="dateCreated datePublished" datetime="2018-10-18T01:58:00+08:00">2018-10-18</time>
             
 
             
@@ -429,7 +434,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:39:38" itemprop="dateModified" datetime="2018-11-24T19:39:38+08:00">2018-11-24</time>
               
             
           </span>
@@ -461,8 +466,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【3】：DEFINE_CG_MOTION宏/" itemprop="commentCount"></span>
+                <a href="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -498,37 +503,59 @@
       
 
       
-        <p>除了利用Profile进行运动指定之外，Fluent中还可以使用UDF宏来指定部件的运动。其中用于运动指定的宏主要有三个：</p>
-<ul>
-<li>DEFINE_CG_MOTION</li>
-<li>DEFINE_GEOM</li>
-<li>DEFINE_GRID_MOTION</li>
+        <p>overset网格(重叠网格)技术其实并不是Fluent专有的，确切的说，是Fluent在比较新的版本中才添加的方法，用于处理的动网格处理。在一些成熟的商用CFD软件中，重叠网格技术已经被当做了解决动网格问题的主要方法。<br>重叠网格技术原理上还是比较复杂的，但是在实际应用中要比网格重构简单得多，而且也不会担心出现出现负体积的情况。</p>
+<h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>重叠网格在使用过程中需要使用两套网格，如下图所示。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_59247389.jpg" alt=""></p>
+<p>图中包含了背景网格（background mesh）以及一个前景网格（图中的component mesh)，在重叠网格中，可以同时包含几个前景网格。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_34954293.jpg" alt=""></p>
+<p>重叠网格技术采用数学方法处理这两套网格，得到最终的计算网格。如上两幅图在计算过程中的实际模型分别如下图所示。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_55301479.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_G3JAlH6HI6.png" alt="mark"></p>
+<p>实际上在使用重叠网格过程中，这些技术细节都不用考虑，我们需要关注的是运动部件运动的定义，在这里是定义运动区域的运动，应用之前运动区域定义的方式就可以解决了。</p>
+<h1 id="应用方式"><a href="#应用方式" class="headerlink" title="应用方式"></a>应用方式</h1><ul>
+<li><code>网格模型准备</code><br>首先当然要准备两套网格。网格的准备可以是在任何前处理软件中（如ICEM CFD、Mesh等），但是需要注意的是网格组装过程中，需要保证两个区域的相对位置正确，而且尽可能保证区域运动过程中重叠位置网格尺寸相当。建议在mesh中划分网格，当然ICEM CFD中也是没有问题的。</li>
+<li><code>运动定义</code><br>不管是平动、转动还是不规则运动，在重叠网格中，都是将运动指定给前景网格区域。因此可以利用Profile文件或DEFINE_ZONE_MOTION定义运动。</li>
 </ul>
-<p>今天主要看第一个UDF宏DEFINE_CG_MOTION。</p>
-<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>DEFINE_CG_MOTION宏主要用于描述刚体的运动。所谓“刚体”，指的是在运动过程中部件几何形状不会发生任何改变，只是其质心位置发生改变。</p>
-<p>在定义刚体的运动时，通常以速度方式进行显式定义。</p>
-<h1 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h1><p>DEFINE_CG_MOTION宏的结构很简单。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFINE_CG_MOTION(name,dt,vel,omega,time,dtime)</span><br></pre></td></tr></table></figure>
-<p>其中：</p>
-<p><strong>name</strong>：为宏的名称，可以随意定义</p>
-<p><strong>dt</strong>：一个指针Dynamic_Thread *dt，存储动网格属性，通常不需要用户干预。</p>
-<p><strong>vel</strong>：平动速度，为一个数组，其中vel[0]为x方向速度，vel[1]为y方向速度，vel[2]为z方向速度。</p>
-<p><strong>omega</strong>：转动速度，omega[0]为x方向角速度，omega[1]为y方向角速度，omega[2]为z方向角速度。</p>
-<p><strong>time</strong>：当前时间。</p>
-<p><strong>dtime</strong>：时间步长。</p>
-<blockquote>
-<p>DEFINE_CG_MOTION宏实际上是要返回数据vel或omega。__</p>
-</blockquote>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p><strong>实例1：</strong>利用DEFINE_CG_MOTION宏定义速度：<br>$$</p>
-<p>u_x = 2  sin(3t)<br>$$<br>可以写成：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">DEFINE_CG_MOTION(velocity,dt,vel,omega,time,dtime)</span><br><span class="line">&#123;</span><br><span class="line">  vel[<span class="number">0</span>] = <span class="number">2</span>* <span class="built_in">sin</span>(<span class="number">3</span>*time); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很简单，对不对？</p>
-<p>再来个复杂点的例子。</p>
-<p><strong>实例2：</strong>已知作用在部件上的力<em>F</em>，计算部件在力<em>F</em>作用下的运动。</p>
-<p>可以采用牛顿第二定律：<br>$$<br>\int_{t_0}^{t}{dv}=\int_{t_0}^{t}{(F/m)}dt<br>$$</p>
-<p>则速度可写为：<br>$$<br>v_t = v_{t-\Delta t}+(F/m)\Delta t<br>$$</p>
-<p>可写UDF宏为：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/************************************************************</span></span><br><span class="line"><span class="comment">* 1-degree of freedom equation of motion (x-direction)</span></span><br><span class="line"><span class="comment">* compiled UDF</span></span><br><span class="line"><span class="comment">************************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">static</span> real v_prev = <span class="number">0.0</span>;</span><br><span class="line"><span class="keyword">static</span> real time_prev = <span class="number">0.0</span>;</span><br><span class="line"> </span><br><span class="line">DEFINE_CG_MOTION(piston,dt,vel,omega,time,dtime)</span><br><span class="line">&#123;</span><br><span class="line">  Thread *t;</span><br><span class="line">  <span class="keyword">face_t</span> f;</span><br><span class="line">  <span class="function">real <span class="title">NV_VEC</span><span class="params">(A)</span></span>;</span><br><span class="line">  real force_x, dv;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* reset velocities */</span></span><br><span class="line">  NV_S(vel, =, <span class="number">0.0</span>);</span><br><span class="line">  NV_S(omega, =, <span class="number">0.0</span>);</span><br><span class="line">  <span class="keyword">if</span> (!Data_Valid_P())</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">/* get the thread pointer for which this motion is defined */</span></span><br><span class="line">  t = DT_THREAD(dt);</span><br><span class="line">  <span class="comment">/* compute pressure force on body by looping through all faces */</span></span><br><span class="line">  force_x = <span class="number">0.0</span>;</span><br><span class="line">  begin_f_loop(f,t)</span><br><span class="line">    &#123;</span><br><span class="line">      F_AREA(A,f,t);</span><br><span class="line">      force_x += F_P(f,t) * A[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  end_f_loop(f,t)</span><br><span class="line">  <span class="comment">/* compute change in velocity, dv = F*dt/mass */</span></span><br><span class="line">  dv = dtime * force_x / <span class="number">50.0</span>;</span><br><span class="line">  <span class="comment">/* motion UDFs can be called multiple times and should not cause</span></span><br><span class="line"><span class="comment">     false velocity updates */</span></span><br><span class="line">  <span class="keyword">if</span> (time &gt; (time_prev + EPSILON))</span><br><span class="line">    &#123;</span><br><span class="line">      v_prev += dv;</span><br><span class="line">      time_prev = time;</span><br><span class="line">    &#125;</span><br><span class="line">  Message(<span class="string">"time = %f, x_vel = %f, x_force = %f\n"</span>, time, v_prev, force_x);</span><br><span class="line">  <span class="comment">/* set x-component of velocity */</span></span><br><span class="line">  vel[<span class="number">0</span>] = v_prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h1><p>重叠网格在Fluent中还属于新玩意儿，目前存在很多的局限性。这些局限性包括：</p>
+<ul>
+<li>重叠区域中不能包含有固体网格域。如果计算域中存在固体域，则需要将其从重叠系统中分离开。</li>
+<li>前景网格区域不能包含有不一致的interface</li>
+<li>前景网格区域中不能包含有周期边界</li>
+<li>背景网格区域中不能包含有overset边界</li>
+<li>前景网格边界不能与coupled壁面重叠</li>
+<li>重叠网格与动网格的remeshing或Layering不兼容</li>
+<li>在有重叠网格的区域，不能使用FMG初始化</li>
+<li>不能使用FAS多层网格模型</li>
+<li>无法激活Implicit residual smoothing方法</li>
+</ul>
+<h1 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h1><p>目前Fluent最新版本中的重叠网格已经比较成熟，能够与绝大多数模型相兼容。</p>
+<ul>
+<li>压力基求解器</li>
+<li>平面2D以及3D流动中使用绝对速度格式</li>
+<li>支持Cell-base、Green-Gauss以及Least-Squares梯度方法</li>
+<li>所有的压力插值格式</li>
+<li>一阶及二阶空间格式</li>
+<li>压力速度耦合算法中的耦合格式</li>
+<li>伪瞬态方法</li>
+<li>密度基求解器</li>
+<li>平面2D以及3D流动中使用绝对速度格式</li>
+<li>可压缩流动</li>
+<li>支持Cell-base、Green-Gauss以及Least-Squares梯度方法</li>
+<li>所有的对流通量类型(Roe-FDS、AUSM以及低扩散Roe-FDS)</li>
+<li>一阶及二阶空间格式</li>
+<li>压力速度耦合算法中的耦合格式</li>
+<li>伪瞬态方法</li>
+<li>k-epsilon以及标准k-omega湍流模型</li>
+<li>使用一阶瞬态格式的动网格及滑移网格</li>
+<li>所有的AMG模型</li>
+<li>内部边界(包括exhaust fan、inlet vent、intake fan、outlet invent、fan、porous-jump以及radiator)只能出现在非overset区域</li>
+<li>支持hybrid及standard初始化</li>
+<li>重叠网格可以支持任意类型的网格，包括自适应网格</li>
+</ul>
+<h1 id="使用重叠网格"><a href="#使用重叠网格" class="headerlink" title="使用重叠网格"></a>使用重叠网格</h1><p>采用以下流程:</p>
+<ul>
+<li>修改前景网格的边界类型为<code>overset</code>。</li>
+<li>创建背景网格与前景网格的interface。</li>
+<li>设置前景网格区域的运动</li>
+</ul>
+<p>其他的就没什么好设置的了，让区域动起来吧。<br>so easy, just try!</p>
 
       
     </div>
@@ -628,8 +655,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/18/Fluent动网格/Fluent动网格【2】：Profile文件/" rel="next" title="Fluent动网格【2】：Profile文件">
-                <i class="fa fa-chevron-left"></i> Fluent动网格【2】：Profile文件
+              <a href="/2018/10/18/Fluent动网格/Fluent动网格【16】：6DOF/" rel="next" title="Fluent动网格【16】：6DOF">
+                <i class="fa fa-chevron-left"></i> Fluent动网格【16】：6DOF
               </a>
             
           </div>
@@ -638,8 +665,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/18/Fluent动网格/Fluent动网格【4】：DEFINE_CG_MOTION宏实例/" rel="prev" title="Fluent动网格【4】：DEFINE_CG_MOTION宏实例">
-                Fluent动网格【4】：DEFINE_CG_MOTION宏实例 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/" rel="prev" title="Fluent动网格【18】：Overset实例">
+                Fluent动网格【18】：Overset实例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -849,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用途"><span class="nav-text">用途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形式"><span class="nav-text">形式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单介绍"><span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用方式"><span class="nav-text">应用方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#局限性"><span class="nav-text">局限性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#兼容性"><span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用重叠网格"><span class="nav-text">使用重叠网格</span></a></li></ol></div>
             
 
           </div>
