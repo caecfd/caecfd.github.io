@@ -177,19 +177,19 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="6DOF模型主要用于模拟计算域中的刚体在受到流体作用后的轨迹及姿态，属于典型的被动型动网格问题。 主动运动与被动运动我们把运动状态已知的动网格问题称之为主动运动。如子弹以速度1000m/s运动，此时运动轨迹可以通过速度直接积分计算得到。但流体中运动的物体，在受到流体作用力时，我们往往很难明确知道其运动速度或运动轨迹，而实际工程中，物体的运动速度及运动姿态反过来又会影响到物体的受力状态，随之影响到其">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/9531669.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/91784654.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/74133609.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/73882465.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/21724259.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/78516579.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/71701234.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/7967870.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:27:29.708Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_9531669.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_91784654.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_74133609.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_73882465.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_21724259.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_78516579.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_71701234.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_7967870.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fluent动网格【16】：6DOF">
 <meta name="twitter:description" content="6DOF模型主要用于模拟计算域中的刚体在受到流体作用后的轨迹及姿态，属于典型的被动型动网格问题。 主动运动与被动运动我们把运动状态已知的动网格问题称之为主动运动。如子弹以速度1000m/s运动，此时运动轨迹可以通过速度直接积分计算得到。但流体中运动的物体，在受到流体作用力时，我们往往很难明确知道其运动速度或运动轨迹，而实际工程中，物体的运动速度及运动姿态反过来又会影响到物体的受力状态，随之影响到其">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/9531669.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_9531669.jpg">
 
 
 
@@ -421,12 +421,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:57:00 / 修改时间：01:27:29" itemprop="dateCreated datePublished" datetime="2018-10-18T00:57:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:57:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:57:00+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -500,22 +512,22 @@
 <h1 id="被动运动的解决方法"><a href="#被动运动的解决方法" class="headerlink" title="被动运动的解决方法"></a>被动运动的解决方法</h1><p>通常有两种解决方式:</p>
 <ul>
 <li>利用UDF将被动运动转化为主动运动。即利用牛顿定律先获取物体所受到的力及力矩，之后利用得到的力或力矩计算得到当前的加速度和角加速度，进而得到当前的速度及角速度，再积分得到其运动轨迹和运动姿态。在每一个时间步内进行计算，实时更新物体的速度和角速度。</li>
-<li>直接使用6DOF模型。在UDF中指定物体的质量、转动惯量等物理参数，软件自动计算每一个时间步内物体的运动速度及加速度。<br>实际上6DOF模型用得更为广泛，几乎所有的主流CFD软件都又6DOF模型(一些软件中的叫法可能有点不一样，但使用方法是一样的)。<h1 id="激活6DOF模型"><a href="#激活6DOF模型" class="headerlink" title="激活6DOF模型"></a>激活6DOF模型</h1>6DOF模型的激活非常简单，只需要在<code>Dynamic Mesh</code>中激活选项<code>6DOF</code>，之后在相应的对话框中设置参数即可。如下图所示。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/9531669.jpg" alt=""></li>
+<li>直接使用6DOF模型。在UDF中指定物体的质量、转动惯量等物理参数，软件自动计算每一个时间步内物体的运动速度及加速度。<br>实际上6DOF模型用得更为广泛，几乎所有的主流CFD软件都又6DOF模型(一些软件中的叫法可能有点不一样，但使用方法是一样的)。<h1 id="激活6DOF模型"><a href="#激活6DOF模型" class="headerlink" title="激活6DOF模型"></a>激活6DOF模型</h1>6DOF模型的激活非常简单，只需要在<code>Dynamic Mesh</code>中激活选项<code>6DOF</code>，之后在相应的对话框中设置参数即可。如下图所示。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_9531669.jpg" alt=""></li>
 </ul>
-<p>之后在定义运动区域过程中，定义相应的部件运动为6DOF即可。如下图所示。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/91784654.jpg" alt=""></p>
-<h1 id="6DOF参数"><a href="#6DOF参数" class="headerlink" title="6DOF参数"></a>6DOF参数</h1><p>6DOF模型需要在图形窗口中指定的参数很少，更多的是利用UDF指定部件的几何属性。<br>在新版本的Fluent软件中，可以利用对话框定义模型的几何参数，如质量和转动惯量等。如图所示。但这里只能定义非常简单的几何属性，对于复杂的模型，利用对话框显然是不够的，此时可以使用UDF宏来实现。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/74133609.jpg" alt=""></p>
+<p>之后在定义运动区域过程中，定义相应的部件运动为6DOF即可。如下图所示。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_91784654.jpg" alt=""></p>
+<h1 id="6DOF参数"><a href="#6DOF参数" class="headerlink" title="6DOF参数"></a>6DOF参数</h1><p>6DOF模型需要在图形窗口中指定的参数很少，更多的是利用UDF指定部件的几何属性。<br>在新版本的Fluent软件中，可以利用对话框定义模型的几何参数，如质量和转动惯量等。如图所示。但这里只能定义非常简单的几何属性，对于复杂的模型，利用对话框显然是不够的，此时可以使用UDF宏来实现。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_74133609.jpg" alt=""></p>
 <h1 id="6DOF宏"><a href="#6DOF宏" class="headerlink" title="6DOF宏"></a>6DOF宏</h1><p>6DOF模型涉及到的UDF宏相对简单。只有一个<code>DEFINE_SDOF_PROPERTIES</code>宏。<br>该宏的描述:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFINE_SDOF_PROPERTIES(name,properties,dt,time,dtime)</span><br></pre></td></tr></table></figure></p>
 <p>其中参数列表:</p>
 <p><code>name</code>:自定义的宏名。<br><code>properties</code>:属性数组，存储各种几何属性，如质量、转动惯量等。<br><code>dt</code>:一个存储动网格属性的结构指针，由Fluent传入，通常不用管它。其类型为Dynamic_Thread *。<br><code>time</code>:当前时间。<br><code>dtime</code>:时间步长。</p>
 <p>实际上是要在宏文件中指定properties数组。<br>properties数组包含了很多的属性，详细属性可参阅UDF手册。如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/73882465.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_73882465.jpg" alt=""></p>
 <p>如下UDF宏定义了一个质量为800kg，x方向转动惯量为200 kg.m2，y方向和z方向转动惯量为100 kg.m2的部件。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">DEFINE_SDOF_PROPERTIES(stage, prop, dt, time, dtime)</span><br><span class="line">&#123;</span><br><span class="line">prop[SDOF_MASS]   = <span class="number">800.0</span>;</span><br><span class="line">prop[SDOF_IXX]  = <span class="number">200.0</span>;</span><br><span class="line">prop[SDOF_IYY]  = <span class="number">100.0</span>;</span><br><span class="line">prop[SDOF_IZZ]  = <span class="number">100.0</span>;</span><br><span class="line"><span class="built_in">printf</span> (<span class="string">"\nstage: updated 6DOF properties"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="几何参数如何获取"><a href="#几何参数如何获取" class="headerlink" title="几何参数如何获取"></a>几何参数如何获取</h1><p>实际上很多的CAD软件都能够计算几何体的转动惯量。这里以solidworks为例。<br>在solidworks中创建如图所示的圆盘，底面位于XY面上，底面半径0.1m，高度0.01m，底面圆心位于几何原点。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/21724259.jpg" alt=""></p>
+<h1 id="几何参数如何获取"><a href="#几何参数如何获取" class="headerlink" title="几何参数如何获取"></a>几何参数如何获取</h1><p>实际上很多的CAD软件都能够计算几何体的转动惯量。这里以solidworks为例。<br>在solidworks中创建如图所示的圆盘，底面位于XY面上，底面半径0.1m，高度0.01m，底面圆心位于几何原点。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_21724259.jpg" alt=""></p>
 <p>在solidworks的<code>评估</code>标签页中选择<code>质量属性</code>按钮。</p>
 <p>弹出如下图所示的对话框，其中包含了几何属性的输出报告，然而密度需要修改。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/78516579.jpg" alt=""><br>选择<code>选项</code>按钮，在新弹出的对话框中选择<code>使用自定义设定</code>，之后修改<code>材料属性</code>中的<code>密度</code>。如下图所示。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/71701234.jpg" alt=""></p>
-<p>点击<code>确定</code>按钮后返回之前的报告对话框，可以看到数据被更新。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/7967870.jpg" alt=""><br>图中红色部分即为转动惯量。<br>对于2D模型，则需要按实际尺寸建立三维模型来得到其转动惯量，默认厚度值为1米。<br>其实测量的方法还有很多，这里就不一一举例了。</p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_78516579.jpg" alt=""><br>选择<code>选项</code>按钮，在新弹出的对话框中选择<code>使用自定义设定</code>，之后修改<code>材料属性</code>中的<code>密度</code>。如下图所示。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_71701234.jpg" alt=""></p>
+<p>点击<code>确定</code>按钮后返回之前的报告对话框，可以看到数据被更新。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_7967870.jpg" alt=""><br>图中红色部分即为转动惯量。<br>对于2D模型，则需要按实际尺寸建立三维模型来得到其转动惯量，默认厚度值为1米。<br>其实测量的方法还有很多，这里就不一一举例了。</p>
 
       
     </div>
@@ -625,8 +637,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/18/Fluent动网格/Fluent动网格【17】：overset网格/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/18/Fluent动网格/Fluent动网格【18】：Overset实例/" rel="prev" title="Fluent动网格【18】：Overset实例">
+                Fluent动网格【18】：Overset实例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

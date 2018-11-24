@@ -177,40 +177,40 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="1 介绍在汽轮机的分析和设计中，湿蒸汽的建模是非常重要的。湿蒸汽是指在蒸汽迅速凝结的过程中饱和蒸汽和液滴形成的两相混合物。本教程演示利用FLUENT的湿蒸汽模型模拟仿真非平衡蒸汽冷凝问题。本教程演示以下操作：  利用湿蒸汽模型建立非平衡蒸汽冷凝问题 指定湿蒸汽建模参数 求解及后处理湿蒸气问题 建模并求解非冷凝问题 比较湿法和干法(非冷凝)的计算结果  2 问题描述本案例考虑拉瓦尔扩散-收敛喷嘴中的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-12/81289289.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/36086509.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/58090821.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/22630111.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/34086943.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/97364596.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/29071152.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/51745041.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/89547039.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/69192514.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/79778396.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/49059654.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/14271770.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/74888769.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/25407566.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/32109558.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/34664865.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/88715997.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/67243279.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/86466214.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/75986093.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/33888665.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/75245954.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/8627317.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/55855870.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/55414831.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/74532329.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/20675569.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-13/56921405.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:25:12.053Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-12_81289289.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_36086509.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_58090821.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_22630111.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_34086943.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_97364596.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_29071152.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_51745041.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_89547039.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_69192514.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_79778396.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_49059654.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_14271770.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_74888769.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_25407566.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_32109558.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_34664865.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_88715997.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_67243279.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_86466214.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_75986093.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_33888665.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_75245954.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_8627317.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_55855870.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_55414831.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_74532329.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_20675569.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_56921405.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【多相流计算】01：二维拉瓦尔喷管中蒸汽凝结">
 <meta name="twitter:description" content="1 介绍在汽轮机的分析和设计中，湿蒸汽的建模是非常重要的。湿蒸汽是指在蒸汽迅速凝结的过程中饱和蒸汽和液滴形成的两相混合物。本教程演示利用FLUENT的湿蒸汽模型模拟仿真非平衡蒸汽冷凝问题。本教程演示以下操作：  利用湿蒸汽模型建立非平衡蒸汽冷凝问题 指定湿蒸汽建模参数 求解及后处理湿蒸气问题 建模并求解非冷凝问题 比较湿法和干法(非冷凝)的计算结果  2 问题描述本案例考虑拉瓦尔扩散-收敛喷嘴中的">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-5-12/81289289.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-12_81289289.jpg">
 
 
 
@@ -459,7 +459,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:25:12" itemprop="dateModified" datetime="2018-10-18T01:25:12+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -537,52 +537,52 @@
 <li>比较湿法和干法(非冷凝)的计算结果</li>
 </ul>
 <h1 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2 问题描述"></a>2 问题描述</h1><p>本案例考虑拉瓦尔扩散-收敛喷嘴中的湿蒸气冷凝问题。采用二维模型进行计算，如下图所示。喷嘴喉部高度1 cm，考虑到喷嘴几何的对称性，计算采用轴对称几何。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-12/81289289.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-12_81289289.jpg" alt=""></p>
 <p>进入喷嘴的流体是干蒸汽。当气流加速并清除喉部区域时，会发生快速冷凝。蒸汽先冷却，然后成核，形成蒸汽(气相)和细水珠(液相)的两相混合物。湿蒸汽模型将解决凝聚相质量分数守恒和单位体积液滴数密度守恒的输运方程。对于非冷凝的情况，这些方程是不能解决的。</p>
 <h1 id="3-Fluent设置"><a href="#3-Fluent设置" class="headerlink" title="3 Fluent设置"></a>3 Fluent设置</h1><h2 id="3-1-启动Fluent"><a href="#3-1-启动Fluent" class="headerlink" title="3.1 启动Fluent"></a>3.1 启动Fluent</h2><ul>
 <li>以<strong>2D</strong>、<strong>Double Precision</strong>方式启动Fluent</li>
 <li>利用菜单<strong>File → Read → Mesh…</strong>打开网格文件<strong>2dlaval.msh</strong></li>
 </ul>
 <p>计算网格如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/36086509.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_36086509.jpg" alt=""></p>
 <h2 id="3-2-General设置"><a href="#3-2-General设置" class="headerlink" title="3.2 General设置"></a>3.2 General设置</h2><ul>
 <li>双击模型树节点<strong>General</strong>，右侧面板选择选项<strong>Density-Based</strong></li>
 </ul>
 <blockquote>
 <p>注：湿蒸气模型只能工作在密度基求解器下。</p>
 </blockquote>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/58090821.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_58090821.jpg" alt=""></p>
 <ul>
 <li>点击按钮<strong>Units…</strong>打开单位设置对话框，修改<strong>Pressure</strong>单位<strong>torr</strong>，点击<strong>Close</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/22630111.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_22630111.jpg" alt=""></p>
 <blockquote>
 <p>注：这里修改单位仅仅只是为了后面设置参数方便，并不会对计算结果产生任何影响。</p>
 </blockquote>
 <h2 id="3-3-激活湿蒸气模型"><a href="#3-3-激活湿蒸气模型" class="headerlink" title="3.3 激活湿蒸气模型"></a>3.3 激活湿蒸气模型</h2><ul>
 <li>右键选择模型树节点<strong>Models &gt; Multiphase</strong>，选择弹出菜单<strong>Wetsteam</strong>激活湿蒸气模型</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/34086943.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_34086943.jpg" alt=""></p>
 <h2 id="3-4-采用无粘模型"><a href="#3-4-采用无粘模型" class="headerlink" title="3.4 采用无粘模型"></a>3.4 采用无粘模型</h2><ul>
 <li>右键选择模型树节点<strong>Models &gt; Viscous</strong>，弹出菜单项中选择<strong>Model → Inviscid</strong>激活无粘模型</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/97364596.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_97364596.jpg" alt=""></p>
 <h2 id="3-5-设置操作条件"><a href="#3-5-设置操作条件" class="headerlink" title="3.5 设置操作条件"></a>3.5 设置操作条件</h2><ul>
 <li>双击模型树节点<strong>Cell Zone Conditions</strong></li>
 <li>右侧面板中点击按钮<strong>Operating Conditions…</strong>打开操作条件设置对话框</li>
 <li>设置<strong>Operating Pressure</strong>为<strong>0</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/29071152.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_29071152.jpg" alt=""></p>
 <h2 id="3-6-Boundary-Conditions设置"><a href="#3-6-Boundary-Conditions设置" class="headerlink" title="3.6 Boundary Conditions设置"></a>3.6 Boundary Conditions设置</h2><p><strong>1、设置pressure_inlet.3</strong></p>
 <ul>
 <li>双击模型树节点<strong>Boundary Conditions &gt; pressure_inlet.3</strong>，进入边界设置对话框</li>
 <li>设置<strong>Gauge Total Pressure</strong>为<strong>530.5 torr</strong>，设置<strong>Supersonic/Initial Gauge Pressure</strong>为<strong>530.5 torr</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/51745041.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_51745041.jpg" alt=""></p>
 <ul>
 <li>切换至<strong>Thermal</strong>标签页，设置<strong>Total Temperature</strong>为<strong>377 k</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/89547039.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_89547039.jpg" alt=""></p>
 <ul>
 <li>点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
@@ -591,11 +591,11 @@
 <li>双击模型树节点<strong>Boundary Conditions &gt; pressure_outlet.4</strong>，进入边界设置对话框</li>
 <li>设置<strong>Gauge Pressure</strong>为<strong>37.50319 torr</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/69192514.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_69192514.jpg" alt=""></p>
 <ul>
 <li>切换至<strong>Thermal</strong>标签页，设置<strong>Backflow Total Temperature</strong>为<strong>377 k</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/79778396.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_79778396.jpg" alt=""></p>
 <ul>
 <li>点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
@@ -604,70 +604,70 @@
 <li>右侧面板选择<strong>Standard Initialization</strong>，设置<strong>Gauge Pressure</strong>为<strong>530.5 torr</strong>，设置<strong>X Velocity</strong>为<strong>53 m/s</strong>，设置<strong>Temperature</strong>为<strong>377 K</strong></li>
 <li>点击按钮<strong>Initialize</strong>进行初始化</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/49059654.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_49059654.jpg" alt=""></p>
 <h2 id="3-8-Run-Calculation"><a href="#3-8-Run-Calculation" class="headerlink" title="3.8 Run Calculation"></a>3.8 Run Calculation</h2><ul>
 <li>双击模型树节点<strong>Run Calculation</strong></li>
 <li>右侧面板设置<strong>Number of Iterations</strong>为<strong>1000</strong></li>
 <li>点击<strong>Calculate</strong>按钮开始计算</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/14271770.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_14271770.jpg" alt=""></p>
 <p>大约850步迭代后收敛至0.001。</p>
 <h1 id="4-冷凝计算结果"><a href="#4-冷凝计算结果" class="headerlink" title="4 冷凝计算结果"></a>4 冷凝计算结果</h1><h2 id="4-1-各种云图分布"><a href="#4-1-各种云图分布" class="headerlink" title="4.1 各种云图分布"></a>4.1 各种云图分布</h2><p><strong>1、Static pressure</strong></p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/74888769.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_74888769.jpg" alt=""></p>
 <p><strong>2、温度分布</strong></p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/25407566.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_25407566.jpg" alt=""></p>
 <p><strong>3、Mach数分布</strong></p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/32109558.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_32109558.jpg" alt=""></p>
 <p>液相质量分数分布如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/34664865.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_34664865.jpg" alt=""></p>
 <p><strong>4、liquid mass fraction</strong></p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/88715997.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_88715997.jpg" alt=""></p>
 <p><strong>5、Log 10 (Droplets Nucleation Rate) </strong></p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/67243279.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_67243279.jpg" alt=""></p>
 <p><strong>6、Droplet Average Radius</strong></p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/86466214.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_86466214.jpg" alt=""></p>
 <h2 id="4-2-定义变量"><a href="#4-2-定义变量" class="headerlink" title="4.2 定义变量"></a>4.2 定义变量</h2><ul>
 <li>右键选择模型树节点<strong>Custom Field Functions</strong>，点击弹出菜单项<strong>New…</strong>弹出设置对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/75986093.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_75986093.jpg" alt=""></p>
 <ul>
 <li>定义变量<strong>p-ratio2</strong>为<strong>p/70727.32</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/33888665.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_33888665.jpg" alt=""></p>
 <blockquote>
 <p>注意：这里定义一个无量纲压力用于和实验结果进行比较。530.5 torr = 70727.32 Pa</p>
 </blockquote>
 <h2 id="4-3-XY-Plot"><a href="#4-3-XY-Plot" class="headerlink" title="4.3 XY Plot"></a>4.3 XY Plot</h2><ul>
 <li>右键选择模型树节点<strong>XY Plot</strong>，选择弹出节点<strong>New…</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/75245954.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_75245954.jpg" alt=""></p>
 <ul>
 <li>如下图所示设置，加载实验数据文件Exp-410 DATA P/Po，并设置显示形式</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/8627317.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_8627317.jpg" alt=""></p>
 <ul>
 <li>压力分布曲线如下图所示。</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/55855870.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_55855870.jpg" alt=""></p>
 <p>计算结果与实验测试结果比较接近。</p>
 <p>保存数据文件为moses-stein-ppo.xy。</p>
 <h1 id="5-无冷凝计算"><a href="#5-无冷凝计算" class="headerlink" title="5 无冷凝计算"></a>5 无冷凝计算</h1><h2 id="5-1-计算设置"><a href="#5-1-计算设置" class="headerlink" title="5.1 计算设置"></a>5.1 计算设置</h2><ul>
 <li>双击模型树节点<strong>Solution &gt; Controls</strong>，点击右侧面板按钮<strong>Equations…</strong>，弹出的对话框中取消选择<strong>Wet Steam</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/55414831.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_55414831.jpg" alt=""></p>
 <ul>
 <li>双击模型树节点<strong>Initialization</strong>，右侧面板中点击按钮<strong>Initialize</strong>进行初始化</li>
 <li>双击模型树节点<strong>Run Calculation</strong>，右侧面板设置<strong>Number of Iteration</strong>为<strong>800</strong>，点击按钮<strong>Calculate</strong>进行计算</li>
 </ul>
 <p>迭代660步，计算收敛至0.001。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/74532329.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_74532329.jpg" alt=""></p>
 <h2 id="5-2-计算结果"><a href="#5-2-计算结果" class="headerlink" title="5.2 计算结果"></a>5.2 计算结果</h2><p><strong>1、马赫数分布</strong></p>
 <p>马赫数分布如下图所示。速度要比考虑冷凝时大一些。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/20675569.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_20675569.jpg" alt=""></p>
 <p><strong>2、压力比较</strong></p>
 <p>比较两种条件下（考虑冷凝与不考虑冷凝）中心线上压力分布，如下图所示。</p>
 <p>采用湿蒸气模型考虑冷凝条件下压力存在突变。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-5-13/56921405.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-5-13_56921405.jpg" alt=""></p>
 <h1 id="6-总结"><a href="#6-总结" class="headerlink" title="6 总结"></a>6 总结</h1><p>ANSYS Fluent采用欧拉-欧拉方法对湿蒸汽流动进行模拟。采用可压缩的Navier-Stokes方程模拟混合物流动，额外再求解两个输运方程：液相质量分数(β)及单位体积液滴数量(η)。相变模型基于经典非等温成核理论，在均匀非平衡冷凝过程中形成液滴。</p>
 <p>wet-steam模型在使用过程中存在诸多限制，包括：</p>
 <ul>

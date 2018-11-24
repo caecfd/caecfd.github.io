@@ -177,16 +177,16 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="本案例描述使用动网格过程中处理边界变形的问题。 案例描述本案例几何为一个抛物线旋转成型的几何体。如图所示。  其中上壁面刚体运动引起抛物面变形。刚体运动方程为：$$v=\left{ \begin{array}{c}    \begin{matrix}    -0.3t&amp;amp;        ,t&amp;lt;=1\\end{matrix}\    \begin{matrix}    0.3t-0.6&amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-17/40094409.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/d89HcBDcig.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/amaDcH4jI8.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/Cj4edLhJG9.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/JL6LIIAhAH.png">
-<meta property="og:updated_time" content="2018-10-17T17:28:00.928Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-17_40094409.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_d89HcBDcig.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_amaDcH4jI8.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_Cj4edLhJG9.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_JL6LIIAhAH.png">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fluent动网格【6】：部件变形案例">
 <meta name="twitter:description" content="本案例描述使用动网格过程中处理边界变形的问题。 案例描述本案例几何为一个抛物线旋转成型的几何体。如图所示。  其中上壁面刚体运动引起抛物面变形。刚体运动方程为：$$v=\left{ \begin{array}{c}    \begin{matrix}    -0.3t&amp;amp;        ,t&amp;lt;=1\\end{matrix}\    \begin{matrix}    0.3t-0.6&amp;">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-17/40094409.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-17_40094409.jpg">
 
 
 
@@ -418,12 +418,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:47:00 / 修改时间：01:28:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:47:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:47:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:47:00+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -494,20 +506,20 @@
       
         <p>本案例描述使用动网格过程中处理边界变形的问题。</p>
 <h1 id="案例描述"><a href="#案例描述" class="headerlink" title="案例描述"></a>案例描述</h1><p>本案例几何为一个抛物线旋转成型的几何体。如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-17/40094409.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-17_40094409.jpg" alt=""></p>
 <p>其中上壁面刚体运动引起抛物面变形。刚体运动方程为：<br>$$<br>v=\left{ \begin{array}{c}<br>    \begin{matrix}<br>    -0.3t&amp;        ,t&lt;=1\<br>\end{matrix}\<br>    \begin{matrix}<br>    0.3t-0.6&amp;        ,1&lt;t&lt;=3\<br>\end{matrix}\<br>    \begin{matrix}<br>    -0.3t+1.2&amp;        ,t&lt;=4\<br>\end{matrix}\<br>    \begin{matrix}<br>    0&amp;        ,t&gt;4\<br>\end{matrix}\<br>\end{array} \right.<br>$$<br>如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/d89HcBDcig.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_d89HcBDcig.png" alt=""></p>
 <p>抛物面方程为：<br>$$<br>x = -0.4z^2+0.5z+0.3<br>$$</p>
 <h1 id="UDF"><a href="#UDF" class="headerlink" title="UDF"></a>UDF</h1><p>UDF可写成：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"dynamesh_tools.h"</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/*40层,每层高0.02m，时间步长可以为0.05s*/</span></span><br><span class="line">DEFINE_CG_MOTION(velocity,dt,vel,omega,time,dtime)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(time &lt;= <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        vel[<span class="number">2</span>] = <span class="number">-0.3</span>*time;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(time &gt; <span class="number">1</span> &amp;&amp; time &lt;= <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        vel[<span class="number">2</span>] = <span class="number">0.3</span>*time<span class="number">-0.6</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(time &lt;= <span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        vel[<span class="number">2</span>] = <span class="number">-0.3</span>* time+<span class="number">1.2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        vel[<span class="number">2</span>]= <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">DEFINE_GEOM(parabola,domain,dt,position)</span><br><span class="line">&#123;</span><br><span class="line">    real radius;</span><br><span class="line">     real norm;</span><br><span class="line">     real x,y,z;</span><br><span class="line"> </span><br><span class="line">     x = position[<span class="number">0</span>];</span><br><span class="line">     y = position[<span class="number">1</span>];</span><br><span class="line">     z = position[<span class="number">2</span>];</span><br><span class="line"> </span><br><span class="line">     radius = <span class="number">-0.4</span> * z * z + <span class="number">0.5</span> * z + <span class="number">0.3</span>;</span><br><span class="line">     norm = <span class="built_in">sqrt</span>(x * x + y * y );</span><br><span class="line"> </span><br><span class="line">     position[<span class="number">0</span>] = position[<span class="number">0</span>] * radius/norm;</span><br><span class="line">     position[<span class="number">1</span>] = position[<span class="number">1</span>] * radius/norm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="模型创建"><a href="#模型创建" class="headerlink" title="模型创建"></a>模型创建</h1><p>模型创建在ICEM CFD中完成，通过导入点坐标的方式创建抛物线，之后绕轴旋转形成抛物面。</p>
 <p>划分六面体网格。</p>
 <h1 id="动网格设置"><a href="#动网格设置" class="headerlink" title="动网格设置"></a>动网格设置</h1><p>采用layering方式进行网格处理。设置抛物面变形及顶部面刚性运动。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/amaDcH4jI8.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_amaDcH4jI8.png" alt=""></p>
 <p>刚体运动定义：</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/Cj4edLhJG9.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_Cj4edLhJG9.png" alt=""></p>
 <p>变形体定义：</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/JL6LIIAhAH.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_JL6LIIAhAH.png" alt=""></p>
 
       
     </div>

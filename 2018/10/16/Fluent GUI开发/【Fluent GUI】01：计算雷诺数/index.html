@@ -177,12 +177,12 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png">
-<meta property="og:updated_time" content="2018-10-17T17:30:10.216Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180815_DE7JlmelH2.png">
+<meta property="og:updated_time" content="2018-11-24T11:14:18.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Fluent GUI】01：计算雷诺数">
 <meta name="twitter:description" content="湖北的天气真是热啊，汗流浃背用程序代码来降温。 最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。 1 Y+计算Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。  Y+计算采用PointWise官方网页提供的计算方法。见网址 http://www.pointwise.com/yp">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180815_DE7JlmelH2.png">
 
 
 
@@ -431,7 +431,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:30:10" itemprop="dateModified" datetime="2018-10-18T01:30:10+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:18" itemprop="dateModified" datetime="2018-11-24T19:14:18+08:00">2018-11-24</time>
               
             
           </span>
@@ -503,7 +503,7 @@
         <p>湖北的天气真是热啊，汗流浃背用程序代码来降温。</p>
 <p>最近在关注Fluent的界面开发，猛补了一把Scheme语言。是时候展示一下学习成果了。这不，在酷暑中做了个太阳能手电筒：利用Fluent计算YPlus。</p>
 <h1 id="1-Y-计算"><a href="#1-Y-计算" class="headerlink" title="1 Y+计算"></a>1 Y+计算</h1><p>Y+计算通常是根据Y+值估算第一层网格高度。实现效果如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180815/DE7JlmelH2.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180815_DE7JlmelH2.png" alt=""></p>
 <p>Y+计算采用PointWise官方网页提供的计算方法。见网址<a href="http://www.pointwise.com/yplus/" target="_blank" rel="noopener"> http://www.pointwise.com/yplus/</a> 。该方法基于 Frank M. White’s   Fluid Mechanics   5th edition, page 467中关于平板边界层理论计算。<br>具体计算方法为：<br>先计算雷诺数：<br>$$<br>Re = \frac{\rho UL}{\mu}<br>$$</p>
 <p>通过雷诺数计算摩擦系数：<br>$$<br>C_f = \frac{0.026}{Re_{x}^{1/7}}<br>$$</p>
 <p>计算壁面剪切力：<br>$$<br>\tau_{wall} = \frac{C_f \rho U^2}{2}<br>$$<br>计算：<br>$$<br>U_{fric}=\sqrt{\frac{\tau_{wall}}{\rho}}<br>$$<br>得到第一层网格高度：<br>$$<br>\Delta S= \frac{y^+ \mu}{U_{fric}\rho}<br>$$</p>

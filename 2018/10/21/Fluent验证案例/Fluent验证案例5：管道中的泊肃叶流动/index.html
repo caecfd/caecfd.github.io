@@ -177,14 +177,14 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="案例描述本案例计算管道内部泊肃叶流动压降。案例几何如图所示。  管道半径0.00125m，长度0.1m，内部介质密度1 kg/m3，粘度1e-5 kg/m-s。管内入口流动为充分发展层流，平均速度为2 m/s。 前期准备充分发展层流边界需要编辑UDF文件。 充分发展速度表达式为：$$u=2u_m (1-\frac{r^2}{R^2})$$ 12345678910111213141516#inclu">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/181021/IjA9d3bfKA.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/181021/lkfJB4jLkG.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/181021/ikL198gklD.png">
-<meta property="og:updated_time" content="2018-10-21T14:29:51.151Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_IjA9d3bfKA.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_lkfJB4jLkG.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_ikL198gklD.png">
+<meta property="og:updated_time" content="2018-11-24T11:14:20.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fluent验证案例5：管道中的泊肃叶流动">
 <meta name="twitter:description" content="案例描述本案例计算管道内部泊肃叶流动压降。案例几何如图所示。  管道半径0.00125m，长度0.1m，内部介质密度1 kg/m3，粘度1e-5 kg/m-s。管内入口流动为充分发展层流，平均速度为2 m/s。 前期准备充分发展层流边界需要编辑UDF文件。 充分发展速度表达式为：$$u=2u_m (1-\frac{r^2}{R^2})$$ 12345678910111213141516#inclu">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/181021/IjA9d3bfKA.png">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_IjA9d3bfKA.png">
 
 
 
@@ -416,12 +416,24 @@
                 
               
 
-              <time title="创建时间：2018-10-21 22:05:00 / 修改时间：22:29:51" itemprop="dateCreated datePublished" datetime="2018-10-21T22:05:00+08:00">2018-10-21</time>
+              <time title="创建时间：2018-10-21 22:05:00" itemprop="dateCreated datePublished" datetime="2018-10-21T22:05:00+08:00">2018-10-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
               
             
           </span>
@@ -491,7 +503,7 @@
 
       
         <h1 id="案例描述"><a href="#案例描述" class="headerlink" title="案例描述"></a>案例描述</h1><p>本案例计算管道内部泊肃叶流动压降。案例几何如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/181021/IjA9d3bfKA.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_IjA9d3bfKA.png" alt=""></p>
 <p>管道半径0.00125m，长度0.1m，内部介质密度1 kg/m3，粘度1e-5 kg/m-s。管内入口流动为充分发展层流，平均速度为2 m/s。</p>
 <h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>充分发展层流边界需要编辑UDF文件。</p>
 <p>充分发展速度表达式为：<br>$$<br>u=2u_m (1-\frac{r^2}{R^2})<br>$$</p>
@@ -500,12 +512,13 @@
 <p>本案例雷诺数为：<br>$$<br>Re= \frac{\rho u D}{\mu} = \frac{1\times 2 \times 0.0025}{1e-5} = 500<br>$$<br>泊肃叶流动摩擦系数：<br>$$<br>f=\frac{64}{Re} = \frac{64}{500} =0.128<br>$$<br>可得压降：<br>$$<br>\Delta p = \rho f\frac{L}{D} \frac{v^2}{2}= 1\times 0.128 \times \frac{0.1}{0.0025}\times \frac{2^2}{2} = 10.24 Pa<br>$$</p>
 <h1 id="计算结果"><a href="#计算结果" class="headerlink" title="计算结果"></a>计算结果</h1><p>1、速度分布</p>
 <p>速度分布如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/181021/lkfJB4jLkG.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_lkfJB4jLkG.png" alt=""></p>
 <p>2、压降计算</p>
 <p>进出口总压统计如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/181021/ikL198gklD.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181021_ikL198gklD.png" alt=""></p>
 <p>可以看到入口总压12.89Pa，出口总压2.68Pa，则系统总压降10.21 Pa。</p>
 <h1 id="操作视频"><a href="#操作视频" class="headerlink" title="操作视频"></a>操作视频</h1><iframe frameborder="0" width="640" height="498" src="https://v.qq.com/iframe/player.html?vid=m0388albfqm&tiny=0&auto=0" allowfullscreen></iframe>
+
       
     </div>
 

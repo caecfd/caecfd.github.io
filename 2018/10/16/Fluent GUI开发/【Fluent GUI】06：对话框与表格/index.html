@@ -177,14 +177,14 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="Fluent GUI具有三层结构：  Dialog：最顶层结构，所有的界面元素均放置于Dialog中。利用函数cx-create-panel创建 Tables：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数cx-create-table创建 控件 ：实现数据输入及命令响应的元素。如数据输入框、文本输入框、按钮、列表及下拉框等。  1 、Dialog在Fluent中，每一个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/H6J7de0k5G.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/9486K8k8b2.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/CKk5GHCLb5.png">
-<meta property="og:updated_time" content="2018-10-17T17:30:24.677Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_H6J7de0k5G.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_9486K8k8b2.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_CKk5GHCLb5.png">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Fluent GUI】06：对话框与表格">
 <meta name="twitter:description" content="Fluent GUI具有三层结构：  Dialog：最顶层结构，所有的界面元素均放置于Dialog中。利用函数cx-create-panel创建 Tables：主要用于布局。将界面元素放置于Table中，便于管理。Table利用函数cx-create-table创建 控件 ：实现数据输入及命令响应的元素。如数据输入框、文本输入框、按钮、列表及下拉框等。  1 、Dialog在Fluent中，每一个">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/H6J7de0k5G.png">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_H6J7de0k5G.png">
 
 
 
@@ -433,7 +433,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:30:24" itemprop="dateModified" datetime="2018-10-18T01:30:24+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -526,12 +526,12 @@
 <p>一个最简单的对话框代码如下所示：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog (<span class="name">cx-create-panel</span> <span class="string">"my dialog box"</span> <span class="literal">#t</span> <span class="literal">#f</span>))</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog)</span><br></pre></td></tr></table></figure>
 <p>将上述代码保存到以scm为扩展名的文本文件中，启动Fluent后利用菜单<strong>File → Read → Scheme…</strong>读取保存的scm文件即可开启对话框。如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/H6J7de0k5G.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_H6J7de0k5G.png" alt=""></p>
 <p>这个对话框很简陋，除了三个什么功能都没有的按钮后就没别的了。</p>
 <p>下面来为按钮添加功能，比如说想要对话框启动后在TUI窗口打印消息，以及在点击OK按钮后打印消息。可以改造代码如下所示。</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;定义apply-cb函数，该函数在点击OK按钮后执行</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"clicked OK button!\n"</span>)<span class="comment">;该行语句在TUI窗口打印文本消息</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">;定义update-cb函数，该函数在对话框启动时执行</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"dialog box opened!\n"</span>)</span><br><span class="line">)</span><br><span class="line"><span class="comment">;定义对话框my-dialog</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog (<span class="name">cx-create-panel</span> <span class="string">"my dialog box"</span> apply-cb update-cb))</span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog)</span><br></pre></td></tr></table></figure>
 <p>相同方式加载该scm文件后，如下图所示，在TUI窗口打印文本消息。点击OK按钮也会在TUI窗口打印文本消息。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/9486K8k8b2.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_9486K8k8b2.png" alt=""></p>
 <h1 id="2、table"><a href="#2、table" class="headerlink" title="2、table"></a>2、table</h1><p>table主要用于布局。一个dialog中可以包含有多个table。</p>
 <p>table采用函数<strong>cx-create-table</strong>创建，函数形式如：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cx-create-table</span> parent label border below right-of row column)</span><br></pre></td></tr></table></figure>
@@ -588,7 +588,7 @@
 <p>如下面的代码：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"clicked OK button!\n"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">update-cb</span> . args)</span><br><span class="line">    (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"dialog box opened!\n"</span>)</span><br><span class="line">)</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> my-dialog (<span class="name">cx-create-panel</span> <span class="string">"my dialog box"</span> apply-cb update-cb)) <span class="comment">;创建dialog</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> table (<span class="name">cx-create-table</span> my-dialog <span class="string">"input parameter"</span> ))<span class="comment">;创建table</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int1 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num1"</span> <span class="symbol">'row</span> <span class="number">0</span> <span class="symbol">'col</span> <span class="number">0</span>))<span class="comment">;创建int1输入框，其位于第1行第1列</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int2 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num2"</span> <span class="symbol">'row</span> <span class="number">1</span> <span class="symbol">'col</span> <span class="number">0</span>))<span class="comment">;创建int2输入框，其位于第2行第1列</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int3 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num3"</span> <span class="symbol">'row</span> <span class="number">0</span> <span class="symbol">'col</span> <span class="number">1</span>))<span class="comment">;创建int3输入框，其位于第1行第3列</span></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> int4 (<span class="name">cx-create-integer-entry</span> table <span class="string">"num4"</span> <span class="symbol">'row</span> <span class="number">1</span>' col <span class="number">1</span>))<span class="comment">;创建int4输入框，其位于第2行第2列</span></span><br><span class="line">(<span class="name">cx-show-panel</span> my-dialog)</span><br></pre></td></tr></table></figure>
 <p>显示对话框如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/CKk5GHCLb5.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_CKk5GHCLb5.png" alt=""></p>
 
       
     </div>

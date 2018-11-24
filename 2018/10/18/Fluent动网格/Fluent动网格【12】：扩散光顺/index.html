@@ -177,14 +177,14 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="扩散光顺是Fluent提供的另外一种常用的网格光顺方法。其基本原理是通过求解扩散方程得到网格节点的运动位移。 扩散光顺基本计算扩散光顺通过求解 以下扩散方程来设置网格的节点位置。$$\nabla \cdot (\gamma \nabla \vec{u})=0$$其中，u为网格的运动速度。求解出运动速度后，可以很容易获得网格节点在下一个时间步长的位置。$$\vec{x}{new}=\vec{x}{o">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/7HbhmmFmG5.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/E8BmIF1e5c.png">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/7323486.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:27:42.374Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_7HbhmmFmG5.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_E8BmIF1e5c.png">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_7323486.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fluent动网格【12】：扩散光顺">
 <meta name="twitter:description" content="扩散光顺是Fluent提供的另外一种常用的网格光顺方法。其基本原理是通过求解扩散方程得到网格节点的运动位移。 扩散光顺基本计算扩散光顺通过求解 以下扩散方程来设置网格的节点位置。$$\nabla \cdot (\gamma \nabla \vec{u})=0$$其中，u为网格的运动速度。求解出运动速度后，可以很容易获得网格节点在下一个时间步长的位置。$$\vec{x}{new}=\vec{x}{o">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180825/7HbhmmFmG5.png">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_7HbhmmFmG5.png">
 
 
 
@@ -416,12 +416,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:53:00 / 修改时间：01:27:42" itemprop="dateCreated datePublished" datetime="2018-10-18T00:53:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:53:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:53:00+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -503,15 +515,15 @@
 <p>$$<br>\gamma = \frac{1}{V^\alpha }<br>$$</p>
 <p>式中，v为网格正则化体积。</p>
 <p>参数$\alpha$即扩散光顺设置面板中的<strong>Diffusion Parameter</strong>，如下图所示。此参数取值$\alpha \ge 0$。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/7HbhmmFmG5.png" alt="mark"></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_7HbhmmFmG5.png" alt=""></p>
 <h1 id="扩散光顺参数设置"><a href="#扩散光顺参数设置" class="headerlink" title="扩散光顺参数设置"></a>扩散光顺参数设置</h1><p>扩散光顺需要设置的参数只有<strong>Diffusion Parameter</strong>，亦即前面公式中的$\alpha$。</p>
 <p>该参数<strong>取值范围为0~2</strong>。当取值为0时，扩散系数$\gamma=1$，则计算域中网格为均匀扩散。提高此参数值可以使得距离运动边界较远区域吸收更多的位移。对于旋转边界运动，建议初始扩散参数取1.5。</p>
 <p><strong>注意</strong>：扩散光顺比弹簧光顺的计算量要大，但通常能够获得比弹簧光顺更好的网格质量（特别是对于非四面体/非三角形网格区域）。与弹簧光顺一样，扩散光顺也更适合于平移运动，对于旋转运动边界则很容易出现负体积。</p>
 <h1 id="Linearly-Elastic-Solid光顺"><a href="#Linearly-Elastic-Solid光顺" class="headerlink" title="Linearly Elastic Solid光顺"></a>Linearly Elastic Solid光顺</h1><p>线弹性实体光顺方法是新版本Fluent中添加的。此方法则是通过借鉴弹性力学中的平衡方程来计算节点位移。具体计算方法可参阅Fluent UserGuid的10.6.2.1.3节。</p>
 <p>该方法只有一个参数需要设置：<strong>Poisson’s Ratio</strong>。泊松比的取值方位为-1.0~0.5。默认参数为0.45。</p>
 <p>此方法的计算量比扩散光顺更大，但是能够提供比扩散光顺更好的网格质量。此方法支持二维的三角形和四边形网格，三维模型中的四面体、六面体、三棱柱以及五面体网格，但是不能用于变形网格区域中包含有多面体或悬挂节点的网格。在包含有多面体或悬挂节点的网格区域，建议使用扩散光顺。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/blog/180825/E8BmIF1e5c.png" alt="mark"></p>
-<h1 id="光顺案例"><a href="#光顺案例" class="headerlink" title="光顺案例"></a>光顺案例</h1><p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/7323486.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180825_E8BmIF1e5c.png" alt=""></p>
+<h1 id="光顺案例"><a href="#光顺案例" class="headerlink" title="光顺案例"></a>光顺案例</h1><p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_7323486.jpg" alt=""></p>
 
       
     </div>

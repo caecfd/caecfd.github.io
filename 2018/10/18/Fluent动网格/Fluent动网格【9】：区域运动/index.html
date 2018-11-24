@@ -177,14 +177,14 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="本文所述的区域运动并非动网格中的运动域，而是指在多参考系（MRF）或滑移网格中所涉及到的区域的运动。 在滑移网格中指定区域运动时，除了能够指定绝对运动外，还能指定某一区域与其他区域间的相对运动，如图所示。  区域运动的指定，除了可以采用Profile文件外，还可以利用UDF宏DEFINE_TRANSIENT_PROFILE及DEFINE_ZONE_MOTION。这两个宏均可采用解释及编译形式加载。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/4235307.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/97576018.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/blog/180817/d6JgGC0kf6.png">
-<meta property="og:updated_time" content="2018-10-17T17:27:51.369Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_4235307.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_97576018.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_d6JgGC0kf6.png">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fluent动网格【9】：区域运动">
 <meta name="twitter:description" content="本文所述的区域运动并非动网格中的运动域，而是指在多参考系（MRF）或滑移网格中所涉及到的区域的运动。 在滑移网格中指定区域运动时，除了能够指定绝对运动外，还能指定某一区域与其他区域间的相对运动，如图所示。  区域运动的指定，除了可以采用Profile文件外，还可以利用UDF宏DEFINE_TRANSIENT_PROFILE及DEFINE_ZONE_MOTION。这两个宏均可采用解释及编译形式加载。">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-12/4235307.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_4235307.jpg">
 
 
 
@@ -416,12 +416,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:50:00 / 修改时间：01:27:51" itemprop="dateCreated datePublished" datetime="2018-10-18T00:50:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:50:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:50:00+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -492,7 +504,7 @@
       
         <p>本文所述的区域运动并非动网格中的运动域，而是指在多参考系（MRF）或滑移网格中所涉及到的区域的运动。</p>
 <p>在滑移网格中指定区域运动时，除了能够指定绝对运动外，还能指定某一区域与其他区域间的相对运动，如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/4235307.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_4235307.jpg" alt=""></p>
 <p>区域运动的指定，除了可以采用Profile文件外，还可以利用UDF宏DEFINE_TRANSIENT_PROFILE及DEFINE_ZONE_MOTION。这两个宏均可采用解释及编译形式加载。</p>
 <h1 id="DEFINE-TRANSIENT-PROFILE"><a href="#DEFINE-TRANSIENT-PROFILE" class="headerlink" title="DEFINE_TRANSIENT_PROFILE"></a>DEFINE_TRANSIENT_PROFILE</h1><p>此宏主要用于替代Profile文件，指定网格区域随时间变化规律。</p>
 <p>该UDF宏的形式为：</p>
@@ -505,7 +517,7 @@
 <p>若将宏中的rotation指定给某一角速度分量，如omega_x，则该宏等同于PROFILE文件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">((rotation transient 3 0)</span><br><span class="line">(time 0 0.1 1)</span><br><span class="line">(omega_x 0 250 250)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，一个UDF宏只能指定一个速度分量。若需要指定多个速度分量的话，则需要写多个宏。宏的加载如下图所示。此宏即可表示旋转，也可以用于平移。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-8-12/97576018.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-12_97576018.jpg" alt=""></p>
 <h1 id="DEFINE-ZONE-MOTION"><a href="#DEFINE-ZONE-MOTION" class="headerlink" title="DEFINE_ZONE_MOTION"></a>DEFINE_ZONE_MOTION</h1><p>Fluent中还可以利用DEFINE_ZONE_MOTION宏定义区域的运动。该宏的形式：</p>
 <p><strong>DEFINE_ZONE_MOTION(name,omega,axis,origin,velocity,time,dtime)</strong></p>
 <p>其中参数：</p>
@@ -517,7 +529,7 @@
 <p><strong>time</strong>：real time。当前时间</p>
 <p><strong>dtime</strong>：real dtime。当前时间步长</p>
 <p>在利用此UDF时，只有name是用户指定的，其他的参数均为Fluent传入然后在宏中进行修改。。</p>
-<p>对于前面同时存在自转和公转的案例，可以利用UDF宏DEFINE_ZONE_MOTION：<br><img src="http://olx22rz2y.bkt.clouddn.com/blog/180817/d6JgGC0kf6.png" alt="mark"></p>
+<p>对于前面同时存在自转和公转的案例，可以利用UDF宏DEFINE_ZONE_MOTION：<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_180817_d6JgGC0kf6.png" alt=""></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.1415926</span></span><br><span class="line">DEFINE_ZONE_MOTION(rotor,omega,axis,origin,velocity,time,dtime)</span><br><span class="line">&#123;</span><br><span class="line">    real theta0,theta1,omegac,omegar,radr,ox2,oy1;</span><br><span class="line">    omegar = <span class="number">-2.0</span>;</span><br><span class="line">    omegac = <span class="number">1.0</span>;</span><br><span class="line">    theta0 = PI/<span class="number">4</span>;</span><br><span class="line">    radr = <span class="number">0.141435</span>;</span><br><span class="line">    theta1 = omegac *(time +dtime);</span><br><span class="line"> </span><br><span class="line">    *omega = omegar;</span><br><span class="line">    ox1 = radr * <span class="built_in">cos</span>(theta0 + theta1);</span><br><span class="line">    ox2 = radr * <span class="built_in">sin</span>(theta0 + theta1);</span><br><span class="line"> </span><br><span class="line">    origin[<span class="number">0</span>]= ox1;</span><br><span class="line">    origin[<span class="number">2</span>]= oy1;</span><br><span class="line">    origin[<span class="number">2</span>]= <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       

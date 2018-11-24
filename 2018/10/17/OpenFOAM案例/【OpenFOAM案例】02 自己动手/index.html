@@ -177,13 +177,13 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="前言：很多人说OpenFOAM很难，要啃上很多的理论书籍，什么流体力学、计算流体力学、矩阵理论、线性代数、数值计算、C++程序设计神马的，看看光这一堆书就能吓倒绝大多数的人。其实我们并不一定要从这些基础的东西入手，我觉得要学习使用一个工具，首先使它运转起来才是最靠谱的。通过大量实例练习，做多了自然就能有所感悟。  前面讲到了利用icoFoam求解器计算弯曲管道中流体混合问题。现在来自己动手做一个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-21/16339504.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-22/75550596.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:23:58.996Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-6-21_16339504.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-6-22_75550596.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:20.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【OpenFOAM案例】02 自己动手">
 <meta name="twitter:description" content="前言：很多人说OpenFOAM很难，要啃上很多的理论书籍，什么流体力学、计算流体力学、矩阵理论、线性代数、数值计算、C++程序设计神马的，看看光这一堆书就能吓倒绝大多数的人。其实我们并不一定要从这些基础的东西入手，我觉得要学习使用一个工具，首先使它运转起来才是最靠谱的。通过大量实例练习，做多了自然就能有所感悟。  前面讲到了利用icoFoam求解器计算弯曲管道中流体混合问题。现在来自己动手做一个">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-6-21/16339504.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-6-21_16339504.jpg">
 
 
 
@@ -432,7 +432,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:23:58" itemprop="dateModified" datetime="2018-10-18T01:23:58+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
               
             
           </span>
@@ -509,7 +509,7 @@
 <h1 id="案例描述"><a href="#案例描述" class="headerlink" title="案例描述"></a>案例描述</h1><p>一个非常简单的管道流动问题。我们不强调问题多复杂，只关注OpenFOAM解决问题的思路。</p>
 <p>流体流经一个直径0.01m，长度0.5m的管道，计算其内部流场。流体介质为水，密度1000kg/m3，动力粘度0.001 pa.s，入口流速0.1 m。</p>
 <p>雷诺数：<br>$$<br>Re= \frac{\rho u D}{\mu} = \frac{1000 \times 0.1 \times 0.01}{0.001} =1000<br>$$<br>几何及网格如图所示。在ICEM CFD中创建几何并划分网格，各边界命名如图所示。生成并输出网格pipe.msh。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-6-21/16339504.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-6-21_16339504.jpg" alt=""></p>
 <h1 id="OpenFOAM准备"><a href="#OpenFOAM准备" class="headerlink" title="OpenFOAM准备"></a>OpenFOAM准备</h1><p>本案例采用icoFoam求解器进行求解。因此先从tutorials文件夹中拷贝一个icoFoam模板，我们这里还是使用前面的elbow文件夹。</p>
 <p>在此之前，先创建一个工作文件夹。我用命令在run路径下创建文件夹pipe。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir $FOAM_RUN/pipe</span><br></pre></td></tr></table></figure>
@@ -546,7 +546,7 @@
 <h1 id="后处理"><a href="#后处理" class="headerlink" title="后处理"></a>后处理</h1><p>输入命令：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paraFoam</span><br></pre></td></tr></table></figure>
 <p>软件自动启动ParaView，可观察剖面上速度分布云图，如图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-6-22/75550596.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-6-22_75550596.jpg" alt=""></p>
 
       
     </div>

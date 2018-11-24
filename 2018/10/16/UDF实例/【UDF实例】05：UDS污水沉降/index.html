@@ -177,41 +177,41 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="本教程利用Fluent UDS模拟二次沉降池中泥沙浓度分布。 通过在重力方向上的动量方程上添加源项来考虑介质密度差异引起的浮力效应，在湍动能方程(k)及湍流耗散率方程(e)中，利用源项引入分层对湍流的阻尼效应，并利用流变学函数来考虑高浓度污泥混合物粘度的增加。案例涉及到的内容包括：  定义瞬态计算案例并设置合适的计算参数 编译并加载UDF 设置物理量收敛监测器 计算后处理  1 问题描述本案例所考">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-6/68197122.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/17083482.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/35770462.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/31329967.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/41207956.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/68341632.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/93316080.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/41670161.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/64712878.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/45667009.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/47500158.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/95540638.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/51546996.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/61427526.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/23322839.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/89244612.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/70874571.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/89734419.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/90950143.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/54451236.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/7774367.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/36645477.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/89914856.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/28406980.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/87594337.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/76956261.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/30781841.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/14830529.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/23942458.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-4/87365023.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:34:23.977Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-6_68197122.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_17083482.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_35770462.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_31329967.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_41207956.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_68341632.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_93316080.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_41670161.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_64712878.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_45667009.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_47500158.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_95540638.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_51546996.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_61427526.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_23322839.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_89244612.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_70874571.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_89734419.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_90950143.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_54451236.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_7774367.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_36645477.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_89914856.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_28406980.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_87594337.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_76956261.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_30781841.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_14830529.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_23942458.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_87365023.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:20.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【UDF实例】05：UDS污水沉降">
 <meta name="twitter:description" content="本教程利用Fluent UDS模拟二次沉降池中泥沙浓度分布。 通过在重力方向上的动量方程上添加源项来考虑介质密度差异引起的浮力效应，在湍动能方程(k)及湍流耗散率方程(e)中，利用源项引入分层对湍流的阻尼效应，并利用流变学函数来考虑高浓度污泥混合物粘度的增加。案例涉及到的内容包括：  定义瞬态计算案例并设置合适的计算参数 编译并加载UDF 设置物理量收敛监测器 计算后处理  1 问题描述本案例所考">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-6/68197122.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-6_68197122.jpg">
 
 
 
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:34:23" itemprop="dateModified" datetime="2018-10-18T01:34:23+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
               
             
           </span>
@@ -537,20 +537,20 @@
 <li>设置物理量收敛监测器</li>
 <li>计算后处理</li>
 </ul>
-<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>本案例所考虑的问题是一个圆柱形容器、中心进给的二次沉降器，几何带有倾斜的底部。中央进水口包含有两个挡板：一个垂直进水口挡板，使流入的流体以相对较低的位置进入水箱；以及一个水平偏转板，防止从入口到污泥回收口的短路。<br><img src="http://olx22rz2y.bkt.clouddn.com/18-8-6/68197122.jpg" alt=""></p>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>本案例所考虑的问题是一个圆柱形容器、中心进给的二次沉降器，几何带有倾斜的底部。中央进水口包含有两个挡板：一个垂直进水口挡板，使流入的流体以相对较低的位置进入水箱；以及一个水平偏转板，防止从入口到污泥回收口的短路。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-6_68197122.jpg" alt=""></p>
 <p>计算模型采用二维轴对称模型，考虑模型径向截面，如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/17083482.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_17083482.jpg" alt=""></p>
 <blockquote>
 <p>注意：轴对称模型的对称轴必须为X轴</p>
 </blockquote>
 <h1 id="2-编译UDF"><a href="#2-编译UDF" class="headerlink" title="2 编译UDF"></a>2 编译UDF</h1><ul>
 <li>右键选择模型树节点<strong>User Defined Functions</strong>，点击弹出菜单项<strong>Compiled…</strong>打开编译对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/35770462.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_35770462.jpg" alt=""></p>
 <ul>
 <li>如下图所示，添加源文件<strong>clarifier.c</strong>，点击<strong>Build</strong>按钮编译UDF文件，利用<strong>Load</strong>按钮加载文件</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/31329967.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_31329967.jpg" alt=""></p>
 <h1 id="5-Fluent设置"><a href="#5-Fluent设置" class="headerlink" title="5 Fluent设置"></a>5 Fluent设置</h1><ul>
 <li>以<strong>2D、Double Precision</strong>方式启动Fluent</li>
 <li>利用菜单<strong>File → Read → Mesh…</strong>加载网格文件<strong>clarifier.msh</strong></li>
@@ -558,63 +558,63 @@
 <h2 id="3-1-General设置"><a href="#3-1-General设置" class="headerlink" title="3.1 General设置"></a>3.1 General设置</h2><ul>
 <li>鼠标双击模型树节点<strong>General</strong>，右侧面板激活选项<strong>Transient</strong>及<strong>Axisymmetric</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/41207956.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_41207956.jpg" alt=""></p>
 <h2 id="3-2-Models"><a href="#3-2-Models" class="headerlink" title="3.2 Models"></a>3.2 Models</h2><ul>
 <li>鼠标双击模型树节点<strong>Models &gt; Viscous</strong>，弹出对话框中选择<strong>Standard k-epsilon</strong>湍流模型，如下图所示</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/68341632.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_68341632.jpg" alt=""></p>
 <h2 id="3-3-添加UDS"><a href="#3-3-添加UDS" class="headerlink" title="3.3 添加UDS"></a>3.3 添加UDS</h2><ul>
 <li>鼠标右键选择模型树节点<strong>User Defined Scalars</strong>，点击弹出菜单项<strong>New…</strong>弹出UDS定义对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/93316080.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_93316080.jpg" alt=""></p>
 <ul>
 <li>对话框中设置<strong>Number of User-Defined Scalars</strong>为<strong>1</strong>，设置<strong>Flux Function</strong>为<strong>settling_flux::libudf</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/41670161.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_41670161.jpg" alt=""></p>
 <h2 id="3-4-添加UDM"><a href="#3-4-添加UDM" class="headerlink" title="3.4 添加UDM"></a>3.4 添加UDM</h2><ul>
 <li>右键选择模型树节点<strong>User Defined Memory</strong>，点击按钮<strong>Edit…</strong>弹出定义对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/64712878.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_64712878.jpg" alt=""></p>
 <ul>
 <li>如下图所示，设置<strong>Number of User-defined Memory Locations</strong>为<strong>5</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/45667009.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_45667009.jpg" alt=""></p>
 <h2 id="3-5-Materials设置"><a href="#3-5-Materials设置" class="headerlink" title="3.5 Materials设置"></a>3.5 Materials设置</h2><ul>
 <li>鼠标双击模型树节点<strong>Materials &gt; fluid &gt; air</strong>弹出材料属性定义对话框</li>
 <li>设置<strong>Density</strong>为<strong>1000 kg/m3</strong>，设置<strong>Viscosity</strong>为<strong>viscosity::libudf</strong>，如下图所示</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/47500158.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_47500158.jpg" alt=""></p>
 <h2 id="3-6-Cell-Zone-Conditions"><a href="#3-6-Cell-Zone-Conditions" class="headerlink" title="3.6 Cell Zone Conditions"></a>3.6 Cell Zone Conditions</h2><ul>
 <li>鼠标双击模型树节点<strong>Cell Zone Conditions &gt; fluid</strong>，弹出如下图所示的计算域设置对话框，激活选项<strong>Source Terms</strong>，切换值<strong>Source Terms</strong>标签页</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/95540638.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_95540638.jpg" alt=""></p>
 <ul>
 <li>点击<strong>Axial Momentum</strong>右侧的<strong>Edit..</strong>按钮打开设置对话框，如下图所示，设置<strong>Number of Axial Momentum sources</strong>为<strong>1</strong>，并设置其为<strong>udf X_mom_src::libudf</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/51546996.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_51546996.jpg" alt=""></p>
 <ul>
 <li>点击<strong>Turbulent Kinetic Energy</strong>右侧的<strong>Edit..</strong>按钮打开设置对话框，如下图所示，设置<strong>Number of Axial Kinetic Energy sources</strong>为<strong>1</strong>，并设置其为<strong>udf turb_k_source::libudf</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/61427526.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_61427526.jpg" alt=""></p>
 <ul>
 <li>点击<strong>Turbulent Kinetic Dissipation Rate</strong>右侧的<strong>Edit..</strong>按钮打开设置对话框，如下图所示，设置<strong>Number of Turbulent Dissipation Rate sources</strong>为<strong>1</strong>，并设置其为<strong>udf turb_e_source::libudf</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/23322839.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_23322839.jpg" alt=""></p>
 <h2 id="3-7-Boundary-Conditions设置"><a href="#3-7-Boundary-Conditions设置" class="headerlink" title="3.7 Boundary Conditions设置"></a>3.7 Boundary Conditions设置</h2><p><strong>1、inlet设置</strong></p>
 <ul>
 <li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inlet</strong>，弹出设置对话框，进入<strong>Momentum</strong>标签页，设置<strong>Velocity Magnitude</strong>为<strong>0.019 m/s</strong>，湍流条件设置湍流强度为<strong>5%</strong>，水力直径为 <strong>5.6 m</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/89244612.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_89244612.jpg" alt=""></p>
 <ul>
 <li>切换至<strong>UDS</strong>标签页，设置<strong>User Scalar 0</strong>为<strong>Specified Value</strong>，同时设置其值为<strong>3.2</strong>，如下图所示</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/70874571.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_70874571.jpg" alt=""></p>
 <p><strong>2、outlet_top边界</strong></p>
 <ul>
 <li>鼠标双击模型树节点<strong>Boundary Conditions &gt; outlet_top</strong>，弹出设置对话框，进入<strong>Momentum</strong>标签页，设置<strong>Velocity Magnitude</strong>为<strong>-0.04 m/s</strong>，湍流条件设置湍流强度为<strong>5%</strong>，水力直径为 <strong>0.02 m</strong></li>
 <li>UDS标签页采用默认参数设置</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/89734419.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_89734419.jpg" alt=""></p>
 <blockquote>
 <p>注：这里设置负的速度入口来表示流出。</p>
 </blockquote>
@@ -623,32 +623,32 @@
 <li>鼠标双击模型树节点<strong>Boundary Conditions &gt; outlet_bottom</strong>，弹出设置对话框，进入<strong>Momentum</strong>标签页，湍流条件设置湍流强度为<strong>5%</strong>，水力直径为 <strong>3.2 m</strong></li>
 <li>其他参数保持默认设置</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/90950143.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_90950143.jpg" alt=""></p>
 <h2 id="3-8-Solution"><a href="#3-8-Solution" class="headerlink" title="3.8 Solution"></a>3.8 Solution</h2><ul>
 <li>鼠标双击模型树节点<strong>Solution &gt; Method</strong>，右侧面板中设置<strong>Pressure</strong>为<strong>PRESTO!</strong>，其他选项采用<strong>QUICK</strong>算法，如下图所示</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/54451236.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_54451236.jpg" alt=""></p>
 <h2 id="3-9-Report-Definitions设置"><a href="#3-9-Report-Definitions设置" class="headerlink" title="3.9 Report Definitions设置"></a>3.9 Report Definitions设置</h2><p>监测出口污染物的质量流量。</p>
 <ul>
 <li>右键选择模型树节点<strong>Solution &gt; Report Definitions</strong>，点击弹出菜单项<strong>New → Surface Report → Flow Rate…</strong>弹出设置对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/7774367.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_7774367.jpg" alt=""></p>
 <ul>
 <li>如下图所示，监测位置<strong>outlet_bottom</strong>上变量<strong>Scalar-0</strong>的质量流量</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/36645477.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_36645477.jpg" alt=""></p>
 <h2 id="3-10-初始化"><a href="#3-10-初始化" class="headerlink" title="3.10 初始化"></a>3.10 初始化</h2><ul>
 <li>右键选择模型树节点<strong>Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>开始初始化</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/89914856.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_89914856.jpg" alt=""></p>
 <h2 id="3-11-AutoSave"><a href="#3-11-AutoSave" class="headerlink" title="3.11 AutoSave"></a>3.11 AutoSave</h2><ul>
 <li>鼠标双击模型树节点<strong>Calculation Activities &gt; Autosave</strong>，在弹出的设置对话框中设置<strong>Save Data File Every</strong>为<strong>100</strong></li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/28406980.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_28406980.jpg" alt=""></p>
 <h2 id="3-12-Run-Calculation"><a href="#3-12-Run-Calculation" class="headerlink" title="3.12 Run Calculation"></a>3.12 Run Calculation</h2><ul>
 <li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板设置<strong>Time Step Size</strong>为<strong>10 s</strong>，设置<strong>Number of Time Steps</strong>为<strong>7300</strong>，点击按钮<strong>Calculate</strong>进行计算</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/87594337.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_87594337.jpg" alt=""></p>
 <blockquote>
 <p>注：本案例中泥沙水力弛豫时间约为7300s，这里计算73000s使其达到稳定。</p>
 </blockquote>
@@ -656,21 +656,21 @@
 <h1 id="4-后处理"><a href="#4-后处理" class="headerlink" title="4 后处理"></a>4 后处理</h1><ul>
 <li>查看变量Scalar-0分布</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/76956261.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_76956261.jpg" alt=""></p>
 <ul>
 <li>创建isosurface y=4 m</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/30781841.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_30781841.jpg" alt=""></p>
 <ul>
 <li>创建自定义变量x-in = -x</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/14830529.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_14830529.jpg" alt=""></p>
 <ul>
 <li>创建XYPlot，如下图所示进行设置</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/23942458.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_23942458.jpg" alt=""></p>
 <p>显示标量Scalar-0的分布如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-4/87365023.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-4_87365023.jpg" alt=""></p>
 <h1 id="5-解释"><a href="#5-解释" class="headerlink" title="5 解释"></a>5 解释</h1><p>本案例参考文献：</p>
 <blockquote>
 <p>Computing Shear Flow and Sludge Blanket in Secondary Clarifiers Djamel Lakehal, Peter Krebs, Johan Krijgsman, Wolfgang Rodi  </p>

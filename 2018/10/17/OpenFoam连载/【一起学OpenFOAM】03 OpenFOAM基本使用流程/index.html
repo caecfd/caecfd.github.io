@@ -177,12 +177,12 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="OpenFOAM初学者常常对于软件的使用流程感到很迷惑，与其他的具有GUI的CFD软件不同，OpenFOAM的所有操作均为基于文本操作，譬如说里面各种计算模型、计算参数、流程控制参数等，均为通过修改对应的文本文件来进行指定。那么什么时候该用哪些文件，该修改哪些参数，要了这些则需要花费时间去了解OpenFOAM的内部运作机理。 1 CFD的一般流程如果只是将OpenFOAM当做一款CFD软件的话，则">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-11/3723585.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:23:18.466Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-11_3723585.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:20.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【一起学OpenFOAM】03 OpenFOAM基本使用流程">
 <meta name="twitter:description" content="OpenFOAM初学者常常对于软件的使用流程感到很迷惑，与其他的具有GUI的CFD软件不同，OpenFOAM的所有操作均为基于文本操作，譬如说里面各种计算模型、计算参数、流程控制参数等，均为通过修改对应的文本文件来进行指定。那么什么时候该用哪些文件，该修改哪些参数，要了这些则需要花费时间去了解OpenFOAM的内部运作机理。 1 CFD的一般流程如果只是将OpenFOAM当做一款CFD软件的话，则">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-8-11/3723585.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-11_3723585.jpg">
 
 
 
@@ -431,7 +431,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:23:18" itemprop="dateModified" datetime="2018-10-18T01:23:18+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
               
             
           </span>
@@ -527,7 +527,7 @@
 </li>
 </ul>
 <p>利用ls命令查看文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -R cavity</span><br></pre></td></tr></table></figure></p>
-<p>如下图所示，cavity文件夹中包含有三个文件夹：0、constant以及system。<br><img src="http://olx22rz2y.bkt.clouddn.com/17-8-11/3723585.jpg" alt=""></p>
+<p>如下图所示，cavity文件夹中包含有三个文件夹：0、constant以及system。<br><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-8-11_3723585.jpg" alt=""></p>
 <p>这些文件夹各自用途：</p>
 <blockquote>
 <p><strong>0</strong>：文件夹0中存储了0时刻的物理量，根据求解的模型不同，物理量也有所差别。本案例中需要求解的物理量包括压力p以及速度U，因此0文件夹中包含两个文件：p及U。<br><strong>constant</strong>:此文件夹一般保存一些计算过程中不会变化的物理量，如介质物性参数等。本案例中需要指定transportProperties文件，该文件中确定了介质的粘度。<br><strong>system</strong>：此文件夹中包含了一些控制参数。如本案例中包含网格参数、求解控制参数、离散算法等。</p>

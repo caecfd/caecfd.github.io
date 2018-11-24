@@ -177,14 +177,14 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="所谓流固耦合计算，通常指的是同时利用流体求解器和固体结构求解器计算流体和固体相互作用问题。流体求解器主要负责流场压力、速度、温度、组分等物理量的计算，而固体结构求解器则负责位移、应力、应变等计算。在这些求解变量中，同时存在于流体和固体求解中的物理量是压力和位移。 在流体求解器中，压力是直接解出量，而在固体求解器中，压力可作为载荷。 在固体求解器中，位移是直接解出量，而在流体求解器中，位移可作为载荷">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-11-30/12489064.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-11-30/24855022.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/17-11-30/68482083.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:22:19.377Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_12489064.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_24855022.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_68482083.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:20.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【流固耦合案例】00：流固耦合简介">
 <meta name="twitter:description" content="所谓流固耦合计算，通常指的是同时利用流体求解器和固体结构求解器计算流体和固体相互作用问题。流体求解器主要负责流场压力、速度、温度、组分等物理量的计算，而固体结构求解器则负责位移、应力、应变等计算。在这些求解变量中，同时存在于流体和固体求解中的物理量是压力和位移。 在流体求解器中，压力是直接解出量，而在固体求解器中，压力可作为载荷。 在固体求解器中，位移是直接解出量，而在流体求解器中，位移可作为载荷">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/17-11-30/12489064.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_12489064.jpg">
 
 
 
@@ -433,7 +433,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-18 01:22:19" itemprop="dateModified" datetime="2018-10-18T01:22:19+08:00">2018-10-18</time>
+                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
               
             
           </span>
@@ -506,7 +506,7 @@
 <p>在流体求解器中，压力是直接解出量，而在固体求解器中，压力可作为载荷。</p>
 <p>在固体求解器中，位移是直接解出量，而在流体求解器中，位移可作为载荷，表现为计算域运动或变形。</p>
 <p>如下图所示。</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-11-30/12489064.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_12489064.jpg" alt=""></p>
 <p>因此，流固耦合问题的核心是在于共同变量的求解计算或传递问题。</p>
 <h1 id="求解方式"><a href="#求解方式" class="headerlink" title="求解方式"></a>求解方式</h1><p>流固耦合问题求解计算方式主要有两种：</p>
 <ul>
@@ -520,11 +520,11 @@
 <ul>
 <li>单向传递。例如流体求解器结算出压力，然后将压力数据作为载荷传递给固体结构求解器。如下图所示。</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-11-30/24855022.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_24855022.jpg" alt=""></p>
 <ul>
 <li>双向传递。例如流体求解器发送压力数据至固体求解器，同时接收固体求解器发回的位移数据。如下图所示。</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/17-11-30/68482083.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/17-11-30_68482083.jpg" alt=""></p>
 <p>通常情况下，单向传递用于稳态计算，双向数据传递一般用于计算瞬态问题。</p>
 <h1 id="误差来源"><a href="#误差来源" class="headerlink" title="误差来源"></a>误差来源</h1><p>目前采用分离方式求解流固耦合问题，影响计算精度的地方包括：</p>
 <ul>

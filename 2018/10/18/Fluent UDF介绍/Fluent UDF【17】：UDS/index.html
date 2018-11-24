@@ -177,19 +177,19 @@
 <meta property="og:site_name" content="CFDer聚乐埠">
 <meta property="og:description" content="1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。 2 UDS理论2.1 单相流对于任意标量$\phi _k $，ANSYS Fluent求解方程：$$\frac{\partial">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/62866859.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/35898590.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/45037235.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/11438495.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/85975546.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/46571271.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/21027408.jpg">
-<meta property="og:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/64378685.jpg">
-<meta property="og:updated_time" content="2018-10-17T17:28:26.324Z">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_62866859.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_35898590.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_45037235.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_11438495.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_85975546.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_46571271.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_21027408.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_64378685.jpg">
+<meta property="og:updated_time" content="2018-11-24T11:14:19.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fluent UDF【17】：UDS">
 <meta name="twitter:description" content="1 UDS介绍ANSYS Fluent可以像求解组分输运方程一样求解任意用户自定义的标量方程。在某些燃烧应用中或在等离子体增强的表面反应建模中，可能需要求解额外的标量输运方程。ANSYS Fluent允许您在用户定义的Scalars对话框中定义模型中的附加标量传输方程。 2 UDS理论2.1 单相流对于任意标量$\phi _k $，ANSYS Fluent求解方程：$$\frac{\partial">
-<meta name="twitter:image" content="http://olx22rz2y.bkt.clouddn.com/18-8-3/62866859.jpg">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_62866859.jpg">
 
 
 
@@ -421,12 +421,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 00:37:00 / 修改时间：01:28:26" itemprop="dateCreated datePublished" datetime="2018-10-18T00:37:00+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 00:37:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:37:00+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -531,16 +543,16 @@
 <li>增加<strong>Pre-Sweep及Post-sweeps</strong>参数值</li>
 <li>调整亚松弛因子</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/62866859.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_62866859.jpg" alt=""></p>
 <h2 id="3-1-单相流中使用UDS"><a href="#3-1-单相流中使用UDS" class="headerlink" title="3.1 单相流中使用UDS"></a>3.1 单相流中使用UDS</h2><p>采用以下步骤在单向流中使用UDS：</p>
 <ul>
 <li>鼠标右键选择模型树节点<strong>Parameters &amp; Customization</strong> → <strong>User Defined Scalars</strong>，点击弹出菜单项<strong>New…</strong>打开对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/35898590.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_35898590.jpg" alt=""></p>
 <ul>
 <li>在弹出的对话框中设置<strong>Number of User-Defined Scalars</strong>指定UDS方程的数量</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/45037235.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_45037235.jpg" alt=""></p>
 <blockquote>
 <p>注意：Fluent最多支持50个UDS标量方程。</p>
 </blockquote>
@@ -555,26 +567,26 @@
 <li>为每一个UDS方程指定源项。在计算域中激活选项<strong>Source Term</strong></li>
 <li>进入<strong>Source Terms</strong>标签页，点开<strong>User Scalar</strong>后方的<strong>Edit…</strong>按钮，打开设置对话框</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/11438495.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_11438495.jpg" alt=""></p>
 <ul>
 <li>对话框中通过参数<strong>Number of User Scalar . Sources</strong>指定源项的数量</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/85975546.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_85975546.jpg" alt=""></p>
 <ul>
 <li>打开材料编辑对话框指定UDS方程的扩散特性</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/46571271.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_46571271.jpg" alt=""></p>
 <ul>
 <li>边界条件中指定UDS边界条件</li>
 </ul>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/21027408.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_21027408.jpg" alt=""></p>
 <ul>
 <li>求解控制中指定UDS的求解计算参数</li>
 <li>指定UDS的初始条件并求解计算</li>
 <li>检查计算结果并后处理数据</li>
 </ul>
 <h2 id="3-2-多相流中使用UDS"><a href="#3-2-多相流中使用UDS" class="headerlink" title="3.2 多相流中使用UDS"></a>3.2 多相流中使用UDS</h2><p>多相流中使用UDS与单向流类似，只不过在创建UDS时需要选择相应的相，如下图所示</p>
-<p><img src="http://olx22rz2y.bkt.clouddn.com/18-8-3/64378685.jpg" alt=""></p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-8-3_64378685.jpg" alt=""></p>
 <p>其他过程与单向流相同。</p>
 
       
