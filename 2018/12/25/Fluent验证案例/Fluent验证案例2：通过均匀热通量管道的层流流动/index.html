@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1 测试用例模拟仿真水银通过具有均匀热通量壁面的圆形管道内的层流流动。在管道入口处为充分发展湍流速度分布。利用Fluent计算管道压降及出口中心点位置温度，并与解析解进行比较。本案例采用二维轴对称模型计算。 2 几何模型几何模型如图所示，管道半径为0.0025 m，管道长度0.1 m。  3 介质参数 流体介质为水银 密度：13529 kg/m3 粘度：0.001523 kg/m-s 比热：139">
+<meta name="keywords" content="Fluent验证案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent验证案例2：通过均匀热通量管道的层流流动.md">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例2：通过均匀热通量管道的层流流动/index.html">
+<meta property="og:site_name" content="CFDer聚乐埠">
+<meta property="og:description" content="1 测试用例模拟仿真水银通过具有均匀热通量壁面的圆形管道内的层流流动。在管道入口处为充分发展湍流速度分布。利用Fluent计算管道压降及出口中心点位置温度，并与解析解进行比较。本案例采用二维轴对称模型计算。 2 几何模型几何模型如图所示，管道半径为0.0025 m，管道长度0.1 m。  3 介质参数 流体介质为水银 密度：13529 kg/m3 粘度：0.001523 kg/m-s 比热：139">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181225152833.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111409.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111502.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111650.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111932.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112050.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112601.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112645.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112712.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112743.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181117181643.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181117181717.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113029.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113229.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113801.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226114013.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226114121.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226114141.png">
+<meta property="og:updated_time" content="2018-12-31T06:28:26.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent验证案例2：通过均匀热通量管道的层流流动.md">
+<meta name="twitter:description" content="1 测试用例模拟仿真水银通过具有均匀热通量壁面的圆形管道内的层流流动。在管道入口处为充分发展湍流速度分布。利用Fluent计算管道压降及出口中心点位置温度，并与解析解进行比较。本案例采用二维轴对称模型计算。 2 几何模型几何模型如图所示，管道半径为0.0025 m，管道长度0.1 m。  3 介质参数 流体介质为水银 密度：13529 kg/m3 粘度：0.001523 kg/m-s 比热：139">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181225152833.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例2：通过均匀热通量管道的层流流动/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent验证案例2：通过均匀热通量管道的层流流动.md | CFDer聚乐埠</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer聚乐埠</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例2：通过均匀热通量管道的层流流动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer聚乐埠">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent验证案例2：通过均匀热通量管道的层流流动.md
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-25 14:01:00" itemprop="dateCreated datePublished" datetime="2018-12-25T14:01:00+08:00">2018-12-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-31 14:28:26" itemprop="dateModified" datetime="2018-12-31T14:28:26+08:00">2018-12-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-测试用例"><a href="#1-测试用例" class="headerlink" title="1 测试用例"></a>1 测试用例</h1><p>模拟仿真水银通过具有均匀热通量壁面的圆形管道内的层流流动。在管道入口处为充分发展湍流速度分布。利用Fluent计算管道压降及出口中心点位置温度，并与解析解进行比较。本案例采用二维轴对称模型计算。</p>
+<h1 id="2-几何模型"><a href="#2-几何模型" class="headerlink" title="2 几何模型"></a>2 几何模型</h1><p>几何模型如图所示，管道半径为0.0025 m，管道长度0.1 m。</p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181225152833.png" alt=""></p>
+<h1 id="3-介质参数"><a href="#3-介质参数" class="headerlink" title="3 介质参数"></a>3 介质参数</h1><ul>
+<li>流体介质为水银</li>
+<li>密度：13529 kg/m3</li>
+<li>粘度：0.001523 kg/m-s</li>
+<li>比热：139.3 J/kg-K</li>
+</ul>
+<h1 id="4-边界条件"><a href="#4-边界条件" class="headerlink" title="4 边界条件"></a>4 边界条件</h1><ul>
+<li>入口条件为充分发展速度，平均速度0.005m/s</li>
+<li>入口温度：300K</li>
+<li>壁面热通量：5000 W/m^2</li>
+</ul>
+<h1 id="5-解析计算方式"><a href="#5-解析计算方式" class="headerlink" title="5 解析计算方式"></a>5 解析计算方式</h1><p>1、压降计算<br>理论值来自 Theodore L. Bergman, Adrienne S. Lavine, Frank P. Incropera, David P. DeWitt.Fundamentals of Heat and Mass Transfer [ 7ed. ] . P523，(<a href="https://pan.baidu.com/s/1geRm1zH" target="_blank" rel="noopener">https://pan.baidu.com/s/1geRm1zH</a>)<br>其中给出了充分发展速度表达式及水头损失表达式。分别为：<br>$$<br>u=2u_{m}(1-\frac{r^2}{R^2})<br>$$<br>$$<br>\Delta p=\frac{32 \mu Lu_m}{d^2}<br>$$<br>式中$u_m$为平均流速，$\mu$为流体动力粘度，$d$为管道直径。</p>
+<p>2、传热计算<br>理论值来自Fundamentals of Heat and Mass Transfer [ 7ed. ] . P530，给出：<br>$$<br>T_m(x)=T_{m,i}+\frac{q_s^{‘’} \pi d}{\dot{m}c_p}x<br>$$</p>
+<h1 id="6-数值计算"><a href="#6-数值计算" class="headerlink" title="6 数值计算"></a>6 数值计算</h1><p>采用2D轴对称模型进行计算。</p>
+<ul>
+<li>以<strong>2D、Double Precision</strong>模式启动Fluent</li>
+</ul>
+<h2 id="6-1-General设置"><a href="#6-1-General设置" class="headerlink" title="6.1 General设置"></a>6.1 General设置</h2><ul>
+<li>鼠标双击模型树节点<strong>General</strong>，右侧面板激活选项<strong>Axisymmetric</strong>采用轴对称模型</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111409.png" alt=""></p>
+<h2 id="6-2-Models设置"><a href="#6-2-Models设置" class="headerlink" title="6.2 Models设置"></a>6.2 Models设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Energy</strong>，点击弹出菜单项<strong>On</strong>激活能量方程</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111502.png" alt=""></p>
+<h2 id="6-3-Materials设置"><a href="#6-3-Materials设置" class="headerlink" title="6.3 Materials设置"></a>6.3 Materials设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Materials &gt; Fluid &gt; air</strong>弹出材料属性设置对话框</li>
+<li>修改<strong>Name</strong>为<strong>hg</strong></li>
+<li>如下图所示，设置<strong>Density</strong>为<strong>13529 kg/m3</strong></li>
+<li>设置<strong>Cp</strong>为<strong>139.3 j/kg-k</strong></li>
+<li>设置<strong>Thermal Conductivity</strong>为<strong>8.54 w/m-k</strong></li>
+<li>设置<strong>Viscosity</strong>为<strong>0.001523 kg/m-s</strong></li>
+<li>点击按钮<strong>Change/Create</strong>修改参数</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111650.png" alt=""></p>
+<h2 id="6-4-解释UDF"><a href="#6-4-解释UDF" class="headerlink" title="6.4 解释UDF"></a>6.4 解释UDF</h2><ul>
+<li>右键选择模型树节点<strong>User Defined Functions</strong>，点击弹出菜单项<strong>Interpreted…</strong>弹出解释对话框</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226111932.png" alt=""></p>
+<ul>
+<li>选择源文件，点击按钮<strong>Interpret</strong>进行代码解释</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112050.png" alt=""></p>
+<p>案例采用的UDF代码如下所示。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"udf.h"</span></span></span><br><span class="line">DEFINE_PROFILE(Vel_profile,t,i)</span><br><span class="line">&#123;</span><br><span class="line">    real x[ND_ND]; </span><br><span class="line">    real y;</span><br><span class="line">    <span class="keyword">face_t</span> f;</span><br><span class="line">    begin_f_loop(f,t)</span><br><span class="line">      &#123;</span><br><span class="line">       F_CENTROID(x,f,t);</span><br><span class="line">       y = x[<span class="number">1</span>];</span><br><span class="line">       F_PROFILE(f,t,i) = <span class="number">0.01</span>*(<span class="number">1</span>-y*y/<span class="number">0.0025</span>/<span class="number">0.0025</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    end_f_loop(f,t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-5-Boundary-Conditions"><a href="#6-5-Boundary-Conditions" class="headerlink" title="6.5 Boundary Conditions"></a>6.5 Boundary Conditions</h2><p><strong>1、inlet</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; inlet</strong>弹出设置对话框，选择设置<strong>Axial-velocity</strong>为<strong>udf vel_profile</strong>，其他参数默认设置，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112533.png" alt=""></p>
+<p><strong>2、outlet</strong></p>
+<ul>
+<li>右键选择模型树节点<strong>Boundary &gt; outlet</strong>，点击弹出菜单项<strong>Type  → pressure-outlet</strong>设置边界类型为压力出口，其他参数保持默认设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112601.png" alt=""></p>
+<p><strong>3、top边界</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; top</strong>弹出设置对话框</li>
+<li><strong>Thermal</strong>标签页设置<strong>Heat Flux</strong>为<strong>5000 w/m2</strong>，如下图所示</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112645.png" alt=""></p>
+<ul>
+<li>其他边界采用默认设置</li>
+</ul>
+<h2 id="6-6-Methods"><a href="#6-6-Methods" class="headerlink" title="6.6 Methods"></a>6.6 Methods</h2><ul>
+<li>鼠标双击模型树节点<strong>Methods</strong>，右侧面板如下图所示进行设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112712.png" alt=""></p>
+<h2 id="6-7-Controls"><a href="#6-7-Controls" class="headerlink" title="6.7 Controls"></a>6.7 Controls</h2><ul>
+<li>鼠标双击模型树节点<strong>Controls</strong>，右侧面板如下图所示进行设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112743.png" alt=""></p>
+<h2 id="6-8-Monitor"><a href="#6-8-Monitor" class="headerlink" title="6.8 Monitor"></a>6.8 Monitor</h2><ul>
+<li>双击模型树节点<strong>Monitors &gt; Residual</strong>，弹出设置对话框，如下图所示，设置残差标准为<strong>0.0001</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226112800.png" alt=""></p>
+<h2 id="6-9-Initialization"><a href="#6-9-Initialization" class="headerlink" title="6.9 Initialization"></a>6.9 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181117181643.png" alt="img"></p>
+<h2 id="6-10-Run-Calculation"><a href="#6-10-Run-Calculation" class="headerlink" title="6.10 Run Calculation"></a>6.10 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板如下图所示，设置<strong>Number of Iterations</strong>为<strong>5000</strong></li>
+<li>点击按钮<strong>Calculate</strong>开始迭代计算</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181117181717.png" alt="img"></p>
+<p>计算在50步收敛到1e-6，计算总耗时2分40秒（至强单核，内存16 G 计算 ）。残差如下图所示。</p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113029.png" alt=""></p>
+<h1 id="7-计算结果"><a href="#7-计算结果" class="headerlink" title="7 计算结果"></a>7 计算结果</h1><p><strong>1、速度分布</strong></p>
+<p>速度分布如下图所示，满足充分发展速度分布。</p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113229.png" alt=""></p>
+<p><strong>2、温度分布</strong></p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113617.png" alt=""></p>
+<p><strong>3、出口速度</strong></p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226113801.png" alt=""></p>
+<p><strong>4、出口温度分布</strong></p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226114013.png" alt=""></p>
+<p>输出数据可查看圆心位置温度为341.566 k。</p>
+<p><strong>5、查看压降</strong></p>
+<p>统计进出口总压值，如下图所示。</p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226114121.png" alt=""></p>
+<p>总压值统计结果如下图所示。</p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181226114141.png" alt=""></p>
+<p>计算得到压降为：1.1986683 - 0.2263984 = 0.9722699 Pa</p>
+<p><strong>6、压降及出口温度与解析解比较</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>理论值</th>
+<th>计算值</th>
+<th>相对误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\Delta p$</td>
+<td>0.97472</td>
+<td>0.97227</td>
+<td>-0.2514%</td>
+</tr>
+<tr>
+<td>T</td>
+<td>342.4496</td>
+<td>341.566</td>
+<td>-0.29%</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：降低残差标准继续往下算，有望进一步提高精度。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181016_lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent验证案例/" rel="tag"># Fluent验证案例</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/25/Fluent验证案例/Fluent验证案例1：库艾特流动/" rel="next" title="Fluent验证案例1：库艾特流动.md">
+                <i class="fa fa-chevron-left"></i> Fluent验证案例1：库艾特流动.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/25/Fluent验证案例/Fluent验证案例3：管道中湍流流动压降/" rel="prev" title="Fluent验证案例3：管道中湍流流动压降.md">
+                Fluent验证案例3：管道中湍流流动压降.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-测试用例"><span class="nav-text">1 测试用例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-几何模型"><span class="nav-text">2 几何模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-介质参数"><span class="nav-text">3 介质参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-边界条件"><span class="nav-text">4 边界条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-解析计算方式"><span class="nav-text">5 解析计算方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-数值计算"><span class="nav-text">6 数值计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-General设置"><span class="nav-text">6.1 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Models设置"><span class="nav-text">6.2 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-Materials设置"><span class="nav-text">6.3 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-解释UDF"><span class="nav-text">6.4 解释UDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-Boundary-Conditions"><span class="nav-text">6.5 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-Methods"><span class="nav-text">6.6 Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-Controls"><span class="nav-text">6.7 Controls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-8-Monitor"><span class="nav-text">6.8 Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-9-Initialization"><span class="nav-text">6.9 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-10-Run-Calculation"><span class="nav-text">6.10 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-计算结果"><span class="nav-text">7 计算结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+    });
+  </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

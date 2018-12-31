@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例演示利用Fluent计算180°弯管内湍流流动问题。   参考文献：T. Takamasa, A. Tomiyama. “Three-dimensional gas-liquid two-phase bubbly flow in a C-shaped tube”. NURETH-9. San Francisco, USA. pp. 1-17. 1999.  1 问题描述案例计算模型如图所示。">
+<meta name="keywords" content="Fluent验证案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent验证案例48：弯管湍流流动.md">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例48：弯管湍流流动/index.html">
+<meta property="og:site_name" content="CFDer聚乐埠">
+<meta property="og:description" content="本案例演示利用Fluent计算180°弯管内湍流流动问题。   参考文献：T. Takamasa, A. Tomiyama. “Three-dimensional gas-liquid two-phase bubbly flow in a C-shaped tube”. NURETH-9. San Francisco, USA. pp. 1-17. 1999.  1 问题描述案例计算模型如图所示。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122185359.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181119230517.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122191959.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192054.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192531.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192201.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193719.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193820.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193910.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181117181643.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193942.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122202435.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122201120.png">
+<meta property="og:updated_time" content="2018-12-25T07:48:42.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent验证案例48：弯管湍流流动.md">
+<meta name="twitter:description" content="本案例演示利用Fluent计算180°弯管内湍流流动问题。   参考文献：T. Takamasa, A. Tomiyama. “Three-dimensional gas-liquid two-phase bubbly flow in a C-shaped tube”. NURETH-9. San Francisco, USA. pp. 1-17. 1999.  1 问题描述案例计算模型如图所示。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122185359.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例48：弯管湍流流动/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent验证案例48：弯管湍流流动.md | CFDer聚乐埠</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer聚乐埠</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例48：弯管湍流流动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer聚乐埠">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent验证案例48：弯管湍流流动.md
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-25 14:48:00 / 修改时间：15:48:42" itemprop="dateCreated datePublished" datetime="2018-12-25T14:48:00+08:00">2018-12-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例演示利用Fluent计算180°弯管内湍流流动问题。</p>
+<blockquote>
+<p> 参考文献：T. Takamasa, A. Tomiyama. “Three-dimensional gas-liquid two-phase bubbly flow in a C-shaped tube”. NURETH-9. San Francisco, USA. pp. 1-17. 1999.</p>
+</blockquote>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>案例计算模型如图所示。</p>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122185359.png" alt=""></p>
+<p>计算参数如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>材料参数</th>
+<th>几何参数</th>
+<th>边界条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>密度：997kg/m3<br> 粘度：8.899E-4 kg/m-s</td>
+<td>管道半径：14mm<br> 弯管曲率半径：125mm</td>
+<td>入口平均速度1.42m/s，采用udf指定入口</td>
+</tr>
+</tbody>
+</table>
+<p>采用稳态计算，考虑模型对称性，建模时只考虑一半模型。</p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><ul>
+<li>以<strong>2D、Double Precision</strong>模式启动Fluent</li>
+</ul>
+<h2 id="2-1-General设置"><a href="#2-1-General设置" class="headerlink" title="2.1 General设置"></a>2.1 General设置</h2><ul>
+<li>鼠标双击模型树节点<strong>General</strong>，右侧面板采用默认设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181119230517.png" alt=""></p>
+<h2 id="2-2-Models设置"><a href="#2-2-Models设置" class="headerlink" title="2.2 Models设置"></a>2.2 Models设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt;  Viscous</strong>，选择弹出菜单项<strong>Model → SST k-omega</strong>激活湍流模型</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122191959.png" alt=""></p>
+<h2 id="2-3-Materials设置"><a href="#2-3-Materials设置" class="headerlink" title="2.3 Materials设置"></a>2.3 Materials设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Materials &gt;  Fluid &gt;  air</strong>弹出材料属性设置对话框</li>
+<li>如下图所示，修改<strong>Name</strong>为<strong>water</strong></li>
+<li>设置<strong>Density</strong>为<strong>997 kg/m3</strong></li>
+<li>设置<strong>Viscosity</strong>为<strong>0.0008899 kg/m-s</strong></li>
+<li>其他参数保持默认设置，点击按钮<strong>Change/Create</strong>修改参数</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192054.png" alt=""></p>
+<h2 id="2-4-解释UDF"><a href="#2-4-解释UDF" class="headerlink" title="2.4 解释UDF"></a>2.4 解释UDF</h2><ul>
+<li>右键点击模型树节点<strong>User Defined Function</strong>，点击弹出菜单项<strong>Interpreted…</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192531.png" alt=""></p>
+<ul>
+<li>弹出文件对话框中选择源文件<strong>VMFL048_velocity.c</strong>，点击按钮<strong>Interpret</strong>解释源文件</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192549.png" alt=""></p>
+<p>程序代码其实很简单，如下所示。</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment">#include "udf.h"</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="comment">#define vlmean 1.43</span></span><br><span class="line">&gt; <span class="comment">#define xin 0</span></span><br><span class="line">&gt; <span class="comment">#define yin -0.125</span></span><br><span class="line">&gt; <span class="comment">#define rpipe 0.014</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; DEFINE_PROFILE(vin,t, nv) </span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt;  face_t f;</span><br><span class="line">&gt;  begin_f_loop (f, t)</span><br><span class="line">&gt;  &#123;</span><br><span class="line">&gt;  real xf[ND_ND];</span><br><span class="line">&gt;  real r, r1;</span><br><span class="line">&gt;  F_CENTROID(xf,f,t);</span><br><span class="line">&gt;  r = (xf[<span class="number">0</span>] - xin)*(xf[<span class="number">0</span>] - xin)+ (xf[<span class="number">1</span>] - yin)*(xf[<span class="number">1</span>] - yin);</span><br><span class="line">&gt;  r = sqrt(r);</span><br><span class="line">&gt;  r /= rpipe;</span><br><span class="line">&gt;  r1 = <span class="number">1.</span> - r;</span><br><span class="line">&gt;  F_PROFILE (f,t, nv) = <span class="number">1.264</span>*vlmean*MAX(<span class="number">0.</span>, pow(r1, <span class="number">1.</span>/<span class="number">6.</span>));</span><br><span class="line">&gt;  &#125;</span><br><span class="line">&gt;  end_f_loop (f, thread)</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="2-5-Boundary-Conditions"><a href="#2-5-Boundary-Conditions" class="headerlink" title="2.5 Boundary Conditions"></a>2.5 Boundary Conditions</h2><p><strong>1、inlet</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt;  inlet</strong>弹出设置对话框</li>
+<li><strong>Momentum</strong>标签页设置<strong>X-Velocity</strong>为<strong>udf vin</strong></li>
+<li>其他参数保持默认设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122192201.png" alt=""></p>
+<p><strong>2、outlet</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt;  outlet</strong>弹出设置对话框</li>
+<li><strong>Momentum</strong>标签页保持默认设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193719.png" alt=""></p>
+<h2 id="2-6-Methods"><a href="#2-6-Methods" class="headerlink" title="2.6 Methods"></a>2.6 Methods</h2><ul>
+<li>双击模型树节点<strong>Methods</strong>，右侧面板如下图所示设置<strong>Scheme</strong>为<strong>SIMPLE</strong>，其他参数如下图所示进行设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193820.png" alt=""></p>
+<h2 id="2-7-Monitor"><a href="#2-7-Monitor" class="headerlink" title="2.7 Monitor"></a>2.7 Monitor</h2><ul>
+<li>双击模型树节点<strong>Monitors &gt;  Residual</strong>，弹出设置对话框</li>
+<li>如下图所示，设置所有变量的残差为<strong>1e-4</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193910.png" alt=""></p>
+<h2 id="2-8-Initialization"><a href="#2-8-Initialization" class="headerlink" title="2.8 Initialization"></a>2.8 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>进行初始化</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181117181643.png" alt=""></p>
+<h2 id="2-9-Run-Calculation"><a href="#2-9-Run-Calculation" class="headerlink" title="2.9 Run Calculation"></a>2.9 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板如下图所示，设置<strong>Number of Iterations</strong>为<strong>1500</strong></li>
+<li>点击按钮<strong>Calculate</strong>开始迭代计算</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122193942.png" alt=""></p>
+<h1 id="3-计算结果"><a href="#3-计算结果" class="headerlink" title="3 计算结果"></a>3 计算结果</h1><ul>
+<li>速度分布</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122202435.png" alt=""></p>
+<ul>
+<li>计算结果验证</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/caecfd/pic/master/img/20181122201120.png" alt=""></p>
+<blockquote>
+<p> 链接: <a href="https://pan.baidu.com/s/1wAGKZbL9GllfQZVY_R1Hdg" target="_blank" rel="noopener">https://pan.baidu.com/s/1wAGKZbL9GllfQZVY_R1Hdg</a> 提取码: jvzj</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181016_lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent验证案例/" rel="tag"># Fluent验证案例</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/25/Fluent验证案例/Fluent验证案例47：湍流分离/" rel="next" title="Fluent验证案例47：湍流分离.md">
+                <i class="fa fa-chevron-left"></i> Fluent验证案例47：湍流分离.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/25/Fluent验证案例/Fluent验证案例49：轴对称天然气燃烧器内燃烧/" rel="prev" title="Fluent验证案例49：轴对称天然气燃烧器内燃烧.md">
+                Fluent验证案例49：轴对称天然气燃烧器内燃烧.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-General设置"><span class="nav-text">2.1 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Models设置"><span class="nav-text">2.2 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Materials设置"><span class="nav-text">2.3 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-解释UDF"><span class="nav-text">2.4 解释UDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Boundary-Conditions"><span class="nav-text">2.5 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Methods"><span class="nav-text">2.6 Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Monitor"><span class="nav-text">2.7 Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Initialization"><span class="nav-text">2.8 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-Run-Calculation"><span class="nav-text">2.9 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-计算结果"><span class="nav-text">3 计算结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+    });
+  </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

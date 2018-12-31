@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -389,8 +389,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/" itemprop="url">
-                  【一起学OpenFOAM】03 OpenFOAM基本使用流程
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/" itemprop="url">
+                  Fluent UDF【6】：预处理命令
                 </a>
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:51" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:51+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:26:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:26:00+08:00">2018-10-18</time>
             
 
             
@@ -433,7 +433,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -450,7 +450,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -459,16 +459,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -496,11 +486,12 @@
       
         
           
-          OpenFOAM初学者常常对于软件的使用流程感到很迷惑，与其他的具有GUI的CFD软件不同，OpenFOAM的所有操作均为基于文本操作，譬如说里面各种计算模型、计算参数、流程控制参数等，均为通过修改对应的文本文件来进行指定。那么什么时候该用哪些文件，该修改哪些参数，要了这些则需要花费时间去了解Ope
+          今天要讲的内容是关于C语言的预处理。搞清楚了这个，就可以分析UDF中的各种头文件源代码，从此写UDF不求人。
+1 关于预处理在UDF的各种头文件中(文件路径D:\Program Files\ANSYS Inc\v180\fluent\fluent18.0.0\src)，存在各种以#开头的语句，如下图
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】03 OpenFOAM基本使用流程/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【6】：预处理命令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -559,7 +550,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -578,8 +569,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/" itemprop="url">
-                  【一起学OpenFOAM】02 软件准备
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/" itemprop="url">
+                  Fluent UDF【5】：第一个UDF
                 </a>
               
             
@@ -605,7 +596,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:50" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:50+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:25:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:25:00+08:00">2018-10-18</time>
             
 
             
@@ -622,7 +613,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -639,7 +630,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -648,16 +639,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -685,11 +666,12 @@
       
         
           
-          “工欲善其事必先利其器”，在利用OpenFoam解决我们的工程问题之前，首先要做的事情是搭建一个OpenFoam运行环境。很遗憾的是，OpenFoam的原生开发系统是Linux，因此对于习惯使用Linux操作系统的使用者来讲，自然不存在任何的问题，但是对于长期使用Windows操作系统的人，就需要掌
+          这里以一个简单的初始化案例来描述UDF的使用过程。
+0 Fluent中的PatchFluent中提供了全域初始化以及局部Patch功能。对于整体区域的全局初始化可以采用starndard及hybrid方法进行初始化，指定各种物理量的初始分布。而对于计算域中的局部区域初始化，则可以通过Patch功能来
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】02 软件准备/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【5】：第一个UDF/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -748,7 +730,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -767,8 +749,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/" itemprop="url">
-                  【一起学OpenFOAM】01 OpenFoam的优势
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/" itemprop="url">
+                  Fluent UDF【4】：C语言基础
                 </a>
               
             
@@ -794,7 +776,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:49" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:49+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:24:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:24:00+08:00">2018-10-18</time>
             
 
             
@@ -811,7 +793,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -828,7 +810,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -837,16 +819,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -874,11 +846,14 @@
       
         
           
-          CFD技术发展到今天，已经超过了大半个世纪了，已经涌现出非常多的CFD软件可供人们使用。通用商业CFD软件譬如Fluent、CFX、Star CCM+等在工业上得到了广泛的应用，另外一些专用的软件（如旋转机械领域Numeca、电子散热领域的Flotherm等）也以其专业性牢牢占据着各自领域的市场。这
+          Fluent UDF利用的是C语言，本文简单介绍在UDF中经常会用到的C语言常识。本文部分内容来自UDF手册。
+1 C语言中的注释C语言中的注释利用/*及*/来实现。例如:1/*这是一个注释*/
+注释也可以跨行实现，如:12/*这是一个跨行注释*/
+注意:在编写UDF的过程中，不能把DEFINE宏(
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】01 OpenFoam的优势/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【4】：C语言基础/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -937,7 +912,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -956,8 +931,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/" itemprop="url">
-                  【一起学OpenFOAM】00 系列由来
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/" itemprop="url">
+                  Fluent UDF【3】：环境配置
                 </a>
               
             
@@ -983,7 +958,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:48" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:48+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:23:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:23:00+08:00">2018-10-18</time>
             
 
             
@@ -1000,7 +975,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -1017,7 +992,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFoam连载/" itemprop="url" rel="index"><span itemprop="name">OpenFoam连载</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1026,16 +1001,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1063,11 +1028,12 @@
       
         
           
-          1 为什么要学习OpenFOAM掐指算起来，接触CFD也差不多有十个年头了，其间一直使用的商用CFD软件，有Fluent、CFX、StarCCM+等，这些商用软件各有其优缺点，都能较好的解决常规的工程问题。然而，最近当我试图往这些软件中添加一些核心求解算法时，发现这是一个不可完成的任务，这些软件的核
+          windows操作系统下UDF的编译需要借助Visual Studio中的C编译器。因此若要想编译UDF，则必须事先配置好编译环境。
+Visual StudioVisual Stuido(后面简称VS)是微软开发的一款程序设计IDE，可以用于windows环境下计算机软件的开发。以下内容来自百度百科
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFoam连载/【一起学OpenFOAM】00 系列由来/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【3】：环境配置/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1126,7 +1092,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1145,8 +1111,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/" itemprop="url">
-                  【OpenFOAM案例】07 pitzDaily
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/" itemprop="url">
+                  Fluent UDF【2】：学习途径
                 </a>
               
             
@@ -1172,7 +1138,7 @@
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:47" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:47+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:22:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:22:00+08:00">2018-10-18</time>
             
 
             
@@ -1189,7 +1155,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -1206,7 +1172,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1215,16 +1181,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1252,19 +1208,12 @@
       
         
           
-          本案例演示simpleFoam求解器模型准备。simpleFoam求解器是一个稳态求解器，支持以下湍流模型:
-
-kEpsilon(RAS)
-kOmega(RAS)
-LRR(RAS)本案例的目标:
-理解湍流模型建模过程
-理解稳态模拟过程
-
-1 拷贝文件本案例文件来自于官方提供的案例。利用命令将文件拷贝
+          要怎样做才能做到无畏惧编写任何UDF程序？估计很多与UDF打交道的人都会问到这个问题。面对UDF文档中那众多的宏描述，小伙伴们是不是感觉到茫然无措，不知从何入手。有时候读别人写好的程序感觉并不难，然而自己写的时候总是感觉不对劲。我们今天就来聊聊UDF到底该怎么学。
+关于C语言Fluent UDF使用
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【2】：学习途径/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1323,7 +1272,7 @@ LRR(RAS)本案例的目标:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1342,8 +1291,8 @@ LRR(RAS)本案例的目标:
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/" itemprop="url">
-                  【OpenFOAM案例】06 障碍物
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/" itemprop="url">
+                  Fluent UDF【1】：简介
                 </a>
               
             
@@ -1369,7 +1318,7 @@ LRR(RAS)本案例的目标:
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:46" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:46+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:20:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:20:00+08:00">2018-10-18</time>
             
 
             
@@ -1386,7 +1335,7 @@ LRR(RAS)本案例的目标:
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -1403,7 +1352,7 @@ LRR(RAS)本案例的目标:
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1412,16 +1361,6 @@ LRR(RAS)本案例的目标:
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1449,15 +1388,12 @@ LRR(RAS)本案例的目标:
       
         
           
-          
-相同的食材，不同的烹制方法。
-
-利用OpenFOAM求解气流通过障碍物后的流场分布。
-案例描述： 本案例来自于丹麦海事研究所。流动计算域模型如图所示，包含入口、出口及壁面。案例采用 2D 模型计算。计算域流体介质为空气（标准大气压，温度 293K ），来流速度 1.17m/s 。雷诺数基于障碍物高
+          前面基本完成了动网格专题的发布，不过还是有一些内容并没有更新进去，比如说in-cylinder、接触检测、2.5D网格重构等。不过这些都是小技巧，写起来挺麻烦，以后有时间再通过案例视频的方式讲解好了。从今天开始最近一段时间准备发布Fluent UDF的一些内容。
+关于UDFUDF并不是什么神秘的东西
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】06 障碍物/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF【1】：简介/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1516,7 +1452,7 @@ LRR(RAS)本案例的目标:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/18/Fluent UDF介绍/Fluent UDF[【21】：入门与提高/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1535,8 +1471,8 @@ LRR(RAS)本案例的目标:
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="url">
-                  【OpenFOAM案例】05 圆柱绕流
+                <a class="post-title-link" href="/2018/10/18/Fluent UDF介绍/Fluent UDF[【21】：入门与提高/" itemprop="url">
+                  Fluent UDF[【21】：入门与提高
                 </a>
               
             
@@ -1562,7 +1498,7 @@ LRR(RAS)本案例的目标:
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:45" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:45+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-18 00:19:00" itemprop="dateCreated datePublished" datetime="2018-10-18T00:19:00+08:00">2018-10-18</time>
             
 
             
@@ -1579,7 +1515,7 @@ LRR(RAS)本案例的目标:
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-24 19:14:20" itemprop="dateModified" datetime="2018-11-24T19:14:20+08:00">2018-11-24</time>
+                <time title="修改时间：2018-11-24 19:14:19" itemprop="dateModified" datetime="2018-11-24T19:14:19+08:00">2018-11-24</time>
               
             
           </span>
@@ -1596,7 +1532,7 @@ LRR(RAS)本案例的目标:
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent-UDF介绍/" itemprop="url" rel="index"><span itemprop="name">Fluent UDF介绍</span></a></span>
 
                 
                 
@@ -1605,16 +1541,6 @@ LRR(RAS)本案例的目标:
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1642,23 +1568,16 @@ LRR(RAS)本案例的目标:
       
         
           
-          圆柱绕流问题是流体力学中的经典问题。本案例利用Fluent研究圆柱绕流现象。
-1 目标
-本案例的主要目的为讲解瞬态流动问题仿真
-案例考虑雷诺数为100的圆柱绕流问题，采用层流求解
-案例计算完毕后可以观察到涡脱落现象
+          近来总有人留言问“udf如何学？UDF有没有教材？”之类的问题。懒得一个个的回复了，不如写一篇文章一起回复好了。
 
-2 计算模型计算模型尺寸如图所示。
-尺寸如表所示。
+注：以下所有内容均为个人观点，能力所限，错漏之处在所难免，欢迎批评指正。
 
-
-
-Name
-Locatio
+1 是否需要UDF在使用UDF或者学习使用UDF之前，有必要搞清楚什么是UDF。
+UDF（User Defi
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】05 圆柱绕流/#more" rel="contents">
+            <a class="btn" href="/2018/10/18/Fluent UDF介绍/Fluent UDF[【21】：入门与提高/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1717,7 +1636,7 @@ Locatio
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1736,8 +1655,8 @@ Locatio
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/" itemprop="url">
-                  【OpenFOAM案例】04 编译安装OpenFOAM
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/" itemprop="url">
+                  【流固耦合案例】03 共轭传热
                 </a>
               
             
@@ -1763,7 +1682,7 @@ Locatio
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:44" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:44+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:59:00" itemprop="dateCreated datePublished" datetime="2018-10-17T15:59:00+08:00">2018-10-17</time>
             
 
             
@@ -1797,7 +1716,7 @@ Locatio
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -1806,16 +1725,6 @@ Locatio
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1843,15 +1752,14 @@ Locatio
       
         
           
-          利用编译方式安装OpenFOAM，此种方式适合于所有的Linux系统发行版，最大的好处在于可以对编译过程进行控制，有可能实现代码优化。
-1 文件准备首先需要下载两个文件包：
+          本案例利用Fluent计算共轭传热问题。
+1 案例描述案例几何如图所示。流体域中存在一个固体区域，其中，固体域初始温度为343K，其底部温度为343K，其他边为与流体域耦合面。流体域中两条竖直边温度293K，其他边界为绝热边界。
 
-OpenFOAM安装包：http://dl.openfoam.org/source/4-1
-第三方程序包：http://dl
+其中固体域材料为铝合金，其密度为2800 kg/m3，比热为880 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】04 编译安装OpenFOAM/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】03 共轭传热/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1910,7 +1818,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -1929,8 +1837,8 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/" itemprop="url">
-                  【OpenFOAM案例】03 Docker安装OpenFOAM
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/" itemprop="url">
+                  【流固耦合案例】02：柔性挡板
                 </a>
               
             
@@ -1956,7 +1864,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:42" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:42+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:56:00" itemprop="dateCreated datePublished" datetime="2018-10-17T15:56:00+08:00">2018-10-17</time>
             
 
             
@@ -1990,7 +1898,7 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -1999,16 +1907,6 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -2036,14 +1934,12 @@ OpenFOAM安装包：http://dl.openfoam.org/source/4-1
       
         
           
-          “工欲善其事必先利其器”，软件装不上，讲再多的使用技巧也是白搭。近期不少留言说OpenFOAM不容易安装， 今天来谈谈如何在Linux下利用Docker安装OpenFOAM。
-Linux发行版众多，估计有几百种，比较流行的是三个派系：
-
-RHEL系。比较出名的发行版像Red Hat Enterpri
+          当固体材料较软时，在流体作用下其发生较大变形，从而影响到原有流场分布，此时应该考虑利用双向流固耦合计算。本案例沿用上一个案例的几何，考虑双向耦合作用下，固体材料的应力应变。案例中固体采用采用超弹性橡胶材料。
+计算流程搭建的计算流程如图所示。其中几何模型在流体流程中导入，双向耦合数据通过System 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】03 Docker安装OpenFOAM/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】02：柔性挡板/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2102,7 +1998,7 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/10/17/流固耦合/【流固耦合案例】01：挡板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="流沙[胡坤]">
@@ -2121,8 +2017,8 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/" itemprop="url">
-                  【OpenFOAM案例】02 自己动手
+                <a class="post-title-link" href="/2018/10/17/流固耦合/【流固耦合案例】01：挡板/" itemprop="url">
+                  【流固耦合案例】01：挡板
                 </a>
               
             
@@ -2148,7 +2044,7 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
                 
               
 
-              <time title="创建时间：2018-10-17 12:20:41" itemprop="dateCreated datePublished" datetime="2018-10-17T12:20:41+08:00">2018-10-17</time>
+              <time title="创建时间：2018-10-17 15:54:00" itemprop="dateCreated datePublished" datetime="2018-10-17T15:54:00+08:00">2018-10-17</time>
             
 
             
@@ -2182,7 +2078,7 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenFOAM案例/" itemprop="url" rel="index"><span itemprop="name">OpenFOAM案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流固耦合/" itemprop="url" rel="index"><span itemprop="name">流固耦合</span></a></span>
 
                 
                 
@@ -2191,16 +2087,6 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -2228,12 +2114,14 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
       
         
           
-          
-前言：很多人说OpenFOAM很难，要啃上很多的理论书籍，什么流体力学、计算流体力学、矩阵理论、线性代数、数值计算、C++程序设计神马的，看看光这一堆书就能吓倒绝大多数的人。其实我们并不一定要从这些基础的东西入手，我觉得要学习使用一个工具，首先使它运转起来才是最靠谱的。通过大量实例练习，做多了自然
+          以一个简单的案例来描述在Fluent+Mechanical体系中计算单向流固耦合问题的一般步骤。
+1 案例描述本案例要计算的模型如下图所示（单位为mm），其三维拉伸厚度为50mm。
+
+流动区域内存在一个高度60mm，宽10mm，厚度50mm的金属挡板，采用流固耦合方法计算挡板在流体作用下的应力分布。
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】02 自己动手/#more" rel="contents">
+            <a class="btn" href="/2018/10/17/流固耦合/【流固耦合案例】01：挡板/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2281,13 +2169,14 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
 
           </div>
           
+
 
         </div>
         
@@ -2328,7 +2217,7 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2617,32 +2506,25 @@ RHEL系。比较出名的发行版像Red Hat Enterpri
 
 
 
+
+  
   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-  
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
     var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(function (item) {
+    guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
     new Valine({
+        av: AV, 
         el: '#comments' ,
-        verify: false,
-        notify: false,
         appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
         appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
         placeholder: '填写要评论的内容',
-        avatar:'mm',
-        meta:guest,
-        pageSize:'10' || 10,
-        visitor: false
     });
   </script>
-
-
 
   
 

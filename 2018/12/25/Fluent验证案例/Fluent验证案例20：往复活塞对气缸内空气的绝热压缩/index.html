@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例利用Fluent中的In-Cylinder方法模拟发动机气缸内活塞运动导致的压力及温度变化，并将仿真结果与解析值进行比较。 计算模型如下图所示。气缸活塞往复运动受曲轴控制，本案例利用2D模型模拟气缸，活塞运动通过In-Cylinder方法进行指定。  计算域尺寸如图所示。  假定缸内气体压缩过程为绝热。案例利用in-cylinder、弹簧光顺及网格重构算法模拟边界运动。 1 创建几何及网格本">
+<meta name="keywords" content="Fluent验证案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent验证案例20：往复活塞对气缸内空气的绝热压缩.md">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/index.html">
+<meta property="og:site_name" content="CFDer聚乐埠">
+<meta property="og:description" content="本案例利用Fluent中的In-Cylinder方法模拟发动机气缸内活塞运动导致的压力及温度变化，并将仿真结果与解析值进行比较。 计算模型如下图所示。气缸活塞往复运动受曲轴控制，本案例利用2D模型模拟气缸，活塞运动通过In-Cylinder方法进行指定。  计算域尺寸如图所示。  假定缸内气体压缩过程为绝热。案例利用in-cylinder、弹簧光顺及网格重构算法模拟边界运动。 1 创建几何及网格本">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-23_49427250.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-23_28463011.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_19122314.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_88634573.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_45881301.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_3610813.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_54016198.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_37563190.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_969056.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_90180974.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_95546996.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_62915078.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_22463819.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_61878325.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_57133695.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_85293207.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_79244082.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_28491437.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_41033864.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_30488752.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_41457441.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_85995992.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_35543089.jpg">
+<meta property="og:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_9019004.jpg">
+<meta property="og:updated_time" content="2018-12-25T07:38:19.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent验证案例20：往复活塞对气缸内空气的绝热压缩.md">
+<meta name="twitter:description" content="本案例利用Fluent中的In-Cylinder方法模拟发动机气缸内活塞运动导致的压力及温度变化，并将仿真结果与解析值进行比较。 计算模型如下图所示。气缸活塞往复运动受曲轴控制，本案例利用2D模型模拟气缸，活塞运动通过In-Cylinder方法进行指定。  计算域尺寸如图所示。  假定缸内气体压缩过程为绝热。案例利用in-cylinder、弹簧光顺及网格重构算法模拟边界运动。 1 创建几何及网格本">
+<meta name="twitter:image" content="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-23_49427250.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent验证案例20：往复活塞对气缸内空气的绝热压缩.md | CFDer聚乐埠</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer聚乐埠</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2018/12/25/Fluent验证案例/Fluent验证案例20：往复活塞对气缸内空气的绝热压缩/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer聚乐埠">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent验证案例20：往复活塞对气缸内空气的绝热压缩.md
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-25 14:20:00 / 修改时间：15:38:19" itemprop="dateCreated datePublished" datetime="2018-12-25T14:20:00+08:00">2018-12-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例利用Fluent中的In-Cylinder方法模拟发动机气缸内活塞运动导致的压力及温度变化，并将仿真结果与解析值进行比较。</p>
+<p>计算模型如下图所示。气缸活塞往复运动受曲轴控制，本案例利用2D模型模拟气缸，活塞运动通过In-Cylinder方法进行指定。</p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-23_49427250.jpg" alt=""></p>
+<p>计算域尺寸如图所示。</p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-23_28463011.jpg" alt=""></p>
+<p>假定缸内气体压缩过程为绝热。案例利用in-cylinder、弹簧光顺及网格重构算法模拟边界运动。</p>
+<h1 id="1-创建几何及网格"><a href="#1-创建几何及网格" class="headerlink" title="1 创建几何及网格"></a>1 创建几何及网格</h1><p>本案例几何及网格均较为简单，按上图所示建立几何模型并划分三角形网格。边界命名及网格如下图所示。</p>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_19122314.jpg" alt=""></p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><ul>
+<li>以<strong>2D、Double Precision</strong>模式启动Fluent</li>
+<li>读取网格文件ex20.msh</li>
+</ul>
+<h2 id="2-1-General设置"><a href="#2-1-General设置" class="headerlink" title="2.1 General设置"></a>2.1 General设置</h2><ul>
+<li>双击模型树节点<strong>General</strong>，设置采用<strong>Transient</strong>计算</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_88634573.jpg" alt=""></p>
+<h2 id="2-2-Models设置"><a href="#2-2-Models设置" class="headerlink" title="2.2 Models设置"></a>2.2 Models设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt;  Energy</strong>，点击弹出菜单项<strong>On</strong>激活能量方程</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_45881301.jpg" alt=""></p>
+<h2 id="2-3-Materials设置"><a href="#2-3-Materials设置" class="headerlink" title="2.3 Materials设置"></a>2.3 Materials设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Materials &gt;  fluid &gt;  air</strong>，弹出的材料设置对话框中，设置<strong>Density</strong>为<strong>ideal-gas*</strong></li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_3610813.jpg" alt=""></p>
+<h2 id="2-4-Boundary-Conditions"><a href="#2-4-Boundary-Conditions" class="headerlink" title="2.4 Boundary Conditions"></a>2.4 Boundary Conditions</h2><p>本案例所有边界均为绝热壁面边界，采用默认参数设置。</p>
+<h2 id="2-5-Dynamic-Mesh设置"><a href="#2-5-Dynamic-Mesh设置" class="headerlink" title="2.5 Dynamic Mesh设置"></a>2.5 Dynamic Mesh设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Dynamic Mesh</strong>，右侧面板激活选项<strong>Dynamic Mesh</strong></li>
+<li>激活选项<strong>Smoothing、Remeshing及In-Cylinder</strong></li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_54016198.jpg" alt=""></p>
+<ul>
+<li>选择Mesh Methods下方的<strong>Settings…</strong>，弹出设置对话框，如下图所示设置<strong>Smoothing</strong>标签页下参数</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_37563190.jpg" alt=""></p>
+<ul>
+<li>如下图所示设置<strong>Remeshing</strong>标签页下参数</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_969056.jpg" alt=""></p>
+<ul>
+<li>点击<strong>Options</strong>下方按钮<strong>Settings…</strong>，如下图所示设置曲柄连杆参数</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_90180974.jpg" alt=""></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Dynamic Mesh</strong>，点击右侧面板中<strong>Dynamic Mesh Zone</strong>下方按钮<strong>Create/Edit…</strong>弹出设置对话框</li>
+<li>如下图所示设置<strong>Moving_wall</strong>为Rigid Body及参数</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_95546996.jpg" alt=""></p>
+<ul>
+<li>如下图所示设置<strong>Meshing Options</strong></li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_62915078.jpg" alt=""></p>
+<ul>
+<li>设置<strong>side_walls</strong>为<strong>Deforming</strong>，几何参数定义如下图所示</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_22463819.jpg" alt=""></p>
+<ul>
+<li>如下图所示设置<strong>Meshing Options</strong>参数</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_61878325.jpg" alt=""></p>
+<h2 id="2-6-Methods设置"><a href="#2-6-Methods设置" class="headerlink" title="2.6 Methods设置"></a>2.6 Methods设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Methods</strong>，如下图所示设置右侧面板参数</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_57133695.jpg" alt=""></p>
+<h2 id="2-7-Report-Definitions定义"><a href="#2-7-Report-Definitions定义" class="headerlink" title="2.7 Report Definitions定义"></a>2.7 Report Definitions定义</h2><ul>
+<li>右键选择模型树节点<strong>Report Definitions</strong>，选择弹出菜单<strong>New → Volume Report → Volume-Average…</strong>弹出设置对话框</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_85293207.jpg" alt=""></p>
+<ul>
+<li>如下图所示，监控区域平均压力</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_79244082.jpg" alt=""></p>
+<ul>
+<li>相同的方式监测计算域温度</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_28491437.jpg" alt=""></p>
+<h2 id="2-8-Initialization"><a href="#2-8-Initialization" class="headerlink" title="2.8 Initialization"></a>2.8 Initialization</h2><ul>
+<li>右键选择模型树节点<strong>Initialization</strong>，点击弹出菜单项<strong>Initialize</strong>开始初始化</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_41033864.jpg" alt=""></p>
+<h2 id="2-10-Run-Calculation"><a href="#2-10-Run-Calculation" class="headerlink" title="2.10 Run Calculation"></a>2.10 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板设置<strong>Number of Time Steps</strong>为<strong>180</strong></li>
+<li>点击<strong>Calculate</strong>开始计算</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_30488752.jpg" alt=""></p>
+<blockquote>
+<p> 注意：这里设置的时间步数实际上是指定曲柄旋转的角度，180度为旋转半个周期</p>
+</blockquote>
+<h1 id="3-计算结果"><a href="#3-计算结果" class="headerlink" title="3 计算结果"></a>3 计算结果</h1><ul>
+<li>计算监测得到的压力随时间变化</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_41457441.jpg" alt=""></p>
+<ul>
+<li>监测得到的平均温度随时间变化曲线</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_85995992.jpg" alt=""></p>
+<ul>
+<li>计算压力值与解析解的对比</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_35543089.jpg" alt=""></p>
+<ul>
+<li>计算温度值与解析解的对比</li>
+</ul>
+<p><img src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/18-6-27_9019004.jpg" alt=""></p>
+<blockquote>
+<p> 参考文献：L.D. Russell, G.A. Adebiyi, Classical Thermodynamics, Saunders College Publishing, Philadelphia, PA, 1993</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181016_lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent验证案例/" rel="tag"># Fluent验证案例</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/25/Fluent验证案例/Fluent验证案例19：近运动壁面的瞬态流动/" rel="next" title="Fluent验证案例19：近运动壁面的瞬态流动.md">
+                <i class="fa fa-chevron-left"></i> Fluent验证案例19：近运动壁面的瞬态流动.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/25/Fluent验证案例/Fluent验证案例21：高压入口的锐缘孔口空化模拟/" rel="prev" title="Fluent验证案例21：高压入口的锐缘孔口空化模拟.md">
+                Fluent验证案例21：高压入口的锐缘孔口空化模拟.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-创建几何及网格"><span class="nav-text">1 创建几何及网格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-General设置"><span class="nav-text">2.1 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Models设置"><span class="nav-text">2.2 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Materials设置"><span class="nav-text">2.3 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Boundary-Conditions"><span class="nav-text">2.4 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Dynamic-Mesh设置"><span class="nav-text">2.5 Dynamic Mesh设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Methods设置"><span class="nav-text">2.6 Methods设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Report-Definitions定义"><span class="nav-text">2.7 Report Definitions定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Initialization"><span class="nav-text">2.8 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-Run-Calculation"><span class="nav-text">2.10 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-计算结果"><span class="nav-text">3 计算结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+    });
+  </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

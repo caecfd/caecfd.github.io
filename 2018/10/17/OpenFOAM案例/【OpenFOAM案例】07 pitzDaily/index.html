@@ -460,16 +460,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/17/OpenFOAM案例/【OpenFOAM案例】07 pitzDaily/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -704,7 +694,9 @@
   
     <div class="comments" id="comments">
     </div>
+
   
+
 
 
 
@@ -756,7 +748,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1065,32 +1057,25 @@
 
 
 
+
+  
   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-  
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
     var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(function (item) {
+    guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
     new Valine({
+        av: AV, 
         el: '#comments' ,
-        verify: false,
-        notify: false,
         appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
         appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
         placeholder: '填写要评论的内容',
-        avatar:'mm',
-        meta:guest,
-        pageSize:'10' || 10,
-        visitor: false
     });
   </script>
-
-
 
   
 
