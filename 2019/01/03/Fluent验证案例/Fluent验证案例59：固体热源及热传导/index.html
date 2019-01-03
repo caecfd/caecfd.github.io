@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|14:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本案例演示利用Fluent仿真计算固体热源块中热传导问题。  文献：F.P. Incropera, D.P. Dewitt. Fundamentals of Heat and Mass Transfer. 5th Edition, pg. 117, 2006.  1 问题描述案例模型如下图所示。两种不同材料组成的固体块，左侧材料拥有均匀的体积热源，右侧材料通过通过壁面对流换热。计算并验证固体块中温">
+<meta name="keywords" content="Fluent验证案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluent验证案例59：固体热源及热传导">
+<meta property="og:url" content="https://github.com/caecfd/caecfd.github.io/2019/01/03/Fluent验证案例/Fluent验证案例59：固体热源及热传导/index.html">
+<meta property="og:site_name" content="CFDer聚乐埠">
+<meta property="og:description" content="本案例演示利用Fluent仿真计算固体热源块中热传导问题。  文献：F.P. Incropera, D.P. Dewitt. Fundamentals of Heat and Mass Transfer. 5th Edition, pg. 117, 2006.  1 问题描述案例模型如下图所示。两种不同材料组成的固体块，左侧材料拥有均匀的体积热源，右侧材料通过通过壁面对流换热。计算并验证固体块中温">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKB5NAMoRAfKgniadIiaPlez38icC7c7ItTicVVmIElHrL8FxowzDVYBiapYA/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKqHsbXDG9LZOEBfPs4Agt4icickJmCYncN5xevla9m2HsdslWazSSlmLQ/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKYgeff3FcfeW0LCwBxQEqyzU7JbnGGRSZAZwQIILUCia7XIfVkuCMB4w/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKhP2cALiaQChqmvwt3NvzAEnpjbS3xNKWzqhwy5OnRV6lVscg2GicECMQ/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBK4ROmE2bdt8P9hbuXAic8VYsdkc1k52xftzmPsU3LDeTHaPImLQv8E0Q/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKZroGniaBCqLibYpRSgPyDQ6AjTuV1RPVe0HQ4o8MwO2Q8icib226ZNBGicw/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKj9y4gII8NicxGbbrnEZibD89TNWQcMhIODIQOputh3FzwYvotXyUdEew/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKJFfgh3T7lWgaHezGfvN166joHw7XabAT0MWJWbY12lRtdP0F9O1qTQ/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKHJBfibqmgxkWJpN52kSlYUGN6GXeTwcT3WX5c8icQ3q61bmRSdb7lcjQ/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBK30g2Batic9CknaVkputiaXtLYjGFicJmIGyK7lXck79fQialFpCnqMkGFA/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKBddkD6Gygk1Vw0d2NORn8sWy9NFUe5Z0XJdDa5ml24yDUQiafQ5bmpg/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKSobfZE6wg1GT6yl3JxtichTaWp7EXc02XugV47qKNQdVTK3ic0IIbmzg/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKExhiaq4RaDET5UxpF5fM8oLSGrhHiaAliacyEyWFaGBhVqDcQicoTz5cTg/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKoY0hbaJnNOZ4YAxMo2pVvTMibuzXUfA3bl5DhdcZAQz2EKFMf01e58Q/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKVe4ZjD0WMkN2AVDlEwLKQxwGRxiaib16fMY9zr6iat3VV3LG4g4WIkDUA/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKozVlHzFPp7dNyl8lZB7OkNnnbvNxyr9kuJbSwpRDLcjQL8icrGzOcsg/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKsME3YBS7lg90KF30tTWh5Gwn22hmbreRWcvYXnicg4Z1n51HG5uPYKA/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKpLEVEjBxfiaUIru3ptymFopCIibZgGvVXJxHv8sFxExdr7eo25VEGBfQ/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKs7CU0xL5g68rhtvzSiajuUqbico1jZuLmMFibUO5kJyel1OX8xONKde1Q/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2019-01-03T12:48:56.853Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fluent验证案例59：固体热源及热传导">
+<meta name="twitter:description" content="本案例演示利用Fluent仿真计算固体热源块中热传导问题。  文献：F.P. Incropera, D.P. Dewitt. Fundamentals of Heat and Mass Transfer. 5th Edition, pg. 117, 2006.  1 问题描述案例模型如下图所示。两种不同材料组成的固体块，左侧材料拥有均匀的体积热源，右侧材料通过通过壁面对流换热。计算并验证固体块中温">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKB5NAMoRAfKgniadIiaPlez38icC7c7ItTicVVmIElHrL8FxowzDVYBiapYA/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/caecfd/caecfd.github.io/2019/01/03/Fluent验证案例/Fluent验证案例59：固体热源及热传导/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Fluent验证案例59：固体热源及热传导 | CFDer聚乐埠</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CFDer聚乐埠</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">做一个合格的CFDer</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />博客首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />文章分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档合集</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签集锦</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/caecfd/caecfd.github.io/2019/01/03/Fluent验证案例/Fluent验证案例59：固体热源及热传导/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流沙[胡坤]">
+      <meta itemprop="description" content="应用CFD解决工程流体问题">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CFDer聚乐埠">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Fluent验证案例59：固体热源及热传导
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-03 20:11:00 / 修改时间：20:48:56" itemprop="dateCreated datePublished" datetime="2019-01-03T20:11:00+08:00">2019-01-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Fluent验证案例/" itemprop="url" rel="index"><span itemprop="name">Fluent验证案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本案例演示利用Fluent仿真计算固体热源块中热传导问题。</p>
+<blockquote>
+<p>文献：F.P. Incropera, D.P. Dewitt. Fundamentals of Heat and Mass Transfer. 5th Edition, pg. 117, 2006.</p>
+</blockquote>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><p>案例模型如下图所示。两种不同材料组成的固体块，左侧材料拥有均匀的体积热源，右侧材料通过通过壁面对流换热。计算并验证固体块中温度分布。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKB5NAMoRAfKgniadIiaPlez38icC7c7ItTicVVmIElHrL8FxowzDVYBiapYA/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>计算条件如表所示。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKqHsbXDG9LZOEBfPs4Agt4icickJmCYncN5xevla9m2HsdslWazSSlmLQ/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>采用稳态计算。</p>
+<h1 id="2-Fluent设置"><a href="#2-Fluent设置" class="headerlink" title="2 Fluent设置"></a>2 Fluent设置</h1><ul>
+<li>以<strong>2D、Double Precision</strong>模式启动Fluent</li>
+</ul>
+<h2 id="2-1-General设置"><a href="#2-1-General设置" class="headerlink" title="2.1 General设置"></a>2.1 General设置</h2><ul>
+<li>鼠标双击模型树节点<strong>General</strong>，右侧面板选择选项<strong>Transient</strong>采用瞬态计算</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKYgeff3FcfeW0LCwBxQEqyzU7JbnGGRSZAZwQIILUCia7XIfVkuCMB4w/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h2 id="2-2-Models设置"><a href="#2-2-Models设置" class="headerlink" title="2.2 Models设置"></a>2.2 Models设置</h2><ul>
+<li>右键选择模型树节点<strong>Models &gt; Energy</strong>，选择弹出菜单项<strong>On</strong>激活能量方程</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKhP2cALiaQChqmvwt3NvzAEnpjbS3xNKWzqhwy5OnRV6lVscg2GicECMQ/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h2 id="2-3-Materials设置"><a href="#2-3-Materials设置" class="headerlink" title="2.3 Materials设置"></a>2.3 Materials设置</h2><ul>
+<li>鼠标双击模型树节点<strong>Materials &gt; Solid &gt; aluminum</strong>，弹出设置对话框</li>
+<li>如下图所示，设置<strong>Density</strong>为<strong>2719 kg/m3</strong></li>
+<li>设置<strong>Cp</strong>为<strong>871 j/kg-k</strong></li>
+<li>设置<strong>Thermal Conductivity</strong>为<strong>75 w/m-k</strong></li>
+<li>其他参数保持默认设置，点击按钮<strong>Change/Create</strong>修改参数</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBK4ROmE2bdt8P9hbuXAic8VYsdkc1k52xftzmPsU3LDeTHaPImLQv8E0Q/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<ul>
+<li>增加固体材料<strong>copper</strong></li>
+<li>如下图所示，设置<strong>Density</strong>为<strong>8798 kg/m3</strong></li>
+<li>设置<strong>Cp</strong>为<strong>381 j/kg-k</strong></li>
+<li>设置<strong>Thermal Conductivity</strong>为<strong>150 w/m-k</strong></li>
+<li>其他参数保持默认设置，点击按钮<strong>Change/Create</strong>修改参数</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKZroGniaBCqLibYpRSgPyDQ6AjTuV1RPVe0HQ4o8MwO2Q8icib226ZNBGicw/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h2 id="2-4-Cell-Zone-Conditions"><a href="#2-4-Cell-Zone-Conditions" class="headerlink" title="2.4 Cell Zone Conditions"></a>2.4 Cell Zone Conditions</h2><ul>
+<li>鼠标双击模型树节点<strong>Cell Zone Conditions &gt; slab1</strong>，弹出材料设置对话框，激活选项<strong>Source Terms</strong></li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKj9y4gII8NicxGbbrnEZibD89TNWQcMhIODIQOputh3FzwYvotXyUdEew/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<ul>
+<li>进入<strong>Source Terms</strong>标签页，点击<strong>Edit…</strong>按钮进入能量源设置对话框</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKJFfgh3T7lWgaHezGfvN166joHw7XabAT0MWJWbY12lRtdP0F9O1qTQ/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<ul>
+<li>弹出对话框中设置<strong>Number of Energy source</strong>为<strong>1</strong>，并设置其值为<strong>1500000 w/m3</strong>，点击<strong>OK</strong>按钮关闭对话框</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKHJBfibqmgxkWJpN52kSlYUGN6GXeTwcT3WX5c8icQ3q61bmRSdb7lcjQ/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Cell Zone Conditions &gt; slab2</strong>，弹出设置对话框，设置<strong>Materials Name</strong>为<strong>copper</strong></li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBK30g2Batic9CknaVkputiaXtLYjGFicJmIGyK7lXck79fQialFpCnqMkGFA/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<blockquote>
+<p>注：确保计算区域类型为solid</p>
+</blockquote>
+<h2 id="2-5-Boundary-Conditions"><a href="#2-5-Boundary-Conditions" class="headerlink" title="2.5 Boundary Conditions"></a>2.5 Boundary Conditions</h2><p><strong>1、side2</strong></p>
+<ul>
+<li>鼠标双击模型树节点<strong>Boundary Conditions &gt; side2</strong>弹出设置对话框</li>
+<li><strong>Thermal</strong>标签页设置<strong>Thermal Conditions</strong>为<strong>Convection</strong></li>
+<li>设置<strong>Heat Transfer Coefficient</strong>为<strong>1000 w/m2-k</strong>，设置<strong>Free Stream Temperature</strong>为<strong>30 c</strong></li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKBddkD6Gygk1Vw0d2NORn8sWy9NFUe5Z0XJdDa5ml24yDUQiafQ5bmpg/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<ul>
+<li>其他边界采用默认设置</li>
+</ul>
+<h2 id="2-6-Methods"><a href="#2-6-Methods" class="headerlink" title="2.6 Methods"></a>2.6 Methods</h2><ul>
+<li>双击模型树节点<strong>Methods</strong>，右侧面板保持默认设置</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKSobfZE6wg1GT6yl3JxtichTaWp7EXc02XugV47qKNQdVTK3ic0IIbmzg/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h2 id="2-7-Controls"><a href="#2-7-Controls" class="headerlink" title="2.7 Controls"></a>2.7 Controls</h2><ul>
+<li>鼠标双击模型树节点<strong>Controls</strong>，点击右侧面板中按钮<strong>Equations…</strong>，弹出对话框中取消选择列表项<strong>Flow</strong>，如下图所示</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKExhiaq4RaDET5UxpF5fM8oLSGrhHiaAliacyEyWFaGBhVqDcQicoTz5cTg/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<blockquote>
+<p>注：本案例只计算固体间传热，并不涉及到流场计算，因此这里可以排除流动方程。</p>
+</blockquote>
+<h2 id="2-8-Monitor"><a href="#2-8-Monitor" class="headerlink" title="2.8 Monitor"></a>2.8 Monitor</h2><ul>
+<li>双击模型树节点<strong>Monitors &gt; Residual</strong>，弹出设置对话框</li>
+<li>如下图所示，设置所有变量的残差为<strong>1e-16</strong></li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKoY0hbaJnNOZ4YAxMo2pVvTMibuzXUfA3bl5DhdcZAQz2EKFMf01e58Q/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h2 id="2-9-Initialization"><a href="#2-9-Initialization" class="headerlink" title="2.9 Initialization"></a>2.9 Initialization</h2><ul>
+<li>鼠标双击模型树节点<strong>Initialization</strong>，右侧面板中如下图所示设置初始温度为<strong>26.85 c</strong></li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKVe4ZjD0WMkN2AVDlEwLKQxwGRxiaib16fMY9zr6iat3VV3LG4g4WIkDUA/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h2 id="2-10-Run-Calculation"><a href="#2-10-Run-Calculation" class="headerlink" title="2.10 Run Calculation"></a>2.10 Run Calculation</h2><ul>
+<li>鼠标双击模型树节点<strong>Run Calculation</strong>，右侧面板如下图所示，设置<strong>Number of Time Iterations</strong>为<strong>100</strong>，其他参数保持默认设置</li>
+<li>点击按钮<strong>Calculate</strong>开始迭代计算</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKozVlHzFPp7dNyl8lZB7OkNnnbvNxyr9kuJbSwpRDLcjQL8icrGzOcsg/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h1 id="3-计算结果"><a href="#3-计算结果" class="headerlink" title="3 计算结果"></a>3 计算结果</h1><ul>
+<li>温度分布</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKsME3YBS7lg90KF30tTWh5Gwn22hmbreRWcvYXnicg4Z1n51HG5uPYKA/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<ul>
+<li>与实验值比较</li>
+</ul>
+<p>利用树形节点<strong>Report</strong>输出左侧壁面平均温度，并与实验值进行比较。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKpLEVEjBxfiaUIru3ptymFopCIibZgGvVXJxHv8sFxExdr7eo25VEGBfQ/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>与实验值比较结果如下表所示。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AF2vGryRNycgSwjqXS3G8icAm83mzpiaBKs7CU0xL5g68rhtvzSiajuUqbico1jZuLmMFibUO5kJyel1OX8xONKde1Q/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>相关文件：</p>
+<blockquote>
+<p><a href="https://pan.baidu.com/s/1tk4CCUYFxnMb9lsHgQ5Onw" target="_blank" rel="noopener">https://pan.baidu.com/s/1tk4CCUYFxnMb9lsHgQ5Onw</a><br>&gt;<br>提取码：2q0d </p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="https://faee0-1253397841.cos.ap-chengdu.myqcloud.com/qiniupic/blog_181016_lFgFih8EbB.jpg" alt="流沙[胡坤] wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多内容可以微信扫描上面二维码，关注微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="流沙[胡坤] 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="流沙[胡坤] 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fluent验证案例/" rel="tag"># Fluent验证案例</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/Fluent验证案例/Fluent验证案例60：后向台阶超声速转捩计算/" rel="next" title="Fluent验证案例60：后向台阶超声速转捩计算">
+                <i class="fa fa-chevron-left"></i> Fluent验证案例60：后向台阶超声速转捩计算
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/03/Fluent验证案例/Fluent验证案例58：扩散管内湍流流动/" rel="prev" title="Fluent验证案例58：扩散管内湍流流动">
+                Fluent验证案例58：扩散管内湍流流动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="流沙[胡坤]" />
+            
+              <p class="site-author-name" itemprop="name">流沙[胡坤]</p>
+              <p class="site-description motion-element" itemprop="description">应用CFD解决工程流体问题</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.cnblogs.com/lscax" target="_blank" title="博客园" rel="external nofollow"><i class="fa fa-fw fa-heartbeat"></i>博客园</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.sina.com.cn/faee0" target="_blank" title="新浪博客" rel="external nofollow"><i class="fa fa-fw fa-twitter-square"></i>新浪博客</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-问题描述"><span class="nav-text">1 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Fluent设置"><span class="nav-text">2 Fluent设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-General设置"><span class="nav-text">2.1 General设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Models设置"><span class="nav-text">2.2 Models设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Materials设置"><span class="nav-text">2.3 Materials设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Cell-Zone-Conditions"><span class="nav-text">2.4 Cell Zone Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Boundary-Conditions"><span class="nav-text">2.5 Boundary Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Methods"><span class="nav-text">2.6 Methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-Controls"><span class="nav-text">2.7 Controls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-Monitor"><span class="nav-text">2.8 Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-Initialization"><span class="nav-text">2.9 Initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-Run-Calculation"><span class="nav-text">2.10 Run Calculation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-计算结果"><span class="nav-text">3 计算结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">流沙[胡坤]</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        appId: 'Qbi00Qa3JcG7gUrMzI7VV2TP-gzGzoHsz',
+        appKey: 'kI4wcdgRRvrryMNPwXPyaYiQ',
+        placeholder: '填写要评论的内容',
+    });
+  </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
